@@ -1,0 +1,33 @@
+{
+    "name": "abo3adel/ft",
+    "description": "an simple mvc app",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ahmed adel",
+            "email": "abo3adel35@gmail.com"
+        }
+    ],
+    "require": {
+        "filp/whoops": "^2.4",
+        "nikic/fast-route": "dev-master",
+        "twig/twig": "~1.5",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/config": "^4.3",
+        "symfony/yaml": "^4.3",
+        "symfony/http-foundation": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "DB\\": "database/"
+        }
+    },
+    "scripts": {
+        "asset": [
+            "sass --update --error-css --color --style=compressed resources/sass/app.scss public/assets/css/app.css",
+            "tsc"
+        ]
+    }
+}

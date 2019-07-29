@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "outFile": "./public/assets/js/app.js",
+        "sourceRoot": "./resources/typescript/",
+        "sourceMap": true
+        // "fi"
+    }
+}
