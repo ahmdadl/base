@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\{
     Response
 };
 use League\Plates\Engine;
+use League\Plates\Extension\Asset;
 class Home
 {
     private $request;
@@ -21,6 +22,7 @@ class Home
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
+        // $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/assets/'));
     }
 
     public function show($params = [])
