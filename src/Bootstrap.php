@@ -3,10 +3,6 @@
 namespace App;
 
 use Whoops;
-use Symfony\Component\HttpFoundation\{
-    Request,
-    Response
-};
 use App\Route\Router;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -30,10 +26,12 @@ $whoops->register();
 // require the dependecy container
 $container = require_once __DIR__ . '/AppDi.php';
 
+// get request from di container
+$requsetInstance = $container->get ('Symfony\Component\HttpFoundation\Request');
 // create new request with the global GET, POST, FILES, SERVER, COOKIE
-$requset = (new Request())::createFromGlobals();
+$requset = $requsetInstance::createFromGlobals();
 // create new response
-$response = new Response();
+$response = $container->get('Symfony\Component\HttpFoundation\Response');
 
 // require web routes
 $routes = require_once dirname(__DIR__) . '/routes/web.php';
@@ -46,6 +44,13 @@ $router = new Router(
 );
 // set routes
 $router->setRoutes($routes);
+$router->run();
+
+// fix http headers
+$response->prepare($requset);
+// show response
+$response->send();
+
 
 
 
