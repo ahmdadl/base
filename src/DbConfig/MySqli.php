@@ -3,6 +3,7 @@
 namespace App\DbConfig;
 
 use PDO;
+use PDOException;
 
 class MySqli extends MainFn
 {
@@ -14,7 +15,7 @@ class MySqli extends MainFn
 
     protected function connect() : void
     {
-        $dsn = 'mysql:host='. $this->host .';dbname'. $this->db_name .
+        $dsn = 'mysql:host='. $this->host .';dbname='. $this->db_name .
         ';charset=utf8mb4';
 
         $opts = [
@@ -24,6 +25,11 @@ class MySqli extends MainFn
             PDO::ATTR_PERSISTENT => false,
         ];
 
-        $this->con = new PDO($dsn, $this->user, $this->pass, $opts);
+        try {
+            $this->con = new PDO($dsn, $this->user, $this->pass, $opts);
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            exit;
+        }
     }
 }
