@@ -45,7 +45,7 @@ class FrontRender implements FrontRenderInterface
     private function configView() : void
     {
         // load Asset extension
-        $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/assets/', true));
+        $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/', true));
 
         // load URI extenssion
         $this->view->loadExtension(new URI($this->request->getPathInfo()));
