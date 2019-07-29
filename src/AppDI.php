@@ -38,8 +38,8 @@ if (!$cacheContainerConfig->isFresh()) {
     // set contaianer params
     // pageReader params
     $container->setParameter('pagesDir', PAGE_DIR);
-    // twig params
-    $container->setParameter('views', View_DIR);
+    // template render params
+    $container->setParameter('viewsDir', View_DIR);
 
     // locate config direcory
     $fileLocator = new FileLocator(CONFIG_DIR);
