@@ -39,11 +39,12 @@ class Joke
     public function addNew() : void
     {
         // check if this is form submit
-        if ($this->request->request->get('submit')) {
+        if ($this->request->request->get('text')) {
+            $this->model->text = $this->request->request->get('text');
+            $this->model->authorID = $this->request->request->get('authorID');
+            $data = $this->model->createOne() ? 'trueee' : 'falsess';
+        }   
 
-        } else {
-            // this just the route so show the form
-            $this->view->render('addnew');
-        }
+        $this->view->render('addnew', ['fine' => $data ?? '']);
     }
 }

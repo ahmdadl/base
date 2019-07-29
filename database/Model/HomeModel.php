@@ -35,7 +35,7 @@ class HomeModel
         return $stmt;
     }
 
-    public function creatOne() : bool
+    public function createOne() : bool
     {
         $sql = 'INSERT INTO '. $this->tbName . '(text, authorID)
         VALUES (:text, :aid)';
@@ -46,7 +46,7 @@ class HomeModel
             ':aid' => $this->authorID,
         ];
         
-        return ($stmt->execute()) ? true : false;
+        return ($stmt->execute($params)) ? true : false;
     }
 
 }

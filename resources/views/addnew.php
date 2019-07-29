@@ -2,6 +2,11 @@
 <h1>
     <hr>
 </h1>
+<?php if ($fine):?>
+    <div class="pure-alert">
+        <b>Joke Saved</b>
+    </div>
+<?php endif ?>
 <form action="/ft/public/addNew" method="post" class="form pure-form pure-form-stacked">
     <fieldset>
         <legend>Add new Joke</legend>
