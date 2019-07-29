@@ -6,8 +6,10 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use League\Plates\Engine;
-use League\Plates\Extension\Asset;
+// use League\Plates\Engine;
+// use League\Plates\Extension\Asset;
+
+use App\View\FrontRenderInterface;
 class Home
 {
     private $request;
@@ -17,17 +19,16 @@ class Home
     public function __construct(
         Request $request,
         Response $response,
-        Engine $view
+        FrontRenderInterface $view
     ) {
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
-        $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/assets/', true));
+        
     }
 
     public function show($params = [])
     {
-        $html = $this->view->render('home', ['name' => 'ahmed']);
-        $this->response->setContent($html);
+        $this->view->render('home', ['name' => 'not me']);
     }
 }
