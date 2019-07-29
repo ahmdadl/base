@@ -26,4 +26,14 @@ if (IS_DEBUG) {
 }
 $whoops->register();
 
+// require the dependecy container
+$container = require_once './AppDi.php';
+
+// create new request with the global GET, POST, FILES, SERVER, COOKIE
+$requset = (new Request())::createFromGlobals();
+// create new response
+$response = new Response();
+
+
+
 
