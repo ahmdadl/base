@@ -9,9 +9,12 @@
     <link rel="icon" href="">
 </head>
 <body>
-    <?=$this->section('list')?>
-    <?=$this->section('content')?>
-    <?=$this->insert('partials/footer')?>
+    <?=$this->insert('partials/nav')?>
+    <main class="container">
+        <?=$this->section('list')?>
+        <?=$this->section('content')?>
+        <?=$this->insert('partials/footer')?>
+    </main>
     <script src="assets/js/app.js"></script>
 </body>
 </html>
