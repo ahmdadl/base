@@ -1,6 +1,6 @@
 <?php $this->layout('layout', ['title' => 'Home Page']);?>
 
-<h1><?=$this->e($name)?></h1>
+<h1><?=$this->es($name)?></h1>
 <?php $this->start('list') ?>
     <ul>
         <li>at</li>
