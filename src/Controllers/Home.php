@@ -24,7 +24,6 @@ class Home
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
-        
     }
 
     public function show($params = [])
