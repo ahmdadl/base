@@ -1,6 +1,12 @@
 <?php $this->layout('layout', ['title' => 'Home Page']);?>
 
 <h1><?=$this->es($name)?></h1>
+<button class="pure-button pure-button-primary">
+    <a href='addNew'>Add New</a>
+</button>
+<h1>
+    <hr>
+</h1>
 
 <table class="pure-table pure-table-striped pure-table-horizontal">
         <thead>
@@ -27,3 +33,4 @@
             </tr>
         </tbody>
     </table>
+    <?=var_dump($data->fetchAll())?>
