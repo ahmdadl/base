@@ -1,0 +1,26 @@
+%resetPos {
+    margin: 0;
+    padding: 0;
+}
+nav {
+    height: 60px;
+    @extend %resetPos;
+    background-color: teal;
+    ul {
+        @extend %resetPos;
+        list-style-type: none;
+        color: #fff;
+        li {
+            // float: left;
+            display: inline;
+            margin: 0 3px;
+            padding: 0 5px 30px 5px;
+            a {
+                color: #fff;
+            }
+        }
+        li.active {
+            background-color: red;
+        }
+    }
+}
