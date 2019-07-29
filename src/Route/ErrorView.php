@@ -2,25 +2,21 @@
 
 namespace App\Route;
 
-use Main\Template\FrontendRenderer;
-use Symfony\Component\HttpFoundation\Response;
+use App\View\FrontRenderInterface;
 
 class ErrorView
 {
-    private $response;
     private $engine;
 
     public function __construct(
-        Response $response,
-        FrontendRenderer $engine
+        FrontRenderInterface $engine
     ) {
-        $this->response = $response;
         $this->engine = $engine;
     }
 
     public function show(int $errCode) : void
     {
-        $html = $this->engine->render($errCode);
-        $this->response->setContent($html);
+        // the page die ex. /error/p404.php
+        $this->engine->render('error/p' . $errCode);
     }
 }

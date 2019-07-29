@@ -12,6 +12,8 @@ services:
         arguments: ['%viewsDir%']
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
+    App\Route\ErrorView:
+        public: true
     DB\Model\:
         resource: '../database/Model/*'
     App\Controllers\:

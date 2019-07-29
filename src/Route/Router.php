@@ -171,25 +171,16 @@ class Router
     {
         switch ($this->routeInfo[0]) {
             case Code::NOT_FOUND:
-                (new \Main\Route\ErrorView(
-                    $this->response,
-                    $this->container->get('Router\ErrorRender')
-                ))->show(404);
+                    ($this->container->get('App\Route\ErrorView'))->show(404);
                 break;
             case Code::METHOD_NOT_ALLOWED:
-                (new \Main\Route\ErrorView(
-                    $this->response,
-                    $this->container->get('Router\ErrorRender')
-                ))->show(405);
+                ($this->container->get('App\Route\ErrorView'))->show(405);
                 break;
             case Code::FOUND:
                 $this->handleRoute();
                 break;
             default:
-                (new \Main\Route\ErrorView(
-                    $this->response,
-                    $this->container->get('Router\ErrorRender')
-                ))->show(404);
+                ($this->container->get('App\Route\ErrorView'))->show(404);
         }
     }
 

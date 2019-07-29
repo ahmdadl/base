@@ -1,0 +1,1 @@
+<h3>404 Error at(<?=date('D M Y H:I:a')?>) Page not found</h3>
