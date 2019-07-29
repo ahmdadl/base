@@ -22,7 +22,7 @@ class Home
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
-        // $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/assets/'));
+        $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/assets/', true));
     }
 
     public function show($params = [])

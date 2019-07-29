@@ -10,6 +10,7 @@
 </head>
 <body>
     <?=$this->section('content')?>
+    <?=$this->insert('partials/footer')?>
     <script src="assets/js/app.js"></script>
 </body>
 </html>
