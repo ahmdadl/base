@@ -13,8 +13,10 @@ use Twig\{
     Environment
 };
 
+/**
+ * @var ROOT_DIR is placed at /src/Bootstrap.php
+ */
 // define directory constants
-define('ROOT_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('View_DIR', ROOT_DIR .'resources'. DIRECTORY_SEPARATOR .'views'. DIRECTORY_SEPARATOR);
 define('CONFIG_DIR', ROOT_DIR .'config'. DIRECTORY_SEPARATOR);
 define('PAGE_DIR', ROOT_DIR .'pages'. DIRECTORY_SEPARATOR);

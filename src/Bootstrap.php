@@ -12,7 +12,7 @@ use App\Route\Router;
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 define('IS_DEBUG', true);
-
+define('ROOT_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 // register the error handler
 $whoops = new Whoops\Run;
 if (IS_DEBUG) {
