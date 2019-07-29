@@ -10,6 +10,8 @@ services:
         public: true
     League\Plates\Engine:
         arguments: ['%viewsDir%']
+    App\View\FrontRenderInterface:
+        class: 'App\View\FrontRender'
     DB\Model\:
         resource: '../database/Model/*'
     App\Controllers\:
