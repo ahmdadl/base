@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
+use App\Route\Router;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -33,6 +34,18 @@ $container = require_once __DIR__ . '/AppDi.php';
 $requset = (new Request())::createFromGlobals();
 // create new response
 $response = new Response();
+
+// require web routes
+$routes = require_once dirname(__DIR__) . '/routes/web.php';
+// init router
+$router = new Router(
+    $requset,
+    $response,
+    $container,
+    IS_DEBUG
+);
+// set routes
+$router->setRoutes($routes);
 
 
 
