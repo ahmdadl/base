@@ -26,10 +26,9 @@ $whoops->register();
 // require the dependecy container
 $container = require_once __DIR__ . '/AppDi.php';
 
-// get request from di container
-$requsetInstance = $container->get ('Symfony\Component\HttpFoundation\Request');
-// create new request with the global GET, POST, FILES, SERVER, COOKIE
-$requset = $requsetInstance::createFromGlobals();
+// get request from di container and create new request with
+// the global GET, POST, FILES, SERVER, COOKIE
+$requset = $container->get ('Symfony\Component\HttpFoundation\Request');
 // create new response
 $response = $container->get('Symfony\Component\HttpFoundation\Response');
 
