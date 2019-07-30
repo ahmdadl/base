@@ -14,6 +14,7 @@
                 <th>#</th>
                 <th>Author</th>
                 <th>Content</th>
+                <th>LastUpdate</th>
                 <th>Opts</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                    <td><?=$this->e($row->id)?></td>
                    <td><?=$this->es($row->userName)?></td>
                    <td><?=$this->e($row->text)?></td>
+                   <td><?=$row->lastUpdate?></td>
                    <td>
                         <button type="button" class="pure-button pure-button-primary">
                                 <a href='edit/j/<?=$hashid->encode($row->id)?>'>Edit</a>

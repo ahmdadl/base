@@ -42,7 +42,7 @@ class HomeModel
 
     public function readAll() : object
     {
-        $sql = 'SELECT j.id, u.name AS userName, j.text FROM jokes AS j 
+        $sql = 'SELECT j.id, u.name AS userName, j.text, TIME_FORMAT(TIMEDIFF(NOW(), j.updatedAt), \'%HHrs %iMin\') AS lastUpdate FROM jokes AS j 
         JOIN users AS u ON u.id = j.authorID';
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
