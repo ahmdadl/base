@@ -41,7 +41,9 @@ if (!$cacheContainerConfig->isFresh()) {
     // template render params
     $container->setParameter('viewsDir', View_DIR);
     // hashids salt
-    $container->setParameter('salt', 'someofMyveryoldsaltsvery123654789032./*');
+    $container->setParameter('salt', '4e46c93890f89ff4dd3e41513c377ba11fa495a42d26ab1342c49086ae7c630fc91e0d');
+    // hashids min length
+    $container->setParameter('minLength', 5);
 
     // locate config direcory
     $fileLocator = new FileLocator(CONFIG_DIR);
