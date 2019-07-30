@@ -14,9 +14,13 @@
         <!-- <label for="text">Joke Text</label> -->
         <input id="text" type='text' name="text" placeholder="Write Joke ..." />
         <select name="author">
-            <option>Select Author</option>
-            <option value="0">abo3adel35</option>
-            <option value="1">someoneElse</option>
+            <optgroup label="Select Joke Author">
+            <?php foreach ($users->fetchAll() as $user): ?>
+                <option value="<?=$this->e($user->id)?>">
+                    <?=$this->es($user->name)?>
+                </option>
+            <?php endforeach; ?>
+            </optgroup>
         </select>
         <button type="submit" name="submit" class="pure-button pure-button-primary">Save</button>
     </fieldset>

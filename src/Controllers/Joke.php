@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use DB\Model\HomeModel;
 use App\View\FrontRenderInterface;
+use DB\Model\UserModel;
 
 class Joke
 {
@@ -26,14 +27,18 @@ class Joke
      */
     private $view;
 
+    private $user;
+
     public function __construct(
         Request $request,
         HomeModel $model,
-        FrontRenderInterface $view
+        FrontRenderInterface $view,
+        UserModel $user
     ) {
         $this->request = $request;
         $this->model = $model;
         $this->view = $view;
+        $this->user = $user;
     }
 
     public function addNew() : void
@@ -45,6 +50,9 @@ class Joke
             $data = $this->model->createOne() ? 'trueee' : 'falsess';
         }   
 
-        $this->view->render('addnew', ['fine' => $data ?? '']);
+        $this->view->render('addnew', [
+            'fine' => $data ?? '',
+            'users' => $this->user->readAll()
+        ]);
     }
 }
