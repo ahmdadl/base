@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use DB\Model\HomeModel;
 use App\View\FrontRenderInterface;
 use DB\Model\UserModel;
+use Hashids\Hashids;
 
 class Joke
 {
@@ -17,28 +18,40 @@ class Joke
     /**
      * joke model instance
      *
-     * @var JokeModle
+     * @var Joke
      */
     private $model;
+    /**
+     * User model instance
+     *
+     * @var User
+     */
+    private $user;
     /**
      * Plates Template View
      *
      * @var FrontRender
      */
     private $view;
-
-    private $user;
+    /**
+     * hashid instance
+     *
+     * @var Hashids
+     */
+    private $hashid;
 
     public function __construct(
         Request $request,
         HomeModel $model,
         FrontRenderInterface $view,
-        UserModel $user
+        UserModel $user,
+        Hashids $hashid
     ) {
         $this->request = $request;
         $this->model = $model;
         $this->view = $view;
         $this->user = $user;
+        $this->hashid = $hashid;
     }
 
     public function addNew() : void
@@ -47,12 +60,47 @@ class Joke
         if ($this->request->request->get('text')) {
             $this->model->text = $this->request->request->get('text');
             $this->model->authorID = $this->request->request->get('authorID');
-            $data = $this->model->createOne() ? 'trueee' : 'falsess';
+            $data = $this->model->createOne();
         }   
 
         $this->view->render('addnew', [
+            'edit' => false,
             'fine' => $data ?? '',
-            'users' => $this->user->readAll()
+            'users' => $this->user->readAll(),
+            'hashid' => $this->hashid
+        ]);
+    }
+
+    public function edit(array $p) : void
+    {
+        // decode joke id and assign it to model
+        $this->model->id = $this->hashid->decode($p['id'])[0];
+
+        // check if user has submited the edit button
+        if (!$this->request->request->get('text')) {
+            // if user just visited the edit route then show joke
+            $joke = $this->model->readOne()->fetch();
+        } else {
+            // if user edited and submited joke then update joke
+            $this->model->text = $this->request->request->get('text');
+            $this->model->authorID = $this->hashid->decode($this->request->request->get('authorID'))[0];
+
+            $data = $this->model->update();
+
+            // create new object contain joke data 
+            // better than reloading it from database
+            $joke = new \stdClass();
+            $joke->text = $this->request->request->get('text');
+            $joke->id = $p['id'];
+            $joke->authorID =$this->request->request->get('authorID');
+        }
+
+        $this->view->render('addnew', [
+            'edit' => true,
+            'fine' => $data ?? '',
+            'joke' => $joke,
+            'users' => $this->user->readAll(),
+            'hashid' => $this->hashid
         ]);
     }
 }
