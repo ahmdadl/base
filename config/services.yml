@@ -8,6 +8,8 @@ services:
         public: true
     Symfony\Component\HttpFoundation\Response:
         public: true
+    Hashids\Hashids:
+        arguments: ['%salt%']
     App\DbConfig\MySqli: ~
     League\Plates\Engine:
         arguments: ['%viewsDir%']

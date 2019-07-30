@@ -40,6 +40,8 @@ if (!$cacheContainerConfig->isFresh()) {
     $container->setParameter('pagesDir', PAGE_DIR);
     // template render params
     $container->setParameter('viewsDir', View_DIR);
+    // hashids salt
+    $container->setParameter('salt', 'someofMyveryoldsaltsvery123654789032./*');
 
     // locate config direcory
     $fileLocator = new FileLocator(CONFIG_DIR);
