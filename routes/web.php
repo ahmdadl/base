@@ -9,5 +9,8 @@ return function (RouteCollector $r) {
     $r->addRoute(['GET', 'POST'], $uri . '/edit/j/{id}', [
         'App\Controllers\Joke::edit'
     ]);
+    $r->addRoute(['POST', 'DELETE'], $uri. '/delete/j/{id}', [
+        'App\Controllers\Joke::delete',
+    ]);
 };
 
