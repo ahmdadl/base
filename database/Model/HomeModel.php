@@ -77,4 +77,14 @@ class HomeModel
         return $stmt->execute($params);
     }
 
+    public function delete() : bool
+    {
+        $sql = 'DELETE FROM ' . $this->tbName .
+        ' WHERE id = :id';
+
+        $stmt = $this->con->prepare($sql);
+        
+        return ($stmt->execute([':id' => $this->id]));
+    }
+
 }
