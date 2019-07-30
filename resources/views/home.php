@@ -21,7 +21,7 @@
             <?php foreach($data->fetchAll() as $row): ?>
                <tr>
                    <td><?=$this->e($row->id)?></td>
-                   <td><?=$row->authorID?></td>
+                   <td><?=$this->es($row->userName)?></td>
                    <td><?=$this->e($row->text)?></td>
                    <td>
                         <button type="button" class="pure-button pure-button-primary">

@@ -5,6 +5,8 @@ namespace App\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
 use DB\Model\HomeModel;
+// use DB\Model\UserModel;
+
 class Home
 {
     private $request;
