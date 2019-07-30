@@ -25,10 +25,10 @@
                    <td><?=$this->e($row->text)?></td>
                    <td>
                         <button type="button" class="pure-button pure-button-primary">
-                                <a href='edit/j/<?=$hash->encode($row->id)?>'>Edit</a>
+                                <a href='edit/j/<?=$hashid->encode($row->id)?>'>Edit</a>
                             </button>
                             <button type="button" class="pure-button button-error">
-                                <a href='delete/j/<?=$hash->encode($row->id)?>'>Delete</a>
+                                <a href='delete/j/<?=$hashid->encode($row->id)?>'>Delete</a>
                             </button>
                    </td>
                </tr>
