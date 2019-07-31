@@ -73,6 +73,7 @@ class Joke
 
     public function edit(array $p) : void
     {
+        
         // decode joke id and assign it to model
         $this->model->id = $this->hashid->decode($p['id'])[0];
 
@@ -102,5 +103,12 @@ class Joke
             'users' => $this->user->readAll(),
             'hashid' => $this->hashid
         ]);
+    }
+
+    public function delete(array $param) : bool
+    {
+        $this->model->id = $this->hashid->decode($param['id'])[0];
+
+        return $this->model->delete();
     }
 }

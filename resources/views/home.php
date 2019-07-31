@@ -29,9 +29,13 @@
                         <button type="button" class="pure-button pure-button-primary">
                                 <a href='edit/j/<?=$hashid->encode($row->id)?>'>Edit</a>
                             </button>
-                            <button type="button" class="pure-button button-error">
-                                <a href='delete/j/<?=$hashid->encode($row->id)?>'>Delete</a>
-                            </button>
+                            <form action="delete/j/<?=$hashid->encode($row->id)?>" method='post'>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type='hidden' name="CSRF_TOKEN" value="<?=bin2hex(random_bytes(25))?>" />
+                                <button type="submit" class="pure-button button-error">
+                                    Delete
+                                </button>
+                            </form>
                    </td>
                </tr>
             <?php endforeach; ?>
