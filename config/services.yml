@@ -8,13 +8,18 @@ services:
         public: true
     Symfony\Component\HttpFoundation\Response:
         public: true
-    Symfony\Component\HttpFoundation\Session\SessionInterface:
-        class: Symfony\Component\HttpFoundation\Session\Session
+    # session_storage:
+    #     class: 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage'
+    # Symfony\Component\HttpFoundation\Session\SessionInterface:
+    #     class: 'Symfony\Component\HttpFoundation\Session\Session'
+       # arguments: ['@session_storage']
     Hashids\Hashids:
         arguments: ['%salt%', '%minLength%']
-    App\DbConfig\MySqli: ~
     League\Plates\Engine:
         arguments: ['%viewsDir%']
+    App\DbConfig\MySqli: ~
+    Symfony\Component\HttpFoundation\Session\SessionInterface:
+        factory: ['App\Util\AppSession', 'getInstance']
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
     App\Route\ErrorView:
