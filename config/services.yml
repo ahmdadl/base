@@ -26,6 +26,9 @@ services:
         public: true
     DB\Model\:
         resource: '../database/Model/*'
+    App\Middlewares\:
+        resource: '../src/Middlewares/*'
+        public: true
     App\Controllers\:
         resource: "../src/Controllers/*"
         public: true
