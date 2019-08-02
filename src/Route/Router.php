@@ -148,7 +148,6 @@ class Router
         if (isset($this->routeInfo[1]['middlewares'])) {
             // run these middlewares sorted as enterd in route []
             $args['error'] = $this->handleMiddlewares(
-                $class,
                 $this->routeInfo[1]['middlewares']
             );
         }
@@ -156,12 +155,10 @@ class Router
         $class->$method($args);
     }
 
-    private function handleMiddlewares(
-        object $class,
-        array $middlewares
-    ) : array {
-        foreach ($middlewares as $fn) {
-            $err = $class->$fn();
+    private function handleMiddlewares(array $middlewares) : array
+    {
+        foreach ($middlewares as $cls) {
+            $err = ($this->container->get('App\Middlewares\\' . $cls))->process();
             if ($err['errCode']) return $err;
         }
         return ['error' => false];
