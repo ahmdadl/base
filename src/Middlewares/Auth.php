@@ -4,7 +4,7 @@ namespace App\Middlewares;
 
 class Auth
 {
-    public function proccess()
+    public function process()
     {
         return ['errCode' => false];
     }
