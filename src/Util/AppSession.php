@@ -44,9 +44,9 @@ class AppSession
         // session is created
         if ((self::CHECK_BROWSER || self::CHECK_IP_ADDRESS)
         && !$this->preventMultiIP()) {
-            // change session id
-            $this->se->migrate();
-            
+            // destory session
+            $this->se->invalidate();
+
             if (self::CHECK_IP_ADDRESS) $this->setUserIP();
             if (self::CHECK_BROWSER) $this->setUserAgent();
         }
