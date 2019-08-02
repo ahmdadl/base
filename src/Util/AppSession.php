@@ -2,68 +2,119 @@
 
 namespace App\Util;
 
-use Symfony\Component\HttpFoundation\Session\{
-    Session,
-    Storage\NativeSessionStorage
-};
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Requset;
+use Symfony\Component\HttpFoundation\Request;
+use TheSeer\Tokenizer\Exception;
 
 class AppSession
 {
-    const CHECK_IP_ADDRESS = true; // check if user changed ip
+    const CHECK_IP_ADDRESS = false; // check if user changed ip
     const CHECK_BROWSER = true; // check if user changed browser
     const SAME_SITE = 'Strict'; // or lax for more than one domain
     const SESSION_MAXLIFE = 1800; // 1800 sec ==> 30 min
+    const Strict_MODE = 1; // or 0
 
-    private static $session;
+    /**
+     * Request Instance
+     *
+     * @var Request
+     */
+    private $request;
+    /**
+     * Session Instance
+     *
+     * @var Session
+     */
+    public $se;
 
-    public function __construct() {}
-    
-    private static function start()
-    {
-        self::$session = new Session(new NativeSessionStorage([
-            'name' => strtoupper($_SERVER['HTTP_HOST']) . 'SESSION',
-            'use_strict_mode' => 1,
-            // un comment if cookie not needed for javascript access
-            // 'cookie_httponly' => 1,
-            'gc_maxlifetime' => self::SESSION_MAXLIFE,
-            'cookie_samesite' => self::SAME_SITE,
-            'sid_length' => 48,
-            'sid_bits_per_character' => '6',
-            // frame and area is not used
-            // 'trans_sid_tags' => 'a=href,form=',
-        ]));
-
-        // start the session
-        self::$session->start();
+    public function __construct(
+        SessionInterface $session,
+        Request $request
+        ) {
+        $this->se = $session;
+        $this->request = $request;
     }
 
-    public static function getInstance()
+    public function sessStart() : void
     {
-        if (self::$session === null) self::start();
-        return self::$session;
+        $this->se->start();
+
+        // check prevent multible ip and browser
+        // session is created
+        if ((self::CHECK_BROWSER || self::CHECK_IP_ADDRESS)
+        && !$this->preventMultiIP()) {
+            // change session id
+            $this->se->migrate();
+            
+            if (self::CHECK_IP_ADDRESS) $this->setUserIP();
+            if (self::CHECK_BROWSER) $this->setUserAgent();
+        }
+
+        // check session active time
+        $this->checkActivity();
+    }
+
+    private function setUserIP() : void
+    {
+        $this->se->set('userIP', $this->encode('REMOTE_ADDR'));
+    }
+
+    private function getUserIP() : ?string
+    {
+        return $this->se->get('userIP');
+    }
+
+    private function setUserAgent() : void
+    {
+        $this->se->set('userAgent', $this->encode('HTTP_USER_AGENT'));
+    }
+
+    private function getUserAgent() : ?string
+    {
+        return $this->se->get('userAgent');
     }
 
     /**
-     * destroy old session and create one with new session ID
+     * hash server attributes to check if session hijaked
      *
-     * @return void
+     * @param string $server_attr
+     * @return string
      */
-    public function reGenID() : void
+    private function encode(string $server_attr) : string
     {
-        // useful for multible requests at the same time
-        // and stopping unstable newtwork connection
-        $this->obsolete = time();
-        $this->newSessionID = true;
+        // Blowfish algorithem
+        return crypt($this->request->server->get($server_attr), '$2a$07$'.bin2hex(\random_bytes(50)));
+    }
 
-        // destroy old sessions
-        $this->close();
+    private function checkActivity() : void
+    {
+        if (time() - $this->se->getMetadataBag()->getLastUsed() > self::SESSION_MAXLIFE) {
+            $this->se->invalidate();
+            throw new Exception('session distroyed');
+        }
+    }
 
-        // regenrate session ID
-        $this->reGenerateSessID();
+    private function preventMultiIP() : bool
+    {
+        if (!$this->se->has('userIP')
+        || !$this->se->has('userAgent')) {
+            return false;
+        }
 
-        // remove for new session
-        $this->__unset('obsolete');
-        $this->__unset('newSessionID');
+        // check for ip address
+        if (self::CHECK_IP_ADDRESS
+        && ($this->getUserIP() !== $this->encode('REMOTE_ADDR'))) {
+            return false;
+        }
+
+        // check for user browser
+        if (self::CHECK_BROWSER
+        && ($this->getUserAgent() !== $this->encode('HTTP_USER_AGENT')) ) {
+            return false;
+        }
+
+        return true;
     }
     
 }
