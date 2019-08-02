@@ -7,11 +7,7 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Twig_Loader_Filesystem;
-use Twig\{
-    Loader\FilesystemLoader,
-    Environment
-};
+use App\Util\AppSession;
 
 /**
  * @var ROOT_DIR is placed at /src/Bootstrap.php
@@ -44,6 +40,22 @@ if (!$cacheContainerConfig->isFresh()) {
     $container->setParameter('salt', '4e46c93890f89ff4dd3e41513c377ba11fa495a42d26ab1342c49086ae7c630fc91e0d');
     // hashids min length
     $container->setParameter('minLength', 5);
+    // session options
+    $container->setParameter('session_options', [
+        'name' => strtoupper($_SERVER['HTTP_HOST']) . 'SESSION',
+        'use_strict_mode' => AppSession::Strict_MODE,
+        // un comment if cookie not needed for javascript access
+        // 'cookie_httponly' => 1,
+        // 'gc_maxlifetime' => AppSession::SESSION_MAXLIFE,
+        'gc_probability' => 0,
+        'cookie_lifetime' => AppSession::SESSION_MAXLIFE + 10,
+        // 'gc_divisor' => AppSession::SESSION_GC_DIVISOR,
+        'cookie_samesite' => AppSession::SAME_SITE,
+        'sid_length' => 48,
+        'sid_bits_per_character' => 6,
+        // frame and area is not used
+        // 'trans_sid_tags' => 'a=href,form=',
+    ]);
 
     // locate config direcory
     $fileLocator = new FileLocator(CONFIG_DIR);

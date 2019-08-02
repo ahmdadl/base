@@ -18,8 +18,14 @@ services:
     League\Plates\Engine:
         arguments: ['%viewsDir%']
     App\DbConfig\MySqli: ~
+    session_storage:
+        class: 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage'
+        arguments: ['%session_options%']
     Symfony\Component\HttpFoundation\Session\SessionInterface:
-        factory: ['App\Util\AppSession', 'getInstance']
+        class: 'Symfony\Component\HttpFoundation\Session\Session'
+        arguments: ['@session_storage']
+    App\Util\AppSession: ~
+    # factory: ['App\Util\AppSession', 'getInstance']
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
     App\Route\ErrorView:
