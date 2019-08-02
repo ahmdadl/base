@@ -43,12 +43,18 @@ $router = new Router(
 );
 // set routes
 $router->setRoutes($routes);
-$router->run();
 
-// fix http headers
-$response->prepare($requset);
-// show response
-$response->send();
+// check for custom errors
+// try {
+    $router->run();
+
+    // fix http headers
+    $response->prepare($requset);
+    // show response
+    $response->send();
+// } catch(\Exception $e) {
+//     echo 'asdasd' . $e->getMessage();
+// }
 
 
 
