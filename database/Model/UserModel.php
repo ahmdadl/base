@@ -74,10 +74,21 @@ class UserModel
 
         // check if password matched with entered on
         if (Password::verify($this->pass, $row->pass)) {
+            // check if password needs to rehash
+            if (Password::checkReHash($row->pass)) {
+                $this->pass = Password::encode($this->pass);
+                // update table to add it
+            }
+
+            // assign propers to model entities
+            $this->id = $row->id;
+            $this->admin = $row->admin;
+            $this->lastModified = $row->lastModified;
+            // no need for password any more
+            $this->pass = null;
+
             return true;
         }
-
-
 
         return false;
     }
