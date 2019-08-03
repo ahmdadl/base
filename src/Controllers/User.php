@@ -72,6 +72,8 @@ class User
                     'user name is required'
                 );
                 $data['nameReq'] = true;
+            } else {
+                $data['userName'] = $userName;
             }
             // check if password input not empty
             if (!$userPass) {
@@ -94,6 +96,11 @@ class User
                         'success',
                         'welcome '. $this->model->name
                     );
+
+                    // iniate the proper sessions
+                    $this->session->se->set('logedIn', true);
+                    $this->session->se->set('userName', $this->model->name);
+                    $this->session->se->set('userID', $this->model->id);
                 } else {
                     $this->session->se->getFlashBag()->add(
                         'danger',
