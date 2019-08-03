@@ -49,12 +49,21 @@ class User
 
     public function logIn(array $p = []) : void
     {
-        $data = [];
-        // check if form was submitted
-        if ($this->request->request->has('submit')) {
+        $data = [
+            'nameReq' => false,
+            'passReq' => false
+        ];
+        /**
+         * check if form was submitted and 
+         * no errors ocuured through middlewares
+         */
+        if ($this->request->request->has('submit')
+        && !$p['error']) {
             // assign input to vars for simplicty
             $userName = $this->request->request->get('name');
             $userPass = $this->request->request->get('pass');
+            // validate form inputs
+
             // check if name is not empty
             if (!$userName) {
                 // send an required message to user view
@@ -64,7 +73,7 @@ class User
                 );
                 $data['nameReq'] = true;
             }
-            // check if pass input not empty
+            // check if password input not empty
             if (!$userPass) {
                 $this->session->se->getFlashBag()->add(
                     'danger',
@@ -92,8 +101,6 @@ class User
                     );
                 }
             }
-        } else {
-            $data['success'] = false;
         }
         // show login form
         $this->view->render('logIn', $data);
