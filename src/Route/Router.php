@@ -155,13 +155,13 @@ class Router
         $class->$method($args);
     }
 
-    private function handleMiddlewares(array $middlewares) : array
+    private function handleMiddlewares(array $middlewares) : bool
     {
         foreach ($middlewares as $cls) {
             $err = ($this->container->get('App\Middlewares\\' . $cls))->process();
-            if ($err['errCode']) return $err;
+            if ($err) return true;
         }
-        return ['error' => false];
+        return false;
     }
 
     private function validateRoute()
