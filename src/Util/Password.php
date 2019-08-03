@@ -8,6 +8,8 @@ class Password
     const DEFAULT_ALGO = PASSWORD_ARGON2ID;
     // 8-10 is a good base line
     const DEFAULT_COST = 10;
+    // random string length
+    const RAND_LENGTH = 48;
     
     public function __construct() {}
 
@@ -41,6 +43,13 @@ class Password
         return password_needs_rehash($hash, self::DEFAULT_ALGO, [
             'cost' => self::DEFAULT_COST,
         ]);
+    }
+
+    public static function randStr(int $length = self::RAND_LENGTH) : string
+    {
+        return substr(
+            crypt(base64_encode(bin2hex(random_bytes(48))), '$5$rounds=5000$'.bin2hex(random_bytes(48)).'$'),
+            16, $length);
     }
 
     /**
