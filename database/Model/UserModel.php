@@ -21,7 +21,7 @@ class UserModel
 
     /**
      * Entity properties
-     *
+     * 
      * @var tableRows
      */
     public $id;
