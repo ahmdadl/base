@@ -26,16 +26,18 @@
                    <td><?=$this->e($row->text)?></td>
                    <td><?=$row->lastUpdate?></td>
                    <td>
+                       <?php if ($session->has('logedIn')) : ?>
                         <button type="button" class="pure-button pure-button-primary">
-                                <a href='edit/j/<?=$hashid->encode($row->id)?>'>Edit</a>
+                            <a href='edit/j/<?=$hashid->encode($row->id)?>'>Edit</a>
+                        </button>
+                        <form action="delete/j/<?=$hashid->encode($row->id)?>" method='post'>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type='hidden' name="CSRF_TOKEN" value="<?=bin2hex(random_bytes(25))?>" />
+                            <button type="submit" class="pure-button button-error">
+                                Delete
                             </button>
-                            <form action="delete/j/<?=$hashid->encode($row->id)?>" method='post'>
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type='hidden' name="CSRF_TOKEN" value="<?=bin2hex(random_bytes(25))?>" />
-                                <button type="submit" class="pure-button button-error">
-                                    Delete
-                                </button>
-                            </form>
+                        </form>
+                        <?php endif;?>
                    </td>
                </tr>
             <?php endforeach; ?>
