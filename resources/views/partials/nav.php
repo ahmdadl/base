@@ -5,10 +5,10 @@
             <a class="pure-menu-link" href='about'>About</a>
         </li>
         <li class="pure-menu-item">
-        <?php if (!$hasSession) : ?>
+        <?php if (!$session->has('userName')) : ?>
                 <a class="pure-menu-link pure-button button-success" href='logIn'>SignIn</a>
         <?php else : ?>
-                <a class="pure-menu-link pure-button button-danger" href='/ft/public/logOut'>SignOut</a>
+                <a class="pure-menu-link pure-button button-error" href='/ft/public/logOut'>SignOut</a>
         <?php endif?>
         </li>
     </ul>
