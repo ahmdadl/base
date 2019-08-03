@@ -16,7 +16,7 @@ return function (RouteCollector $r) {
     $r->get($uri . '/logIn', ['App\Controllers\User::logIn']);
     $r->post($uri . '/logIn', [
         'App\Controllers\User::logIn',
-        'middlewares' => ['Auth']
+        'middlewares' => ['CsrfVerify']
     ]);
 };
 

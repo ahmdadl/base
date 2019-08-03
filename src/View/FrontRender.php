@@ -6,7 +6,10 @@ use Symfony\Component\HttpFoundation\{
     Request,
     Response
 };
-use App\Util\AppSession;
+use App\Util\{
+    AppSession,
+    Password
+};
 use League\Plates\Engine;
 use League\Plates\Extension\{
     Asset,
@@ -64,9 +67,20 @@ class FrontRender implements FrontRenderInterface
             return '<input type="hidden" name="_method" value="' . strtoupper($method) . '" />';
         });
 
-        // create function to add csrf token like laravel
-        $this->view->registerFunction('csrf', function () {
-            $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
+        /**
+         * create function to add csrf token
+         * @link https://stackoverflow.com/questions/6287903/how-to-properly-add-csrf-token-using-php
+         */
+        $this->view->registerFunction('csrf', function (string $uri = null) {
+            if (null !== $uri) {
+                $token = Password::hashMac(
+                    $uri, // string to be hashed
+                    $this->session->se->get('Form_Token') // key
+                );
+            } else {
+                $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
+            }
+            var_dump($this->request->server->get('HTTP_USER_AGENT'));
             return '<input type="hidden" name="csrfToken" value="' .
             $token . '" />';
         });

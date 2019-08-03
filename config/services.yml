@@ -8,11 +8,6 @@ services:
         public: true
     Symfony\Component\HttpFoundation\Response:
         public: true
-    # session_storage:
-    #     class: 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage'
-    # Symfony\Component\HttpFoundation\Session\SessionInterface:
-    #     class: 'Symfony\Component\HttpFoundation\Session\Session'
-       # arguments: ['@session_storage']
     Hashids\Hashids:
         arguments: ['%salt%', '%minLength%']
     League\Plates\Engine:
@@ -21,11 +16,12 @@ services:
     session_storage:
         class: 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage'
         arguments: ['%session_options%']
+    session_attrbag:
+        class: 'Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag'
     Symfony\Component\HttpFoundation\Session\SessionInterface:
         class: 'Symfony\Component\HttpFoundation\Session\Session'
-        arguments: ['@session_storage']
+        arguments: ['@session_storage', '@session_attrbag']
     App\Util\AppSession: ~
-    # factory: ['App\Util\AppSession', 'getInstance']
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
     App\Route\ErrorView:

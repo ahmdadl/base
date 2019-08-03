@@ -57,11 +57,22 @@ class AppSession
         $this->setCsrfToken();
     }
 
+    /**
+     * set the csrf token to random string
+     *
+     * @return void
+     */
     private function setCsrfToken() : void
     {
-        if (!$this->se->get('X_CSRF_TOKEN')) {
+        // check for general purpose token
+        if (!$this->se->has('X_CSRF_TOKEN')) {
             // default length is 48
             $this->se->set('X_CSRF_TOKEN', Password::randStr());
+        }
+
+        // add an per-form csrf token
+        if (!$this->se->has('Form_Token')) {
+            $this->se->set('Form_Token', Password::randStr());
         }
     }
 
@@ -94,7 +105,10 @@ class AppSession
     private function encode(string $server_attr) : string
     {
         // Blowfish algorithem
-        return crypt($this->request->server->get($server_attr), '$2a$07$'.bin2hex(random_bytes(50)));
+        return Password::hashMac(
+            $this->request->server->get($server_attr),
+            '41c6dee3uX0E2hwmpVKuqbyIkbs43GN9QLW41u3y'
+        );
     }
 
     private function checkActivity() : void
@@ -108,19 +122,19 @@ class AppSession
     private function preventMultiIP() : bool
     {
         if (!$this->se->has('userIP')
-        || !$this->se->has('userAgent')) {
+        && !$this->se->has('userAgent')) {
             return false;
         }
 
         // check for ip address
         if (self::CHECK_IP_ADDRESS
-        && ($this->getUserIP() !== $this->encode('REMOTE_ADDR'))) {
+        && (!Password::hashVerify($this->getUserIP(), $this->encode('REMOTE_ADDR')))) {
             return false;
         }
 
         // check for user browser
         if (self::CHECK_BROWSER
-        && ($this->getUserAgent() !== $this->encode('HTTP_USER_AGENT')) ) {
+        && (!Password::hashVerify($this->getUserAgent(), $this->encode('HTTP_USER_AGENT'))) ) {
             return false;
         }
 
