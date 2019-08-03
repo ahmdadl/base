@@ -84,6 +84,16 @@ class FrontRender implements FrontRenderInterface
             $token . '" />';
         });
 
+        /**
+         * create function to check if variable set before
+         * handaling it
+         * @param variable $var
+         * @return mixed false on not found
+         */
+        $this->view->registerFunction('_set', function ($var) {
+            return isset($var) ? $var : false;
+        });
+
 
         // assign data to all views
         // check if there is user sign in or not
