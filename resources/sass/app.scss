@@ -85,3 +85,15 @@
 .alert-warning {
     background-color: darkorange;
 }
+div.error{
+    input {
+        border: 1px solid red !important;
+        color: red;
+    }
+    span {
+        color: red;
+        float: right;
+        background-color: darkorange;
+        padding: 10px 20px;
+    }
+}
