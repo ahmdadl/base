@@ -70,8 +70,6 @@ class FrontRender implements FrontRenderInterface
         $this->view->addData(['hasSession' => $this->request->hasPreviousSession()]);
 
         // make session available to all views
-        $this->view->addData(['session' => $this->session]);
-        
-
+        $this->view->addData(['session' => $this->session->se]);
     }
 }
