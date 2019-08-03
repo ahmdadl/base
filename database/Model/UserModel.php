@@ -41,4 +41,18 @@ class UserModel
         $stmt->execute();
         return $stmt;
     }
+
+    public function readOne() : bool
+    {
+        $sql = 'SELECT id FROM ' . $this->tbName .
+        ' WHERE id = :id';
+
+        $stmt = $this->con->prepare($sql);
+        $params = [
+            ':id' => $this->id
+        ];
+        $stmt->execute($params);
+
+        return ($stmt->rowCount() > 0);
+    }
 }
