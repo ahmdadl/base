@@ -80,7 +80,6 @@ class FrontRender implements FrontRenderInterface
             } else {
                 $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
             }
-            var_dump($this->request->server->get('HTTP_USER_AGENT'));
             return '<input type="hidden" name="csrfToken" value="' .
             $token . '" />';
         });
