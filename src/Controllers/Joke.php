@@ -59,7 +59,7 @@ class Joke
         // check if this is form submit
         if ($this->request->request->get('text')) {
             $this->model->text = $this->request->request->get('text');
-            $this->model->authorID = $this->request->request->get('authorID');
+            $this->model->authorID = $this->hashid->decode($this->request->request->get('authorID'))[0];
             $data = $this->model->createOne();
         }   
 
@@ -76,9 +76,8 @@ class Joke
         
         // decode joke id and assign it to model
         $this->model->id = $this->hashid->decode($p['id'])[0];
-
         // check if user has submited the edit button
-        if (!$this->request->request->get('text')) {
+        if (!$this->request->request->has('text')) {
             // if user just visited the edit route then show joke
             $joke = $this->model->readOne()->fetch();
         } else {
