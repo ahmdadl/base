@@ -13,5 +13,9 @@ return function (RouteCollector $r) {
     $r->addRoute(['POST', 'DELETE'], $uri. '/delete/j/{id}', [
         'App\Controllers\Joke::delete',
     ]);
+    $r->get($uri . '/logIn', [
+        'App\Controllers\User::logIn',
+        'middlewares' => ['Auth']
+    ]);
 };
 

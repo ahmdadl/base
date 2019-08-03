@@ -37,7 +37,10 @@ class User
         $this->view = $view;
     }
 
-    
+    public function logIn() : void
+    {
+
+    }
 
     
 }
