@@ -60,8 +60,15 @@ class FrontRender implements FrontRenderInterface
         });
 
         // create method function like laravel one
-        $this->view->registerFunction('_method', function ($me) {
-            return '<input type="hidden" name="_method" value="' . $me . '" />';
+        $this->view->registerFunction('_method', function ($method) {
+            return '<input type="hidden" name="_method" value="' . strtoupper($method) . '" />';
+        });
+
+        // create function to add csrf token like laravel
+        $this->view->registerFunction('csrf', function () {
+            $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
+            return '<input type="hidden" name="csrfToken" value="' .
+            $token . '" />';
         });
 
 
