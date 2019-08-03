@@ -3,9 +3,8 @@
 namespace App\Util;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Requset;
+use App\Util\Password;
 use Symfony\Component\HttpFoundation\Request;
-use TheSeer\Tokenizer\Exception;
 
 class AppSession
 {
@@ -53,6 +52,17 @@ class AppSession
 
         // check session active time
         $this->checkActivity();
+
+        // set the csrf token
+        $this->setCsrfToken();
+    }
+
+    private function setCsrfToken() : void
+    {
+        if (!$this->se->get('X_CSRF_TOKEN')) {
+            // default length is 48
+            $this->se->set('X_CSRF_TOKEN', Password::randStr());
+        }
     }
 
     private function setUserIP() : void
@@ -84,7 +94,7 @@ class AppSession
     private function encode(string $server_attr) : string
     {
         // Blowfish algorithem
-        return crypt($this->request->server->get($server_attr), '$2a$07$'.bin2hex(\random_bytes(50)));
+        return crypt($this->request->server->get($server_attr), '$2a$07$'.bin2hex(random_bytes(50)));
     }
 
     private function checkActivity() : void
