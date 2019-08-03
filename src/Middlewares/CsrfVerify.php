@@ -18,18 +18,17 @@ class CsrfVerify extends Base implements MiddlewareInterface
         // get the token submited with user input
         $token = parent::$request->request->get('csrfToken');
         // check if the two tokens not equal
-        if (!hash_equals($known, $token)) {
-            // send message to view via flash sessions
-            parent::$session->se->getFlashBag()->add(
-                'danger',
-                'an error occured. please try again later'
-            );
-
-            // stop any other middleware
-            return true;
+        if (hash_equals($known, $token)) {
+            // if no error
+            return false;
         }
 
-        // if no error
-        return false;
+        // send message to view via flash sessions
+        parent::$session->se->getFlashBag()->add(
+            'danger',
+            'an error occured. please try again later'
+        );
+        // stop any other middleware
+        return true;
     }
 }
