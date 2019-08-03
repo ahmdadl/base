@@ -53,6 +53,35 @@ class Password
     }
 
     /**
+     * create two way crypto function for usage with per-form token
+     *
+     * @param string $string
+     * @param string $key
+     * @param string $algo
+     * @return string
+     */
+    public static function hashMac(
+        string $string,
+        string $key,
+        $algo = 'sha256'
+    ) : string {
+        return hash_hmac($algo, $string, $key);
+    }
+
+    /**
+     * decrypt the hashed value and 
+     * check if it equals the user entered value
+     *
+     * @param string $known
+     * @param string $userInp
+     * @return boolean
+     */
+    public static function hashVerify(string $known, string $userInp) : bool
+    {
+        return hash_equals($known, $userInp);
+    }
+
+    /**
      * test website to caculate the best cost
      * 
      * @see https://www.php.net/manual/en/function.password-hash.php
