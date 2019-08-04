@@ -5,7 +5,8 @@ namespace App\Route;
 
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    Response,
+    RedirectResponse
 };
 use FastRoute\{
     RouteCollector,
@@ -29,6 +30,12 @@ class Router
      * @var Response
      */
     private $response;
+    /**
+     * HttpFoundation redirect Response
+     *
+     * @var Redirectrespose
+     */
+    private $redirect;
 
     /**
      * DI contaniner to retrive controllers

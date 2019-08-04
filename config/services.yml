@@ -8,6 +8,8 @@ services:
         public: true
     Symfony\Component\HttpFoundation\Response:
         public: true
+    Symfony\Component\HttpFoundation\RedirectResponse:
+        lazy: true
     Hashids\Hashids:
         arguments: ['%salt%', '%minLength%']
     League\Plates\Engine:
