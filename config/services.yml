@@ -12,7 +12,8 @@ services:
         arguments: ['%salt%', '%minLength%']
     League\Plates\Engine:
         arguments: ['%viewsDir%']
-    App\DbConfig\MySqli: ~
+    App\DbConfig\MySqli:
+        lazy: true
     session_storage:
         class: 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage'
         arguments: ['%session_options%']
@@ -24,8 +25,10 @@ services:
     App\Util\AppSession: ~
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
+        lazy: true
     App\Route\ErrorView:
         public: true
+        lazy: true
     DB\Model\:
         resource: '../database/Model/*'
     App\Middlewares\:

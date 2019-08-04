@@ -180,5 +180,4 @@ class Router
                 ($this->container->get('App\Route\ErrorView'))->show(Response::HTTP_NOT_FOUND);
         }
     }
-
 }
