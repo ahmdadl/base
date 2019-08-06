@@ -2,14 +2,14 @@
 <h1>
     <hr />
 </h1>
-<?php if ($hasSession) : ?>
-    <?php foreach ($session->getFlashBag()->all() as $type => $messages) : ?>   <?php foreach ($messages as $mess) : ?>
-                <div class="alert alert-<?=$type?>">
-                    <?=$mess?>
-                </div>
-            <?php endforeach?>
+<?php foreach($session->getFlashBag()->all() as $type => $messages):?>
+    <?php foreach ($messages as $mess) : ?>
+        <div class="alert alert-<?=$type?>">
+            <?=$mess?>
+        </div>
     <?php endforeach?>
-<?php endif?>
+<?php endforeach?>
+
 <form action='/ft/public<?=$this->uri()?>' method='post' class='form pure-form pure-form-stacked'>
     <fieldset>
         <legend>LogIn</legend>

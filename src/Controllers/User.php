@@ -62,6 +62,7 @@ class User
          */
         if ($this->request->request->has('submit')
         && !$p['error']) {
+            // var_dump($l);
             // assign input to vars for simplicty
             $userName = $this->request->request->get('name');
             $userPass = $this->request->request->get('pass');
@@ -112,6 +113,7 @@ class User
                 }
             }
         }
+        $data['req'] = $this->request;
         // show login form
         $this->view->render('logIn', $data);
         // var_dump('asd');

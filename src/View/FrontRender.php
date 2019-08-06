@@ -87,7 +87,7 @@ class FrontRender implements FrontRenderInterface
 
         // assign data to all views
         // check if there is user sign in or not
-        $this->view->addData(['hasSession' => $this->request->hasPreviousSession()]);
+        // $this->view->addData(['hasSession' => $this->request->hasPreviousSession()]);
 
         // make session available to all views
         $this->view->addData(['session' => $this->session->se]);

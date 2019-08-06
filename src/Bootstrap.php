@@ -18,6 +18,7 @@ if (IS_DEBUG) {
     $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
 } else {
     $whoops->pushHandler(function ($e) {
+        // var_dump($e);
         echo 'TODO: Friendly error page and send email to admin';
     });
 }
