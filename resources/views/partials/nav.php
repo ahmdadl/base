@@ -6,9 +6,9 @@
         </li>
         <li class="pure-menu-item">
         <?php if (!$session->has('userName')) : ?>
-                <a class="pure-menu-link pure-button button-success" href='logIn'>SignIn</a>
+            <a class="pure-menu-link pure-button button-success" href='logIn'>SignIn</a>
         <?php else : ?>
-                <a class="pure-menu-link pure-button button-error" href='/ft/public/logOut'>SignOut</a>
+            <a class="pure-menu-link pure-button button-error" href='/ft/public/logOut'>SignOut</a>
         <?php endif?>
         </li>
     </ul>
