@@ -49,6 +49,9 @@ class User
 
     public function logIn(array $p = []) : void
     {
+        // sleep(25);
+        // var_dump($this->request->server->all());
+        // var_dump($this->request->request);
         $data = [
             'nameReq' => false,
             'passReq' => false
@@ -111,6 +114,7 @@ class User
         }
         // show login form
         $this->view->render('logIn', $data);
+        // var_dump('asd');
     }
 
     

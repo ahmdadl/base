@@ -25,6 +25,8 @@
                 <b><?=$passReq ? 'password is required' : ''?></b>
             </span>
         </div>
+        <input type='hidden' name='time' value='<?=microtime(true)?>' />
+        <input type='hidden' name='asd' value='<?=$this->uri()?>' />
         <?=$this->csrf()?>
         <?=$this->_method('post')?>
         <button type='submit' name='submit' class="pure pure-button pure-button-primary">LogIn</button>
