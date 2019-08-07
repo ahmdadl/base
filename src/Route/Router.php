@@ -16,7 +16,7 @@ use FastRoute\{
 
 class Router
 {
-    const CACHE_DIR = DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'route.cache';
+    const CACHE_FILE = 'route.cache';
 
     /**
      * HttpFoundation Request
@@ -85,12 +85,13 @@ class Router
         Request $request,
         Response $response,
         object $DIcontainer,
-        bool $isDebug = false
+        bool $isDebug = false,
+        string $cacheDir
     ) {
         $this->request = $request;
         $this->response = $response;
         $this->container = $DIcontainer;
-        $this->setOptions($isDebug);
+        $this->setOptions($isDebug, $cacheDir);
     }
 
     public function setRoutes($routes) : void
@@ -108,14 +109,14 @@ class Router
         $this->validateRoute();
     }
 
-    private function setOptions(bool $isDebug) : void
-    {
-        if ($isDebug) {
-            $this->options = [
-                'cacheFile' => dirname(__DIR__) . self::CACHE_DIR,
-                'cacheDisabled' => $isDebug
-            ];
-        }
+    private function setOptions(
+        bool $isDebug,
+        string $cacheDir
+    ) : void {
+        $this->options = [
+            'cacheFile' => $cacheDir . self::CACHE_FILE,
+            'cacheDisabled' => $isDebug
+        ];
     }
 
     private function instanc() : void
@@ -149,6 +150,7 @@ class Router
         // var_dump($this->routeInfo[0]['middlewares']);
         
         // get the class from container
+        // prefix class name with 
         $class = $this->container->get($r[0]);
 
         // check if there is any middlewares attached to that route
