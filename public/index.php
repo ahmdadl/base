@@ -2,7 +2,7 @@
 
 use App\Bootstrap;
 
-// auto injoked function to keep the outer namespace clean
+// auto invoked function to keep the outer namespace clean
 (function() {
     require_once dirname(__DIR__) . '/vendor/autoload.php';
 
