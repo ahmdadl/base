@@ -10,20 +10,16 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use App\Util\AppSession;
 
 /**
- * @var ROOT_DIR is placed at /src/Bootstrap.php
+ * build the dependency injection container and cache it
+ * or just require the cheched version if no changes has happend
+ * 
+ * usage => ( new DIContainer() )->getContainer(configArray)
  */
-// define('ROOT_DIR', dirname(__DIR__) . '/');
-// define('IS_DEBUG', true);
-// // define directory constants
-// define('View_DIR', ROOT_DIR .'resources'. DIRECTORY_SEPARATOR .'views'. DIRECTORY_SEPARATOR);
-// define('CONFIG_DIR', ROOT_DIR .'config'. DIRECTORY_SEPARATOR);
-// define('PAGE_DIR', ROOT_DIR .'pages'. DIRECTORY_SEPARATOR);
-
-// $cachedFile = ROOT_DIR . 'cache/containerBulider.php';
-
 class DIContainer
 {
-
+    /**
+     * the cached container file name
+     */
     const CACHED_FILE = 'containerBulider.php';
 
     /**
@@ -33,7 +29,7 @@ class DIContainer
      */
     private $config;
     /**
-     * locate cached container file and check for changes
+     * ConfigCache instance to handle changes in file
      *
      * @var ConfigCache
      */
@@ -59,7 +55,7 @@ class DIContainer
     {
         // iniate the container
         $this->setCacheContainerConfig();
-        
+
         // check if cache file has changed or file not exists
         if (!$this->cacheContainerConfig->isFresh()
         || !file_exists($this->config['dir']['cache'] . self::CACHED_FILE)) {
