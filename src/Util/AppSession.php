@@ -10,9 +10,9 @@ class AppSession
 {
     const CHECK_IP_ADDRESS = false; // check if user changed ip
     const CHECK_BROWSER = true; // check if user changed browser
-    const SAME_SITE = 'Strict'; // or lax for more than one domain
+    // const SAME_SITE = 'Strict'; // or lax for more than one domain
     const SESSION_MAXLIFE = 1800; // 1800 sec ==> 30 min
-    const Strict_MODE = 1; // or 0
+    // const Strict_MODE = 1; // or 0
 
     /**
      * Request Instance
@@ -104,7 +104,6 @@ class AppSession
      */
     private function encode(string $server_attr) : string
     {
-        // Blowfish algorithem
         return Password::hashMac(
             $this->request->server->get($server_attr),
             '41c6dee3uX0E2hwmpVKuqbyIkbs43GN9QLW41u3y'

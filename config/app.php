@@ -11,10 +11,10 @@ return [
     'dir' => [
         'root' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
         // all below is based on root dir
-        'views' => 'resources/views/',
-        'config' => 'config/',
-        'cache' => 'storage/cache/',
-        'errlog' => 'storage/log/',
+        'views' => dirname(__DIR__) . '/resources/views/',
+        'config' => dirname(__DIR__) . '/config//',
+        'cache' => dirname(__DIR__) . '/storage/cache/',
+        'errlog' => dirname(__DIR__) . '/storage/log/',
     ],
 
     // enviroment
@@ -30,9 +30,11 @@ return [
     ],
 
     // sessions options
-    'name' => null, // use default webhost_SESSION
-    'samesite' => 'Strict', // or `lax' for example.website.com
-    // maxlife should be changed at App\Util\Session; class
+    'session' => [
+        'name' => null, // use default webhost_SESSION
+        'samesite' => 'Strict', // or `lax' for example.website.com
+        // maxlife should be changed at App\Util\Session; class
+    ],
 
     /**
      * create an unique csrf token for important forms
