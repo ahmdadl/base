@@ -83,7 +83,7 @@ class Bootstrap
         } else {
             // set manual error handler
             set_exception_handler([$this, 'errHandler']);
-            set_error_handler([$this, 'errHandler'], E_ALL);
+            set_error_handler([$this, 'errHandler']);
         }
 
         if ($this->_config['env'] === 'dev') {
