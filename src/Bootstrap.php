@@ -8,8 +8,11 @@ use App\DIContainer;
 
 use Symfony\Component\HttpFoundation\{
     Request,
-    Response
+    Response,
+    RedirectResponse
 };
+
+error_reporting(E_ALL);
 
 class Bootstrap
 {
@@ -72,21 +75,21 @@ class Bootstrap
      */
     private function envInit() : void
     {
-        if ($this->_config['env'] === 'dev') {
-            $this->devENV();
-        } else {
-            // prod enviroment
-        }
-
         if ($this->_config['isDebug']) {
             // iniate whoops and show error page
             $whoops = new Whoops\Run;
             $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
             $whoops->register();
         } else {
-            set_error_handler(function(...$args) {
-                var_dump($args);
-            }, E_ALL);
+            // set manual error handler
+            set_exception_handler([$this, 'errHandler']);
+            set_error_handler([$this, 'errHandler'], E_ALL);
+        }
+
+        if ($this->_config['env'] === 'dev') {
+            $this->devENV();
+        } else {
+            $this->prodENV();
         }
 
     }
@@ -103,7 +106,8 @@ class Bootstrap
             $this->request,
             $this->response,
             $this->container,
-            $this->_config['isDebug']
+            $this->_config['isDebug'],
+            $this->_config['dir']['cache']
         );
 
         // set loaded routes
@@ -160,8 +164,6 @@ class Bootstrap
     {
         ini_set('display_errors', '1');
         ini_set('display_startup_errors', '1');
-        ini_set('log_errors', '1');
-        error_reporting(E_ALL);
     }
 
     /**
@@ -175,10 +177,30 @@ class Bootstrap
         ini_set('display_errors', '0');
         ini_set('display_startup_errors', '0');
         ini_set('log_errors', '1');
-        error_reporting(E_ALL);
-        set_error_handler(function ($e) {
-            var_dump($e);
-        }, E_ALL);
+        ini_set("error_log", dirname(__DIR__) . "/storage/log/error.log");
+    }
+
+    public function errHandler(
+        $err,
+        string $errstr = '',
+        string $errfile = '',
+        int $errline = 0
+    )
+    {
+        // check if it an exception then handle it
+        if (is_object($err)) {
+            $errstr = $err->getMessage();
+            $errfile = $err->getFile();
+            $errline = $err->getLine();
+            $err = $err->getCode();
+        }
+
+        // echo nl2br( 'Error(' . $err. '): ' . $errstr . "\r\n" .' [ON FILE]-> '
+        // . $errfile . ' [AT LINE => ' . $errline  .']'. ".\r\n\r\n");
+        /** @todo add mail function to email admin with errors */
+
+        // redirect to unknownError route
+        (new RedirectResponse('error'))->send();
     }
 }
 
