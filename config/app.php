@@ -17,10 +17,22 @@ return [
         'errlog' => dirname(__DIR__) . '/storage/log/',
     ],
 
-    // enviroment
+    /**
+     * set current enviroment
+     * dev || prod
+     * setting to dev will display all errors on screen
+     * and setting to prod will log errors only to error log directory
+     */
     'env' => 'dev', // or 'prod'
 
-    // is debug enabled for this enviroment
+    /**
+     * is debug enabled for this enviroment
+     * setting this to true will turn on whoops error handler
+     * and setting to false will turn on custom errro handler
+     * * Please be aware that setting this to false will stop 
+     * * affecting the router with changes 
+     * * and website will work on cached routes
+     */
     'isDebug' => true,
 
     // hashids options
@@ -31,9 +43,9 @@ return [
 
     // sessions options
     'session' => [
-        'name' => null, // use default webhost_SESSION
+        'name' => null, // use default webSiteNameSESSION
         'samesite' => 'Strict', // or `lax' for example.website.com
-        // maxlife should be changed at App\Util\Session; class
+        // maxlife should be changed at App\Util\Session class
     ],
 
     /**
