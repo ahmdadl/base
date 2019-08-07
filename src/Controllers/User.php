@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\View\FrontRenderInterface;
 use DB\Model\UserModel;
 use Hashids\Hashids;
@@ -115,7 +116,7 @@ class User
         }
         $data['req'] = $this->request;
         // show login form
-        $this->view->render('logIn', $data);
+        // $this->view->render('logIn', $data);
         // var_dump('asd');
     }
 

@@ -43,7 +43,7 @@ if (!$cacheContainerConfig->isFresh()) {
     // session options
     $container->setParameter('session_options', [
         'name' => strtoupper($_SERVER['HTTP_HOST']) . 'SESSION',
-        'use_strict_mode' => AppSession::Strict_MODE,
+        'use_strict_mode' => true,
         // un comment if cookie not needed for javascript access
         // 'cookie_httponly' => 1,
         // 'gc_maxlifetime' => AppSession::SESSION_MAXLIFE,
