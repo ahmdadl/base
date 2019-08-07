@@ -113,6 +113,7 @@ class Router
         bool $isDebug,
         string $cacheDir
     ) : void {
+        // var_dump($isDebug, $cacheDir, self::CACHE_FILE);
         $this->options = [
             'cacheFile' => $cacheDir . self::CACHE_FILE,
             'cacheDisabled' => $isDebug
@@ -143,19 +144,23 @@ class Router
      */
     private function handleRoute() : void
     {
-        // ClassName::methodName
-        $r = preg_split('/\:\:/', $this->routeInfo[1][0], -1, PREG_SPLIT_NO_EMPTY);
+        /**
+         * split ClassName@methodName into CLassName and methodName
+         */
+        $r = preg_split('/@/', $this->routeInfo[1][0], -1, PREG_SPLIT_NO_EMPTY);
         $method = $r[1];
         $args = $this->routeInfo[2];
-        // var_dump($this->routeInfo[0]['middlewares']);
         
-        // get the class from container
-        // prefix class name with 
-        $class = $this->container->get($r[0]);
+        /**
+         * get the class from container
+         * and prefix the class with App\Controllers\ + ClassName
+         * because all routes will route to controllers any way
+         */
+        $class = $this->container->get('App\Controllers\\' . $r[0]);
 
         // check if there is any middlewares attached to that route
         if (isset($this->routeInfo[1]['middlewares'])) {
-            // run these middlewares sorted as enterd in route []
+            // run these middlewares sorted as enterd in route array
             $args['error'] = $this->handleMiddlewares(
                 $this->routeInfo[1]['middlewares']
             );
