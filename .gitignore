@@ -1,4 +1,8 @@
 /vendor/
 .env
 /cache/*
-!cache/.gitkeep
+!/cache/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/log/*
+!/storage/log/.gitkeep

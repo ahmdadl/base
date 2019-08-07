@@ -116,7 +116,7 @@ class User
         }
         $data['req'] = $this->request;
         // show login form
-        // $this->view->render('logIn', $data);
+        $this->view->render('logIn', $data);
         // var_dump('asd');
     }
 

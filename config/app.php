@@ -11,16 +11,28 @@ return [
     'dir' => [
         'root' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
         // all below is based on root dir
-        'views' => 'resources/views/',
-        'config' => 'config/',
-        'cache' => 'storage/cache/',
-        'errlog' => 'storage/log/',
+        'views' => dirname(__DIR__) . '/resources/views/',
+        'config' => dirname(__DIR__) . '/config//',
+        'cache' => dirname(__DIR__) . '/storage/cache/',
+        'errlog' => dirname(__DIR__) . '/storage/log/',
     ],
 
-    // enviroment
+    /**
+     * set current enviroment
+     * dev || prod
+     * setting to dev will display all errors on screen
+     * and setting to prod will log errors only to error log directory
+     */
     'env' => 'dev', // or 'prod'
 
-    // is debug enabled for this enviroment
+    /**
+     * is debug enabled for this enviroment
+     * setting this to true will turn on whoops error handler
+     * and setting to false will turn on custom errro handler
+     * * Please be aware that setting this to false will stop 
+     * * affecting the router with changes 
+     * * and website will work on cached routes
+     */
     'isDebug' => true,
 
     // hashids options
@@ -30,9 +42,11 @@ return [
     ],
 
     // sessions options
-    'name' => null, // use default webhost_SESSION
-    'samesite' => 'Strict', // or `lax' for example.website.com
-    // maxlife should be changed at App\Util\Session; class
+    'session' => [
+        'name' => null, // use default webSiteNameSESSION
+        'samesite' => 'Strict', // or `lax' for example.website.com
+        // maxlife should be changed at App\Util\Session class
+    ],
 
     /**
      * create an unique csrf token for important forms

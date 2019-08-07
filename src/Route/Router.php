@@ -16,7 +16,7 @@ use FastRoute\{
 
 class Router
 {
-    const CACHE_DIR = DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'route.cache';
+    const CACHE_FILE = 'route.cache';
 
     /**
      * HttpFoundation Request
@@ -85,12 +85,13 @@ class Router
         Request $request,
         Response $response,
         object $DIcontainer,
-        bool $isDebug = false
+        bool $isDebug = false,
+        string $cacheDir
     ) {
         $this->request = $request;
         $this->response = $response;
         $this->container = $DIcontainer;
-        $this->setOptions($isDebug);
+        $this->setOptions($isDebug, $cacheDir);
     }
 
     public function setRoutes($routes) : void
@@ -108,14 +109,15 @@ class Router
         $this->validateRoute();
     }
 
-    private function setOptions(bool $isDebug) : void
-    {
-        if ($isDebug) {
-            $this->options = [
-                'cacheFile' => dirname(__DIR__) . self::CACHE_DIR,
-                'cacheDisabled' => $isDebug
-            ];
-        }
+    private function setOptions(
+        bool $isDebug,
+        string $cacheDir
+    ) : void {
+        // var_dump($isDebug, $cacheDir, self::CACHE_FILE);
+        $this->options = [
+            'cacheFile' => $cacheDir . self::CACHE_FILE,
+            'cacheDisabled' => $isDebug
+        ];
     }
 
     private function instanc() : void
@@ -142,18 +144,23 @@ class Router
      */
     private function handleRoute() : void
     {
-        // ClassName::methodName
-        $r = preg_split('/\:\:/', $this->routeInfo[1][0], -1, PREG_SPLIT_NO_EMPTY);
+        /**
+         * split ClassName@methodName into CLassName and methodName
+         */
+        $r = preg_split('/@/', $this->routeInfo[1][0], -1, PREG_SPLIT_NO_EMPTY);
         $method = $r[1];
         $args = $this->routeInfo[2];
-        // var_dump($this->routeInfo[0]['middlewares']);
         
-        // get the class from container
-        $class = $this->container->get($r[0]);
+        /**
+         * get the class from container
+         * and prefix the class with App\Controllers\ + ClassName
+         * because all routes will route to controllers any way
+         */
+        $class = $this->container->get('App\Controllers\\' . $r[0]);
 
         // check if there is any middlewares attached to that route
         if (isset($this->routeInfo[1]['middlewares'])) {
-            // run these middlewares sorted as enterd in route []
+            // run these middlewares sorted as enterd in route array
             $args['error'] = $this->handleMiddlewares(
                 $this->routeInfo[1]['middlewares']
             );
