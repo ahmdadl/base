@@ -1,5 +1,4 @@
 /vendor/
-.env
 /cache/*
 !/cache/.gitkeep
 /storage/cache/*
@@ -8,3 +7,5 @@
 !/storage/log/.gitkeep
 /storage/tmp/*
 !/storage/tmp/.gitkeep
+.env
+.phpunit.result.cache
