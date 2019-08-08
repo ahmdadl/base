@@ -20,7 +20,7 @@
         "hashids/hashids": "^4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8"
+        "phpunit/phpunit": "8"
     },
     "autoload": {
         "psr-4": {
@@ -28,9 +28,19 @@
             "DB\\": "database/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "AppTest\\": "test/AppTest/"
+        }
+    },
     "scripts": {
         "asset": [
             "sass --update --error-css --color --style=compressed resources/sass/app.scss public/assets/css/app.css"
-        ]
+        ],
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --testdox-text storage/tmp/clover.txt"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests!"
     }
 }

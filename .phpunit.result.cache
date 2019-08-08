@@ -1,0 +1,1 @@
+C:30:"PHPUnit\Runner\TestResultCache":185:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:2:{s:51:"AppTest\Handler\HomePageHandlerTest::testPushAndPop";d:0.014;s:58:"AppTest\Handler\HomePageHandlerTest::testCanBeUsedAsString";d:0.001;}}}
