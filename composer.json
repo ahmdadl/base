@@ -20,7 +20,8 @@
         "hashids/hashids": "^4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "8"
+        "phpunit/phpunit": "8",
+        "mockery/mockery": "^1.2"
     },
     "autoload": {
         "psr-4": {
