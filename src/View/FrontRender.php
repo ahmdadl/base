@@ -58,12 +58,12 @@ class FrontRender implements FrontRenderInterface
         $this->view->loadExtension(new URI($this->request->getPathInfo()));
 
         // create new escape function
-        $this->view->registerFunction('es', function($str) {
+        $this->view->registerFunction('es', function(string $str) {
             return htmlspecialchars(strip_tags(trim($str)), ENT_QUOTES);
         });
 
         // create method function like laravel one
-        $this->view->registerFunction('_method', function ($method) {
+        $this->view->registerFunction('_method', function (string $method = 'post') {
             return '<input type="hidden" name="_method" value="' . strtoupper($method) . '" />';
         });
 
@@ -75,13 +75,13 @@ class FrontRender implements FrontRenderInterface
             if (null !== $uri) {
                 $token = Password::hashMac(
                     $uri, // string to be hashed
-                    $this->session->se->get('Form_Token') // key
+                    $this->session->se->get('Form_Token') ?? '' // key
                 );
             } else {
                 $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
             }
-            return '<input type="hidden" name="csrfToken" value="' .
-            $token . '" />';
+            return strlen($token > 15) ? '<input type="hidden" name="csrfToken" value="' .
+            $token . '" />' : '';
         });
 
 
