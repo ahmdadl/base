@@ -6,8 +6,13 @@ class Password
 {
     // default algorthim to be used
     const DEFAULT_ALGO = PASSWORD_ARGON2ID;
-    // 8-10 is a good base line
-    const DEFAULT_COST = 10;
+    /**
+    * * consider increasing it depending on your hardware 
+    */
+    // default memory cost in bytes ==> 1024
+    const DEFAULT_MEMORY = PASSWORD_ARGON2_DEFAULT_MEMORY_COST;
+    // default time cost
+    const DEFUALT_TIME = 5;
     // random string length
     const RAND_LENGTH = 48;
     
@@ -19,11 +24,20 @@ class Password
      * @param mixed|string $pass
      * @return string
      */
-    public static function encode($pass) : string
-    {
-        return password_hash($pass, self::DEFAULT_ALGO, [
-            'cost' => self::DEFAULT_COST,
-            ]);
+    public static function encode(
+        $pass,
+        int $algo = self::DEFAULT_ALGO,
+        int $memory = self::DEFAULT_MEMORY,
+        int $time = self::DEFUALT_TIME
+    ) : string {
+        if (strlen((string)$pass) < 6) {
+            throw new \Exception('password must be longer than 6 chars');
+            // throw new InvalidArgumentException('password must be longer than 5 chars')
+        }
+        return password_hash($pass, $algo, [
+            'memory_cost' => $memory,
+            'time_cost' => $time
+        ]);
     }
 
     /**
@@ -38,17 +52,29 @@ class Password
         return password_verify($userPass, $hash);
     }
 
-    public static function checkReHash(string $hash) : bool
-    {
-        return password_needs_rehash($hash, self::DEFAULT_ALGO, [
-            'cost' => self::DEFAULT_COST,
+    public static function checkReHash(
+        string $hash,
+        int $algo = self::DEFAULT_ALGO,
+        int $memory = self::DEFAULT_MEMORY,
+        int $time = self::DEFUALT_TIME
+    ) : bool {
+        return password_needs_rehash($hash, $algo, [
+            'memory_cost' => $memory,
+            'time_cost' => $time
         ]);
     }
 
-    public static function randStr(int $length = self::RAND_LENGTH) : string
-    {
+    /**
+     * create random string with 256hash method
+     * Maximum Length Returned Is 59
+     * @param integer $length
+     * @return string
+     */
+    public static function randStr(
+        int $length = self::RAND_LENGTH
+    ) : string {
         return substr(
-            crypt(base64_encode(bin2hex(random_bytes(48))), '$5$rounds=5000$'.bin2hex(random_bytes(48)).'$'),
+            crypt(base64_encode(bin2hex(random_bytes($length))), '$5$rounds=5000$'.bin2hex(random_bytes($length)).'$'),
             16, $length);
     }
 
@@ -82,7 +108,8 @@ class Password
     }
 
     /**
-     * test website to caculate the best cost
+     * test website to caculate the best time cost
+     * the function can run in less than 50 milliseconds
      * 
      * @see https://www.php.net/manual/en/function.password-hash.php
      * @return integer
@@ -90,16 +117,18 @@ class Password
     public static function getAppropriateCost() : int
     {
         // it must be under 100 milliseconds
-        $timeTarget = 0.08; // 80 milliseconds 
+        $timeTarget = 0.05; // 50 milliseconds 
 
-        $cost = 8;
+        $timeCost = 2;
         do {
-            $cost++;
+            $timeCost++;
             $start = microtime(true);
-            password_hash("test", self::DEFAULT_ALGO, ["cost" => $cost]);
+            password_hash("test", self::DEFAULT_ALGO, [
+                "time_cost" => $timeCost
+            ]);
             $end = microtime(true);
         } while (($end - $start) < $timeTarget);
 
-        return $cost;
+        return $timeCost;
     }
 }
