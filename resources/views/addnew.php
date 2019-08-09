@@ -13,7 +13,7 @@
         <input id="text" type='text' name="text" placeholder="Write Joke ..." value="<?=$joke->text ?? ''?>" />
         <select name="authorID">
             <optgroup label="Select Joke Author">
-            <?php foreach ($users->fetchAll() as $user): ?>
+            <?php foreach ($users as $user): ?>
                 <option value="<?=$hashid->encode($user->id)?>" 
                 <?php if (isset($joke) && $joke->authorID === $user->id) echo 'selected';?>>
                     <?=$this->es($user->name)?>
