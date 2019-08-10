@@ -230,6 +230,17 @@ class AppSessionTest extends TestCase
         $this->assertIsString($csrfToken);
         $this->assertIsString($formToken);
 
+        // test no new tokens if old ones still active
+        $this->session->sessStart();
+        $this->assertSame(
+            $csrfToken,
+            $this->session->se->get('X_CSRF_TOKEN')
+        );
+        $this->assertSame(
+            $formToken,
+            $this->session->se->get('Form_Token')
+        );
+
         // check if new tokens will be generated 
         // if session invalidated
         sleep(2);
@@ -249,36 +260,6 @@ class AppSessionTest extends TestCase
             $this->session->se->get('Form_Token')
         );
     }
-
-    /**
-     * @depends testSetCsrfToken
-     */
-    // public function testSetCsrfTokenNoNewGeneratedTokenIfOneExists(array $args) : void
-    // {
-    //     [$csrfToken, $formToken, $session] = $args;
-
-    //     // fwrite(STDOUT, "\t\t" . json_encode($this->session));
-        
-    //     $this->session = $session;
-
-    //     $this->request->server->shouldReceive('get')
-    //         ->with(Mockery::any())
-    //         ->andReturn($this->faker->chrome);
-
-    //     $this->session->sessStart();
-
-    //     $this->assertEquals(
-    //         $csrfToken,
-    //         $this->session->se->get('X_CSRF_TOKEN'),
-    //         'csrftoken has not changed'
-    //     );
-
-    //     $this->assertEquals(
-    //         $formToken,
-    //         $this->session->se->get('Form_Token'),
-    //         'formtoken has not changed'
-    //     );
-    // }
 
     protected static function getMethod($name) {
         $class = new ReflectionClass('AppSession');

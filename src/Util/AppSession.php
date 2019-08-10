@@ -131,7 +131,6 @@ class AppSession
             $this->request->server->get($server_attr),
             '41c6dee3uX0E2hwmpVKuqbyIkbs43GN9QLW41u3y'
         );
-        // return $this->request->server->get($server_attr);
     }
 
     private function checkActivity(int $maxlife = null)
