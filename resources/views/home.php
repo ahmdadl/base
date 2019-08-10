@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($data->fetchAll() as $row): ?>
+            <?php foreach($data as $row): ?>
                <tr>
                    <td><?=$this->e($row->id)?></td>
                    <td><?=$this->es($row->userName)?></td>

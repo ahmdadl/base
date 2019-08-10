@@ -47,10 +47,10 @@ class HomeModel
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
 
-        return $stmt;
+        return $stmt->fetchAll();
     }
 
-    public function readOne() : object
+    public function readOne() : array
     {
         $sql = 'SELECT id, `text`, authorID FROM ' . $this->tbName .' 
         WHERE id = :id';
@@ -58,7 +58,7 @@ class HomeModel
         $stmt = $this->con->prepare($sql);
         $stmt->execute([':id' => $this->id]);
 
-        return $stmt;
+        return $stmt->fetch();
     }
 
     public function update() : bool

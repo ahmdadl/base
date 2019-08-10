@@ -21,6 +21,8 @@
             <?php endforeach; ?>
             </optgroup>
         </select>
+        <?=$this->csrf()?>
+        <?=$this->method()?>
         <button type="submit" name="submit" class="pure-button pure-button-primary">Save</button>
     </fieldset>
 </form>
