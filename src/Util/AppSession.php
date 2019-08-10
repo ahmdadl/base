@@ -3,6 +3,7 @@
 namespace App\Util;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Util\Password;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,6 +22,12 @@ class AppSession
      */
     private $request;
     /**
+     * session max life period to change session id after it
+     *
+     * @var int
+     */
+    private $maxlife;
+    /**
      * Session Instance
      *
      * @var Session
@@ -29,32 +36,48 @@ class AppSession
 
     public function __construct(
         SessionInterface $session,
-        Request $request
+        Request $request,
+        int $maxlife
         ) {
         $this->se = $session;
         $this->request = $request;
+        $this->maxlife = $maxlife;
     }
 
-    public function sessStart() : void
+    /**
+     * start the session
+     * and prevent Browser OR Ipaddress
+     * and set the two csrf Tokens
+     *
+     * @param boolean $preventIP
+     * @param boolean $preventBrowser
+     * @return void
+     */
+    public function sessStart(
+        bool $preventIP = self::CHECK_IP_ADDRESS,
+        bool $preventBrowser = self::CHECK_BROWSER,
+        int $maxlife = self::SESSION_MAXLIFE
+    ) : void
     {
         $this->se->start();
 
         // check prevent multible ip and browser
         // session is created
-        if ((self::CHECK_BROWSER || self::CHECK_IP_ADDRESS)
-        && !$this->preventMultiIP()) {
+        if (($preventBrowser || $preventIP)
+        && !$this->preventMultiIP($preventIP, $preventBrowser)) {
+            // fwrite(STDOUT, "\nprevnet browser\n");
             // destory session
             $this->se->invalidate();
 
-            if (self::CHECK_IP_ADDRESS) $this->setUserIP();
-            if (self::CHECK_BROWSER) $this->setUserAgent();
+            if ($preventIP) $this->setUserIP();
+            if ($preventBrowser) $this->setUserAgent();
         }
-
-        // check session active time
-        $this->checkActivity();
 
         // set the csrf token
         $this->setCsrfToken();
+
+        // check session active time
+        $this->checkActivity($maxlife);
     }
 
     /**
@@ -108,31 +131,43 @@ class AppSession
             $this->request->server->get($server_attr),
             '41c6dee3uX0E2hwmpVKuqbyIkbs43GN9QLW41u3y'
         );
+        // return $this->request->server->get($server_attr);
     }
 
-    private function checkActivity() : void
+    private function checkActivity(int $maxlife = null)
     {
-        if (time() - $this->se->getMetadataBag()->getLastUsed() > self::SESSION_MAXLIFE) {
+        $maxlife = $maxlife ?? $this->maxlife;
+        if (time() - $this->se->getMetadataBag()->getLastUsed() > $maxlife) {
+            // clear all session and regenerate id
             $this->se->invalidate();
-            throw new Exception('session distroyed');
+            // redirect to logOut page
+            // (new RedirectResponse('logOut'))->send();
+        } else if(time() - $this->se->getMetadataBag()->getCreated() > $maxlife) {
+            // just regenrate session id
+            $this->se->migrate();
         }
     }
 
-    private function preventMultiIP() : bool
+    private function preventMultiIP(
+        bool $preventIP,
+        bool $preventBrowser
+    ) : bool
     {
-        if (!$this->se->has('userIP')
-        && !$this->se->has('userAgent')) {
-            return false;
+        if ($preventIP && !$this->se->has('userIP')) {
+            $this->setUserIP();
+        }
+        if ($preventBrowser && !$this->se->has('userAgent')) {
+            $this->setUserAgent();
         }
 
         // check for ip address
-        if (self::CHECK_IP_ADDRESS
+        if ($preventIP
         && (!Password::hashVerify($this->getUserIP(), $this->encode('REMOTE_ADDR')))) {
             return false;
         }
 
         // check for user browser
-        if (self::CHECK_BROWSER
+        if ($preventBrowser
         && (!Password::hashVerify($this->getUserAgent(), $this->encode('HTTP_USER_AGENT'))) ) {
             return false;
         }
