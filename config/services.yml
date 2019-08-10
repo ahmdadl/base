@@ -24,7 +24,8 @@ services:
     Symfony\Component\HttpFoundation\Session\SessionInterface:
         class: 'Symfony\Component\HttpFoundation\Session\Session'
         arguments: ['@session_storage', '@session_attrbag']
-    App\Util\AppSession: ~
+    App\Util\AppSession:
+        arguments: ['@Symfony\Component\HttpFoundation\Session\SessionInterface', '@Symfony\Component\HttpFoundation\Request','%session.maxlife%']
     App\View\FrontRenderInterface:
         class: 'App\View\FrontRender'
         lazy: true

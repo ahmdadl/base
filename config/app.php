@@ -44,8 +44,14 @@ return [
     // sessions options
     'session' => [
         'name' => null, // use default webSiteNameSESSION
-        'samesite' => 'Strict', // or `lax' for example.website.com
-        // maxlife should be changed at App\Util\Session class
+        'samesite' => 'Strict', // or `lax' for multi domain websites
+
+        /**
+         * destroy the after a period 
+         * if user has not make any request in that time
+         * @var int number of seconds
+         */
+        'maxlife' => 1800 // 30 min
     ],
 
     /**

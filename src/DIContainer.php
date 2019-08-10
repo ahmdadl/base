@@ -126,13 +126,18 @@ class DIContainer
             'minLength',
             $this->config['hashids']['minLength']
         );
+        
         // session options
+        $this->container->setParameter(
+            'session.maxlife',
+            $this->config['session']['maxlife']
+        );
         $this->container->setParameter('session_options', [
             'name' => $this->config['session']['name'] ?? strtoupper($_SERVER['HTTP_HOST']) . 'SESSION',
             'use_strict_mode' => true,
             // disable and handle regenrate session ID manauly
             'gc_probability' => 0,
-            'cookie_lifetime' => AppSession::SESSION_MAXLIFE + 10,
+            'cookie_lifetime' => $this->config['session']['maxlife'] + 10,
             'cookie_samesite' => $this->config['session']['samesite'],
             'sid_length' => 48,
             'sid_bits_per_character' => 6,
