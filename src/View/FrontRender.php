@@ -15,7 +15,7 @@ use League\Plates\Extension\{
     Asset,
     URI
 };
-
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class FrontRender implements FrontRenderInterface
 {
@@ -72,22 +72,19 @@ class FrontRender implements FrontRenderInterface
          * @link https://stackoverflow.com/questions/6287903/how-to-properly-add-csrf-token-using-php
          */
         $this->view->registerFunction('csrf', function (string $uri = null) {
+            $this->session->sessStart();
             if (null !== $uri) {
                 $token = Password::hashMac(
                     $uri, // string to be hashed
                     $this->session->se->get('Form_Token') ?? '' // key
                 );
             } else {
-                $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
+                $token = $this->session->se->has('X_CSRF_TOKEN') ? $this->session->se->get('X_CSRF_TOKEN') : '';
             }
-            return strlen($token > 15) ? '<input type="hidden" name="csrfToken" value="' .
+
+            return strlen($token) > 15 ? '<input type="hidden" name="csrfToken" value="' .
             $token . '" />' : '';
         });
-
-
-        // assign data to all views
-        // check if there is user sign in or not
-        // $this->view->addData(['hasSession' => $this->request->hasPreviousSession()]);
 
         // make session available to all views
         $this->view->addData(['session' => $this->session->se]);
