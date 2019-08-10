@@ -32,7 +32,6 @@ class Password
     ) : string {
         if (strlen((string)$pass) < 6) {
             throw new \Exception('password must be longer than 6 chars');
-            // throw new InvalidArgumentException('password must be longer than 5 chars')
         }
         return password_hash($pass, $algo, [
             'memory_cost' => $memory,
