@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\{
 };
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Faker;
 
 class CustomTest extends TestCase
 {
@@ -43,7 +42,7 @@ class CustomTest extends TestCase
             $this->model
         );
 
-        $this->faker = Faker\Factory::create();
+        $this->faker = \Faker\Factory::create();
 
     }
 
