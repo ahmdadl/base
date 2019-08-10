@@ -31,16 +31,11 @@ class Home
         $this->model = $model;
         $this->hashid = $hashid;
         $this->session = $session;
-        if ($this->request->hasPreviousSession()){
-            $this->session->sessStart();
-        }
+        $this->session->sessStart();
     }
 
     public function show($params = []) : void
     {
-        // var_dump($this->request->hasPreviousSession());
-        // var_dump($this->session);
-        // var_dump(ini_get('session.use_strict_mode'));
         $this->view->render('home', [
             'name' => 'not me',
             'data' => $this->model->readAll(),

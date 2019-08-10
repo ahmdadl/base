@@ -40,7 +40,7 @@ class HomeModel
         return ($stmt->execute($params)) ? true : false;
     }
 
-    public function readAll() : object
+    public function readAll() : array
     {
         $sql = 'SELECT j.id, u.name AS userName, j.text, TIME_FORMAT(TIMEDIFF(NOW(), j.updatedAt), \'%HHrs %iMin\') AS lastUpdate FROM jokes AS j 
         JOIN users AS u ON u.id = j.authorID';
