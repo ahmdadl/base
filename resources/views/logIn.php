@@ -31,4 +31,8 @@
         <?=$this->_method('post')?>
         <button type='submit' name='submit' class="pure pure-button pure-button-primary">LogIn</button>
     </fieldset>
+    <pre>
+        name ==> abo3adel35<br/>
+        pass ==> asdefg
+    </pre>
 </form>
