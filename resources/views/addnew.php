@@ -22,7 +22,7 @@
             </optgroup>
         </select>
         <?=$this->csrf()?>
-        <?=$this->method()?>
+        <?=$this->_method()?>
         <button type="submit" name="submit" class="pure-button pure-button-primary">Save</button>
     </fieldset>
 </form>
