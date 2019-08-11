@@ -37,9 +37,9 @@ class FrontRender implements FrontRenderInterface
         $this->configView();
     }
 
-    public function render(string $template, array $params = []) : void
+    public function render(string $template, array $params = []) : Response
     {
-        $this->response->setContent($this->view->render($template, $params));
+        return $this->response->setContent($this->view->render($template, $params));
     }
 
     /**
