@@ -39,9 +39,7 @@ class FrontRender implements FrontRenderInterface
 
     public function render(string $template, array $params = []) : void
     {
-        $html = $this->view->render($template, $params);
-        $this->response->setStatusCode(Response::HTTP_OK);
-        $this->response->setContent($html);
+        $this->response->setContent($this->view->render($template, $params));
     }
 
     /**
