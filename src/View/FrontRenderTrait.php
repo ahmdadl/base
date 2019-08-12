@@ -29,6 +29,9 @@ trait FrontRenderTrait
     ) : string {
         // doing this to allow using static session at tester
         if (null === $session) {
+            if (!isset($this->session)) {
+                throw new \Exception('session property not found. tou must add it manaualy to function argument');
+            }
             $session = $this->session;
         }
 
