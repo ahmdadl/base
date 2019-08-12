@@ -14,9 +14,10 @@ use FastRoute\RouteCollector;
 
 class RouterTest extends TestCase
 {
+    use AbstractTrait;
+
     const DEBUG = true;
     const CACHE_DIR = '/../../storage/tmp/';
-    use AbstractTrait;
 
     private $routes;
     private $container;
@@ -41,6 +42,16 @@ class RouterTest extends TestCase
                 '/ft/{up:[a-z]+}[/{name:[A-Z]+}]',
                 ['Up@noWhere']
             );
+            $r->get('/not/{id:\d+}/profile', [
+                'User@profile',
+                'middlewares' => ['Auth']
+                ]
+            );
+            $r->put('/post/{slug:[a-z]+}', 
+                ['Post@update',
+                'middlewares' => ['Auth', 'CsrfVerify', 'WillShow']
+                ]
+            );
         };
     }
 
@@ -62,9 +73,6 @@ class RouterTest extends TestCase
         );
     }
 
-    /**
-     * @doesNotPerformAssertions
-     */
     public function testSetRoutes() : void
     {
         $this->router = new Router(
@@ -76,10 +84,14 @@ class RouterTest extends TestCase
         );
 
         $this->router->setRoutes($this->routes);
+
+        $this->assertSame(
+            $this->routes,
+            $this->router->getRoutes()
+        );
     }
 
     /**
-     * @doesNotPerformAssertions
      * @dataProvider testRunWithFoundRouteData
      */
     public function testRunWithFoundRoute(
@@ -96,18 +108,27 @@ class RouterTest extends TestCase
             ->get('REQUEST_URI')
             ->once()
             ->andReturn($uri);
+        
+        $this->container->shouldReceive('get')
+            ->atLeast()
+            ->once()
+            ->with(Mockery::any())
+            ->andReturn($this->homeCtrl);
 
+        if ($uri === '/not/25/profile') {
+            $return = false;
+        } else {
+            $return = true;
+        }
+        $this->homeCtrl->shouldReceive('process')
+            ->atMost()
+            ->times(3)
+            ->andReturn($return);
         
         $this->homeCtrl->shouldReceive($receiveHandler)
             ->once()
             ->with(Mockery::any())
             ->andReturn($this->faker('randomHtml'));
-
-        $this->container->expects()
-            ->get(Mockery::any())
-            ->atMost()
-            ->twice()
-            ->andReturn($this->homeCtrl);
 
         $this->router = new Router(
             self::$request,
@@ -119,12 +140,16 @@ class RouterTest extends TestCase
 
         $this->router->setRoutes($this->routes);
 
-        $this->router->run();
+        $this->assertNull($this->router->run());
     }
 
     /**
-     * @doesNotPerformAssertions
      * @dataProvider testRunWithNotFoundRouteData
+     *
+     * @param string $method
+     * @param string $uri
+     * @param integer $errCode
+     * @return void
      */
     public function testRunWithNotFoundRoute(
         string $method,
@@ -164,7 +189,7 @@ class RouterTest extends TestCase
 
         $this->router->setRoutes($this->routes);
 
-        $this->router->run();
+        $this->assertNull($this->router->run());
     }
 
     /**
@@ -188,6 +213,16 @@ class RouterTest extends TestCase
                 'POST',
                 '/ft/ahmed/HOMES',
                 'noWhere'
+            ],
+            'get with one middleware' => [
+                'GET',
+                '/not/25/profile',
+                'profile'
+            ],
+            'put with 3 middlewares' => [
+                'PUT',
+                '/post/something',
+                'update'
             ]
         ];
     }
@@ -217,6 +252,16 @@ class RouterTest extends TestCase
             'get method not allwoed' => [
                 'GET',
                 '/user/home',
+                405
+            ],
+            'get with middleware' => [
+                'GET',
+                '/not/as/profile',
+                404
+            ],
+            'post with middlewares' => [
+                'POST',
+                '/post/somenoo',
                 405
             ]
         ];

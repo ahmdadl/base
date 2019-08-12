@@ -94,9 +94,14 @@ class Router
         $this->setOptions($isDebug, $cacheDir);
     }
 
-    public function setRoutes($routes) : void
+    public function setRoutes(\Closure $routes) : void
     {
         $this->routes = $routes;
+    }
+
+    public function getRoutes() : \Closure
+    {
+        return $this->routes;
     }
 
     public function run()
@@ -190,8 +195,6 @@ class Router
             case Code::FOUND:
                 $this->handleRoute();
                 break;
-            default:
-                ($this->container->get('App\Route\ErrorView'))->show(Response::HTTP_NOT_FOUND);
         }
     }
 }
