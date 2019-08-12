@@ -24,6 +24,7 @@ trait AbstractTrait
     {
         self::$request = Mockery::mock(Request::class);
         self::$request->server = Mockery::mock(ParameterBag::class);
+        self::$request->request = Mockery::mock(ParameterBag::class);
         self::$response = Mockery::mock(Response::class);
         self::$session = Mockery::mock(AppSession::class);
         self::$session->se = new Session(new MockArraySessionStorage());
