@@ -15,8 +15,11 @@ use League\Plates\Extension\{
     Asset,
     URI
 };
+use App\View\FrontRenderTrait;
 class FrontRender implements FrontRenderInterface
 {
+    use FrontRenderTrait;
+
     private $requset;
     private $response;
     private $view;
@@ -37,7 +40,11 @@ class FrontRender implements FrontRenderInterface
 
     public function render(string $template, array $params = []) : Response
     {
-        return $this->response->setContent($this->view->render($template, $params));
+        return $this->response->setContent(
+            $this->spaceless(
+                $this->view->render($template, $params)
+            )
+        );
     }
 
     /**
@@ -54,32 +61,16 @@ class FrontRender implements FrontRenderInterface
         $this->view->loadExtension(new URI($this->request->getPathInfo()));
 
         // create new escape function
-        $this->view->registerFunction('es', function(string $str) {
-            return htmlspecialchars(strip_tags(trim($str)), ENT_QUOTES);
-        });
+        $this->view->registerFunction('es', [$this, 'es']);
 
         // create method function like laravel one
-        $this->view->registerFunction('_method', function (string $method = 'post') {
-            return '<input type="hidden" name="_method" value="' . strtoupper($method) . '" />';
-        });
+        $this->view->registerFunction('_method', [$this, '_method']);
 
         /**
          * create function to add csrf token
          * @link https://stackoverflow.com/questions/6287903/how-to-properly-add-csrf-token-using-php
          */
-        $this->view->registerFunction('csrf', function (string $uri = null) {
-            if (null !== $uri) {
-                $token = Password::hashMac(
-                    $uri, // string to be hashed
-                    $this->session->se->get('Form_Token') ?? '' // key
-                );
-            } else {
-                $token = $this->session->se->get('X_CSRF_TOKEN') ?? '';
-            }
-
-            return (strlen($token) > 15) ? '<input type="hidden" name="csrfToken" value="' .
-            $token . '" />' : '';
-        });
+        $this->view->registerFunction('csrf', [$this, 'csrf']);
 
         // make session available to all views
         $this->view->addData(['session' => $this->session->se]);
