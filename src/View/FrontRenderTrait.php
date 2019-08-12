@@ -28,12 +28,8 @@ trait FrontRenderTrait
         ?object $session = null
     ) : string {
         // doing this to allow using static session at tester
-        if (null === $session) {
-            if (!isset($this->session)) {
-                throw new \Exception('session property not found. you must add it manaualy to as argument');
-            }
-            $session = $this->session;
-        }
+        
+        $session = $session ?? $this->session;
 
         if (null !== $key) {
             $token = Password::hashMac(

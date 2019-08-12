@@ -194,10 +194,6 @@ final class FrontRenderTest extends TestCase
             $input($generatedFormToken),
             $this->csrf($key, self::$session) 
         );
-
-        $this->expectExceptionMessage('session property not found. you must add it manaualy to as argument');
-
-        $this->csrf(null, null);
     }
 
     /**
