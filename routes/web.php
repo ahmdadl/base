@@ -5,7 +5,7 @@ use FastRoute\RouteCollector;
 return function (RouteCollector $r) {
     $uri = '/ft/public';
     $r->get($uri . '/', ['Home@show',
-    'middlewares' => ['Auth',]]);
+    'middlewares' => []]);
     $r->addRoute(['GET', 'POST'], $uri . '/addNew', ['Joke@addNew']);
     $r->addRoute(['GET', 'POST'], $uri . '/edit/j/{id}', [
         'Joke@edit'

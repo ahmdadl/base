@@ -6,7 +6,6 @@ use App\Middlewares\CsrfVerify;
 use AppTest\AbstractTrait;
 use PHPUnit\Framework\TestCase;
 use Mockery;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 final class CsrfVerifyTest extends TestCase
 {
