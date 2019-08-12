@@ -14,9 +14,9 @@ class CsrfVerify extends Base implements MiddlewareInterface
     public function process() : bool
     {
         // get saved in session csrf token
-        $known = parent::$session->se->get('X_CSRF_TOKEN');
+        $known = $this->session->se->get('X_CSRF_TOKEN');
         // get the token submited with user input
-        $token = parent::$request->request->get('csrfToken');
+        $token = $this->request->request->get('csrfToken');
         // check if the two tokens not equal
         if (hash_equals($known, $token)) {
             // if no error
@@ -24,7 +24,7 @@ class CsrfVerify extends Base implements MiddlewareInterface
         }
 
         // send message to view via flash sessions
-        parent::$session->se->getFlashBag()->add(
+        $this->session->se->getFlashBag()->add(
             'danger',
             'an error occured. please try again later'
         );

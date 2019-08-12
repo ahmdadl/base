@@ -7,14 +7,15 @@ use App\Util\AppSession;
 
 abstract class Base
 {
-    protected static $request;
-    protected static $session;
+    protected  $request;
+    protected $session;
     public function __construct(
         Request $request,
         AppSession $session
     ) {
-        self::$request = $request;
-        self::$session = $session;
+        $this->request = $request;
+        $this->session = $session;
+        $this->session->sessStart();
     }
 
     /**
