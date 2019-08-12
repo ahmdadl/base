@@ -143,7 +143,9 @@ class AppSession
             // (new RedirectResponse('logOut'))->send();
         } else if(time() - $this->se->getMetadataBag()->getCreated() > $maxlife) {
             // just regenrate session id
+            // @codeCoverageIgnoreStart
             $this->se->migrate();
+            // @codeCoverageIgnoreEnd
         }
     }
 
