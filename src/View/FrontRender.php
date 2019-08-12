@@ -15,8 +15,6 @@ use League\Plates\Extension\{
     Asset,
     URI
 };
-use Mockery\Generator\StringManipulation\Pass\Pass;
-
 class FrontRender implements FrontRenderInterface
 {
     private $requset;
