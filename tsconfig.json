@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "outFile": "./public/assets/js/app.js",
+        "module": "amd",
         "sourceRoot": "./resources/typescript/",
+        "outFile": "./public/assets/js/app.js",
         "sourceMap": true
         // "fi"
     }
