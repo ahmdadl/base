@@ -4,6 +4,7 @@ namespace AppTest\View;
 
 use AppTest\AbstractTrait;
 use App\View\FrontRender;
+use App\View\FrontRenderTrait;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use League\Plates\Engine;
@@ -24,23 +25,29 @@ class FrontRenderTest extends TestCase
 
     public function setUp() : void
     {
+        self::$request->shouldReceive('getPathInfo')
+            ->atMost()
+            ->once()
+            ->andReturn('/ft/public/');
+
         $this->engine = Mockery::mock(Engine::class);
         $this->engine->shouldReceive('loadExtension')
             ->atMost()
             ->twice()
             ->andReturn(ExtensionInterface::class);
 
-        self::$request->shouldReceive('getPathInfo')
-            ->atMost()
-            ->once()
-            ->andReturn('/ft/public/');
-        
+        $closure = function (string $str) {
+            return $str;
+        };
         $this->engine->shouldReceive('registerFunction')
+            ->withArgs(function ($name, $closure) {
+                return true;
+            })
             ->atMost()
             ->times(3)
-            ->byDefault()
             ->andReturn(
-                $this->es('some')
+                $this->es('some'),
+                $this->_method()
             );
         
         $this->engine->shouldReceive('addData')
@@ -82,7 +89,9 @@ class FrontRenderTest extends TestCase
             'name' => $this->faker('name'),
             'id' => $this->faker('randomDigitNotNull'),
         ];
-        $content = $this->faker('randomHtml');
+        $content = $this->spaceless(
+            $this->faker('randomHtml')
+        );
 
         $this->engine->expects()
             ->render($template, $param)
@@ -108,7 +117,9 @@ class FrontRenderTest extends TestCase
         );
 
         $this->assertSame(
-            self::$response->setContent($content),
+            self::$response->setContent(
+                $this->spaceless($content)
+            ),
             $res
         );
     }
@@ -151,9 +162,12 @@ class FrontRenderTest extends TestCase
         };
 
         // test will return nothing if no csrf token exists
-        $this->assertEmpty($this->csrf());
+        $this->assertEmpty($this->csrf(null, self::$session));
         // will return as expected regaredless to exitst of formToken
-        $this->assertNotEmpty($this->csrf($this->faker('url')));
+        $this->assertNotEmpty($this->csrf(
+            $this->faker('url'),
+            self::$session
+        ));
 
         // set random tokens
         $csrfToken = $this->faker('sha256');
@@ -169,7 +183,7 @@ class FrontRenderTest extends TestCase
 
         $this->assertSame(
             $input($csrfToken),
-            $this->csrf()
+            $this->csrf(null, self::$session)
         );
 
         $key = $this->faker('word');
@@ -177,8 +191,22 @@ class FrontRenderTest extends TestCase
         
         $this->assertSame(
             $input($generatedFormToken),
-            $this->csrf($key) 
+            $this->csrf($key, self::$session) 
         );
+    }
+
+    /**
+     * @dataProvider testSpacelessData
+     *
+     * @param string $expected
+     * @param string $actual
+     * @return void
+     */
+    public function testSpaceless(
+        string $expected,
+        string $actual
+    ) : void {
+        $this->assertSame($expected, $this->spaceless($actual));
     }
 
     /**
@@ -230,6 +258,39 @@ class FrontRenderTest extends TestCase
                 $before.'DELETE'.$after,
                 'delete'
             ]
+        ];
+    }
+
+    /**
+     * @doesNotPerformAssertions
+     */
+    public function testSpacelessData() : array
+    {
+        $randHtml = $this->faker('randomHtml');
+        
+        return [
+            'empty' => ['', ''],
+            'html header' => ['<h1> asd </h1>', '<h1> asd </h1>'],
+            'html comment removed' => [
+                '<div></div>',
+                '<div><!--asdefg--></div>'
+            ],
+            'html paragraph' => [
+                '<p> asd </p><p>www </p>',
+                '<p> asd </p> <p>www </p> '
+            ],
+            'html head content' => [
+                '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"></head></html>',
+                '<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                </head>
+                </html>'
+            ],
+            'randomHtml' => [$this->spaceless($randHtml), $randHtml]
         ];
     }
 }
