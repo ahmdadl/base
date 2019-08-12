@@ -9,3 +9,4 @@
 !/storage/tmp/.gitkeep
 .env
 .phpunit.result.cache
+*.map
