@@ -22,14 +22,33 @@ class ErrorViewTest extends TestCase
     public function testInstance() : void
     {
         $this->assertTrue(
-            Mockery::type(FrontRenderInterface::class)->type($this->engine)
+            Mockery::type(FrontRenderInterface::class)->match($this->engine)
         );
 
         $errorView = new ErrorView($this->engine);
 
         $this->assertTrue(
-            Mockery::type(ErrorView::class)->type($errorView)
+            Mockery::type(ErrorView::class)->match($errorView)
         );
+    }
+
+    public function testShow() : void
+    {
+        $this->engine->expects()
+            ->render('error/p404')
+            ->once()
+            ->andReturn(self::$response);
+        
+        $errorView = new ErrorView($this->engine);
+        $this->assertNull($errorView->show(404));
+
+        $this->engine->expects()
+            ->render('error/p405')
+            ->once()
+            ->andReturn(self::$response);
+        
+        $errorView = new ErrorView($this->engine);
+        $this->assertNull($errorView->show(405));
     }
 
 }
