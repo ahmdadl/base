@@ -15,8 +15,9 @@ use Symfony\Component\HttpFoundation\{
 use App\Util\AppSession;
 use App\Util\Password;
 use League\Plates\Extension\ExtensionInterface;
+use Mockery\Mock;
 
-class FrontRenderTest extends TestCase
+final class FrontRenderTest extends TestCase
 {
     use AbstractTrait;
     use FrontRenderTrait;
@@ -193,6 +194,10 @@ class FrontRenderTest extends TestCase
             $input($generatedFormToken),
             $this->csrf($key, self::$session) 
         );
+
+        $this->expectExceptionMessage('session property not found. you must add it manaualy to as argument');
+
+        $this->csrf(null, null);
     }
 
     /**
