@@ -4,12 +4,13 @@ namespace AppTest\Route;
 
 use App\DIContainer;
 use App\Route\Router;
+use App\Controllers\Home;
+use App\Route\ErrorView;
+use App\View\FrontRenderTrait;
 use AppTest\AbstractTrait;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 use FastRoute\RouteCollector;
-use App\Controllers\Home;
-use App\Route\ErrorView;
 
 class RouterTest extends TestCase
 {
