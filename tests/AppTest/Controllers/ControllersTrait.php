@@ -30,13 +30,23 @@ trait ControllersTrait
         self::$request->request = Mockery::mock(ParameterBag::class);
 
         self::$response = Mockery::mock(Response::class);
+        self::$response->expects()
+            ->setContent(Mockery::any())
+            ->once()
+            ->andReturn(self::$response->setContent(''));
+        self::$response->shouldReceive('getContent')
+            ->atMost()
+            ->times(4)
+            ->passthru();
+        
 
         self::$session = Mockery::mock(AppSession::class);
         self::$session->se = new Session(
             new MockArraySessionStorage()
         );
         self::$session->shouldReceive('sessStart')
-            ->once()
+            ->atMost()
+            ->times(5)
             ->withNoArgs()
             ->andReturn(Mockery::any());
 

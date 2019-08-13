@@ -6,6 +6,7 @@ use DB\Model\HomeModel;
 use App\View\FrontRenderInterface;
 use DB\Model\UserModel;
 use Hashids\Hashids;
+use Symfony\Component\HttpFoundation\Response;
 
 class Joke
 {
@@ -52,9 +53,10 @@ class Joke
         $this->view = $view;
         $this->user = $user;
         $this->hashid = $hashid;
+        // $this->sess
     }
 
-    public function addNew() : void
+    public function addNew() : Response
     {
         // check if this is form submit
         if ($this->request->request->get('text')) {
@@ -63,7 +65,7 @@ class Joke
             $data = $this->model->createOne();
         }   
 
-        $this->view->render('addnew', [
+        return $this->view->render('addnew', [
             'edit' => false,
             'fine' => $data ?? '',
             'users' => $this->user->readAll(),
@@ -71,15 +73,19 @@ class Joke
         ]);
     }
 
-    public function edit(array $p) : void
+    public function edit(array $p) : Response
     {
         
         // decode joke id and assign it to model
-        $this->model->id = $this->hashid->decode($p['id'])[0];
+        $id = $this->hashid->decode($p['id']);
+        if (!isset($id[0])) {
+            throw new \Exception('joke id is not vaild');
+        }
+        $this->model->id = $id[0];
         // check if user has submited the edit button
         if (!$this->request->request->has('text')) {
             // if user just visited the edit route then show joke
-            $joke = $this->model->readOne()->fetch();
+            $joke = $this->model->readOne();
         } else {
             // if user edited and submited joke then update joke
             $this->model->text = $this->request->request->get('text');
@@ -95,7 +101,7 @@ class Joke
             $joke->authorID =$this->request->request->get('authorID');
         }
 
-        $this->view->render('addnew', [
+        return $this->view->render('addnew', [
             'edit' => true,
             'fine' => $data ?? '',
             'joke' => $joke,
@@ -106,7 +112,13 @@ class Joke
 
     public function delete(array $param) : bool
     {
-        $this->model->id = $this->hashid->decode($param['id'])[0];
+        $id = $this->hashid->decode($param['id']);
+
+        if (!isset($id[0])) {
+            throw new \Exception('joke id is not vaild');
+        }
+        
+        $this->model->id = $id[0];
 
         return $this->model->delete();
     }

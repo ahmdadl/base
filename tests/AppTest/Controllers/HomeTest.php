@@ -52,10 +52,6 @@ final class HomeTest extends TestCase
             ->setContent(Mockery::any())
             ->once()
             ->andReturn(self::$response->setContent($posts));
-        
-        self::$response->shouldReceive('getContent')
-            ->twice()
-            ->passthru();
 
         self::$view->shouldReceive('render')
             ->once()

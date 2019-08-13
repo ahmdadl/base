@@ -8,6 +8,7 @@ use App\View\FrontRenderInterface;
 use DB\Model\UserModel;
 use Hashids\Hashids;
 use App\Util\AppSession;
+use Symfony\Component\HttpFoundation\Response;
 
 class User
 {
@@ -48,7 +49,7 @@ class User
         $session->sessStart();
     }
 
-    public function logIn(array $p = []) : void
+    public function logIn(array $p = []) : Response
     {
         // sleep(25);
         // var_dump($this->request->server->all());
@@ -116,7 +117,7 @@ class User
         }
         $data['req'] = $this->request;
         // show login form
-        $this->view->render('logIn', $data);
+        return $this->view->render('logIn', $data);
         // var_dump('asd');
     }
 

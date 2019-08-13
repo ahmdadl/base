@@ -50,7 +50,7 @@ class HomeModel
         return $stmt->fetchAll();
     }
 
-    public function readOne() : array
+    public function readOne() : object
     {
         $sql = 'SELECT id, `text`, authorID FROM ' . $this->tbName .' 
         WHERE id = :id';
