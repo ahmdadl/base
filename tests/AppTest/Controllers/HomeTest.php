@@ -10,69 +10,77 @@ use Mockery;
 use Symfony\Component\HttpFoundation\Request;
 use Hashids\Hashids;
 use PHPUnit\Framework\TestCase;
+use AppTest\AbstractTrait;
 
-// final class HomeTest extends TestCase
-// {
-//     protected $request;
-//     protected $view;
-//     protected $hashids;
-//     protected $session;
-//     protected $faker;
-//     private $model;
-//     private $ctrl;
+final class HomeTest extends TestCase
+{
+    use AbstractTrait;
 
-//     public function setUp() : void
-//     {
-//         $this->request = Mockery::mock(Request::class);
-//         $this->view = Mockery::mock(FrontRenderInterface::class);
-//         $this->hashids = Mockery::mock(Hashids::class);
-//         $this->session = Mockery::mock(AppSession::class);
-//         $this->model = Mockery::mock(HomeModel::class);
+    protected $view;
+    protected $hashids;
+    private $model;
+    private $ctrl;
 
-//         $this->faker = \Faker\Factory::create('ar_SA');
+    public function setUp() : void
+    {
+        $this->view = Mockery::mock(FrontRenderInterface::class);
+        $this->hashids = Mockery::mock(Hashids::class);
+        $this->model = Mockery::mock(HomeModel::class);
         
 
-//         $this->session->shouldReceive('sessStart')
-//             ->once()
-//             ->withNoArgs()
-//             ->andReturn(Mockery::any());
+        self::$session->shouldReceive('sessStart')
+            ->once()
+            ->withNoArgs()
+            ->andReturn(Mockery::any());
 
-//         $this->ctrl = new Home(
-//             $this->request,
-//             $this->view,
-//             $this->model,
-//             $this->hashids,
-//             $this->session
-//         );
-//     }
+        $this->ctrl = new Home(
+            self::$request,
+            $this->view,
+            $this->model,
+            $this->hashids,
+            self::$session
+        );
+    }
 
-//     public function testShow() : void
-//     {
-//         $posts = [
-//             [
-//                 'id' => $this->faker->randomDigitNotNull,
-//                 'authorID' => $this->faker->randomDigitNotNull,
-//                 'text' => $this->faker->text,
-//                 'updatedAt' => $this->faker->datetime
-//             ],
-//             [
-//                 'id' => $this->faker->randomDigitNotNull,
-//                 'authorID' => $this->faker->randomDigitNotNull,
-//                 'text' => $this->faker->text,
-//                 'updatedAt' => $this->faker->datetime
-//             ]
-//         ];
-//         $this->model->shouldReceive('readAll')
-//             ->once()
-//             ->withNoArgs()
-//             ->andReturn($posts);
-
-//         $this->view->shouldReceive('render')
-//             ->once()
-//             ->andReturn('asd');
+    public function testShow() : void
+    {
+        $posts = [
+            [
+                'id' => $this->faker('randomDigitNotNull'),
+                'authorID' => $this->faker('randomDigitNotNull'),
+                'text' => $this->faker('text'),
+                'updatedAt' => $this->faker('datetime')
+            ],
+            [
+                'id' => $this->faker('randomDigitNotNull'),
+                'authorID' => $this->faker('randomDigitNotNull'),
+                'text' => $this->faker('text'),
+                'updatedAt' => $this->faker('datetime')
+            ]
+        ];
+        $this->model->shouldReceive('readAll')
+            ->once()
+            ->withNoArgs()
+            ->andReturn($posts);
         
-//         $response = $this->ctrl->show();
+        self::$response->expects()
+            ->setContent(Mockery::any())
+            ->once()
+            ->andReturn(self::$response->setContent($posts));
+        
+        self::$response->shouldReceive('getContent')
+            ->twice()
+            ->passthru();
 
-//         $this->assertSame('asd', 'asd');
-//     }
-// }
+        $this->view->shouldReceive('render')
+            ->once()
+            ->andReturn(self::$response);
+        
+        $response = $this->ctrl->show();
+
+        $this->assertSame(
+            self::$response->getContent(),
+            $response->getContent()
+        );
+    }
+}

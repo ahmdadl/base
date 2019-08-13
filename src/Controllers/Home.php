@@ -8,6 +8,7 @@ use DB\Model\HomeModel;
 use Hashids\Hashids;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Util\AppSession;
+use Symfony\Component\HttpFoundation\Response;
 
 // use DB\Model\UserModel;
 
@@ -34,9 +35,9 @@ class Home
         $this->session->sessStart();
     }
 
-    public function show($params = []) : void
+    public function show($params = [])
     {
-        $this->view->render('home', [
+        return $this->view->render('home', [
             'name' => 'not me',
             'data' => $this->model->readAll(),
             'hashid' => $this->hashid
