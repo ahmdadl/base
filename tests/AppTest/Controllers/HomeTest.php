@@ -17,12 +17,6 @@ final class HomeTest extends TestCase
     public function setUp() : void
     {
         $this->model = Mockery::mock(HomeModel::class);
-        
-
-        self::$session->shouldReceive('sessStart')
-            ->once()
-            ->withNoArgs()
-            ->andReturn(Mockery::any());
 
         $this->ctrl = new Home(
             self::$request,

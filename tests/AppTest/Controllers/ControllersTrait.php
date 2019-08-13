@@ -32,7 +32,13 @@ trait ControllersTrait
         self::$response = Mockery::mock(Response::class);
 
         self::$session = Mockery::mock(AppSession::class);
-        self::$session->se = new Session(new MockArraySessionStorage());
+        self::$session->se = new Session(
+            new MockArraySessionStorage()
+        );
+        self::$session->shouldReceive('sessStart')
+            ->once()
+            ->withNoArgs()
+            ->andReturn(Mockery::any());
 
         self::$view = Mockery::mock(FrontRenderInterface::class);
 

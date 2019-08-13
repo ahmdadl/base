@@ -16,9 +16,9 @@ final class BaseTest extends TestCase
 
     public function setUp() : void
     {
-        self::$session->expects()
-        ->sessStart()
-        ->times(2)
+        self::$session->shouldReceive('sessStart')
+        ->atMost()
+        ->times(4)
         ->andReturnNull();
         
         $this->clss = new class(
@@ -28,6 +28,7 @@ final class BaseTest extends TestCase
             public function __construct($request, $session)
             {
                 parent::__construct($request, $session);
+                $session->sessStart();
             }
 
             public function process() : bool
