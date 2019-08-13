@@ -2,15 +2,10 @@
 
 namespace AppTest\Controllers;
 
-use App\Util\AppSession;
-use App\View\FrontRenderInterface;
 use App\Controllers\Home;
 use DB\Model\HomeModel;
 use Mockery;
-use Symfony\Component\HttpFoundation\Request;
-use Hashids\Hashids;
 use PHPUnit\Framework\TestCase;
-use AppTest\AbstractTrait;
 
 final class HomeTest extends TestCase
 {
