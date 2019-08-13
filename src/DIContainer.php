@@ -2,12 +2,15 @@
 
 namespace App;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
-use Symfony\Component\Config\ConfigCache;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use App\Util\AppSession;
+use Symfony\Component\DependencyInjection\{
+    ContainerBuilder,
+    Dumper\PhpDumper,
+    Loader\YamlFileLoader
+};
+use Symfony\Component\Config\{
+    ConfigCache,
+    FileLocator
+};
 
 /**
  * build the dependency injection container and cache it
