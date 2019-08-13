@@ -25,11 +25,6 @@ class MySqli extends MainFn
             PDO::ATTR_PERSISTENT => false,
         ];
 
-        try {
-            $this->con = new PDO($dsn, $this->user, $this->pass, $opts);
-        } catch (PDOException $e) {
-            var_dump($e->getMessage());
-            exit;
-        }
+        $this->con = new PDO($dsn, $this->user, $this->pass, $opts);
     }
 }
