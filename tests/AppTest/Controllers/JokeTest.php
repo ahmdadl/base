@@ -264,5 +264,28 @@ class JokeTest extends TestCase
         
         $this->ctrl->delete(['id' => 'w']);
     }
+
+    public function testDelete() : void
+    {
+        $hashedId = $this->faker('word');
+
+        self::$hashids->expects()
+            ->decode($hashedId)
+            ->twice()
+            ->andReturn([$this->faker('randomDigitNotNull')]);
+        
+        $this->joke->expects()
+            ->delete()
+            ->twice()
+            ->andReturn(true, false);
+        
+        $this->assertTrue(
+            $this->ctrl->delete(['id' => $hashedId])
+        );
+
+        $this->assertFalse(
+            $this->ctrl->delete(['id' => $hashedId])
+        );
+    }
     
 }
