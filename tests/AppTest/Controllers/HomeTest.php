@@ -14,17 +14,13 @@ use AppTest\AbstractTrait;
 
 final class HomeTest extends TestCase
 {
-    use AbstractTrait;
+    use ControllersTrait;
 
-    protected $view;
-    protected $hashids;
     private $model;
     private $ctrl;
 
     public function setUp() : void
     {
-        $this->view = Mockery::mock(FrontRenderInterface::class);
-        $this->hashids = Mockery::mock(Hashids::class);
         $this->model = Mockery::mock(HomeModel::class);
         
 
@@ -35,9 +31,9 @@ final class HomeTest extends TestCase
 
         $this->ctrl = new Home(
             self::$request,
-            $this->view,
+            self::$view,
             $this->model,
-            $this->hashids,
+            self::$hashids,
             self::$session
         );
     }
@@ -72,7 +68,7 @@ final class HomeTest extends TestCase
             ->twice()
             ->passthru();
 
-        $this->view->shouldReceive('render')
+        self::$view->shouldReceive('render')
             ->once()
             ->andReturn(self::$response);
         
