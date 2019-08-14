@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\{
 
 error_reporting(E_ALL);
 
+/**
+ * @codeCoverageIgnore
+ */
 class Bootstrap
 {
     /**
@@ -78,7 +81,9 @@ class Bootstrap
         if ($this->_config['isDebug']) {
             // iniate whoops and show error page
             $whoops = new Whoops\Run;
-            $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
+            $whoops->pushHandler(
+                new Whoops\Handler\PrettyPageHandler
+            );
             $whoops->register();
         } else {
             // set manual error handler
@@ -195,8 +200,6 @@ class Bootstrap
             $err = $err->getCode();
         }
 
-        // echo nl2br( 'Error(' . $err. '): ' . $errstr . "\r\n" .' [ON FILE]-> '
-        // . $errfile . ' [AT LINE => ' . $errline  .']'. ".\r\n\r\n");
         /** @todo add mail function to email admin with errors */
 
         // redirect to unknownError route
