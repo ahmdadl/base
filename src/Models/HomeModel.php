@@ -40,14 +40,14 @@ class HomeModel
         return ($stmt->execute($params)) ? true : false;
     }
 
-    public function readAll() : object
+    public function readAll() : array
     {
         $sql = 'SELECT j.id, u.name AS userName, j.text, TIME_FORMAT(TIMEDIFF(NOW(), j.updatedAt), \'%HHrs %iMin\') AS lastUpdate FROM jokes AS j 
         JOIN users AS u ON u.id = j.authorID';
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
 
-        return $stmt;
+        return $stmt->fetchAll();
     }
 
     public function readOne() : object
@@ -58,7 +58,7 @@ class HomeModel
         $stmt = $this->con->prepare($sql);
         $stmt->execute([':id' => $this->id]);
 
-        return $stmt;
+        return $stmt->fetch();
     }
 
     public function update() : bool

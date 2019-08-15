@@ -35,16 +35,16 @@ class UserModel
         $this->con = $con->getConnection();
     }
 
-    public function readAll() : PDOStatement
+    public function readAll() : array
     {
         $sql = 'SELECT id, `name`, `admin`, lastModified FROM '. $this->tbName;
         
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetchAll();
     }
 
-    public function readOne() : array
+    public function readOne() : object
     {
         $sql = 'SELECT id, `name`, `admin`, lastModified FROM ' . $this->tbName .
         ' WHERE id = :id';

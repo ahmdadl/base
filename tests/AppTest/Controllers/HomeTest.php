@@ -3,7 +3,7 @@
 namespace AppTest\Controllers;
 
 use App\Controllers\Home;
-use DB\Model\HomeModel;
+use App\Models\HomeModel;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

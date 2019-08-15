@@ -3,8 +3,8 @@
 namespace AppTest\Controllers;
 
 use App\Controllers\Joke;
-use DB\Model\HomeModel;
-use DB\Model\UserModel;
+use App\Models\HomeModel;
+use App\Models\UserModel;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 use stdClass;

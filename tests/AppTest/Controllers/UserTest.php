@@ -3,7 +3,7 @@
 namespace AppTest\Controllers;
 
 use App\Controllers\User;
-use DB\Model\UserModel;
+use App\Models\UserModel;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 
