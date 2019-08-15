@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 use Symfony\Component\HttpFoundation\Request;
-use DB\Model\HomeModel;
+use App\Models\HomeModel;
 use App\View\FrontRenderInterface;
-use DB\Model\UserModel;
+use App\Models\UserModel;
 use Hashids\Hashids;
 use Symfony\Component\HttpFoundation\Response;
 

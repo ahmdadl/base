@@ -30,8 +30,8 @@ services:
     App\Route\ErrorView:
         public: true
         lazy: true
-    DB\Model\:
-        resource: '../database/Model/*'
+    App\Models\:
+        resource: '../src/Models/*'
     App\Middlewares\:
         resource: '../src/Middlewares/*'
         public: true

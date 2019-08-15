@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
-use DB\Model\HomeModel;
+use App\Models\HomeModel;
 use Hashids\Hashids;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Util\AppSession;

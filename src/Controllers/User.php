@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\View\FrontRenderInterface;
-use DB\Model\UserModel;
+use App\Models\UserModel;
 use Hashids\Hashids;
 use App\Util\AppSession;
 use Symfony\Component\HttpFoundation\Response;
