@@ -81,6 +81,38 @@ class AppSession
     }
 
     /**
+     * add flash session that will be used one time then deleted
+     *
+     * @param string $type
+     * @param string $value
+     * @return void
+     */
+    public function addFlash(string $type, string $value) : void
+    {
+        $this->se->getFlashBag()->add($type, $value);
+    }
+
+    /**
+     * retrive all flash session messages by it`s type
+     *
+     * @param string $type
+     * @return void
+     */
+    public function getFlash(string $type) : array {
+        return $this->se->getFlashBag()->get($type);
+    }
+
+    /**
+     * retrive all stored flash sessions
+     *
+     * @return array [type => [messages]]
+     */
+    public function getAllFlash() : array
+    {
+        return $this->se->getFlashBag()->all();
+    } 
+
+    /**
      * set the csrf token to random string
      *
      * @return void
