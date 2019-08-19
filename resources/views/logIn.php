@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => 'logIn']) ?>
 
 <div class="shadow-lg card text-dark bg-light mb-3 mx-auto logIn">
-    <div class="card-header">Sign In</div>
+    <div class="card-header bg-primary text-white font-weight-bolder">Sign In</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
             <form action="/fc/public<?=$this->e($this->uri())?>" method='POST' class="form needs-validation" novalidate>
@@ -38,7 +38,6 @@
                         <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <span class="text-secondary">
@@ -46,6 +45,13 @@
                             <a class="shadow btn btn-outline-info" href='signUp'>Here</a>
                         </span>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <pre>
+                        sn: abo3adel<br />
+                        email: abo3adel35@gmail.com<br />
+                        pass: asdsadsad<br />
+                    </pre>
                 </div>
             </form>
         </fieldset>
