@@ -132,7 +132,7 @@ class Auth extends BaseController{
             
         }
 
-        $param['wasValid'] = $wasValid ?? null;
+        $param['wasValid'] = $wasValid ?? '';
         $param['errors'] = $errors;
         $param['vars'] = (object)$vars;
 
