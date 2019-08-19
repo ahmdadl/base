@@ -43,6 +43,12 @@ class Auth extends BaseController{
             'userSn' => 0,
             'pass' => 0
         ];
+        $vars = [
+            'name' => '',
+            'email' => '',
+            'userSn' => '',
+            'pass' => ''
+        ];
 
         if ($this->request->request->has('submit')) {
             // iniat all inputs
@@ -123,10 +129,12 @@ class Auth extends BaseController{
                 }  
             }
 
-            $param['wasValid'] = $wasValid;
-            $param['errors'] = $errors;
-            $param['vars'] = (object)$vars;
+            
         }
+
+        $param['wasValid'] = $wasValid ?? null;
+        $param['errors'] = $errors;
+        $param['vars'] = (object)$vars;
 
         $this->show([
             'temp' => 'signUp',

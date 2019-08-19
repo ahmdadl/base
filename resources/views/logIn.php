@@ -33,16 +33,18 @@
                         </div>
                     </div>
                 </div>
+                <?= $this->_method('post') ?>
+                <?= $this->csrf() ?>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-r">Sign in</button>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <span class="text-secondary">
                             Or Create an accout from
-                            <a class="shadow btn btn-outline-info" href='signUp'>Here</a>
+                            <a class="shadow btn btn-outline-info btn-r" href='signUp'>Here</a>
                         </span>
                     </div>
                 </div>

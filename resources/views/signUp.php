@@ -13,7 +13,7 @@
     <div class="card-header bg-primary text-white font-weight-bolder">Sign Up</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
-            <form action="/fc/public<?= $this->e($this->uri()) ?>" method='POST' class="form needs-validation <?=$wasValid?>" novalidate>
+            <form action="/fc/public<?= $this->e($this->uri()) ?>" method='POST' class="form needs-validation <?=$wasValid ?? ''?>" novalidate>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="userName" class="input-group-text">Name</label>
