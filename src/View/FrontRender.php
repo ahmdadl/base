@@ -73,6 +73,6 @@ class FrontRender implements FrontRenderInterface
         $this->view->registerFunction('csrf', [$this, 'csrf']);
 
         // make session available to all views
-        $this->view->addData(['session' => $this->session->se]);
+        $this->view->addData(['session' => $this->session]);
     }
 }
