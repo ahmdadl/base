@@ -20,7 +20,7 @@ class AuthorModel extends BaseModel
      */
     public $userID;
     public $userName;
-    public $screenName;
+    public $userSn;
     public $email;
     public $userPass;
     public $permission;
@@ -33,17 +33,16 @@ class AuthorModel extends BaseModel
     public function createOne() : bool
     {
         $sql = 'INSERT INTO ' . $this->tbName .
-        ' (userName, screenName, email, userPass, permission) 
-        VALUES (:uname, :sname, :email, :pass, :perm)';
+        ' (userName, screenName, email, userPass) 
+        VALUES (:uname, :sname, :email, :pass)';
 
         $stmt = $this->con->prepare($sql);
 
         $params = [
             ':uname' => $this->userName,
-            ':sname' => $this->screenName,
+            ':sname' => $this->userSn,
             ':email' => $this->email,
-            ':pass' => $this->userPass,
-            ':perm' => $this->permission
+            ':pass' => $this->userPass
         ];
 
         return ($stmt->execute($params));
