@@ -1,10 +1,19 @@
 <?php $this->layout('layout', ['title' => 'sign Up']) ?>
 
+<?php foreach($session->getFlashBag()->all() as $type => $messages):?>
+    <?php foreach ($messages as $mess) : ?>
+        <div class="alert alert-<?=$type?>">
+            <?=$mess?>
+        </div>
+    <?php endforeach?>
+<?php endforeach?>
+
+
 <div class="shadow-lg card text-dark bg-light mb-3 mx-auto" style="width: 80%;">
-    <div class="card-header">Sign Up</div>
+    <div class="card-header bg-primary text-white font-weight-bolder">Sign Up</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
-            <form>
+            <form action="/fc/public<?=$this->e($this->uri())?>" method='POST'>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="userName" class="input-group-text">Name</label>
@@ -48,28 +57,20 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <div class="form-check custom-control custom-switch">
-                            <input class="form-check-input custom-control-input" type="checkbox" id="remmberMe" name='remmber'>
-                            <label class="custom-control-label" for="remmberMe">
-                                Remmber Me <span class="text-muted">(for 72 hours)</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Sign Up</button>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <span class="text-secondary">
-                            Or Create an accout from
-                            <a class="shadow btn btn-outline-info" href='signUp'>Here</a>
+                            Or already have an accout logIn from 
+                            <a class="shadow btn btn-outline-info" href='logIn'>Here</a>
                         </span>
                     </div>
                 </div>
+                <?=$this->_method('post')?>
+                <?=$this->csrf()?>
             </form>
         </fieldset>
     </div>
