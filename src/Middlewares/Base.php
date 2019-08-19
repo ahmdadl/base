@@ -2,18 +2,41 @@
 
 namespace App\Middlewares;
 
-use Symfony\Component\HttpFoundation\Request;
 use App\Util\AppSession;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    Response
+};
+
 
 abstract class Base
 {
+    /**
+     * Http request instance
+     *
+     * @var Request
+     */
     protected  $request;
+    /**
+     * Http response instance
+     *
+     * @var Response
+     */
+    protected $response;
+    /**
+     * handle all sessions
+     *
+     * @var AppSession
+     */
     protected $session;
+
     public function __construct(
         Request $request,
+        Response $response,
         AppSession $session
     ) {
         $this->request = $request;
+        $this->response = $response;
         $this->session = $session;
         $this->session->sessStart();
     }

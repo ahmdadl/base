@@ -16,6 +16,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Auth extends BaseController{
     const REMEMBER_ME_COOKIE = 'localhostFcRemmberMe';
+    /**
+     * expire period for remmberMe cookie
+     * 86400 => 1 day
+     * ----- * 3 ==> 3 days
+     */
+    const COOKIE_EXPIR = 86400 * 3;
+    const COOKIE_RAND_LENGTH = 59;
 
     private $model;
     private $response;
@@ -37,13 +44,7 @@ class Auth extends BaseController{
     {
         // check if user already signed in
         if ($this->session->get('logIn')) {
-            // return (new RedirectResponse('/fc/public/'))->send();
-        } elseif (null !== $this->getRequest('localhostFcRemmberMe', 'cookies')) {
-            // var_dump(Cookie::fromString(
-            //     ,
-            //     true
-            // ));
-            var_dump($this->request->cookies->all());
+            return (new RedirectResponse('/fc/public/'))->send();
         }
 
         $errors = [
@@ -97,11 +98,11 @@ class Auth extends BaseController{
                             /** @todo update old user password */
                         }
 
-                        $this->session->set('logIn', true);
-                        $this->session->set('userId', $row->userId);
-                        $this->session->set(
-                            'userSn',
-                            $row->screenName
+                        self::setLoggedSessions(
+                            $this->session,
+                            $row->userName,
+                            $row->screenName,
+                            $row->userId
                         );
 
                         // check if user checked remmber Me switch
@@ -110,16 +111,21 @@ class Auth extends BaseController{
                                 self::REMEMBER_ME_COOKIE,
                                 'cookies'
                             )) {
-                                // add one time crypto as cookie
-                                $this->response->headers->setCookie(
-                                    Cookie::create(
-                                        self::REMEMBER_ME_COOKIE,
-                                        Password::randStr(),
-                                        strtotime('+72 hours'),
-                                        '/', null, false, true,
-                                        false, 'Strict'
-                                    )
+
+                                // save random token in database
+                                $hash = self::saveRemmberToken(
+                                    $this->model,
+                                    $row->userId
                                 );
+
+                                // check if hashed token was saved
+                                if (null !== $hash) {
+                                    // add one time crypto as cookie
+                                    $this->response->headers
+                                    ->setCookie(
+                                        self::getRemmberCookie($hash)
+                                    );
+                                }
                             }
                         }
 
@@ -242,9 +248,7 @@ class Auth extends BaseController{
                         );
                     } 
                 }  
-            }
-
-            
+            }  
         }
 
         $param['wasValid'] = $wasValid ?? '';
@@ -256,7 +260,96 @@ class Auth extends BaseController{
             'data' => $param
         ]);
     }
-    
+
+    public static function saveRemmberToken(
+        AuthorModel $model,
+        int $userId
+    ) : ?string
+    {
+        $hash = Password::randStr(self::COOKIE_RAND_LENGTH);
+
+        $model->remmberToken = $hash;
+        $model->userId = $userId;
+
+        if ($model->saveToken()) {
+            return $hash;
+        }
+
+        return null;
+    }
+
+    /**
+     * set logged in sessions
+     *
+     * @param AppSession $session
+     * @param string $userName
+     * @param string $userSn
+     * @param integer $userId
+     * @return void
+     */
+    public static function setLoggedSessions(
+        AppSession $session,
+        string $userName,
+        string $userSn,
+        int $userId
+    ) : void {
+        $session->set('logIn', true);
+        $session->set('userName', $userName);
+        $session->set('userSn', $userSn);
+        $session->set('userId', $userId);
+    }
+
+    /**
+     * check if user logged in sessions is exsist
+     *
+     * @param AppSession $session
+     * @return boolean
+     */
+    public static function isLoggedIn(AppSession $session) : bool
+    {
+        if ($session->se->has('logIn')
+        && $session->se->has('userSn')
+        && $session->se->has('userId')
+        && $session->se->has('userName')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * create cookie for remmber me token
+     *
+     * @param string $path
+     * @param string|null $domain
+     * @param boolean $secure https sites
+     * @param boolean $httpOnly
+     * @param boolean $raw
+     * @param string $sameSite
+     * @return void
+     */
+    public static function getRemmberCookie(
+        string $hash,
+        string $path = '/',
+        ?string $domain = null,
+        bool $secure = false,
+        bool $httpOnly = true,
+        bool $raw = false,
+        string $sameSite = 'Strict'
+    ) : Cookie
+    {   
+        return Cookie::create(
+            self::REMEMBER_ME_COOKIE,
+            $hash,
+            time() + self::COOKIE_EXPIR,
+            $path,
+            $domain,
+            $secure,
+            $httpOnly,
+            $raw,
+            $sameSite
+        );
+    }
 
     public function show(array $param = []) : Response
     {

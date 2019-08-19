@@ -6,6 +6,6 @@ abstract class BaseModel
 {
     public function __set(string $key, $value) : void
     {
-        $this->key = htmlspecialchars($value, ENT_QUOTES);
+        $this->key = htmlspecialchars((string)$value, ENT_QUOTES);
     }
 }
