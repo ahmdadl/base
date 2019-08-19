@@ -8,16 +8,21 @@ use Hashids\Hashids;
 use App\Util\AppSession;
 use App\Models\AuthorModel;
 use Symfony\Component\HttpFoundation\Response;
-use stdClass;
 use app\Util\Password;
 use PDOException;
 use App\DbConfig\MySqli;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Auth extends BaseController{
+    const REMEMBER_ME_COOKIE = 'localhostFcRemmberMe';
+
     private $model;
+    private $response;
 
     public function __construct(
         Request $request,
+        Response $response,
         FrontRenderInterface $view,
         Hashids $hashid,
         AppSession $session,
@@ -25,10 +30,120 @@ class Auth extends BaseController{
     ) {
         parent::__construct($request, $view, $hashid, $session);
         $this->model = $model;
+        $this->response = $response;
     }
 
     public function logIn(array $param = [])
     {
+        // check if user already signed in
+        if ($this->session->get('logIn')) {
+            // return (new RedirectResponse('/fc/public/'))->send();
+        } elseif (null !== $this->getRequest('localhostFcRemmberMe', 'cookies')) {
+            // var_dump(Cookie::fromString(
+            //     ,
+            //     true
+            // ));
+            var_dump($this->request->cookies->all());
+        }
+
+        $errors = [
+            'userSn' => 0,
+            'pass' => 0
+        ];
+        $vars = [
+            'userSn' => ''
+        ];
+
+        // check if login form was submitted
+        if ($this->request->request->has('submit')) {
+            // iniat all inputs
+            // if input not set or empty will return null
+            $userSn = $this->getRequest('userSn');
+            $pass = $this->getRequest('userPass');
+            $remmberMe = $this->getRequest('remmberMe');
+
+            // attatch old input to be used in view
+            $vars = [
+                'userSn' => $userSn
+            ];
+
+            $wasValid = 'was-validated';
+
+            // check for user name input
+            if (!$userSn) {
+               $errors['userSn'] = 1;
+            } elseif (!$pass || strlen($pass) < 6) {
+                $pass = 0;
+                $errors['pass'] = 1;
+            }
+
+            if ($userSn && $pass) {
+                $this->model->userSn = $userSn;
+
+                $row = $this->model->readOne();
+
+                // check if no user found
+                if (isset($row->size)) {
+                    // show flash session for no user registerd
+                    $this->session->addFlash(
+                        'danger',
+                        'invalid user name or password'
+                    );
+                } else {
+                    // check if user password matche
+                    if (Password::verify($pass, $row->userPass)) {
+                        // check if password needs rehash
+                        if (Password::checkReHash($row->userPass)) {
+                            /** @todo update old user password */
+                        }
+
+                        $this->session->set('logIn', true);
+                        $this->session->set('userId', $row->userId);
+                        $this->session->set(
+                            'userSn',
+                            $row->screenName
+                        );
+
+                        // check if user checked remmber Me switch
+                        if ($remmberMe) {
+                            if (null === $this->getRequest(
+                                self::REMEMBER_ME_COOKIE,
+                                'cookies'
+                            )) {
+                                // add one time crypto as cookie
+                                $this->response->headers->setCookie(
+                                    Cookie::create(
+                                        self::REMEMBER_ME_COOKIE,
+                                        Password::randStr(),
+                                        strtotime('+72 hours'),
+                                        '/', null, false, true,
+                                        false, 'Strict'
+                                    )
+                                );
+                            }
+                        }
+
+                        // show flash session with success message
+                        $this->session->addFlash(
+                            'success',
+                            'user loged in successfully.
+                            <br> welcome ' . $row->userName
+                        );
+                    } else {
+                        // user login failed
+                        $this->session->addFlash(
+                            'danger',
+                            'invalid user name or password'
+                        );
+                    }
+                }
+            }
+        }
+
+        $param['wasValid'] = $wasValid ?? '';
+        $param['errors'] = $errors;
+        $param['vars'] = (object)$vars;
+
         $this->show([
             'temp' => 'logIn',
             'data' => $param

@@ -1,24 +1,32 @@
 <?php $this->layout('layout', ['title' => 'logIn']) ?>
 
+<?php foreach ($session->getAllFlash() as $type => $messages) : ?>
+    <?php foreach ($messages as $mess) : ?>
+        <div class="alert alert-<?=$type?>">
+            <?=$mess?>
+        </div>
+    <?php endforeach?>
+<?php endforeach?>
+
 <div class="shadow-lg card text-dark bg-light mb-3 mx-auto logIn">
     <div class="card-header bg-primary text-white font-weight-bolder">Sign In</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
-            <form action="/fc/public<?=$this->e($this->uri())?>" method='POST' class="form needs-validation" novalidate>
+            <form action="/fc/public<?=$this->e($this->uri())?>" method='POST' class="form needs-validation <?=$wasValid?>" novalidate>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
-                        <label for="userEmail" class="input-group-text">Email</label>
+                        <label for="userSn" class="input-group-text">Email</label>
                         <span class='input-group-text'>@</span>
                     </div>
-                    <input type="email" class="form-control" id="userEmail" placeholder="Email" name='userEmail' required>
+                    <input type="text" class="form-control <?= $errors['userSn'] ? 'is-invalid' : ''?>" id="userSn" placeholder="userSn" name='userSn' value="<?=$vars->userSn?>" required>
                 </div>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="password" class="input-group-text ">Password</label>
                     </div>
-                    <input type="password" class="form-control password" id="password" placeholder="Password" aria-describedby="showPass">
+                    <input type="password" class="form-control password" id="password" placeholder="Password" aria-describedby="showPass" minlength="6"  name="userPass" required>
                     <div class="input-group-prepend">
-                        <button type='button' class="btn btn-primary" id='showPass' name="userPass">
+                        <button type='button' class="btn btn-primary" id='showPass'>
                             &Omega;
                         </button>
                     </div>
@@ -26,7 +34,7 @@
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <div class="form-check custom-control custom-switch">
-                            <input class="form-check-input custom-control-input" type="checkbox" id="remmberMe" name='remmber'>
+                            <input class="form-check-input custom-control-input" type="checkbox" id="remmberMe" name='remmberMe'>
                             <label class="custom-control-label" for="remmberMe">
                                 Remmber Me <span class="text-muted">(for 72 hours)</span>
                             </label>

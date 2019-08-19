@@ -2,9 +2,7 @@
 
 namespace App\Middlewares;
 
-// use Symfony\Component\HttpFoundation\Request;
-
-class CsrfVerify extends Base implements MiddlewareInterface
+class Auth extends Base implements MiddlewareInterface
 {
     /**
      * all documention at Base Class

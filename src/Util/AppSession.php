@@ -81,6 +81,40 @@ class AppSession
     }
 
     /**
+     * add new session key
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function set(string $key, $value) : void
+    {
+        $this->se->set($key, $value);
+    }
+
+    /**
+     * get value from session by name
+     *
+     * @param string $key
+     * @return void
+     */
+    public function get(string $key)
+    {
+        return $this->se->get($key);
+    }
+    
+    /**
+     * check if key exists in session array
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function has(string $key) : bool
+    {
+        return $this->se->has($key);
+    }
+
+    /**
      * add flash session that will be used one time then deleted
      *
      * @param string $type

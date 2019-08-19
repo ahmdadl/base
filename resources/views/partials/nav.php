@@ -14,7 +14,8 @@
       <li class="nav-item">
         <a class="nav-link" href="/">profile</a>
       </li>
-      <li class="nav-item">
+      <li 
+      class="nav-item <?=$session->has('logIn') ? 'd-none' : ''?>">
         <a class="nav-link" href="logIn">LogIn</a>
       </li>
     </ul>

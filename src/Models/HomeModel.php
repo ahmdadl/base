@@ -13,7 +13,7 @@ class HomeModel
      */
     private $con;
 
-    private $tbName = 'jokes';
+    private $tbName = 'posts';
 
     public $id;
     public $text;

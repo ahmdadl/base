@@ -32,7 +32,7 @@ class Home extends BaseController
     {
         return $this->view->render('home', [
             'name' => 'not me',
-            'data' => $this->model->readAll(),
+            // 'data' => $this->model->readAll(),
             'hashid' => $this->hashid
         ]);
     }
