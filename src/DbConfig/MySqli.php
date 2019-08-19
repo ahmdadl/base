@@ -8,7 +8,7 @@ use PDOException;
 class MySqli extends MainFn
 {
 
-    public function __construct(string $db_name = 'test')
+    public function __construct(string $db_name = 'blog')
     {
         parent::__construct($db_name);
     }
