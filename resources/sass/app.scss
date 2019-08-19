@@ -1,4 +1,19 @@
-nav.navbar.bg-navbar
+.container-fluid
 {
-    background-color: #563d7c;
+    margin-top: 6em !important;
+}
+.card.logIn {
+    width: 100%;
+}
+
+@media screen and (min-width: 576px) {
+    .card.logIn {
+        max-width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card.logIn {
+        max-width: 50%;
+    }
 }

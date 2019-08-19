@@ -25,8 +25,20 @@ class Auth extends BaseController{
 
     public function logIn(array $param = [])
     {
-        
+        $this->show([
+            'temp' => 'logIn',
+            'data' => $param
+        ]);
     }
+
+    public function signUp(array $param = [])
+    {
+        $this->show([
+            'temp' => 'signUp',
+            'data' => $param
+        ]);
+    }
+    
 
     public function show(array $param = []) : Response
     {

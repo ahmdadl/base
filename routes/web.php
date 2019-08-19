@@ -7,5 +7,6 @@ return function (RouteCollector $r) {
     $r->get($uri . '/', ['Home@show',
     'middlewares' => []]);
     $r->get($uri . '/logIn', ['Auth@logIn']);
+    $r->get($uri . '/signUp', ['Auth@signUp']);
 };
 

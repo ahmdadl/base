@@ -12,7 +12,7 @@
         <a class="nav-link" href="/fc/public/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?=$hashid->encode(6533)?>">profile</a>
+        <a class="nav-link" href="/">profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="logIn">LogIn</a>

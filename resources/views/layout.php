@@ -11,9 +11,9 @@
     <link rel="icon" href="">
 </head>
 <body>
+    <?=$this->insert('partials/nav', ['name' => $name ?? '',
+    'hashid' => $hashid ?? ''])?>
     <main class="container-fluid">
-        <?=$this->insert('partials/nav', ['name' => $name,
-    'hashid' => $hashid])?>
         <?=$this->section('list')?>
         <?=$this->section('content')?>
         <?=$this->insert('partials/footer')?>
