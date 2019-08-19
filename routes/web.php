@@ -8,5 +8,6 @@ return function (RouteCollector $r) {
     'middlewares' => []]);
     $r->get($uri . '/logIn', ['Auth@logIn']);
     $r->get($uri . '/signUp', ['Auth@signUp']);
+    $r->post($uri . '/signUp', ['Auth@signUp']);
 };
 
