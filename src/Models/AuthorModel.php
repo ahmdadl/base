@@ -47,4 +47,20 @@ class AuthorModel extends BaseModel
 
         return ($stmt->execute($params));
     }
+
+    public function readOne() : object
+    {
+        $sql = 'SELECT userId, userName, screenName, email, userPass 
+        FROM '. $this->tbName . ' WHERE screenName = :sn';
+
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->execute([':sn' => $this->userSn]);
+
+        if ($stmt->rowCount() === 0) {
+            return (object)['size' => 0];
+        }
+
+        return $stmt->fetch();
+    }
 }
