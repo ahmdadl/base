@@ -28,5 +28,24 @@ abstract class BaseController
         $this->session->sessStart();
     }
 
+    /**
+     * retrives input data from request object
+     *
+     * @param string $key
+     * @param string $req use query for GET request
+     * @return string|null
+     */
+    public function getRequest(
+        string $key,
+        string $req = 'request'
+    ) : ?string {
+        $q = $this->request->{$req}->get($key);
+        if (!$q || empty(trim($q))) {
+            return null;
+        } 
+
+        return htmlspecialchars((string)$q, ENT_QUOTES);
+    }
+
     abstract public function show(array $params = []) : Response;
 }
