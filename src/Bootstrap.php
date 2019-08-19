@@ -201,7 +201,7 @@ class Bootstrap
         }
 
         /** @todo add mail function to email admin with errors */
-
+        error_log("Error($err): inFile: $errfile atLine($errline) withMessage: $errstr");
         // redirect to unknownError route
         (new RedirectResponse('error'))->send();
     }
