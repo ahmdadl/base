@@ -1,9 +1,9 @@
 <?php $this->layout('layout', ['title' => 'sign Up']) ?>
 
-<?php foreach ($session->getFlashBag()->all() as $type => $messages) : ?>
+<?php foreach ($session->getAllFlash() as $type => $messages) : ?>
     <?php foreach ($messages as $mess) : ?>
-        <div class="alert alert-<?= $type ?>">
-            <?= $mess ?>
+        <div class="alert alert-<?=$type?>">
+            <?=$mess?>
         </div>
     <?php endforeach ?>
 <?php endforeach ?>
@@ -13,12 +13,13 @@
     <div class="card-header bg-primary text-white font-weight-bolder">Sign Up</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
-            <form action="/fc/public<?= $this->e($this->uri()) ?>" method='POST' class="form needs-validation" novalidate>
+            <form action="/fc/public<?= $this->e($this->uri()) ?>" method='POST' class="form needs-validation <?=$wasValid?>" novalidate>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="userName" class="input-group-text">Name</label>
                     </div>
-                    <input type="text" class="form-control" id="userName" placeholder="Name" name='userName' required>
+                    <input type="text" class="form-control 
+                    <?=$errors['name'] ? 'is-invalid' : 'is-valid';?>" id="userName" placeholder="Name" name='userName' value="<?=$vars->name?>">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -29,21 +30,25 @@
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="userEmail" class="input-group-text">Email</label>
-                        <span class='input-group-text'>@</span>
                     </div>
-                    <input type="email" class="form-control" id="userEmail" placeholder="Email" name='userEmail' required>
+                    <input type="email" class="form-control 
+                    <?=$errors['email'] ? 'is-invalid' : 'is-valid'?>" id="userEmail" placeholder="Email" name='userEmail' value="<?=$vars->email?>" required>
+                    <div class="invalid-feedback">
+                        please enter a valid email
+                    </div>
                 </div>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <span class='input-group-text'>@</span>
                     </div>
-                    <input type="text" class="form-control" id="userSn" placeholder="login name" name='userSn' required>
+                    <input type="text" class="form-control
+                    <?= $errors['userSn'] ? 'is-invalid' : 'is-valid'?>" id="userSn" placeholder="login name" name='userSn' value="<?=$vars->userSn?>" required>
                 </div>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="password" class="input-group-text ">Password</label>
                     </div>
-                    <input type="password" class="form-control password" id="password" placeholder="Password" aria-describedby="showPass" required>
+                    <input type="password" class="form-control password <?=$errors['pass'] ? 'is-invalid' : 'is-valid'?>" id="password" placeholder="Password" aria-describedby="showPass" name="pass" required>
                     <div class="input-group-prepend">
                         <button type='button' class="btn btn-primary" id='showPass' name="userPass">
                             &Omega;
@@ -60,7 +65,7 @@
                     <div class="input-group-prepend">
                         <label for="confPassword" class="input-group-text ">Confirm Password</label>
                     </div>
-                    <input type="password" class="form-control password" id="confPassword" placeholder="Confirm Password" aria-describedby="showPass2" name="confPass" required>
+                    <input type="password" class="form-control password <?=$errors['pass'] ? 'is-invalid' : 'is-valid'?>" id="confPassword" placeholder="Confirm Password" aria-describedby="showPass2" name="confPass" required>
                     <div class="valid-feedback">
                         password matched
                     </div>
