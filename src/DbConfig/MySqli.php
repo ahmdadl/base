@@ -8,6 +8,8 @@ use PDOException;
 class MySqli extends MainFn
 {
 
+    const MYSQL_CODE_DUPLICATE_KEY = 1062;
+
     public function __construct(string $db_name = 'blog')
     {
         parent::__construct($db_name);
