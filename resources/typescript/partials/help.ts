@@ -7,7 +7,8 @@ class El
 
     constructor(cssSelector : any)
     {
-        if (cssSelector instanceof El) {
+        if (cssSelector instanceof El
+        || cssSelector instanceof HTMLElement) {
             this.el = cssSelector;
         } else {
             this.cssSelector = cssSelector;

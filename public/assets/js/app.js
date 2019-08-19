@@ -144,12 +144,12 @@ var Ajax = /** @class */ (function () {
      */
     Ajax.prototype.setHeaders = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var e_1, _a, _b, _c, h_1;
+            var e_1, _a, _b, _c, h;
             return __generator(this, function (_d) {
                 try {
                     for (_b = __values(this._headers), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        h_1 = _c.value;
-                        this.xhttp.setRequestHeader(h_1.key, h_1.value);
+                        h = _c.value;
+                        this.xhttp.setRequestHeader(h.key, h.value);
                     }
                 }
                 catch (e_1_1) { e_1 = { error: e_1_1 }; }
@@ -226,7 +226,8 @@ var Ajax = /** @class */ (function () {
 }());
 var El = /** @class */ (function () {
     function El(cssSelector) {
-        if (cssSelector instanceof El) {
+        if (cssSelector instanceof El
+            || cssSelector instanceof HTMLElement) {
             this.el = cssSelector;
         }
         else {
@@ -330,19 +331,6 @@ var El = /** @class */ (function () {
 function $(cssSelector) {
     return (new El(cssSelector));
 }
-// declare var fetch: any;
-var y = new Toast('#toast1', {
-    autohide: false,
-    animation: true
-});
-y.show();
-var x = new Toast('#toast2', {
-    autohide: false,
-    animation: true
-});
-x.show();
-setTimeout(function (_) { x.hide(); }, 2500);
-console.log('no working yet');
 var App = /** @class */ (function () {
     function App() {
     }
@@ -354,20 +342,36 @@ var App = /** @class */ (function () {
     return App;
 }());
 (new App()).run();
-var d = {
-    name: 'someofMe',
-    num: 531,
-    notW: 'QQQQQQQQQQQQ321sa3d2',
-    csrfToken: 'somesad'
-};
-var h = [
-    {
-        key: 'SomeMethod',
-        value: 'notNow'
-    },
-    Ajax.POST_HEADER
-];
-var aj = new Ajax('../sat/price.php', 'post', d, h);
-aj.send()
-    .then(function (res) { return console.log(res); });
+$('#showPass').on('click', function (ev) {
+    var self = $(ev.target);
+    if (ev.target.className.indexOf('active') > -1) {
+        self.removeClass('btn-danger');
+        self.removeClass('active');
+        $('.password').handleAll(function (el) {
+            $(el).attr('type', 'password');
+        });
+    }
+    else {
+        self.addClass('btn-danger');
+        self.addClass('active');
+        $('.password').handleAll(function (el) {
+            $(el).attr('type', 'text');
+        });
+    }
+});
+$('form.needs-validation').handleAll(function (el) {
+    $(el).on('submit', function (ev) {
+        var self = ev.target;
+        var isNotValid = (self.checkValidity() === false), passMatch = ($('#password').val() !== $('#confPassword').val());
+        if (isNotValid || passMatch) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            if (passMatch) {
+                $('#password').addClass('is-invalid');
+            }
+        }
+        $('.submit').addClass('loading');
+        $(self).addClass('was-validated');
+    });
+});
 //# sourceMappingURL=app.js.map

@@ -4,22 +4,22 @@
     <div class="card-header">Sign In</div>
     <div class="card-body">
         <fieldset class="card-text p-3">
-            <form>
+            <form action="/fc/public<?=$this->e($this->uri())?>" method='POST' class="form needs-validation" novalidate>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="userEmail" class="input-group-text">Email</label>
                         <span class='input-group-text'>@</span>
                     </div>
-                    <input type="email" class="form-control" id="userEmail" placeholder="Email" name='userEmail'>
+                    <input type="email" class="form-control" id="userEmail" placeholder="Email" name='userEmail' required>
                 </div>
                 <div class="form-group row input-group">
                     <div class="input-group-prepend">
                         <label for="password" class="input-group-text ">Password</label>
                     </div>
-                    <input type="password" class="form-control" id="password" placeholder="Password" aria-describedby="showPass">
+                    <input type="password" class="form-control password" id="password" placeholder="Password" aria-describedby="showPass">
                     <div class="input-group-prepend">
                         <button type='button' class="btn btn-primary" id='showPass' name="userPass">
-                            Show
+                            &Omega;
                         </button>
                     </div>
                 </div>
