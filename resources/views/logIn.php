@@ -1,0 +1,1 @@
+<?php $this->layout('partials/layout', ['name' => $name]);

@@ -25,7 +25,7 @@ class Auth extends BaseController{
 
     public function logIn(array $param = [])
     {
-
+        
     }
 
     public function show(array $param = []) : Response
