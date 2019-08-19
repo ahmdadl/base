@@ -9,16 +9,13 @@ use Hashids\Hashids;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Util\AppSession;
 use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // use DB\Model\UserModel;
 
-class Home
+class Home extends BaseController
 {
-    private $request;
-    private $view;
     private $model;
-    private $hashid;
-    private $session;
 
     public function __construct(
         Request $request,
@@ -27,15 +24,11 @@ class Home
         Hashids $hashid,
         AppSession $session
     ) {
-        $this->request = $request;
-        $this->view = $view;
+        parent::__construct($request, $view, $hashid, $session);
         $this->model = $model;
-        $this->hashid = $hashid;
-        $this->session = $session;
-        $this->session->sessStart();
     }
 
-    public function show($params = [])
+    public function show(array $params = []) : Response
     {
         return $this->view->render('home', [
             'name' => 'not me',

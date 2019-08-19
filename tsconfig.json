@@ -1,20 +1,30 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-      "baseUrl": "./",
-      "sourceRoot": "./resources/typescript/",
-      "outDir": "./public/assets/js",
-      "sourceMap": true,
-      "declaration": false,
-      "module": "commonjs",
-    //   "moduleResolution": "node",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "importHelpers": true,
-      "target": "es3",
-      "typeRoots": [
-        "node_modules/@types"
-      ],
-      "strict": true
-    }
-  }
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    // "sourceRoot": "./resources/typescript/",
+    // "outDir": "./public/assets/js",
+    "outFile": "./public/assets/js/app.js",
+    "sourceMap": true,
+    "declaration": false,
+    "allowJs": true,
+    "strictNullChecks":true,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "dom",
+      "es6"
+    ]
+  },
+  "files": [
+    "./resources/typescript/partials/ajax.ts",
+    "./resources/typescript/partials/help.ts",
+    "./resources/typescript/app.ts"
+  ]
+}
