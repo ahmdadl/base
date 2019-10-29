@@ -69,4 +69,17 @@ File: resources/views/home.php
 </ul>
 ```
 
+### Composer Scripts
+
+* tsc
+  > compile typescripts files to public/js/
+* composer asset
+  > compile app.scss to public/app.css
+* composer test
+  > run phpunit tests
+* composer test-log
+  > create phpunit log
+* composer test-coverage
+  > create phpunit coverage
+
 
