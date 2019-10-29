@@ -53,4 +53,40 @@ $('form.needs-validation').handleAll((el) => {
     });
 });
 
+let toggleCurrent = (el: El, current: string) => {
+    if (current === 'light') {
+        el.attr('data-current', 'dark');
+    } else {
+        el.attr('data-current', 'light');
+    }
+};
+
+$('#dark-mode').on('click', (ev) => {
+    let self = $(ev.target);
+
+    let current = self.attr('data-current');
+
+    toggleCurrent(self, current);
+
+    if (current === 'light') {
+        $('.bg-light').handleAll(el => {
+            let self = $(el);
+
+            self.removeClass('bg-light');
+            self.removeClass('text-dark');
+            self.addClass('bg-dark');
+            self.addClass('text-white');
+        });
+    } else {
+        $('.bg-dark').handleAll(el => {
+            let self = $(el);
+
+            self.removeClass('bg-dark');
+            self.removeClass('text-white');
+            self.addClass('bg-light');
+            self.addClass('text-dark');
+        });
+    }
+});
+
 

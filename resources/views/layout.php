@@ -10,7 +10,7 @@
     <link href="<?=$this->asset('assets/css/app.css')?>" rel="stylesheet" type="text/css">
     <link rel="icon" href="">
 </head>
-<body>
+<body class="bg-light">
     <?=$this->insert('partials/nav', ['name' => $name ?? '',
     'hashid' => $hashid ?? ''])?>
     <main class="container-fluid">

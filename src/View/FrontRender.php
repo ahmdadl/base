@@ -16,25 +16,35 @@ use League\Plates\Extension\{
     URI
 };
 use App\View\FrontRenderTrait;
+use Hashids\Hashids;
+
 class FrontRender implements FrontRenderInterface
 {
     use FrontRenderTrait;
 
     private $requset;
     private $response;
+    /**
+     * Platest Instance
+     *
+     * @var \League\Plates\Engine
+     */
     private $view;
     private $session;
+    private $hashid;
 
     public function __construct(
         Request $request,
         Response $response,
         Engine $view,
-        AppSession $session
+        AppSession $session,
+        Hashids $hashid
     ) {
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
         $this->session = $session;
+        $this->hashid = $hashid;
         $this->configView();
     }
 
@@ -74,5 +84,7 @@ class FrontRender implements FrontRenderInterface
 
         // make session available to all views
         $this->view->addData(['session' => $this->session]);
+        // make hashid available to all views
+        $this->view->addData(['hashid' => $this->hashid]);
     }
 }

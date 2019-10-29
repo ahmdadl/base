@@ -60,7 +60,7 @@ class DIContainer
         $this->setCacheContainerConfig();
 
         // check if cache file has changed or file not exists
-        if (!$this->cacheContainerConfig->isFresh()
+        if ($this->cacheContainerConfig->isFresh()
         || !file_exists($this->config['dir']['cache'] . self::CACHED_FILE)) {
             // rebuild container
             $this->build();

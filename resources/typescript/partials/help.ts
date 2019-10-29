@@ -54,6 +54,7 @@ class El
 
     public css(prop: string, value: string) : void
     {
+        // prop.replace(/-[a-zA-Z]/, )
         this.el.style[prop] = value;
     }
 
@@ -61,6 +62,7 @@ class El
     {
         // check if no value added then return current attribute value
         if (null === value) return this.el.getAttribute(prop);
+
         // set attribute value
         this.el.setAttribute(prop, value);
     }
@@ -112,6 +114,8 @@ class El
 
     private addEvent(event: string, callback: CallableFunction) : void
     {
+        if (!this.el) return;
+
         this.el.addEventListener(event, function (ev) {
             callback(ev);
         }, true)

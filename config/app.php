@@ -37,8 +37,8 @@ return [
 
     // hashids options
     'hashids' => [
-        'minLength' => 5,
-        'salt' => '4e46c93890f89ff4dd3e41513c377ba11fa495a42d26ab1342c49086ae7c630fc91e0d'
+        'minLength' => 8,
+        'salt' => 'b6dff7e3c43229cdb1db2dcb24b1b54a20943584c8b2233f398ab6b6c6c840ef939325\04eada4131354751765c3ddez1ed2a6cd6614580002a05e137d300a40e44ad96ae40b44'
     ],
 
     // sessions options

@@ -261,6 +261,7 @@ var El = /** @class */ (function () {
         this.el.className = this.el.className.replace(cls, '');
     };
     El.prototype.css = function (prop, value) {
+        // prop.replace(/-[a-zA-Z]/, )
         this.el.style[prop] = value;
     };
     El.prototype.attr = function (prop, value) {
@@ -316,6 +317,8 @@ var El = /** @class */ (function () {
         return (document.activeElement === this.el);
     };
     El.prototype.addEvent = function (event, callback) {
+        if (!this.el)
+            return;
         this.el.addEventListener(event, function (ev) {
             callback(ev);
         }, true);
@@ -368,10 +371,42 @@ $('form.needs-validation').handleAll(function (el) {
             ev.stopPropagation();
             if (passMatch) {
                 $('#password').addClass('is-invalid');
+                $('#confPassword').addClass('is-invalid');
             }
         }
         $('.submit').addClass('loading');
         $(self).addClass('was-validated');
     });
+});
+var toggleCurrent = function (el, current) {
+    if (current === 'light') {
+        el.attr('data-current', 'dark');
+    }
+    else {
+        el.attr('data-current', 'light');
+    }
+};
+$('#dark-mode').on('click', function (ev) {
+    var self = $(ev.target);
+    var current = self.attr('data-current');
+    toggleCurrent(self, current);
+    if (current === 'light') {
+        $('.bg-light').handleAll(function (el) {
+            var self = $(el);
+            self.removeClass('bg-light');
+            self.removeClass('text-dark');
+            self.addClass('bg-dark');
+            self.addClass('text-white');
+        });
+    }
+    else {
+        $('.bg-dark').handleAll(function (el) {
+            var self = $(el);
+            self.removeClass('bg-dark');
+            self.removeClass('text-white');
+            self.addClass('bg-light');
+            self.addClass('text-dark');
+        });
+    }
 });
 //# sourceMappingURL=app.js.map

@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Util;
 
@@ -12,7 +12,7 @@ class AppSession
     const CHECK_IP_ADDRESS = false; // check if user changed ip
     const CHECK_BROWSER = true; // check if user changed browser
     // const SAME_SITE = 'Strict'; // or lax for more than one domain
-    const SESSION_MAXLIFE = 1800; // 1800 sec ==> 30 min
+    const SESSION_MAXLIFE = 3600*4; // 1800 sec ==> 30 min
     // const Strict_MODE = 1; // or 0
 
     /**
@@ -38,7 +38,7 @@ class AppSession
         SessionInterface $session,
         Request $request,
         int $maxlife
-        ) {
+    ) {
         $this->se = $session;
         $this->request = $request;
         $this->maxlife = $maxlife;
@@ -57,8 +57,7 @@ class AppSession
         bool $preventIP = self::CHECK_IP_ADDRESS,
         bool $preventBrowser = self::CHECK_BROWSER,
         int $maxlife = self::SESSION_MAXLIFE
-    ) : void
-    {
+    ) : void {
         $this->se->start();
 
         // check prevent multible ip and browser
@@ -69,8 +68,12 @@ class AppSession
             // destory session
             $this->se->invalidate();
 
-            if ($preventIP) $this->setUserIP();
-            if ($preventBrowser) $this->setUserAgent();
+            if ($preventIP) {
+                $this->setUserIP();
+            }
+            if ($preventBrowser) {
+                $this->setUserAgent();
+            }
         }
 
         // set the csrf token
@@ -96,11 +99,12 @@ class AppSession
      * get value from session by name
      *
      * @param string $key
+     * @param mixed $default
      * @return void
      */
-    public function get(string $key)
+    public function get(string $key, $default = '')
     {
-        return $this->se->get($key);
+        return $this->se->get($key, $default);
     }
     
     /**
@@ -132,7 +136,8 @@ class AppSession
      * @param string $type
      * @return void
      */
-    public function getFlash(string $type) : array {
+    public function getFlash(string $type) : array
+    {
         return $this->se->getFlashBag()->get($type);
     }
 
@@ -144,7 +149,7 @@ class AppSession
     public function getAllFlash() : array
     {
         return $this->se->getFlashBag()->all();
-    } 
+    }
 
     /**
      * set the csrf token to random string
@@ -206,8 +211,8 @@ class AppSession
             // clear all session and regenerate id
             $this->se->invalidate();
             // redirect to logOut page
-            // (new RedirectResponse('logOut'))->send();
-        } else if(time() - $this->se->getMetadataBag()->getCreated() > $maxlife) {
+            (new RedirectResponse('logOut'))->send();
+        } elseif (time() - $this->se->getMetadataBag()->getCreated() > $maxlife) {
             // just regenrate session id
             // @codeCoverageIgnoreStart
             $this->se->migrate();
@@ -218,8 +223,7 @@ class AppSession
     private function preventMultiIP(
         bool $preventIP,
         bool $preventBrowser
-    ) : bool
-    {
+    ) : bool {
         if ($preventIP && !$this->se->has('userIP')) {
             $this->setUserIP();
         }
@@ -235,11 +239,10 @@ class AppSession
 
         // check for user browser
         if ($preventBrowser
-        && (!Password::hashVerify($this->getUserAgent(), $this->encode('HTTP_USER_AGENT'))) ) {
+        && (!Password::hashVerify($this->getUserAgent(), $this->encode('HTTP_USER_AGENT')))) {
             return false;
         }
 
         return true;
     }
-    
 }

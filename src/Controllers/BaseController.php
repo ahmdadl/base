@@ -47,5 +47,18 @@ abstract class BaseController
         return htmlspecialchars((string)$q, ENT_QUOTES);
     }
 
-    abstract public function show(array $params = []) : Response;
+    public function show(array $params = []) : Response
+    {
+        return $this->view->rename('');
+    }
+
+    public function decode(string $hashedId) : int
+    {
+        return $this->hashid->decode($hashedId)[0];
+    }
+
+    public function encode(int $id) : string
+    {
+        return $this->hashid->encode($id);
+    }
 }

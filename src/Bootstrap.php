@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App;
 
@@ -6,11 +6,9 @@ use Whoops;
 use App\Route\Router;
 use App\DIContainer;
 
-use Symfony\Component\HttpFoundation\{
-    Request,
-    Response,
-    RedirectResponse
-};
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 error_reporting(E_ALL);
 
@@ -96,7 +94,6 @@ class Bootstrap
         } else {
             $this->prodENV();
         }
-
     }
 
     /**
@@ -190,8 +187,7 @@ class Bootstrap
         string $errstr = '',
         string $errfile = '',
         int $errline = 0
-    )
-    {
+    ) {
         // check if it an exception then handle it
         if (is_object($err)) {
             $errstr = $err->getMessage();
@@ -206,10 +202,3 @@ class Bootstrap
         (new RedirectResponse('error'))->send();
     }
 }
-
-
-
-
-
-
-

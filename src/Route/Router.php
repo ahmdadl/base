@@ -1,18 +1,13 @@
-<?php declare (strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Route;
 
-
-use Symfony\Component\HttpFoundation\{
-    Request,
-    Response,
-    RedirectResponse
-};
-use FastRoute\{
-    RouteCollector,
-    cachedDispatcher,
-    Dispatcher as Code
-};
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FastRoute\RouteCollector;
+use FastRoute\cachedDispatcher;
+use FastRoute\Dispatcher as Code;
 
 class Router
 {
@@ -68,7 +63,7 @@ class Router
      *
      * @example [int => Dispatcher::HTTP_{Codes},
      * handler => ['className::methodname', 'middlewares' => [methods in the same controlller] ]]
-     * 
+     *
      * @var FastRoute::dispatch[array]
      */
     private $routeInfo;
@@ -178,7 +173,9 @@ class Router
     {
         foreach ($middlewares as $cls) {
             $err = ($this->container->get('App\Middlewares\\' . $cls))->process();
-            if ($err) return true;
+            if ($err) {
+                return true;
+            }
         }
         return false;
     }

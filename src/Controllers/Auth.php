@@ -93,6 +93,8 @@ class Auth extends BaseController{
                 } else {
                     // check if user password matche
                     if (Password::verify($pass, $row->userPass)) {
+                        $wasValid = '';
+                        
                         // check if password needs rehash
                         if (Password::checkReHash($row->userPass)) {
                             /** @todo update old user password */
@@ -293,10 +295,10 @@ class Auth extends BaseController{
         string $userSn,
         int $userId
     ) : void {
-        $session->set('logIn', true);
-        $session->set('userName', $userName);
-        $session->set('userSn', $userSn);
-        $session->set('userId', $userId);
+        $session->se->set('logIn', true);
+        $session->se->set('userName', $userName);
+        $session->se->set('userSn', $userSn);
+        $session->se->set('userId', $userId);
     }
 
     /**

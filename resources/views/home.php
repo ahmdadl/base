@@ -1,49 +1,48 @@
 <?php $this->layout('layout', [
     'title' => 'Home Page',
-    'name' => $name,
+    'name' => $session->get('userName', 'stranger'),
     'hashid' => $hashid
-    ]);?>
+]); ?>
 
-<div class="jumbotron mt-5">
-    <h1 class="display-4">Hello, <?=$name?></h1>
+<div class="jumbotron mt-5 bg-light shadow-lg">
+    <h1 class="display-4">Hello, <?= $session->get('userName', 'stranger') ?></h1>
     <p class="lead">Welcome to my blog</p>
     <hr class="my-4">
     <p>this just an test</p>
     <a class="btn btn-primary" href="#" role="button">Learn more</a>
 </div>
 
-<div class="card-columns">
-    <div class="card mb-4 ">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-                <small class="text-muted">by abo3adel </small>
-                <small class="text-muted"> Last updated 3 mins ago</small>
-            </p>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+<div class="row">
+    <?php foreach ($posts as $post) : ?>
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4 p-2 ">
+            <!-- explode(',', $post->allCats) -->
+            
+            <div class="card border-primary bg-light shadow-lg">
+                <a href="p/<?= $hashid->encode($post->postId) ?>">
+                    <img src="assets/img/1.jpeg" class="card-img-top" alt="guko">
+                </a>
+                <div class="card-body">
+                    <?php foreach(explode(',', $post->allCats) as $cat) : ?>
+                    <a href="cat/<?=$cat?>" class="badge badge-info mr-1">
+                        <?=$cat?>
+                    </a>
+                    <?php endforeach?>
+                    <h5 class="card-title">
+                        <a href="p/<?= $hashid->encode($post->postId) ?>"><?= $post->title ?></a>
+                    </h5>
+                    <small class="card-subtitle text-muted">
+                        by <a class="text-info" href="user/<?= $hashid->encode($post->userId) ?>"><?= $post->userName ?></a>
+                        updated At <?= $post->updatedAt ?> ago
+                    </small>
+                    <p class="card-text text-center">
+                        <?= $post->postContent ?>
+                    </p>
+                    <!-- footer start -->
+                    <a href="p/<?= $hashid->encode($post->postId) ?>" class="btn btn-outline-primary btn-r">
+                        Continue Reading ->
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card mb-4 ">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-                <small class="text-muted">by abo3adel </small>
-                <small class="text-muted"> Last updated 3 mins ago</small>
-            </p>
-            <p class="card-text">This is a wider card with supporting text below as a natuonger.</p>
-        </div>
-    </div>
-    <div class="card mb-4 ">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-                <small class="text-muted">by abo3adel </small>
-                <small class="text-muted"> Last updated 3 mins ago</small>
-            </p>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-    </div>
+    <?php endforeach ?>
 </div>

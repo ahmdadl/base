@@ -1,4 +1,4 @@
-<?php declare (strict_types=1);
+<?php declare(strict_types=1);
 
 namespace app\Util;
 
@@ -7,7 +7,7 @@ class Password
     // default algorthim to be used
     const DEFAULT_ALGO = PASSWORD_ARGON2ID;
     /**
-    * * consider increasing it depending on your hardware 
+    * * consider increasing it depending on your hardware
     */
     // default memory cost in bytes ==> 1024
     const DEFAULT_MEMORY = PASSWORD_ARGON2_DEFAULT_MEMORY_COST;
@@ -16,7 +16,9 @@ class Password
     // random string length
     const RAND_LENGTH = 48;
     
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * encode password with provided params
@@ -74,7 +76,9 @@ class Password
     ) : string {
         return substr(
             crypt(base64_encode(bin2hex(random_bytes($length))), '$5$rounds=5000$'.bin2hex(random_bytes($length)).'$'),
-            16, $length);
+            16,
+            $length
+        );
     }
 
     /**
@@ -94,7 +98,7 @@ class Password
     }
 
     /**
-     * decrypt the hashed value and 
+     * decrypt the hashed value and
      * check if it equals the user entered value
      *
      * @param string $known
@@ -109,14 +113,14 @@ class Password
     /**
      * test website to caculate the best time cost
      * the function can run in less than 50 milliseconds
-     * 
+     *
      * @see https://www.php.net/manual/en/function.password-hash.php
      * @return integer
      */
     public static function getAppropriateCost() : int
     {
         // it must be under 100 milliseconds
-        $timeTarget = 0.05; // 50 milliseconds 
+        $timeTarget = 0.05; // 50 milliseconds
 
         $timeCost = 2;
         do {
