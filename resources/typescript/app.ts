@@ -1,4 +1,12 @@
-import {al} from './partials/help';
-// var invoice = new tutorialPoint.invoiceApp.Invoice(); 
-// console.log(invoice.calculateDiscount(500));
-console.log('no working yet');
+import {al} from './partials/help'
+
+declare var Alert: any
+declare var Button: any
+declare var Carousel: any
+declare var Collapse: any
+declare var Dropdown: any
+declare var Modal: any
+declare var Popover: any
+declare var Toast: any
+
+console.log('no working yet', al)

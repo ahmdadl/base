@@ -2,7 +2,7 @@
     "compileOnSave": false,
     "compilerOptions": {
       "baseUrl": "./",
-      "sourceRoot": "./resources/typescript/",
+      // "sourceRoot": "./resources/typescript/",
       "outDir": "./public/assets/js",
       "sourceMap": true,
       "declaration": false,
@@ -11,10 +11,13 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "importHelpers": true,
-      "target": "es3",
+      "target": "es5",
       "typeRoots": [
         "node_modules/@types"
       ],
-      "strict": true
-    }
+      "strict": true,
+    },
+    "files": [
+      "resources/typescript/app.ts"
+    ]
   }

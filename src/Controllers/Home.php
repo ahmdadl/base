@@ -39,8 +39,6 @@ class Home
     {
         return $this->view->render('home', [
             'name' => 'not me',
-            'data' => $this->model->readAll(),
-            'hashid' => $this->hashid
         ]);
     }
 }
