@@ -16,16 +16,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link {{request()->is('posts') ? 'active' : ''}}"
-                        href="/posts">Posts</a>
-                </li>
-                <li>
-                    <a class="nav-link {{request()->is('posts/create') ? 'active' : ''}}"
-                        href="/posts/create">Create</a>
-                </li>
-                <li>
-                    <a class="nav-link {{request()->is('category/create') ? 'active' : ''}}"
-                        href="/category/create">Ccategory</a>
+                    <a class="nav-link <?=$this->uri('/') ? 'active' : ''?>"
+                        href="/">Protfolio</a>
                 </li>
             </ul>
 
