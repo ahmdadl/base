@@ -13,7 +13,7 @@
     <main class="container">
     <?=$this->section('content')?>
     </main>
-    <script src='/assets/js/bootstrap-native-v4.min.js'></script>
-    <script src="/assets/js/app.js"></script>
+    <script src='<?=$this->asset('/assets/js/bootstrap-native-v4.min.js')?>'></script>
+    <script src="<?=$this->asset('/assets/js/app.js')?>"></script>
 </body>
 </html>
