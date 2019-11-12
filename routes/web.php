@@ -3,6 +3,6 @@
 use FastRoute\RouteCollector;
 
 return function (RouteCollector $r) {
-    $r->get('/', ['Home@show']);
+    $r->get('/', ['HomeController@show']);
 };
 

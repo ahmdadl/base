@@ -1,5 +1,5 @@
 <nav
-    class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm text-light">
+    class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm text-light <?=$class?>">
     <div class="container">
         <a class="navbar-brand" href="/">
             MyBlog

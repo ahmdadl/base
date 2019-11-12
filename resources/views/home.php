@@ -1,1 +1,1 @@
-<?php $this->layout('layout', ['title' => 'Home Page'])?>
+<?php $this->layout('layouts/base', ['title' => 'ninjaCoder'])?>
