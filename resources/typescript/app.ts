@@ -13,7 +13,7 @@ Vue.component('animated-dots', animatedDots)
 let app = new Vue({
     el: ".landing-page",
     data: {
-        arr: ["asdasd", "wwwdsa", "szxxzcs", "wewewe"]
+        
     },
     mounted () {
         // frame()

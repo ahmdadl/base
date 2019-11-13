@@ -13106,9 +13106,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-job-title', _com
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-dots', _components_animatedDots__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: ".landing-page",
-    data: {
-        arr: ["asdasd", "wwwdsa", "szxxzcs", "wewewe"]
-    },
+    data: {},
     mounted: function () {
         // frame()
     }

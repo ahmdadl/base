@@ -37,8 +37,41 @@ class HomeController
 
     public function show($params = [])
     {
+        $pros = [
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+            (object)[
+                'title' => 'Responsive',
+                'icon' => 'desktop',
+                'txt' => 'some thing to be said about that'
+            ],
+        ];
+
         return $this->view->render('home', [
-            'name' => 'not me',
+            'pros' => $pros,
         ]);
     }
 }

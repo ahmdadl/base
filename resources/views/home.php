@@ -30,16 +30,16 @@
         <hr width="40%" class='mx-auto bg-dark pt-1 rounded ' />
     </h2>
     <div class="row">
-        <div class="pros col-6 col-md-4 col-lg-3 shadow">
+        <?php foreach ($pros as $p) : ?>
+        <div class="pros col-6 col-md-4 shadow mt-4">
             <div class="content p-1">
                 <div class="fa-3x d-inline-block bg-primary p-2 text-light w-50 mx-auto diamond">
-                    <i class="fas fa-desktop"></i>
+                    <i class="fas fa-<?=$p->icon?>"></i>
                 </div>
-                <h3 class="d-block mt-3">Responsive</h3>
-                <span class="text-muted">
-                    with some thing around here to happen some how
-                </span>
+                <h3 class="d-block mt-3"><?=$p->title?></h3>
+                <span class="text-muted"><?=$p->txt?></span>
             </div>
         </div>
+        <?php endforeach ?>
     </div>
 </section>
