@@ -18,6 +18,15 @@ interface Particle {
 }
 
 @Component({
+    props: {
+        fullHeight: {
+            type: Boolean,
+            default: true
+        },
+        ch: {
+            type: Number
+        }
+    },
     template: '<canvas id="canvas" :width="width" :height="height"></canvas>'
 })
 export default class animatedDots extends Vue {
@@ -43,6 +52,21 @@ export default class animatedDots extends Vue {
     public particles: Array<Particle> = [];
     public centerX = this.width / 2;
     public centerY = this.height / 2;
+
+
+    /**
+     * will handle window animation frames
+     */
+    public support = {
+        animationFrame: window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            // @ts-ignore
+            window.mozRequestAnimationFrame ||
+            // @ts-ignore
+            window.msRequestAnimationFrame ||
+            // @ts-ignore
+            window.oRequestAnimationFrame
+    }
 
     public drawBg(ctx: CanvasRenderingContext2D, color: Color | any): void {
         this.ctx.fillStyle =
@@ -162,17 +186,6 @@ export default class animatedDots extends Vue {
         });
     }
 
-    public support = {
-        animationFrame: window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            // @ts-ignore
-            window.mozRequestAnimationFrame ||
-            // @ts-ignore
-            window.msRequestAnimationFrame ||
-            // @ts-ignore
-            window.oRequestAnimationFrame
-    }
-
     public requestAnimFrame (fun) {
         return this.support.animationFrame.call(window, fun)
     }
@@ -197,6 +210,10 @@ export default class animatedDots extends Vue {
     mounted() {
         this.el = <HTMLCanvasElement>this.$el;
         this.ctx = <CanvasRenderingContext2D>this.el.getContext("2d");
+
+        if (this.$props.fullHeight === false) {
+            this.el.height = this.$props.ch
+        }
 
         // First Frame
         this.frame();

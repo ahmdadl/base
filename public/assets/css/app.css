@@ -16512,7 +16512,6 @@ readers do not read off random characters that represent icons */
 #canvas {
   position: absolute;
   z-index: -1;
-  min-height: 100%;
 }
 
 .masthead {

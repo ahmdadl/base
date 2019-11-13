@@ -13157,6 +13157,9 @@ var animatedDots = /** @class */ (function (_super) {
         _this.particles = [];
         _this.centerX = _this.width / 2;
         _this.centerY = _this.height / 2;
+        /**
+         * will handle window animation frames
+         */
         _this.support = {
             animationFrame: window.requestAnimationFrame ||
                 window.webkitRequestAnimationFrame ||
@@ -13287,6 +13290,9 @@ var animatedDots = /** @class */ (function (_super) {
         var _this = this;
         this.el = this.$el;
         this.ctx = this.el.getContext("2d");
+        if (this.$props.fullHeight === false) {
+            this.el.height = this.$props.ch;
+        }
         // First Frame
         this.frame();
         // First particle explosion
@@ -13301,6 +13307,15 @@ var animatedDots = /** @class */ (function (_super) {
     };
     animatedDots = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            props: {
+                fullHeight: {
+                    type: Boolean,
+                    default: true
+                },
+                ch: {
+                    type: Number
+                }
+            },
             template: '<canvas id="canvas" :width="width" :height="height"></canvas>'
         })
     ], animatedDots);

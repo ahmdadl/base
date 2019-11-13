@@ -8,7 +8,7 @@
 ) ?>
 
 <header ref='canvasHeader' id='canvasHeader' class="masthead bg-dark text-light bg-transparent">
-    <animated-dots></animated-dots>
+    <animated-dots :full-height="true"></animated-dots>
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center">
             <h1 class="mx-auto my-0 text-capitalize">Hello, I`m <span class='text-danger'>Ahmed Adel</span></h1>
