@@ -27,26 +27,15 @@
 <section id='about' class='about bg-light text-dark text-center mt-3'>
     <h2>
         About
-        <hr width="40%" class='mx-auto bg-dark pt-1 rounded' />
+        <hr width="40%" class='mx-auto bg-dark pt-1 rounded ' />
     </h2>
     <div class="row">
         <div class="pros col-6 col-md-4 col-lg-3 shadow">
             <div class="content p-1">
-                <div class="rounded fa-3x bg-primary text-light  w-50 mx-auto">
+                <div class="fa-3x d-inline-block bg-primary p-2 text-light w-50 mx-auto diamond">
                     <i class="fas fa-desktop"></i>
                 </div>
-                <h3 class="d-block">Responsive</h3>
-                <span class="text-muted">
-                    with some thing around here to happen some how
-                </span>
-            </div>
-        </div>
-        <div class="pros col-6 col-md-4 col-lg-3 shadow">
-            <div class="content p-1">
-                <div class="rounded fa-3x bg-primary text-light  w-50 mx-auto">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3 class="d-block">Fast</h3>
+                <h3 class="d-block mt-3">Responsive</h3>
                 <span class="text-muted">
                     with some thing around here to happen some how
                 </span>

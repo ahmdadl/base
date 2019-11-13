@@ -1,48 +1,48 @@
-$fa-font-path: '/fonts';
+$fa-font-path: "/fonts";
 
-@import '../../../bl/node_modules/bootstrap/scss/bootstrap.scss';
-@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
-@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
+@import "../../../bl/node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 
- #canvas {
-    position:absolute;
-    z-index:-1;
+#canvas {
+    position: absolute;
+    z-index: -1;
     // min-height: 100%;
- }
- .masthead {
+}
+.masthead {
     position: relative;
     width: 100%;
     height: auto;
     .container {
         padding-top: 15em;
         h1 {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
     }
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
         h1 {
-          font-size: 4rem;
-          line-height: 4rem;
+            font-size: 4rem;
+            line-height: 4rem;
         }
-      }
-      @media(min-width: 992px) {
+    }
+    @media (min-width: 992px) {
         height: 100vh;
         padding: 0;
         h1 {
-          font-size: 6.5rem;
-          line-height: 6.5rem;
-          letter-spacing: 0.8rem;
+            font-size: 6.5rem;
+            line-height: 6.5rem;
+            letter-spacing: 0.8rem;
         }
         h2 {
-          max-width: 30rem;
-          font-size: 1.25rem;
+            max-width: 30rem;
+            font-size: 1.25rem;
         }
-      }
+    }
 }
 .blink {
     animation-name: blink;
-    animation-duration: .7s;
+    animation-duration: 0.7s;
     animation-iteration-count: infinite;
 }
 @keyframes blink {
@@ -51,5 +51,13 @@ $fa-font-path: '/fonts';
     }
     100% {
         opacity: 1;
+    }
+}
+.diamond {
+    width: auto;
+    height: auto;
+    transform: rotate(45deg);
+    i {
+      transform: rotate(-45deg);
     }
 }

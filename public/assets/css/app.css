@@ -16582,3 +16582,13 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.diamond {
+  width: auto;
+  height: auto;
+  transform: rotate(45deg);
+}
+
+.diamond i {
+  transform: rotate(-45deg);
+}
+
