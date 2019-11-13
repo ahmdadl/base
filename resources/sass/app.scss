@@ -1,1 +1,43 @@
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../bl/node_modules/bootstrap/scss/bootstrap.scss';
+
+/*!
+ * Start Bootstrap - Grayscale v5.0.9 (https://startbootstrap.com/template-overviews/grayscale)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
+ */
+
+//  .landing-nav {
+//     //  background-color: transparent !important;
+//  }
+ #canvas {
+    position:absolute;
+    z-index:-1;
+    min-height: 100%;
+ }
+ .masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    .container {
+        padding-top: 15em;
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h2 {
+            
+        }
+    }
+}
+.blink {
+    animation-name: blink;
+    animation-duration: .7s;
+    animation-iteration-count: infinite;
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

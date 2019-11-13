@@ -10,7 +10,7 @@
 </head>
 <body>
     <?=$this->insert('partials/nav', ['navClass' => $navClass ?? ''])?>
-    <main class="container-fluid" id="<?=$id ?? 'body'?>">
+    <main class="<?=$mainClass ?? 'container-fluid'?>" id="<?=$id ?? 'body'?>">
     <?=$this->section('content')?>
     </main>
     <script src='<?=$this->asset('/assets/js/bootstrap-native-v4.min.js')?>'></script>

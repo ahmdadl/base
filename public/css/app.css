@@ -10682,20 +10682,24 @@ a.text-dark:focus {
 @-webkit-keyframes blink {
   0% {
     opacity: 0;
+    color: red;
   }
 
   100% {
     opacity: 1;
+    color: green;
   }
 }
 
 @keyframes blink {
   0% {
     opacity: 0;
+    color: red;
   }
 
   100% {
     opacity: 1;
+    color: green;
   }
 }
 

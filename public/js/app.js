@@ -101,29 +101,12 @@
 /*!*************************************!*\
   !*** ./resources/typescript/app.ts ***!
   \*************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _partials_textTyping__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./partials/textTyping */ "./resources/typescript/partials/textTyping.ts");
 
-
-Object(_partials_textTyping__WEBPACK_IMPORTED_MODULE_0__["textTyping"])();
-
-
-/***/ }),
-
-/***/ "./resources/typescript/partials/textTyping.ts":
-/*!*****************************************************!*\
-  !*** ./resources/typescript/partials/textTyping.ts ***!
-  \*****************************************************/
-/*! exports provided: textTyping */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "textTyping", function() { return textTyping; });
+// import {al} from './partials/help'
 var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d");
 // Set Canvas to be window size
 canvas.width = window.innerWidth;
@@ -262,14 +245,14 @@ setInterval(function (x) {
 }, 3000);
 // animate string
 var jobTitle = document.getElementById('job-title');
-function textTyping() {
+function changeTitle() {
     var arr = [
         'A will not rendered',
         'A Back End Web Developer',
         'A Laravel Developer',
         'A Full Stack Web Developer'
     ], i = 0, j = 0;
-    setInterval(function (_) {
+    setInterval(function (a) {
         if (i > 2)
             i = 0;
         var speed = 90;
@@ -287,8 +270,7 @@ function textTyping() {
         i++;
     }, 4000);
 }
-// changeTitle();
-
+changeTitle();
 
 
 /***/ }),
