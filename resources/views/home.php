@@ -25,7 +25,7 @@
 </header>
 
 <section id='about' class='about bg-light text-dark text-center mt-3'>
-    <h2 class="border-bottom">
+    <h2>
         About
         <hr width="40%" class='mx-auto bg-dark pt-1 rounded' />
     </h2>
