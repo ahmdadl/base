@@ -1,9 +1,10 @@
 var canvas = document.getElementById("canvas") as HTMLCanvasElement,
-    ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    
+    ctx = canvas.getContext("2d") as CanvasRenderingContext2D,
+    header = document.getElementById('canvasHeader') as HTMLDivElement;    
 // Set Canvas to be window size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+header.style.height = window.innerHeight + 'px';
 // Configuration, Play with these
 var config = {
     particleNumber: 50,

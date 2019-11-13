@@ -124,10 +124,11 @@ Object(_partials_textTyping__WEBPACK_IMPORTED_MODULE_0__["textTyping"])();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "textTyping", function() { return textTyping; });
-var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d");
+var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d"), header = document.getElementById('canvasHeader');
 // Set Canvas to be window size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+header.style.height = window.innerHeight + 'px';
 // Configuration, Play with these
 var config = {
     particleNumber: 50,
