@@ -7,7 +7,7 @@
     ]
 ) ?>
 
-<header class="masthead bg-dark text-light bg-transparent">
+<header id='canvasHeader' class="masthead bg-dark text-light bg-transparent">
     <canvas id='canvas' style=''></canvas>
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center">
@@ -21,3 +21,22 @@
         </div>
     </div>
 </header>
+
+<section id='about' class='about bg-light text-dark text-center mt-3'>
+        <h2 class="border-bottom">
+            About
+            <hr width="40%" class='mx-auto bg-dark pt-1 rounded' />
+        </h2>
+        <div class="row">
+            <div class="pros col-6 col-md-4 col-lg-3 bg-info">
+                <div class="content p-1">
+                    adasd
+                </div>
+            </div>
+            <div class="pros col-6 col-md-4 col-lg-3 bg-info">
+                <div class="content p-1">
+                    asdsadasd  asd
+                </div>
+            </div>
+        </div>
+</section>

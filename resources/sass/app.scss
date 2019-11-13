@@ -1,14 +1,4 @@
 @import '../../../bl/node_modules/bootstrap/scss/bootstrap.scss';
-
-/*!
- * Start Bootstrap - Grayscale v5.0.9 (https://startbootstrap.com/template-overviews/grayscale)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
- */
-
-//  .landing-nav {
-//     //  background-color: transparent !important;
-//  }
  #canvas {
     position:absolute;
     z-index:-1;
@@ -23,10 +13,26 @@
         h1 {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        h2 {
-            
-        }
     }
+    @media(min-width: 768px) {
+        h1 {
+          font-size: 4rem;
+          line-height: 4rem;
+        }
+      }
+      @media(min-width: 992px) {
+        height: 100vh;
+        padding: 0;
+        h1 {
+          font-size: 6.5rem;
+          line-height: 6.5rem;
+          letter-spacing: 0.8rem;
+        }
+        h2 {
+          max-width: 30rem;
+          font-size: 1.25rem;
+        }
+      }
 }
 .blink {
     animation-name: blink;
