@@ -23,20 +23,26 @@
 </header>
 
 <section id='about' class='about bg-light text-dark text-center mt-3'>
-        <h2 class="border-bottom">
-            About
-            <hr width="40%" class='mx-auto bg-dark pt-1 rounded' />
-        </h2>
-        <div class="row">
-            <div class="pros col-6 col-md-4 col-lg-3 bg-info">
-                <div class="content p-1">
-                    adasd
+    <h2 class="border-bottom">
+        About
+        <hr width="40%" class='mx-auto bg-dark pt-1 rounded' />
+    </h2>
+    <div class="row">
+        <div class="pros col-6 col-md-4 col-lg-3">
+            <div class="content p-1">
+                <div class="p-1 rounded fa-3x bg-primary text-light">
+                    <i class="fas fa-cog fa-spin"></i>
                 </div>
-            </div>
-            <div class="pros col-6 col-md-4 col-lg-3 bg-info">
-                <div class="content p-1">
-                    asdsadasd  asd
-                </div>
+                with some thing around here to happen some how
             </div>
         </div>
+        <div class="pros col-6 col-md-4 col-lg-3">
+            <div class="content p-1">
+                <div class=" rounded fa-3x bg-primary text-light">
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
+                with some thing around here to happen some how
+            </div>
+        </div>
+    </div>
 </section>
