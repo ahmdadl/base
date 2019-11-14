@@ -13098,20 +13098,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_textWriter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/textWriter */ "./resources/typescript/components/textWriter.ts");
 /* harmony import */ var _components_animatedDots__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/animatedDots */ "./resources/typescript/components/animatedDots.ts");
+/* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Progress */ "./resources/typescript/components/Progress.ts");
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.productionTip = false;
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-job-title', _components_textWriter__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-dots', _components_animatedDots__WEBPACK_IMPORTED_MODULE_2__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('dync-progress', _components_Progress__WEBPACK_IMPORTED_MODULE_3__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: ".landing-page",
     data: {},
     mounted: function () {
-        // frame()
     }
 });
-// textTyping();
+
+
+/***/ }),
+
+/***/ "./resources/typescript/components/Progress.ts":
+/*!*****************************************************!*\
+  !*** ./resources/typescript/components/Progress.ts ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+
+
+
+var Progress = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Progress, _super);
+    function Progress() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.width = 0;
+        return _this;
+    }
+    Progress.prototype.isScrolled = function (ev) {
+        var _this = this;
+        var s = document.querySelector('#skills');
+        var DOC = document.documentElement;
+        if ((s.offsetTop - DOC.scrollTop) < 60) {
+            setTimeout(function (_) { _this.width = _this.$props.val; }, 150);
+        }
+    };
+    Progress.prototype.mounted = function () {
+        document.addEventListener('scroll', this.isScrolled);
+    };
+    Progress = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            props: {
+                txt: {
+                    type: String,
+                    required: true
+                },
+                val: {
+                    type: Number,
+                    required: true
+                }
+            },
+            template: "<div class=\"progress mt-3 mx-2 font-weight-bolder\" style=\"height: 25px;\">\n    <span class=\"px-3 pt-1 align-middle text-light bg-dark text-uppercase\" v-text=\"txt\"></span>\n    <div class=\"progress-bar bg-success text-right\" role=\"progressbar\" :style=\"'width: ' + width + '%'\" aria-valuenow=\"80\" aria-valuemin=\"0\" aria-valuemax=\"100\">{{val}}%</div>\n    </div>\n    "
+        })
+    ], Progress);
+    return Progress;
+}(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Progress);
 
 
 /***/ }),
