@@ -68,11 +68,21 @@
                     <dync-progress :txt='"angular 2"' :val='70'></dync-progress>
                     <dync-progress :txt='"php"' :val='90'></dync-progress>
                     <dync-progress :txt='"php oop"' :val='85'></dync-progress>
+                    <dync-progress :txt='"python"' :val='60'></dync-progress>
+                    <dync-progress :txt='"mysql"' :val='85'></dync-progress>
                     <dync-progress :txt='"laravel"' :val='85'></dync-progress>
                     <dync-progress :txt='"lumen"' :val='80'></dync-progress>
                     <dync-progress :txt='"unit_Testing"' :val='85'></dync-progress>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id='projects' class="skills bg-light text-dark text-center mt-3">
+        <h2>
+            Projects
+            <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
+        </h2>
+
     </section>
 </div>

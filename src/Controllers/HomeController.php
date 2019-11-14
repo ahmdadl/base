@@ -16,21 +16,15 @@ class HomeController
 {
     private $request;
     private $view;
-    private $model;
-    private $hashid;
     private $session;
 
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
-        HomeModel $model,
-        Hashids $hashid,
         AppSession $session
     ) {
         $this->request = $request;
         $this->view = $view;
-        $this->model = $model;
-        $this->hashid = $hashid;
         $this->session = $session;
         $this->session->sessStart();
     }
