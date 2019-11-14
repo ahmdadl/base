@@ -95,7 +95,7 @@ trait HomeModelDataTrait
     {
         $arr = range(1, 8);
 
-        return $arr[rand(0, sizeof($arr))] . '.png';
+        return $arr[rand(0, sizeof($arr)-1)] . '.png';
     }
 
 
