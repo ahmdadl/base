@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
+    use HomeModelDataTrait;
+
     private $request;
     private $view;
     private $session;
@@ -31,41 +33,11 @@ class HomeController
 
     public function show($params = [])
     {
-        $pros = [
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-            (object)[
-                'title' => 'Responsive',
-                'icon' => 'desktop',
-                'txt' => 'some thing to be said about that'
-            ],
-        ];
+        [$pros, $projects] = $this->getData();        
 
         return $this->view->render('home', [
             'pros' => $pros,
+            'projects' => $projects
         ]);
     }
 }
