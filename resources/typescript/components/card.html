@@ -1,0 +1,30 @@
+<div class="col-12 col-md-6 col-lg-4 mb-3 px-sm-5 px-md-2">
+    <div
+        class="card bg-light text-white shadow border border-dark"
+        :class="cls"
+    >
+        <slot name="header"></slot>
+        <div v-if="hasOverlay">
+            <div class="card-body position-relative p-0">
+                <img :src="img" class="card-img" :alt="title" />
+                <div class="card-img-overlay">
+                    <slot name="overlay"></slot>
+                </div>
+            </div>
+            <div class="card-footer text-dark">
+                <h5 class="card-title" v-text="title"></h5>
+                <div class="tags d-block text-capitalize">
+                    <slot name="tags"></slot>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <img :src="img" class="card-img-top" :alt="title" />
+            <div class="card-body">
+                <h5 class="card-title" v-text="title"></h5>
+                <slot name="info"></slot>
+            </div>
+            <slot name="footer"></slot>
+        </div>
+    </div>
+</div>
