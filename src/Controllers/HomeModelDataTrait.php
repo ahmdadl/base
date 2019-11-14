@@ -44,45 +44,58 @@ trait HomeModelDataTrait
         $projects = [
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
                 ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
                 ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
-                ['php', 'oop', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
+                ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
-                ['php', 'oop', 'jquery', 'MySql', 'typeScript', 'bootstrap 4']
+                ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
-                ['laravel', 'es5', 'MySql', 'typeScript', 'bootstrap 4']
+                ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
             $this->createProject(
                 'MyBlog',
+                $this->randImage(),
                 'MySelf',
                 'an laravel blog to show what i can do as an project',
-                ['lumen', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
+                ['laravel', 'vueJs', 'MySql', 'typeScript', 'bootstrap 4']
             ),
         ];
 
 
 
         return [$pros, $projects];
+    }
+
+    private function randImage () : string
+    {
+        $arr = range(1, 8);
+
+        return $arr[rand(0, sizeof($arr))] . '.png';
     }
 
 
@@ -100,12 +113,14 @@ trait HomeModelDataTrait
 
     private function createProject(
         string $title,
+        string $img,
         string $client,
         string $info,
         array $tags
     ) : object {
         return (object) [
             'title' => $title,
+            'img' => $img,
             'client' => $client,
             'info' => $info,
             'tags' => $tags
