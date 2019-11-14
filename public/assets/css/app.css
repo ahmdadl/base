@@ -16509,6 +16509,10 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Brands";
 }
 
+.navbar {
+  transition: all ease-in 0.5s;
+}
+
 #canvas {
   position: absolute;
   z-index: -1;

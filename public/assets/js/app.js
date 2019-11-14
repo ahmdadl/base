@@ -13111,6 +13111,15 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: ".landing-page",
     data: {},
     mounted: function () {
+        document.addEventListener('scroll', function (ev) {
+            var doc = document.documentElement, navbar = document.querySelector('.navbar');
+            if (doc.scrollTop > 300) {
+                navbar.classList.remove('bg-transparent');
+            }
+            else {
+                navbar.classList.add('bg-transparent');
+            }
+        });
     }
 });
 

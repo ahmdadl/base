@@ -5,6 +5,10 @@ $fa-font-path: "/fonts";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 
+.navbar {
+    transition: all ease-in .5s;
+}
+
 #canvas {
     position: absolute;
     z-index: -1;

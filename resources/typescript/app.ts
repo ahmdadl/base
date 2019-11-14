@@ -18,6 +18,15 @@ let app = new Vue({
         
     },
     mounted () {
-        
+        document.addEventListener('scroll', ev => {
+            let doc = document.documentElement as HTMLElement,
+                navbar = document.querySelector('.navbar') as HTMLElement
+
+            if (doc.scrollTop > 300) {
+                navbar.classList.remove('bg-transparent')
+            } else {
+                navbar.classList.add('bg-transparent')
+            }
+        })
     }
 })
