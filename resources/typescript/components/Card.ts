@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import Vue from "vue";
+import Component from "vue-class-component";
 
 @Component({
     props: {
@@ -19,11 +19,8 @@ import Component from 'vue-class-component'
         title: {
             type: String,
             required: true
-        },
+        }
     },
-    template: require('./card.html')
+    template: require("./card.html")
 })
-export default class Card extends Vue
-{
-    
-}
+export default class Card extends Vue {}

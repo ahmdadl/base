@@ -60,6 +60,9 @@ $fa-font-path: "/fonts";
 .hexagon:hover i {
     animation: fa-spin 2s infinite linear;
 }
+.transition {
+    transition: all ease-in 0.5s;
+}
 .project.card {
     .card-img-overlay {
         background-color: rgba(139, 38, 0, 0.38);
@@ -71,6 +74,13 @@ $fa-font-path: "/fonts";
         .card-img-overlay {
             opacity: 1;
             height: 100%;
+        }
+    }
+}
+.post.card {
+    .card-img-container {
+        &:hover .card-img-top {
+            transform: scale(1.3);
         }
     }
 }

@@ -31,4 +31,6 @@
     <?php include_once __DIR__ . '/home/project.php'?>
 
     <?php include_once __DIR__ . '/home/blog.php'?>
+
+    <!-- Experments & open source -->
 </div>

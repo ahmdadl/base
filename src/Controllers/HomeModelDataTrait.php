@@ -86,9 +86,21 @@ trait HomeModelDataTrait
             ),
         ];
 
+        $posts = [];
+
+        foreach (range(0, 5) as $i) {
+            $posts[] = $this->createPost(
+                'php tutrial',
+                $this->randImage(),
+                'some long text php is called hypertext preprocessor and it`s very good at such time beecouse it runs most of the web',
+                rand(4, 20),
+                '2015-5-2 10:25pm',
+                ['php', 'tutrials', 'new', 'oop']
+            );
+        }
 
 
-        return [$pros, $projects];
+        return [$pros, $projects, $posts];
     }
 
     private function randImage () : string
@@ -97,7 +109,6 @@ trait HomeModelDataTrait
 
         return $arr[rand(0, sizeof($arr)-1)] . '.png';
     }
-
 
     private function createPros(
         string $title,
@@ -124,6 +135,24 @@ trait HomeModelDataTrait
             'client' => $client,
             'info' => $info,
             'tags' => $tags
+        ];
+    }
+
+    private function createPost (
+        string $title,
+        string $img,
+        string $info,
+        int $commentCount,
+        string $date,
+        array $cats
+    ) {
+        return (object) [
+            'title' => $title,
+            'img' => $img,
+            'info' => $info,
+            'commentCount' => $commentCount,
+            'date' => $date,
+            'cats' => $cats
         ];
     }
 }

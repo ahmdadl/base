@@ -33,11 +33,12 @@ class HomeController
 
     public function show($params = [])
     {
-        [$pros, $projects] = $this->getData();        
+        [$pros, $projects, $posts] = $this->getData();        
 
         return $this->view->render('home', [
             'pros' => $pros,
-            'projects' => $projects
+            'projects' => $projects,
+            'posts' => $posts
         ]);
     }
 }
