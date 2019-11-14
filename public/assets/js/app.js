@@ -13099,6 +13099,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_textWriter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/textWriter */ "./resources/typescript/components/textWriter.ts");
 /* harmony import */ var _components_animatedDots__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/animatedDots */ "./resources/typescript/components/animatedDots.ts");
 /* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Progress */ "./resources/typescript/components/Progress.ts");
+/* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Card */ "./resources/typescript/components/Card.ts");
+
 
 
 
@@ -13107,6 +13109,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.productionTip = false;
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-job-title', _components_textWriter__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('animated-dots', _components_animatedDots__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('dync-progress', _components_Progress__WEBPACK_IMPORTED_MODULE_3__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('card', _components_Card__WEBPACK_IMPORTED_MODULE_4__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: ".landing-page",
     data: {},
@@ -13122,6 +13125,57 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
         });
     }
 });
+
+
+/***/ }),
+
+/***/ "./resources/typescript/components/Card.ts":
+/*!*************************************************!*\
+  !*** ./resources/typescript/components/Card.ts ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+
+
+
+var Card = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Card, _super);
+    function Card() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Card = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            props: {
+                hasOverlay: {
+                    type: Boolean,
+                    required: false,
+                    default: false
+                },
+                cls: {
+                    type: String,
+                    required: true
+                },
+                img: {
+                    type: String,
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+            },
+            template: __webpack_require__(/*! ./card.html */ "./resources/typescript/components/card.html")
+        })
+    ], Card);
+    return Card;
+}(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Card);
 
 
 /***/ }),
@@ -13386,6 +13440,17 @@ var animatedDots = /** @class */ (function (_super) {
 }(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (animatedDots);
 
+
+/***/ }),
+
+/***/ "./resources/typescript/components/card.html":
+/*!***************************************************!*\
+  !*** ./resources/typescript/components/card.html ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-12 col-md-6 col-lg-4 mb-3 px-sm-5 px-md-2\">\r\n    <div\r\n        class=\"card bg-light text-white shadow border border-dark\"\r\n        :class=\"cls\"\r\n    >\r\n        <slot name=\"header\"></slot>\r\n        <div v-if=\"hasOverlay\">\r\n            <div class=\"card-body position-relative p-0\">\r\n                <img :src=\"img\" class=\"card-img\" :alt=\"title\" />\r\n                <div class=\"card-img-overlay\">\r\n                    <slot name=\"overlay\"></slot>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-footer text-dark\">\r\n                <h5 class=\"card-title\" v-text=\"title\"></h5>\r\n                <div class=\"tags d-block text-capitalize\">\r\n                    <slot name=\"tags\"></slot>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div v-else>\r\n            <img :src=\"img\" class=\"card-img-top\" :alt=\"title\" />\r\n            <div class=\"card-body\">\r\n                <h5 class=\"card-title\" v-text=\"title\"></h5>\r\n                <slot name=\"info\"></slot>\r\n            </div>\r\n            <slot name=\"footer\"></slot>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 

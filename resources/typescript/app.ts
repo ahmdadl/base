@@ -4,6 +4,7 @@ import Axios from "axios";
 import textWriter from './components/textWriter'
 import animatedDots from './components/animatedDots'
 import Progress from './components/Progress'
+import Card from './components/Card'
 import { al } from "./partials/help";
 
 Vue.config.productionTip = false;
@@ -11,6 +12,7 @@ Vue.config.productionTip = false;
 Vue.component('animated-job-title', textWriter)
 Vue.component('animated-dots', animatedDots)
 Vue.component('dync-progress', Progress)
+Vue.component('card', Card)
 
 let app = new Vue({
     el: ".landing-page",
