@@ -6,7 +6,7 @@
     <h5 class="text-muted">I Will Respond Withen 24 Hours</h5>
     <div class="text-left mt-5">
         <alert type='danger' v-if='mailErr'>
-            <strong>an error occured</strong>
+            <strong>an Error occured, Please try again later</strong>
         </alert>
         <alert type='success' v-if='false === mailErr'>
             <strong>Email Sent Succefully</strong>
@@ -26,7 +26,7 @@
                 <div class="col-sm-10">
                     <input type="email" v-model='email' class="form-control" :class="{'is-invalid': emailErr, 'is-valid': emailErr === false}" id="userEmail" placeholder="Email" minlength="5" required />
                     <div class="invalid-feedback">
-                        Please enter a valid email
+                        Please enter a valid email address.
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="col-sm-10">
                     <textarea v-model='message' class="form-control" :class="{'is-invalid': messErr, 'is-valid': messErr === false}" id="userMessage" placeholder="Enter your message" rows="6" minlength="5" required></textarea>
                     <div class="invalid-feedback">
-                        Please enter your message
+                        Please enter your message.
                     </div>
                 </div>
             </div>
