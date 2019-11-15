@@ -8,12 +8,12 @@
             <?php foreach ($posts as $p) : ?>
                 <card cls='post text-left' title='<?= $p->title ?>' img='<?= $this->asset('assets/img/' . $p->img) ?>'>
                     <template v-slot:info>
-                        <div class='p-2 my-1 text-muted d-block'>
-                            <span class="mr-2">
+                        <div class='py-2 my-1 text-muted d-block'>
+                            <span class="mr-3">
                                 <i class="fas fa-clock"></i>
                                 <?= $p->date ?>
                             </span>
-                            <span class='mr-2'>
+                            <span class=''>
                                 <i class="fas fa-comment-alt"></i>
                                 <?= $p->commentCount ?>
                             </span>
