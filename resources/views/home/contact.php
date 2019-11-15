@@ -3,7 +3,7 @@
         Contact
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
-    <h4 class="text-muted">I Will Respond Withen 24 Hours</h4>
+    <h5 class="text-muted">I Will Respond Withen 24 Hours</h5>
     <div class="text-left mt-5">
         <alert type='danger' v-if='mailErr'>
             <strong>an error occured</strong>
