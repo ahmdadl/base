@@ -25,18 +25,15 @@
 </header>
 <div class="container-fluid">
     <?php 
-        include_once __DIR__ . '/home/about.php';
-    
-        include_once __DIR__ . '/home/skill.php';
 
-        include_once __DIR__ . '/home/project.php';
+        $this->insert('home/about', ['pros' => $pros]);
+        $this->insert('home/skill');
+        $this->insert('home/project', ['projects' => $projects]);
+        $this->insert('home/blog', ['posts' => $posts]);
+        $this->insert('home/contact');
 
         /**
          * @todo add Experments & open source page
          */
-
-        include_once __DIR__ . '/home/blog.php';
-
-        include_once __DIR__ . '/home/contact.php';
     ?>
 </div>
