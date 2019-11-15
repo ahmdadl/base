@@ -29,6 +29,7 @@
         "bootstrap-vue": "^2.0.4",
         "vue": "^2.6.10",
         "vue-class-component": "^7.1.0",
-        "vue-property-decorator": "^8.3.0"
+        "vue-property-decorator": "^8.3.0",
+        "vue-scrollto": "^2.17.1"
     }
 }

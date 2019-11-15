@@ -1,5 +1,6 @@
 import Vue, { VNode } from "vue";
-import Component from "vue-class-component";
+// import Component from "vue-class-component";
+import VueScrollTo from 'vue-scrollto'
 import Axios from "axios";
 import textWriter from "./components/textWriter";
 import animatedDots from "./components/animatedDots";
@@ -9,6 +10,12 @@ import Alert from "./components/Alert";
 import { al } from "./partials/help";
 
 Vue.config.productionTip = false;
+
+// Vue.use(VueScrollTo)
+
+Vue.use(VueScrollTo, {
+    duration: 1000
+})
 
 Vue.component("alert", Alert);
 Vue.component("animated-job-title", textWriter);
@@ -104,6 +111,12 @@ let app = new Vue({
             } else {
                 this.$refs.sendMailLoader.classList.add("d-none");
             }
+        },
+        scrollTo (ev) {
+            let target = document.querySelector(ev.target.getAttribute('href')),
+            offset = target.offsetTop
+
+            
         }
     },
     mounted() {
