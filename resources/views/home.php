@@ -36,5 +36,5 @@
          * @todo add Experments & open source page
          */
     ?>
-    <side-nav links="top about projects blog contact"></side-nav>
+    <side-nav links="top about skills projects blog contact"></side-nav>
 </div>

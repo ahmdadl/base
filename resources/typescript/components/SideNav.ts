@@ -21,5 +21,22 @@ export default class SideNav extends Vue
 
     mounted () {
         this.data = this.$props.links.split(' ')
+        let sections = document.querySelectorAll('#top, section') as NodeListOf<HTMLElement>,
+            doc = document.documentElement as HTMLElement
+
+        // initalize of first load
+        sections.forEach(sec => {
+            if (sec.offsetTop - doc.scrollTop < 75) {
+                this.active = sec.id
+            }
+        })
+
+        document.addEventListener('scroll', ev => {
+            sections.forEach(sec => {
+                if (sec.offsetTop - doc.scrollTop < 75) {
+                    this.active = sec.id
+                }
+            })
+        })
     }
 }

@@ -15690,7 +15690,7 @@ var Progress = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded\">\r\n    <ul class=\"list-unstyled\">\r\n        <li v-for=\"link in data\" v-scroll-to=\"{el: '#' + link, onDone: setActive}\" class=\"transition\" :class=\"{'text-primary': active === link}\">\r\n            <i v-if='active === link' class=\"fas fa-at\"></i>\r\n            <i v-else class=\"fas fa-chevron-right\"></i>\r\n            <span class=\"d-none\">{{link}}</span>\r\n        </li>\r\n    </ul>\r\n</div>";
+module.exports = "<div class=\"sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded d-none d-sm-block\">\r\n    <ul class=\"list-unstyled\">\r\n        <li v-for=\"link in data\" v-scroll-to=\"{el: '#' + link, onDone: setActive}\" class=\"transition\" :class=\"{'text-primary': active === link}\">\r\n            <i v-if='active === link' class=\"fas fa-at\"></i>\r\n            <i v-else class=\"fas fa-chevron-right\"></i>\r\n            <span class=\"d-none\">{{link}}</span>\r\n        </li>\r\n    </ul>\r\n</div>";
 
 /***/ }),
 
@@ -15721,7 +15721,22 @@ var SideNav = /** @class */ (function (_super) {
         this.active = el.id;
     };
     SideNav.prototype.mounted = function () {
+        var _this = this;
         this.data = this.$props.links.split(' ');
+        var sections = document.querySelectorAll('#top, section'), doc = document.documentElement;
+        // initalize of first load
+        sections.forEach(function (sec) {
+            if (sec.offsetTop - doc.scrollTop < 75) {
+                _this.active = sec.id;
+            }
+        });
+        document.addEventListener('scroll', function (ev) {
+            sections.forEach(function (sec) {
+                if (sec.offsetTop - doc.scrollTop < 75) {
+                    _this.active = sec.id;
+                }
+            });
+        });
     };
     SideNav = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
