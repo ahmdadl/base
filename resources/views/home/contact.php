@@ -1,7 +1,7 @@
 <section id='contact' class="skills bg-light text-dark text-center mt-3">
     <h2>
         Contact
-        <hr class='mx-auto bg-light pt-1 rounded w-25 px-5' />
+        <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
     <h4 class="text-muted">I Will Respond Withen 24 Hours</h4>
     <div class="text-left mt-5">

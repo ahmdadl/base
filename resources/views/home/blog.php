@@ -1,7 +1,7 @@
 <section id='blog' class="skills bg-light text-dark text-center mt-3">
     <h2>
         Latest Blog Posts
-        <hr class='mx-auto bg-light pt-1 rounded w-25 px-5' />
+        <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
     <div class="text-center mt-5">
         <div class="row">
