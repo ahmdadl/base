@@ -84,3 +84,19 @@ $fa-font-path: "/fonts";
         }
     }
 }
+.sidenav {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    z-index: 300;
+    &:hover li span {
+        display: inline !important;
+    }
+    li {
+        cursor: pointer;
+        &:hover {
+            padding-left: $spacer / 3;
+            color: $white;
+        }
+    }
+}

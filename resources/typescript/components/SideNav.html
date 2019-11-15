@@ -1,0 +1,9 @@
+<div class="sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded">
+    <ul class="list-unstyled">
+        <li v-for="link in data" v-scroll-to="{el: '#' + link, onDone: setActive}" class="transition" :class="{'text-primary': active === link}">
+            <i v-if='active === link' class="fas fa-at"></i>
+            <i v-else class="fas fa-chevron-right"></i>
+            <span class="d-none">{{link}}</span>
+        </li>
+    </ul>
+</div>

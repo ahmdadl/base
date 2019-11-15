@@ -7,7 +7,7 @@
     ]
 ) ?>
 
-<header ref='canvasHeader' id='canvasHeader' class="masthead bg-dark text-light bg-transparent">
+<header ref='canvasHeader' id='top' class="masthead bg-dark text-light bg-transparent">
     <animated-dots :full-height="true"></animated-dots>
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center">
@@ -36,4 +36,5 @@
          * @todo add Experments & open source page
          */
     ?>
+    <side-nav links="top about projects blog contact"></side-nav>
 </div>

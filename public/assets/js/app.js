@@ -15398,8 +15398,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Progress */ "./resources/typescript/components/Progress.ts");
 /* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Card */ "./resources/typescript/components/Card.ts");
 /* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Alert */ "./resources/typescript/components/Alert.ts");
+/* harmony import */ var _components_SideNav__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/SideNav */ "./resources/typescript/components/SideNav.ts");
 
 // import Component from "vue-class-component";
+
 
 
 
@@ -15418,6 +15420,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _com
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _components_animatedDots__WEBPACK_IMPORTED_MODULE_4__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_8__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     el: ".landing-page",
     data: {
@@ -15676,6 +15679,64 @@ var Progress = /** @class */ (function (_super) {
     return Progress;
 }(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (Progress);
+
+
+/***/ }),
+
+/***/ "./resources/typescript/components/SideNav.html":
+/*!******************************************************!*\
+  !*** ./resources/typescript/components/SideNav.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded\">\r\n    <ul class=\"list-unstyled\">\r\n        <li v-for=\"link in data\" v-scroll-to=\"{el: '#' + link, onDone: setActive}\" class=\"transition\" :class=\"{'text-primary': active === link}\">\r\n            <i v-if='active === link' class=\"fas fa-at\"></i>\r\n            <i v-else class=\"fas fa-chevron-right\"></i>\r\n            <span class=\"d-none\">{{link}}</span>\r\n        </li>\r\n    </ul>\r\n</div>";
+
+/***/ }),
+
+/***/ "./resources/typescript/components/SideNav.ts":
+/*!****************************************************!*\
+  !*** ./resources/typescript/components/SideNav.ts ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+
+
+
+var SideNav = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SideNav, _super);
+    function SideNav() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.data = [];
+        _this.active = '';
+        return _this;
+    }
+    SideNav.prototype.setActive = function (el) {
+        this.active = el.id;
+    };
+    SideNav.prototype.mounted = function () {
+        this.data = this.$props.links.split(' ');
+    };
+    SideNav = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            props: {
+                links: {
+                    type: String,
+                    required: true
+                }
+            },
+            template: __webpack_require__(/*! ./SideNav.html */ "./resources/typescript/components/SideNav.html")
+        })
+    ], SideNav);
+    return SideNav;
+}(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (SideNav);
 
 
 /***/ }),
