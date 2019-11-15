@@ -1,4 +1,4 @@
-<section id='about' class='about bg-light text-dark text-center mt-3'>
+<section id='about' class='about bg-light text-dark text-center mt-5 pt-2'>
     <h2>
         About
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />

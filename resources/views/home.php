@@ -19,7 +19,7 @@
                 </span>
                 <span id='blink' class='blink'>|</span>
             </h1>
-            <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>
+            <a href="#about" v-scroll-to="'#about'" class="btn btn-primary js-scroll-trigger">Get Started</a>
         </div>
     </div>
 </header>
