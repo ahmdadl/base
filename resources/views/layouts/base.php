@@ -20,10 +20,9 @@
 
         <footer class="bg-dark text-light p-5">
             <div class="container">
-                <div class="row text-center">
-                    <div class="col-12 col-sm-6 pt-3">
+                <div class="row text-center py-4">
+                    <div class="mx-auto w-75">
                         <a href='fb.com/a7md200' class="btn btn-outline-primary btn-brand transition mr-2">
-
                             <i class='fab fa-github'></i>
                         </a>
                         <a href='fb.com/a7md200' class="btn btn-outline-danger btn-brand transition mr-2">
@@ -40,7 +39,9 @@
                             <i class='fab fa-whatsapp'></i>
                         </a>
                     </div>
-                    <div class="col-12 col-sm-6 pt-3">
+                </div>
+                <div class='row'>
+                    <div class="mx-auto w-75 text-center">
                         Copyright © ninjaCoder 2019
                     </div>
                 </div>
