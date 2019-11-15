@@ -15410,7 +15410,8 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.productionTip = false;
 // Vue.use(VueScrollTo)
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_scrollto__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    duration: 1000
+    duration: 1000,
+    offset: -60
 });
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("alert", _components_Alert__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _components_textWriter__WEBPACK_IMPORTED_MODULE_3__["default"]);
@@ -15509,9 +15510,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
             var doc = document.documentElement, navbar = document.querySelector(".navbar");
             if (doc.scrollTop > 300) {
                 navbar.classList.remove("bg-transparent");
+                navbar.classList.add('position-sticky');
             }
             else {
                 navbar.classList.add("bg-transparent");
+                navbar.classList.remove('position-sticky');
             }
         });
     }

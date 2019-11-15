@@ -14,7 +14,8 @@ Vue.config.productionTip = false;
 // Vue.use(VueScrollTo)
 
 Vue.use(VueScrollTo, {
-    duration: 1000
+    duration: 1000,
+    offset: -60
 })
 
 Vue.component("alert", Alert);
@@ -129,9 +130,11 @@ let app = new Vue({
                 navbar = document.querySelector(".navbar") as HTMLElement;
 
             if (doc.scrollTop > 300) {
-                navbar.classList.remove("bg-transparent");
+                navbar.classList.remove("bg-transparent")
+                navbar.classList.add('position-sticky')
             } else {
-                navbar.classList.add("bg-transparent");
+                navbar.classList.add("bg-transparent")
+                navbar.classList.remove('position-sticky')
             }
         });
     }
