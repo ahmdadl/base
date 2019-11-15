@@ -13,7 +13,7 @@ class HomeModel
      */
     private $con;
 
-    private $tbName = 'jokes';
+    private $tbName = 'emails';
 
     public $id;
     public $text;
@@ -26,65 +26,30 @@ class HomeModel
         $this->con = $con->getConnection();
     }
 
-    public function createOne() : bool
+    public function create(object $email) : bool
     {
-        $sql = 'INSERT INTO '. $this->tbName . '(text, authorID)
-        VALUES (:text, :aid)';
+        $stmt = 'INSERT INTO ' . $this->tbName . ' (name, email, message) VALUES (:na, :em, :mess)';
 
-        $stmt = $this->con->prepare($sql);
+        $sql = $this->con->prepare($stmt);
+
         $params = [
-            ':text' => $this->text,
-            ':aid' => $this->authorID,
-        ];
-        
-        return ($stmt->execute($params)) ? true : false;
-    }
-
-    public function readAll() : array
-    {
-        $sql = 'SELECT j.id, u.name AS userName, j.text, TIME_FORMAT(TIMEDIFF(NOW(), j.updatedAt), \'%HHrs %iMin\') AS lastUpdate FROM jokes AS j 
-        JOIN users AS u ON u.id = j.authorID';
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll();
-    }
-
-    public function readOne() : object
-    {
-        $sql = 'SELECT id, `text`, authorID FROM ' . $this->tbName .' 
-        WHERE id = :id';
-
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute([':id' => $this->id]);
-
-        return $stmt->fetch();
-    }
-
-    public function update() : bool
-    {
-        $sql = 'UPDATE ' . $this->tbName . ' 
-        SET `text` = :te, authorID = :aid 
-        WHERE id = :jid';
-        
-        $stmt = $this->con->prepare($sql);
-        $params = [
-            ':te' => $this->text,
-            ':aid' => $this->authorID,
-            ':jid' => $this->id,
+            ':na' => $email->name,
+            ':em' => $email->email,
+            ':mess' => $email->message 
         ];
 
-        return $stmt->execute($params);
-    }
-
-    public function delete() : bool
-    {
-        $sql = 'DELETE FROM ' . $this->tbName .
-        ' WHERE id = :id';
-
-        $stmt = $this->con->prepare($sql);
-        
-        return ($stmt->execute([':id' => $this->id]));
+        return $sql->execute($params) ? true : false;
     }
 
 }
+
+/**
+ * CREATE TABLE IF NOT EXISTS `emails`
+(
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(120) NOT NULL,
+    `email` VARCHAR(255) NOT NUlL,
+    `message` TEXT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)DEFAULT CHARSET='utf8mb4'
+ */

@@ -78,7 +78,7 @@ let app = new Vue({
                 Axios.post("/api/sendMail", form)
                     .then((res: any) => {
                         this.$refs.mailForm.classList.remove("was-validated");
-                        console.log(res);
+                        // console.log(res);
                         let code = res.data.code
                         if (code) {
                             this.nameErr = code === 601 ? true : false
@@ -95,7 +95,7 @@ let app = new Vue({
                         this.mailErr = true
                     })
                     .catch(err => {
-                        console.log(err);
+                        // console.log(err);
                         this.mailErr = true
                     })
                     .finally(() => {

@@ -14945,7 +14945,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/sendMail", form)
                     .then(function (res) {
                     _this.$refs.mailForm.classList.remove("was-validated");
-                    console.log(res);
+                    // console.log(res);
                     var code = res.data.code;
                     if (code) {
                         _this.nameErr = code === 601 ? true : false;
@@ -14960,7 +14960,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
                     _this.mailErr = true;
                 })
                     .catch(function (err) {
-                    console.log(err);
+                    // console.log(err);
                     _this.mailErr = true;
                 })
                     .finally(function () {

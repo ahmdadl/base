@@ -1,4 +1,6 @@
-<?php declare (strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -6,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
+use App\Models\HomeModel;
 
 class HomeController
 {
@@ -14,21 +17,25 @@ class HomeController
     private $request;
     private $view;
     private $session;
+    private $model;
 
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
+        HomeModel $model,
         AppSession $session
     ) {
         $this->request = $request;
         $this->view = $view;
+        $this->model = $model;
         $this->session = $session;
         $this->session->sessStart();
     }
 
     public function show($params = [])
     {
-        [$pros, $projects, $posts] = $this->getData();        
+        // $this->model->create((object)[]);
+        [$pros, $projects, $posts] = $this->getData();
 
         return $this->view->render('home', [
             'pros' => $pros,
@@ -57,7 +64,18 @@ class HomeController
 
         if ($name && $email && $message && $output->code === 200) {
             // all data is valid
-            $output->code = 200;
+            // save email
+            $data = (object) [
+                'name' => $name,
+                'email' => $email,
+                'message' => $message
+            ];
+
+            if ($this->model->create($data)) {
+                $output->code = 200;
+            } else {
+                $output->code = 400;
+            }
         }
 
         header("Content-Type: application/json");
