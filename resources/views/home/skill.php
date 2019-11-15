@@ -7,7 +7,8 @@
         <div class="col-12 col-md-6">
             <img src="<?= $this->asset('/assets/img/user.png') ?>" class="img w-75 p-1 border border-secondary rounded" />
             <p class="text-secondary mt-2 text-capitalize">
-                I'm a full-stack developer specialised in frontend and backend development for complex scalable web apps. I write about web development on my blog and regularly speak at various web conferences and meetups. Want to know how I may help your project? Check out my project case studies and resume.
+                I'm a full-stack developer specialised in frontend and backend development for complex scalable web apps. I write about web development on my blog.
+                Want to know how I may help your project? Check out <a href='#projects' v-scroll-to="'#projects'" class='btn btn-outline-primary btn-sm'>my projects section</a>.
             </p>
             <a href='#contact' v-scroll-to="{el:'#contact', duration:2500}" class="btn btn-primary">Hire Me</a>
         </div>
