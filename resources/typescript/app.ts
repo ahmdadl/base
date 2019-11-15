@@ -15,7 +15,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueScrollTo, {
     duration: 1000,
-    offset: -60
+    offset: -70
 })
 
 Vue.component("alert", Alert);

@@ -15411,7 +15411,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.productionTip = false;
 // Vue.use(VueScrollTo)
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_scrollto__WEBPACK_IMPORTED_MODULE_1___default.a, {
     duration: 1000,
-    offset: -60
+    offset: -70
 });
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("alert", _components_Alert__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _components_textWriter__WEBPACK_IMPORTED_MODULE_3__["default"]);

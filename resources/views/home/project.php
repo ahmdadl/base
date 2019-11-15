@@ -1,4 +1,4 @@
-<section id='projects' class="skills bg-light text-dark text-center mt-3">
+<section id='projects' class="skills bg-light text-dark text-center mt-4">
     <h2>
         Projects
         <hr class='mx-auto bg-light pt-1 rounded w-25 px-5' />
