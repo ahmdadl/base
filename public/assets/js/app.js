@@ -15651,7 +15651,7 @@ var Progress = /** @class */ (function (_super) {
         var _this = this;
         var s = document.querySelector('#skills');
         var DOC = document.documentElement;
-        if ((s.offsetTop - DOC.scrollTop) < 60) {
+        if ((s.offsetTop - DOC.scrollTop) < 80) {
             setTimeout(function (_) { _this.width = _this.$props.val; }, 150);
         }
     };
@@ -15670,7 +15670,7 @@ var Progress = /** @class */ (function (_super) {
                     required: true
                 }
             },
-            template: "<div class=\"progress mt-3 mx-2 font-weight-bolder\" style=\"height: 25px;\">\n    <span class=\"px-3 pt-1 align-middle text-light bg-dark text-uppercase\" v-text=\"txt\"></span>\n    <div class=\"progress-bar bg-success text-right\" role=\"progressbar\" :style=\"'width: ' + width + '%'\" aria-valuenow=\"80\" aria-valuemin=\"0\" aria-valuemax=\"100\">{{val}}%</div>\n    </div>"
+            template: "<div class=\"progress mb-2 mx-2 font-weight-bolder\" style=\"height: 25px;\">\n    <span class=\"px-3 pt-1 align-middle text-light bg-dark text-uppercase\" v-text=\"txt\"></span>\n    <div class=\"progress-bar bg-success text-right\" role=\"progressbar\" :style=\"'width: ' + width + '%'\" aria-valuenow=\"80\" aria-valuemin=\"0\" aria-valuemax=\"100\">{{val}}%</div>\n    </div>"
         })
     ], Progress);
     return Progress;
