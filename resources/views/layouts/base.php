@@ -21,9 +21,6 @@
         <footer class="bg-dark text-light p-5">
             <div class="container">
                 <div class="row text-center">
-                    <div class="col-12 col-sm-6 pt-3 align-bottom">
-                        Copyright © ninjaCoder 2019
-                    </div>
                     <div class="col-12 col-sm-6 pt-3">
                         <a href='fb.com/a7md200' class="btn btn-outline-primary btn-brand transition mr-2">
 
@@ -42,6 +39,9 @@
                         <a href='fb.com/a7md200' class="btn btn-outline-success btn-brand transition mr-2">
                             <i class='fab fa-whatsapp'></i>
                         </a>
+                    </div>
+                    <div class="col-12 col-sm-6 pt-3">
+                        Copyright © ninjaCoder 2019
                     </div>
                 </div>
             </div>
