@@ -5,6 +5,12 @@
     </h2>
     <h4 class="text-muted">I Will Respond Withen 24 Hours</h4>
     <div class="text-left mt-5">
+        <alert type='danger' v-if='mailErr'>
+            <strong>an error occured</strong>
+        </alert>
+        <alert type='success' v-if='false === mailErr'>
+            <strong>Email Sent Succefully</strong>
+        </alert>
         <form class="form needs-validation" ref='mailForm' method="post" novalidate>
             <div class="form-group row">
                 <label for="userName" class="d-none d-sm-inline col-sm-2 col-form-label">Name</label>
@@ -20,7 +26,7 @@
                 <div class="col-sm-10">
                     <input type="email" v-model='email' class="form-control" :class="{'is-invalid': emailErr, 'is-valid': emailErr === false}" id="userEmail" placeholder="Email" minlength="5" required />
                     <div class="invalid-feedback">
-                        Please enter your email
+                        Please enter a valid email
                     </div>
                 </div>
             </div>
@@ -35,7 +41,10 @@
             </div>
             <div class='form-group row'>
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="submit" class="btn btn-outline-primary btn-block" @click.stop.prevent="sendMail">Send</button>
+                    <button type="submit" class="btn btn-outline-primary btn-block" @click.stop.prevent="sendMail">
+                        <span ref='sendMailLoader' class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Send
+                    </button>
                 </div>
             </div>
         </form>

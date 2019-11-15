@@ -24,13 +24,19 @@
     </div>
 </header>
 <div class="container-fluid">
-    <?php include_once __DIR__ . '/home/about.php'?>
+    <?php 
+        include_once __DIR__ . '/home/about.php';
     
-    <?php include_once __DIR__ . '/home/skill.php'?>
+        include_once __DIR__ . '/home/skill.php';
 
-    <?php include_once __DIR__ . '/home/project.php'?>
+        include_once __DIR__ . '/home/project.php';
 
-    <?php include_once __DIR__ . '/home/blog.php'?>
+        /**
+         * @todo add Experments & open source page
+         */
 
-    <!-- Experments & open source -->
+        include_once __DIR__ . '/home/blog.php';
+
+        include_once __DIR__ . '/home/contact.php';
+    ?>
 </div>
