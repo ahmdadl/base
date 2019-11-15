@@ -18,12 +18,12 @@ $fa-font-path: "/fonts";
     position: relative;
     width: 100%;
     height: auto;
-    .container {
-        padding-top: 15em;
-    }
+    // .container {
+    //     padding-top: 15em;
+    // }
     @media (min-width: 768px) {
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
         }
     }
 }

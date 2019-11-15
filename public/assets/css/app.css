@@ -16524,13 +16524,9 @@ readers do not read off random characters that represent icons */
   height: auto;
 }
 
-.masthead .container {
-  padding-top: 15em;
-}
-
 @media (min-width: 768px) {
   .masthead h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 }
 
