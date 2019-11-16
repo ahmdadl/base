@@ -7,7 +7,7 @@
         <?php foreach ($pros as $p) : ?>
             <div class="pros col-6 col-md-4 shadow mt-4">
                 <div class="content p-1">
-                    <div class="fa-3x d-inline-block bg-primary p-0 p-sm-2 text-light w-25 h-25 mx-auto hexagon hexagon1">
+                    <div class='wyg pointer btn btn-outline-primary btn-lg fa-3x rounded'>
                         <i class="fas fa-<?= $p->icon ?>"></i>
                     </div>
                     <h3 class="d-block mt-3"><?= $p->title ?></h3>

@@ -66,6 +66,11 @@ $fa-font-path: "/fonts";
 .pointer {
     cursor: pointer;
 }
+.pros {
+    .wyg:hover i {
+        animation: fa-spin 2s infinite linear;
+    }
+}
 .project.card {
     .card-img-overlay {
         background-color: rgba(139, 38, 0, 0.38);

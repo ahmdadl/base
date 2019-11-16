@@ -16567,6 +16567,11 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
+.pros .wyg:hover i {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
 .project.card .card-img-overlay {
   background-color: rgba(139, 38, 0, 0.38);
   opacity: 0;
