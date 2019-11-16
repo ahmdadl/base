@@ -12,8 +12,11 @@
 
 <body>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
-    <main class="<?= $mainClass ?? 'container-fluid blog' ?>" id="<?= $id ?? 'body' ?>">
-        <?= $this->section('content') ?>
+    <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
+        <div class="container-fluid">
+            <?= $this->section('content') ?>
+        </div>
+
 
         <input type="hidden" ref='csrf_token' id='csrf_token' class="d-none" name='csrf_token' value="<?= $session->get('X_CSRF_TOKEN') ?>">
 
