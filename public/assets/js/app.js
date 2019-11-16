@@ -15421,8 +15421,15 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _componen
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var currentPage = '', path = location.pathname;
+if (path === '/') {
+    currentPage = '.landing-page';
+}
+else {
+    currentPage = 'main.blog';
+}
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    el: ".landing-page",
+    el: currentPage,
     data: {
         csrfToken: "",
         name: "",
