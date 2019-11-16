@@ -34,8 +34,9 @@ class HomeController
 
     public function show($params = [])
     {
-        // $this->model->create((object)[]);
-        [$pros, $projects, $posts] = $this->getData();
+        [$pros, $projects, ] = $this->getData();
+
+        $posts = $this->model->getPosts();
 
         return $this->view->render('home', [
             'pros' => $pros,

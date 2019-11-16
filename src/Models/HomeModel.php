@@ -41,6 +41,18 @@ class HomeModel
         return $sql->execute($params) ? true : false;
     }
 
+    public function getPosts() : array
+    {
+        $stmt = 'SELECT * FROM blog ORDER BY id DESC LIMIT 7';
+
+        $sql = $this->con->prepare($stmt);
+        $sql->execute();
+        
+        return $sql->fetchAll();
+    }
+
+
+
 }
 
 /**
@@ -52,4 +64,18 @@ class HomeModel
     `message` TEXT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )DEFAULT CHARSET='utf8mb4'
- */
+ 
+CREATE TABLE IF NOT EXISTS `blog`
+(
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `type` BOOLEAN DEFAULT FALSE,
+    `title` VARCHAR(255) NOT NULL,
+    `slug` VARCHAR(255) NOT NULL,
+    `body` TEXT NOT NULL,
+    `img` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX (`slug`)
+)DEFAULT CHARSET='utf8mb4'
+
+*/
