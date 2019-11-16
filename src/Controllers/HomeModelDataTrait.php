@@ -11,33 +11,33 @@ trait HomeModelDataTrait
         $pros = [
             $this->createPros(
                 'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'tablet-alt',
+                'My layouts will work on any device, big or small.'
             ),
             $this->createPros(
-                'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'Dynamic', 
+                'rocket',
+                'I love making pages come to life.'
             ),
             $this->createPros(
-                'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'Tested',
+                'cog',
+                'All website features is well tested before deployment'
             ),
             $this->createPros(
-                'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'Well Organized, Documented', 
+                'code',
+                'To help other`s  to continue after me'
             ),
             $this->createPros(
-                'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'Up to Date', 
+                'laptop-code',
+                'using always the latest versions of my tools'
             ),
             $this->createPros(
-                'Responsive', 
-                'desktop',
-                'some thing to be said about that'
+                'Multi Language', 
+                'language',
+                'as well as RTL or LTR support'
             ),
         ];
 
