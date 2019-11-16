@@ -7,7 +7,7 @@
         <div class="row">
             <?php foreach ($posts as $p) : ?>
                 <card cls='post text-left' title='<?= $p->title ?>'
-                 img="<?='/assets/img/' . $p->img?>">
+                 img="<?=$this->asset('/assets/img/' . $p->img ?? '1.png')?>">
                     <template v-slot:info>
                         <div class='py-2 my-1 text-muted d-block'>
                             <span class="mr-3">
@@ -21,7 +21,7 @@
                         </div>
                         <hr class="w-50 pt-1 rounded bg-primary text-left ml-0 mt-n2 mb-3" />
                         <span class="card-text">
-                            <?= $p->body ?>
+                            <?= substr($p->body, 0, 250) ?>
                         </span>
                     </template>
                     <template v-slot:footer>
