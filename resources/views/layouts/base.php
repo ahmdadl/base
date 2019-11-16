@@ -13,7 +13,7 @@
 <body>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
     <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
-        <div class="container-fluid">
+        <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?>">
             <?= $this->section('content') ?>
         </div>
 
