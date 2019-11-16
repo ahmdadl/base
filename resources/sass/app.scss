@@ -40,28 +40,31 @@ $fa-font-path: "/fonts";
         opacity: 1;
     }
 }
-.hexagon {
-    overflow: hidden;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    cursor: pointer;
-    margin: 0 0 0 -80px;
-    i {
-        -webkit-transform: rotate(-45deg);
-        -moz-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-        -o-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-    }
-    &:hover i {
-        animation: fa-spin 2s infinite linear;
-    }
-}
+// .hexagon {
+//     overflow: hidden;
+//     -webkit-transform: rotate(45deg);
+//     -moz-transform: rotate(45deg);
+//     -ms-transform: rotate(45deg);
+//     -o-transform: rotate(45deg);
+//     transform: rotate(45deg);
+//     cursor: pointer;
+//     margin: 0 0 0 -80px;
+//     i {
+//         -webkit-transform: rotate(-45deg);
+//         -moz-transform: rotate(-45deg);
+//         -ms-transform: rotate(-45deg);
+//         -o-transform: rotate(-45deg);
+//         transform: rotate(-45deg);
+//     }
+//     &:hover i {
+//         animation: fa-spin 2s infinite linear;
+//     }
+// }
 .transition {
     transition: all ease-in 0.5s;
+}
+.pointer {
+    cursor: pointer;
 }
 .project.card {
     .card-img-overlay {

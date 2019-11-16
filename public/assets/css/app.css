@@ -16559,24 +16559,12 @@ readers do not read off random characters that represent icons */
   }
 }
 
-.hexagon {
-  overflow: hidden;
-  transform: rotate(45deg);
-  cursor: pointer;
-  margin: 0 0 0 -80px;
-}
-
-.hexagon i {
-  transform: rotate(-45deg);
-}
-
-.hexagon:hover i {
-  -webkit-animation: fa-spin 2s infinite linear;
-          animation: fa-spin 2s infinite linear;
-}
-
 .transition {
   transition: all ease-in 0.5s;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .project.card .card-img-overlay {
