@@ -56,9 +56,9 @@ $fa-font-path: "/fonts";
         -o-transform: rotate(-45deg);
         transform: rotate(-45deg);
     }
-}
-.hexagon:hover i {
-    animation: fa-spin 2s infinite linear;
+    &:hover i {
+        animation: fa-spin 2s infinite linear;
+    }
 }
 .transition {
     transition: all ease-in 0.5s;
