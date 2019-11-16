@@ -15379,6 +15379,149 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/typescript/Blog.ts":
+/*!**************************************!*\
+  !*** ./resources/typescript/Blog.ts ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Blog; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+
+function Blog() {
+    var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        el: 'main.blog'
+    });
+}
+
+
+/***/ }),
+
+/***/ "./resources/typescript/Landing.ts":
+/*!*****************************************!*\
+  !*** ./resources/typescript/Landing.ts ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LandingPage; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function LandingPage() {
+    var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        el: '.landing-page',
+        data: {
+            csrfToken: "",
+            name: "",
+            email: "",
+            message: "",
+            nameErr: null,
+            emailErr: null,
+            messErr: null,
+            mailErr: null
+        },
+        methods: {
+            validateEmail: function (email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            },
+            resetErr: function () {
+                this.nameErr = this.emailErr = this.messErr = this.mailErr = null;
+            },
+            resetForm: function () {
+                this.name = this.email = this.message = '';
+                this.resetErr();
+            },
+            sendMail: function () {
+                var _this = this;
+                // reset
+                this.resetErr();
+                // show validation result
+                this.$refs.mailForm.classList.add("was-validated");
+                // showloader
+                this.$refs.sendMailLoader.classList.remove("d-none");
+                if (this.name.length < 3 || this.name.length > 120) {
+                    this.nameErr = true;
+                }
+                if (this.email.length < 3 ||
+                    !this.validateEmail(this.email)) {
+                    this.emailErr = true;
+                }
+                if (this.message.length < 5) {
+                    this.messErr = true;
+                }
+                // if all validation was successuffly
+                if (null === this.nameErr &&
+                    null === this.emailErr &&
+                    null === this.messErr) {
+                    var form = new FormData();
+                    form.append("name", this.name);
+                    form.append("email", this.email);
+                    form.append("message", this.message);
+                    form.append("csrfToken", this.csrfToken);
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/sendMail", form)
+                        .then(function (res) {
+                        _this.$refs.mailForm.classList.remove("was-validated");
+                        // console.log(res);
+                        var code = res.data.code;
+                        if (code) {
+                            _this.nameErr = code === 601 ? true : false;
+                            _this.emailErr = code === 602 ? true : false;
+                            _this.messErr = code === 603 ? true : false;
+                            if (code === 200) {
+                                _this.resetForm();
+                                return _this.mailErr = false;
+                            }
+                        }
+                        // an error
+                        _this.mailErr = true;
+                    })
+                        .catch(function (err) {
+                        // console.log(err);
+                        _this.mailErr = true;
+                    })
+                        .finally(function () {
+                        _this.$refs.sendMailLoader.classList.add("d-none");
+                    });
+                }
+                else {
+                    this.$refs.sendMailLoader.classList.add("d-none");
+                }
+            },
+            scrollTo: function (ev) {
+                var target = document.querySelector(ev.target.getAttribute('href')), offset = target.offsetTop;
+            }
+        },
+        mounted: function () {
+            // attach csrf_token to variable
+            this.csrfToken = this.$refs.csrf_token.value + '55';
+            // change navbar background on scroll
+            document.addEventListener("scroll", function (ev) {
+                var doc = document.documentElement, navbar = document.querySelector(".navbar");
+                if (doc.scrollTop > 300) {
+                    navbar.classList.remove("bg-transparent");
+                    navbar.classList.add('position-sticky');
+                }
+                else {
+                    navbar.classList.add("bg-transparent");
+                    navbar.classList.remove('position-sticky');
+                }
+            });
+        }
+    });
+}
+
+
+/***/ }),
+
 /***/ "./resources/typescript/app.ts":
 /*!*************************************!*\
   !*** ./resources/typescript/app.ts ***!
@@ -15391,16 +15534,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_scrollto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-scrollto */ "./node_modules/vue-scrollto/vue-scrollto.js");
 /* harmony import */ var vue_scrollto__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_scrollto__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_textWriter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/textWriter */ "./resources/typescript/components/textWriter.ts");
-/* harmony import */ var _components_animatedDots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/animatedDots */ "./resources/typescript/components/animatedDots.ts");
-/* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Progress */ "./resources/typescript/components/Progress.ts");
-/* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Card */ "./resources/typescript/components/Card.ts");
-/* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Alert */ "./resources/typescript/components/Alert.ts");
-/* harmony import */ var _components_SideNav__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/SideNav */ "./resources/typescript/components/SideNav.ts");
+/* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Landing */ "./resources/typescript/Landing.ts");
+/* harmony import */ var _Blog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Blog */ "./resources/typescript/Blog.ts");
+/* harmony import */ var _components_textWriter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/textWriter */ "./resources/typescript/components/textWriter.ts");
+/* harmony import */ var _components_animatedDots__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/animatedDots */ "./resources/typescript/components/animatedDots.ts");
+/* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Progress */ "./resources/typescript/components/Progress.ts");
+/* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Card */ "./resources/typescript/components/Card.ts");
+/* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Alert */ "./resources/typescript/components/Alert.ts");
+/* harmony import */ var _components_SideNav__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/SideNav */ "./resources/typescript/components/SideNav.ts");
 
-// import Component from "vue-class-component";
+
+// controllers
 
 
 
@@ -15410,125 +15554,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.productionTip = false;
-// Vue.use(VueScrollTo)
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_scrollto__WEBPACK_IMPORTED_MODULE_1___default.a, {
     duration: 1000,
     offset: -70
 });
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("alert", _components_Alert__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _components_textWriter__WEBPACK_IMPORTED_MODULE_3__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _components_animatedDots__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("alert", _components_Alert__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _components_textWriter__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _components_animatedDots__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_9__["default"]);
 var currentPage = '', path = location.pathname;
 if (path === '/') {
-    currentPage = '.landing-page';
+    Object(_Landing__WEBPACK_IMPORTED_MODULE_2__["default"])();
 }
 else {
-    currentPage = 'main.blog';
+    Object(_Blog__WEBPACK_IMPORTED_MODULE_3__["default"])();
 }
-var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    el: currentPage,
-    data: {
-        csrfToken: "",
-        name: "",
-        email: "",
-        message: "",
-        nameErr: null,
-        emailErr: null,
-        messErr: null,
-        mailErr: null
-    },
-    methods: {
-        validateEmail: function (email) {
-            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        },
-        resetErr: function () {
-            this.nameErr = this.emailErr = this.messErr = this.mailErr = null;
-        },
-        resetForm: function () {
-            this.name = this.email = this.message = '';
-            this.resetErr();
-        },
-        sendMail: function () {
-            var _this = this;
-            // reset
-            this.resetErr();
-            // show validation result
-            this.$refs.mailForm.classList.add("was-validated");
-            // showloader
-            this.$refs.sendMailLoader.classList.remove("d-none");
-            if (this.name.length < 3 || this.name.length > 120) {
-                this.nameErr = true;
-            }
-            if (this.email.length < 3 ||
-                !this.validateEmail(this.email)) {
-                this.emailErr = true;
-            }
-            if (this.message.length < 5) {
-                this.messErr = true;
-            }
-            // if all validation was successuffly
-            if (null === this.nameErr &&
-                null === this.emailErr &&
-                null === this.messErr) {
-                var form = new FormData();
-                form.append("name", this.name);
-                form.append("email", this.email);
-                form.append("message", this.message);
-                form.append("csrfToken", this.csrfToken);
-                axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/sendMail", form)
-                    .then(function (res) {
-                    _this.$refs.mailForm.classList.remove("was-validated");
-                    // console.log(res);
-                    var code = res.data.code;
-                    if (code) {
-                        _this.nameErr = code === 601 ? true : false;
-                        _this.emailErr = code === 602 ? true : false;
-                        _this.messErr = code === 603 ? true : false;
-                        if (code === 200) {
-                            _this.resetForm();
-                            return _this.mailErr = false;
-                        }
-                    }
-                    // an error
-                    _this.mailErr = true;
-                })
-                    .catch(function (err) {
-                    // console.log(err);
-                    _this.mailErr = true;
-                })
-                    .finally(function () {
-                    _this.$refs.sendMailLoader.classList.add("d-none");
-                });
-            }
-            else {
-                this.$refs.sendMailLoader.classList.add("d-none");
-            }
-        },
-        scrollTo: function (ev) {
-            var target = document.querySelector(ev.target.getAttribute('href')), offset = target.offsetTop;
-        }
-    },
-    mounted: function () {
-        // attach csrf_token to variable
-        this.csrfToken = this.$refs.csrf_token.value + '55';
-        // change navbar background on scroll
-        document.addEventListener("scroll", function (ev) {
-            var doc = document.documentElement, navbar = document.querySelector(".navbar");
-            if (doc.scrollTop > 300) {
-                navbar.classList.remove("bg-transparent");
-                navbar.classList.add('position-sticky');
-            }
-            else {
-                navbar.classList.add("bg-transparent");
-                navbar.classList.remove('position-sticky');
-            }
-        });
-    }
-});
 
 
 /***/ }),
