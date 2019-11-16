@@ -18,6 +18,7 @@
                                 <?= $p->commentCount ?>
                             </span>
                         </div>
+                        <hr class="w-50 pt-1 rounded bg-primary text-left ml-0 mt-n2 mb-3" />
                         <span class="card-text">
                             <?= $p->info ?>
                         </span>
