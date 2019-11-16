@@ -26,8 +26,18 @@ Vue.component("dync-progress", Progress);
 Vue.component("card", Card);
 Vue.component('side-nav', SideNav)
 
+let currentPage = '',
+    path = location.pathname
+
+if (path === '/') {
+    currentPage = '.landing-page'
+} else {
+    currentPage = 'main.blog'
+}
+
+
 let app = new Vue({
-    el: ".landing-page",
+    el: currentPage,
     data: {
         csrfToken: "",
         name: "",
