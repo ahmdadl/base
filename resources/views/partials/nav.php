@@ -11,7 +11,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#about' : '/' ?>">Protfolio</a>
+                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>">Protfolio</a>
+                </li>
+                <li>
+                    <a class="nav-link <?= $this->uri('/blog') ? 'active' : '' ?>" href="/blog">Blog</a>
                 </li>
             </ul>
 
