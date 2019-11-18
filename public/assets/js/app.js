@@ -15390,10 +15390,15 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Blog; });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _pages_CreatePost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/CreatePost */ "./resources/typescript/pages/CreatePost.ts");
+
 
 function Blog() {
     var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
-        el: 'main.blog'
+        el: 'main.blog',
+        components: {
+            CreatePost: _pages_CreatePost__WEBPACK_IMPORTED_MODULE_1__["default"]
+        }
     });
 }
 
@@ -16083,6 +16088,89 @@ var textWriter = /** @class */ (function (_super) {
     return textWriter;
 }(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (textWriter);
+
+
+/***/ }),
+
+/***/ "./resources/typescript/pages/CreatePost.ts":
+/*!**************************************************!*\
+  !*** ./resources/typescript/pages/CreatePost.ts ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+/* harmony import */ var _partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../partials/setSlotData */ "./resources/typescript/partials/setSlotData.ts");
+
+
+
+
+var CreatePost = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CreatePost, _super);
+    function CreatePost() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.d = _this;
+        _this.title = '';
+        _this.img = '';
+        _this.body = '';
+        return _this;
+    }
+    CreatePost.prototype.mounted = function () {
+        // set all to allow parent to use it
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this);
+    };
+    CreatePost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            template: __webpack_require__(/*! ./template.html */ "./resources/typescript/pages/template.html")
+        })
+    ], CreatePost);
+    return CreatePost;
+}(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (CreatePost);
+
+
+/***/ }),
+
+/***/ "./resources/typescript/pages/template.html":
+/*!**************************************************!*\
+  !*** ./resources/typescript/pages/template.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div><slot :d=\"d\"></slot></div>";
+
+/***/ }),
+
+/***/ "./resources/typescript/partials/setSlotData.ts":
+/*!******************************************************!*\
+  !*** ./resources/typescript/partials/setSlotData.ts ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setSlotData; });
+function setSlotData(cls) {
+    var methods = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        methods[_i - 1] = arguments[_i];
+    }
+    var data = {};
+    for (var x in cls.$data) {
+        data[x] = cls[x];
+    }
+    // set methods
+    methods.forEach(function (x) {
+        data[x] = cls[x];
+    });
+    return data;
+}
 
 
 /***/ }),

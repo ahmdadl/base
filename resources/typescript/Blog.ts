@@ -1,8 +1,11 @@
 import Vue from 'vue'
-
+import CreatePost from './pages/CreatePost'
 
 export default function Blog () {
-    let app = new Vue({
-        el: 'main.blog'
+    const app = new Vue({
+        el: 'main.blog',
+        components: {
+            CreatePost
+        }
     })
 }
