@@ -1,9 +1,14 @@
 <?php $this->layout('layouts/base', [
     'title' => $title ?? '',
     'id' => $id ?? '',
-    'navClass' => 'position-sticky'
+    'navClass' => 'position-sticky',
+    'component' => $component ?? ''
 ]) ?>
 
 <div class="mt-3">
-    <?= $this->section('content') ?>
+    <<?= $component ?>>
+        <template v-slot:default="h">
+            <?= $this->section('content') ?>
+        </template>
+    </<?= $component ?>>
 </div>
