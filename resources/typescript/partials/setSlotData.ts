@@ -2,7 +2,9 @@ export default function setSlotData(cls, ...methods) {
     let data = {};
 
     for (const x in cls.$data) {
-        data[x] = cls[x];
+        if (x !== 'd') {
+            data[x] = cls[x];
+        }
     }
 
     // set methods
