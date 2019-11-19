@@ -16114,14 +16114,46 @@ var CreatePost = /** @class */ (function (_super) {
     function CreatePost() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.d = _this;
-        _this.title = '';
-        _this.img = '';
-        _this.body = '';
+        _this.title = "";
+        _this.imagePrev = '';
+        _this.showPrev = false;
+        _this.body = "";
+        _this.titleErr = null;
+        _this.imgErr = null;
+        _this.bodyErr = null;
         return _this;
     }
+    CreatePost.prototype.beforeSubmit = function () {
+        this.d.titleErr = this.d.imgErr = this.d.bodyErr = null;
+        if (this.d.title.length < 5) {
+            this.d.titleErr = true;
+        }
+        if (this.d.body.length < 25) {
+            this.d.bodyErr = true;
+        }
+        if (null === this.d.titleErr && null === this.d.bodyErr) {
+            var x = this.$refs.createPostForm;
+            x.submit();
+        }
+    };
+    CreatePost.prototype.handleFile = function (ev) {
+        this.d.imagePrev = '';
+        this.d.showPrev = false;
+        var file = ev.target.files[0];
+        var reader = new FileReader();
+        reader.addEventListener("load", function () {
+            this.d.imagePrev = reader.result;
+            this.d.showPrev = true;
+        }.bind(this), false);
+        if (file) {
+            if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                reader.readAsDataURL(file);
+            }
+        }
+    };
     CreatePost.prototype.mounted = function () {
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this);
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "beforeSubmit", 'handleFile');
     };
     CreatePost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
