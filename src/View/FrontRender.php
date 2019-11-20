@@ -96,12 +96,18 @@ class FrontRender implements FrontRenderInterface
 
                 public function has(string $key) : bool
                 {
-                    return true === $this->session->getFlashBag()->peek('danger')[0]->{$key};
+                    $k = $this->session->getFlashBag()->peek('danger')[0]->{$key} ?? false;
+                    return true === $k;
+                }
+
+                public function get(string $key, string $bag = 'danger')
+                {
+                    return $this->session->getFlashBag()->peek($bag)[0]->{$key} ?? '';
                 }
 
                 public function getOld(string $key) : string
                 {
-                    return $this->session->getFlashBag()->peek('old')[0]->{$key} ?? '';
+                    return $this->get($key, 'old') ?? '';
                 }
 
                 public function __destruct()
