@@ -81,6 +81,18 @@ class AppSession
     }
 
     /**
+     * add new flash session in stack
+     *
+     * @param string $bag
+     * @param mixed $value
+     * @return void
+     */
+    public function addFlash(string $bag, $value) : void
+    {
+        $this->se->getFlashBag()->add($bag, $value);
+    }
+
+    /**
      * set the csrf token to random string
      *
      * @return void
