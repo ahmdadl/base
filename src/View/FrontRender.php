@@ -1,4 +1,6 @@
-<?php declare (strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\View;
 
@@ -16,6 +18,7 @@ use League\Plates\Extension\{
     URI
 };
 use App\View\FrontRenderTrait;
+
 class FrontRender implements FrontRenderInterface
 {
     use FrontRenderTrait;
@@ -38,7 +41,7 @@ class FrontRender implements FrontRenderInterface
         $this->configView();
     }
 
-    public function render(string $template, array $params = []) : Response
+    public function render(string $template, array $params = []): Response
     {
         return $this->response->setContent(
             $this->spaceless(
@@ -52,7 +55,7 @@ class FrontRender implements FrontRenderInterface
      *
      * @return void
      */
-    private function configView() : void
+    private function configView(): void
     {
         // load Asset extension
         $this->view->loadExtension(new Asset(dirname(__DIR__) . '/../public/', true));
@@ -74,5 +77,38 @@ class FrontRender implements FrontRenderInterface
 
         // make session available to all views
         $this->view->addData(['session' => $this->session->se]);
+
+        // make errors function
+        $this->view->addData([
+            'errors' => new class ($this->session->se)
+            {
+                private $session;
+
+                public function __construct($session)
+                {
+                    $this->session = $session;
+                }
+
+                public function any() : bool
+                {
+                    return $this->session->getFlashBag()->has('danger');
+                }
+
+                public function has(string $key) : bool
+                {
+                    return true === $this->session->getFlashBag()->peek('danger')[0]->{$key};
+                }
+
+                public function getOld(string $key) : string
+                {
+                    return $this->session->getFlashBag()->peek('old')[0]->{$key} ?? '';
+                }
+
+                public function __destruct()
+                {
+                    $this->session->getFlashBag()->clear();
+                }
+            }
+        ]);
     }
 }
