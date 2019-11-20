@@ -12,7 +12,6 @@ import Progress from "./components/Progress";
 import Card from "./components/Card";
 import Alert from "./components/Alert";
 import SideNav from './components/SideNav'
-import { al } from "./partials/help";
 
 Vue.config.productionTip = false;
 
@@ -27,6 +26,15 @@ Vue.component("animated-dots", animatedDots);
 Vue.component("dync-progress", Progress);
 Vue.component("card", Card);
 Vue.component('side-nav', SideNav)
+
+/**
+ * create directive to init model value
+ */
+Vue.directive('init', {
+    bind: function (el, binding, vnode) {
+        vnode.context[binding.arg] = binding.value
+    }
+})
 
 let currentPage = '',
     path = location.pathname
