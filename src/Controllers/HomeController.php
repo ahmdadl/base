@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
-use App\Models\HomeModel;
+use App\Models\Home;
 
 class HomeController
 {
@@ -22,7 +22,7 @@ class HomeController
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
-        HomeModel $model,
+        Home $model,
         AppSession $session
     ) {
         $this->request = $request;
