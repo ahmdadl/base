@@ -43,7 +43,7 @@ class Home
 
     public function getPosts() : array
     {
-        $stmt = 'SELECT * FROM blog ORDER BY id DESC LIMIT 7';
+        $stmt = 'SELECT * FROM posts ORDER BY id DESC LIMIT 7';
 
         $sql = $this->con->prepare($stmt);
         $sql->execute();
