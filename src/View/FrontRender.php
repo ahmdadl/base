@@ -110,10 +110,10 @@ class FrontRender implements FrontRenderInterface
                     return $this->get($key, 'old') ?? '';
                 }
 
-                public function __destruct()
-                {
-                    $this->session->getFlashBag()->clear();
-                }
+                // public function __destruct()
+                // {
+                //     $this->session->getFlashBag()->clear();
+                // }
             }
         ]);
     }
