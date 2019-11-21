@@ -8,6 +8,7 @@ return function (RouteCollector $r) {
     // home routes
     $r->get('/', ['HomeController@show']);
     $r->get('/fonts/{font}', ['AssetController@fonts']);
+    $r->get('/posts/img/{img}', ['AssetController@postImg']);
 
     // blog routes
     $r->addGroup('/blog', function (RouteCollector $r) {
