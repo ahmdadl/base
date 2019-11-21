@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Hashids\Hashids;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends BaseController
 {
@@ -20,28 +21,25 @@ class PostController extends BaseController
      */
     const UPLOAD_DIR = 'storage/posts/';
 
-    private $request;
-    private $view;
-    private $session;
-    private $model;
-
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
         Post $model,
+        Hashids $hashids,
         AppSession $session
     ) {
-        $this->request = $request;
-        $this->view = $view;
+        parent::__construct($request, $view, $hashids, $session);
         $this->model = $model;
-        $this->session = $session;
-        $this->session->sessStart();
     }
 
-    public function create()
+    public function index()
     {
-        // $this->session->se->set('name', 'ahmed');
-        return $this->view->render('post/create');
+        // return $this->view->ren
+    }
+
+    public function create() : Response
+    {
+        return $this->render('post/create');
     }
 
     public function save()
