@@ -13,6 +13,7 @@ return function (RouteCollector $r) {
     // blog routes
     $r->addGroup('/blog', function (RouteCollector $r) {
         $r->addGroup('/posts', function (RouteCollector $r) {
+            $r->get('', ['PostController@index']);
             $r->post('', ['PostController@save']);
             $r->get('/create', ['PostController@create']);
         });
