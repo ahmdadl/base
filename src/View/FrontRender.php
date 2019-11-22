@@ -103,7 +103,7 @@ class FrontRender implements FrontRenderInterface
                     return true === $k;
                 }
 
-                public function get(string $key) : string
+                public function get(string $key)
                 {
                     return $this->load($key) ?? '';
                 }
