@@ -55,6 +55,9 @@ return [
                 Want to know how I may help your project? Check out",
                 'my' => 'My',
                 'hire' => 'Hire Me'
+            ],
+            'proj' => [
+                'client' => 'Client',
             ]
         ]
     ],

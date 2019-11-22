@@ -1,6 +1,6 @@
 <section id='projects' class="skills bg-light text-dark text-center mt-4">
     <h2>
-        Projects
+        <?=$this->__('home.title.project')?>
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
     <div class="text-center mt-5">
@@ -8,7 +8,7 @@
             <?php foreach ($projects as $p) : ?>
                 <card :has-overlay='true' cls='project' img="<?= $this->asset('assets/img/' . $p->img) ?>" title="<?= $p->title ?>">
                     <template v-slot:overlay>
-                        <h5 class="card-title">Client: <?= $p->client ?></h5>
+                        <h5 class="card-title"><?=$this->__('home.sec.proj.client')?>: <?= $p->client ?></h5>
                         <p class="card-text"><?= $p->info ?></p>
                     </template>
                     <template v-slot:tags>
