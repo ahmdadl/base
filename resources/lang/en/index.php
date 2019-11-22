@@ -1,16 +1,13 @@
 <?php
 
 return [
-    'symfony' => [
-        'is' => [
-            'great'   => 'Symfony is great',
-            'amazing' => 'Symfony is amazing',
-        ],
-        'has' => [
-            'bundles' => 'Symfony has bundles',
-        ],
+    'nav' => [
+        'portfolio' => 'Portfolio',
+        'blog' => 'Blog',
     ],
     'user' => [
         'login' => 'Login',
+        'register' => 'Register',
+        'logout' => 'LogOut'
     ],
 ];

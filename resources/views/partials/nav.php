@@ -11,10 +11,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>">Protfolio</a>
+                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>"><?=$this->__('nav.portfolio')?></a>
                 </li>
                 <li>
-                    <a class="nav-link <?= $this->uri('/blog') ? 'active' : '' ?>" href="/blog">Blog</a>
+                    <a class="nav-link <?= $this->uri('/blog') ? 'active' : '' ?>" href="/blog"><?=$this->__('nav.blog')?></a>
                 </li>
             </ul>
 
@@ -23,11 +23,11 @@
                 <!-- Authentication Links -->
                 <?php if ($session->has('userName')) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/login"><?=$this->__('user.login')?></a>
                     </li>
                     <?php if (true) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
+                            <a class="nav-link" href="/register"><?=$this->__('user.register')?></a>
                         </li>
                     <?php endif ?>
                 <?php else : ?>
@@ -42,7 +42,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/logout" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                Logout
+                                <?=$this->__('user.logout')?>
                             </a>
 
                             <form id="logout-form" action="/logout" method="POST" style="display: none;">
