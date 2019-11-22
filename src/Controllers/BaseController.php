@@ -7,7 +7,6 @@ use App\View\FrontRenderInterface;
 use Hashids\Hashids;
 use App\Util\AppSession;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseController
 {

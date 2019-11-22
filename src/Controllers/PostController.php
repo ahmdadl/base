@@ -10,7 +10,6 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use Hashids\Hashids;
-use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends BaseController
 {

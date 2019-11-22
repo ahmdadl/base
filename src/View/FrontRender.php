@@ -86,15 +86,10 @@ class FrontRender implements FrontRenderInterface
             'errors' => new class ($this->session->se)
             {
                 private $session;
-                public $danger;
-                private $old;
 
                 public function __construct($session)
                 {
                     $this->session = $session;
-
-                    // load all danger sessions in one variable
-                    $this->danger = $this->load('danger');
                 }
 
                 private function load(string $bag) 
@@ -118,9 +113,9 @@ class FrontRender implements FrontRenderInterface
                     return $this->session->getFlashBag()->peek($bag)[0]->{$key} ?? '';
                 }
 
-                public function getOld(string $key) : string
+                public function getOld(string $key, string $default = '') : string
                 {
-                    return $this->get($key, 'old') ?? '';
+                    return $this->get($key, 'old') ?? $default;
                 }
             }
         ]);
