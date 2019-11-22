@@ -63,7 +63,7 @@ class PostController extends BaseController
         $body = Filter::filterStr($this->request->get('body'));
 
         // validate title
-        if (!$title || !Filter::len($title, 50)) {
+        if (!$title || !Filter::len($title, 15)) {
             $error->title = true;
         } else {
             $old->title = $title;
@@ -82,7 +82,7 @@ class PostController extends BaseController
         }
 
         // if all data was entered corectly
-        if (!$error->title && !$error->body && !$error->file) {
+        if (!$error->title || !$error->body || !$error->file) {
             $this->setUploader($_FILES['img']);
 
             // validate files
@@ -114,13 +114,13 @@ class PostController extends BaseController
                     }
                 }
             }
-        } else {
-            // add old variables
-            $this->session->addFlash(
-                'old',
-                $old
-            );
         }
+
+        // add old variables
+        $this->session->addFlash(
+            'old',
+            $old
+        );
 
         $this->session->addFlash(
             'danger',

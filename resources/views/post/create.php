@@ -10,6 +10,7 @@
 </header>
 
 <div class='createPost mt-5'>
+    <?=json_encode($session->getFlashBag()->peekAll())?>
     <form ref='createPostForm' class="form needs-validation <?= $errors->any() ? 'was-validated' : '' ?>" :class="{'was-validated': h.d.titleErr || h.d.bodyErr}" action='/blog/posts' method="post" @submit.stop.prevent="h.d.beforeSubmit" enctype="multipart/form-data" novalidate>
         <?= $this->csrf() ?>
         <div class="form-group row">
@@ -29,9 +30,10 @@
                     <label class="custom-file-label" for="customFile">Choose file</label>
                     <div class="invalid-feedback">
                         <?php
-                        if ($errors->has('files')) {
-                            foreach ($errors->get('files') as $m) {
-                                echo $m->files->type ? 'The Image must be a file of type: png, jpg, jpeg.' : 'The Image must be less than 750 kilobytes.';
+                        if ($errors->get('files')) {
+                            foreach ($errors->get('files') as $m => $v) {
+                                echo $m === 'size' ? 'The Image must be a file of type: png, jpg, jpeg.' : 'The Image must be less than 750 kilobytes.';
+                                break;
                             }
                         } else {
                             echo "The Image field is required.";
