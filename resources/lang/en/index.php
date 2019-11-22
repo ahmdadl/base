@@ -64,6 +64,22 @@ return [
             'blog' => [
                 'date' => 'Updated At',
                 'c_count' => 'Comments Count'
+            ],
+            'con' => [
+                'res' => 'I Will Respond Withen 24 Hours',
+                'err' => 'an Error occured, Please try again later',
+                'success' => 'Email Sent Succefully',
+                'btn' => 'Send',
+                'inp' => [
+                    'name' => 'Name',
+                    'email' => 'Email',
+                    'mess' => 'Message'
+                ],
+                'vaild' => [
+                    'name' => 'The Name must be less than 120 characters.',
+                    'email' => 'Please enter a valid email address.',
+                    'mess' => 'Please enter your message.'
+                ]
             ]
         ]
     ],
@@ -76,7 +92,7 @@ return [
             'btn' => 'Save Post'
         ],
         'ph' => [
-            'enter' => 'Enter ',
+            'enter' => 'Enter Your ',
             'file' => 'Choose File'
         ],
         'vaild' => [
