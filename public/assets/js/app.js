@@ -15752,7 +15752,7 @@ var Progress = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded d-none d-sm-block\">\r\n    <ul class=\"list-unstyled\">\r\n        <li v-for=\"link in data\" v-scroll-to=\"{el: '#' + link, onDone: setActive}\" class=\"transition\" :class=\"{'text-primary': active === link}\">\r\n            <i v-if='active === link' class=\"fas fa-at\"></i>\r\n            <i v-else class=\"fas fa-chevron-right\"></i>\r\n            <span class=\"d-none\">{{link}}</span>\r\n        </li>\r\n    </ul>\r\n</div>";
+module.exports = "<div class=\"sidenav position-fixed py-2 px-3 bg-dark text-left text-white-50 font-weight-bold text-capitalize rounded d-none d-sm-block\">\r\n    <ul class=\"list-unstyled\">\r\n        <li v-for=\"(link, inx) in data\" v-scroll-to=\"{el: '#' + link, onDone: setActive}\" class=\"transition\" :class=\"{'text-primary': active === link}\">\r\n            <i v-if='active === link' class=\"fas fa-at\"></i>\r\n            <i v-else class=\"fas fa-chevron-right\"></i>\r\n            <span class=\"d-none\">{{dataTxt[inx]}}</span>\r\n        </li>\r\n    </ul>\r\n</div>";
 
 /***/ }),
 
@@ -15776,6 +15776,7 @@ var SideNav = /** @class */ (function (_super) {
     function SideNav() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.data = [];
+        _this.dataTxt = [];
         _this.active = '';
         return _this;
     }
@@ -15785,6 +15786,7 @@ var SideNav = /** @class */ (function (_super) {
     SideNav.prototype.mounted = function () {
         var _this = this;
         this.data = this.$props.links.split(' ');
+        this.dataTxt = this.$props.txt.split(',');
         var sections = document.querySelectorAll('#top, section'), doc = document.documentElement;
         // initalize of first load
         sections.forEach(function (sec) {
@@ -15804,6 +15806,10 @@ var SideNav = /** @class */ (function (_super) {
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
             props: {
                 links: {
+                    type: String,
+                    required: true
+                },
+                txt: {
                     type: String,
                     required: true
                 }

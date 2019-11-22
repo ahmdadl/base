@@ -6,6 +6,10 @@ import Component from 'vue-class-component'
         links: {
             type: String,
             required: true
+        },
+        txt: {
+            type: String,
+            required: true
         }
     },
     template: require('./SideNav.html')
@@ -13,6 +17,7 @@ import Component from 'vue-class-component'
 export default class SideNav extends Vue
 {
     public data = []
+    public dataTxt = []
     public active = ''
 
     public setActive (el: HTMLElement) {
@@ -21,6 +26,8 @@ export default class SideNav extends Vue
 
     mounted () {
         this.data = this.$props.links.split(' ')
+        this.dataTxt = this.$props.txt.split(',')
+
         let sections = document.querySelectorAll('#top, section') as NodeListOf<HTMLElement>,
             doc = document.documentElement as HTMLElement
 

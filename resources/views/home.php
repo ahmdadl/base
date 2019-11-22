@@ -36,5 +36,5 @@
          * @todo add Experments & open source page
          */
     ?>
-    <side-nav links="top about skills projects blog contact"></side-nav>
+    <side-nav links="top about skills projects blog contact" txt="<?="{$this->__('home.title.top')},{$this->__('home.title.about')},{$this->__('home.title.skill')},{$this->__('home.title.project')},{$this->__('home.title.blog')},{$this->__('home.title.contact')}"?>"></side-nav>
 </div>

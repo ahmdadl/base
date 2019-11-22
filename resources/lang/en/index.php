@@ -16,6 +16,7 @@ return [
         'and' => 'and I`m',
         'start' => 'Get Started',
         'title' => [
+            'top' => 'Top',
             'about' => 'About',
             'skill' => 'Skills',
             'project' => 'Project',
