@@ -16134,10 +16134,10 @@ var CreatePost = /** @class */ (function (_super) {
     }
     CreatePost.prototype.beforeSubmit = function (ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = null;
-        if (this.d.title.length < 5) {
+        if (this.d.title.length < 15) {
             this.d.titleErr = true;
         }
-        if (this.d.body.length < 25) {
+        if (this.d.body.length < 150) {
             this.d.bodyErr = true;
         }
         if (null === this.d.titleErr && null === this.d.bodyErr) {

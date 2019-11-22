@@ -15,22 +15,25 @@ export default class CreatePost extends Vue {
     public titleErr: null | boolean = null;
     public imgErr: null | boolean = null;
     public bodyErr: null | boolean = null;
+    public loader = false
 
-    public beforeSubmit() {
+    public beforeSubmit(ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = null;
 
-        if (this.d.title.length < 5) {
+        if (this.d.title.length < 15) {
             this.d.titleErr = true;
         }
 
-        if (this.d.body.length < 25) {
+        if (this.d.body.length < 150) {
             this.d.bodyErr = true;
         }
 
         if (null === this.d.titleErr && null === this.d.bodyErr) {
-            let x = this.$refs.createPostForm as HTMLFormElement;
-            x.submit();
+            this.d.loader = true
+            ev.target.submit()
         }
+
+        ev.target.submit()
     }
 
     public handleFile (ev) {

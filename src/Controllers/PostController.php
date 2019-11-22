@@ -45,7 +45,6 @@ class PostController extends BaseController
 
     public function save()
     {
-        // print_r($_POST);
         $error = (object) [
             'title' => false,
             'body' => false,
@@ -64,14 +63,14 @@ class PostController extends BaseController
         $body = Filter::filterStr($this->request->get('body'));
 
         // validate title
-        if (!$title || !Filter::len($title, 10)) {
+        if (!$title || !Filter::len($title, 50)) {
             $error->title = true;
         } else {
             $old->title = $title;
         }
 
         // validate body
-        if (!$body || !Filter::len($body, 50)) {
+        if (!$body || !Filter::len($body, 150)) {
             $error->body = true;
         } else {
             $old->body = $body;
@@ -87,18 +86,10 @@ class PostController extends BaseController
             $this->setUploader($_FILES['img']);
 
             // validate files
-            $error->files = $this->validate(2000, ['png', 'jpeg', 'jpg']);
+            $error->files = $this->validate(750, ['png', 'jpeg', 'jpg']);
 
             // file has error
-            if ($error->files->size || $error->files->type) {
-                // add flash session to show errors in next page
-                // $this->session->addFlash(
-                //     'danger',
-                //     $error
-                // );
-
-                // return $this->create();
-            } else {
+            if (!$error->files->size && !$error->files->type) {
                 // all data was validated
 
                 // first upload image
@@ -107,13 +98,6 @@ class PostController extends BaseController
                 // check if file was not saved
                 if (!$img) {
                     $error->uplading = false;
-
-                    // $this->session->addFlash(
-                    //     'danger',
-                    //     $error
-                    // );
-
-                    // return $this->create();
                 } else {
                     // image uploaded succeffully
 
@@ -131,28 +115,18 @@ class PostController extends BaseController
                 }
             }
         } else {
-            // add error variable is flash session
-
-
             // add old variables
             $this->session->addFlash(
                 'old',
                 $old
             );
-
-            // return to last page
-            // return (new RedirectResponse('/blog/posts/create'))->send();
-
         }
 
         $this->session->addFlash(
             'danger',
             $error
         );
-        // return $this->create();
+        
         return $this->redirect('/blog/posts/create');
-        $this->session->se->set('name', 'ahmedAdel');
-
-        echo $this->session->se->get('name');
     }
 }
