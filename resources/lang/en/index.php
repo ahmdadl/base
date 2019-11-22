@@ -10,6 +10,12 @@ return [
         'register' => 'Register',
         'logout' => 'LogOut'
     ],
+    'home' => [
+        'hello' => 'Hello, I`m ',
+        'myName' => 'Ahmed Adel',
+        'and' => 'and I`m',
+        'start' => 'Get Started'
+    ],
     'cpost' => [
         'title' => 'Create Post',
         'inp' => [
