@@ -92,11 +92,6 @@ class FrontRender implements FrontRenderInterface
                     $this->session = $session;
                 }
 
-                private function load(string $bag) 
-                {
-                    return $this->session->getFlashBag()->get($bag);
-                }
-
                 public function any() : bool
                 {
                     return $this->session->getFlashBag()->has('danger');
@@ -104,18 +99,23 @@ class FrontRender implements FrontRenderInterface
 
                 public function has(string $key) : bool
                 {
-                    $k = $this->session->getFlashBag()->peek('danger')[0]->{$key} ?? false;
+                    $k = $this->load($key, 'danger');
                     return true === $k;
                 }
 
-                public function get(string $key, string $bag = 'danger')
+                public function get(string $key) : string
                 {
-                    return $this->session->getFlashBag()->peek($bag)[0]->{$key} ?? '';
+                    return $this->load($key) ?? '';
                 }
 
-                public function getOld(string $key, string $default = '') : string
+                public function getOld(string $key, string $default = '') : ?string
                 {
-                    return $this->get($key, 'old') ?? $default;
+                    return $this->load($key, 'old') ?? $default;
+                }
+
+                private function load(string $key, string $bag = 'danger') 
+                {
+                    return $this->session->getFlashBag()->peek($bag)[0]->{$key} ?? null;
                 }
             }
         ]);
