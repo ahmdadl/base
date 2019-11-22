@@ -1,4 +1,4 @@
-<section id='skills' class="skills bg-light text-dark text-center mt-3">
+<section id='skills' class="skills bg-light text-dark text-center mt-5 pt-3">
     <h2>
         <?= $this->__('home.title.skill') ?>
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
