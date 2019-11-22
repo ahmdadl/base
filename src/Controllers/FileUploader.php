@@ -61,24 +61,26 @@ trait FileUploader
      */
     private function validate(int $sizeKB, array $types) : object
     {
-        if ($this->file->isvalid()) {
-            $error = (object) [
-                'size' => true,
-                'type' => true
-            ];
+        $error = (object) [
+            'size' => true,
+            'type' => true
+        ];
 
+        if ($this->file->isvalid()) {
+            $error->size = $error->type = false;
+            
             foreach ($types as $type) {
                 if ('image/' . $type === $this->file->getClientMimeType()) {
-                    $error->type = false;
+                    $error->type = true;
                     break;
                 }
             }
 
             if (($this->file->getSize()/1024) <= $sizeKB) {
-                $error->size = false;
+                $error->size = true;
             }
-
-            return $error;
         }
+
+        return $error;
     }
 }
