@@ -15569,6 +15569,14 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _componen
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_9__["default"]);
+/**
+ * create directive to init model value
+ */
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].directive('init', {
+    bind: function (el, binding, vnode) {
+        vnode.context.$children[0][binding.arg] = binding.value;
+    }
+});
 var currentPage = '', path = location.pathname;
 if (path === '/') {
     Object(_Landing__WEBPACK_IMPORTED_MODULE_2__["default"])();
@@ -16121,9 +16129,10 @@ var CreatePost = /** @class */ (function (_super) {
         _this.titleErr = null;
         _this.imgErr = null;
         _this.bodyErr = null;
+        _this.loader = false;
         return _this;
     }
-    CreatePost.prototype.beforeSubmit = function () {
+    CreatePost.prototype.beforeSubmit = function (ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = null;
         if (this.d.title.length < 5) {
             this.d.titleErr = true;
@@ -16132,9 +16141,10 @@ var CreatePost = /** @class */ (function (_super) {
             this.d.bodyErr = true;
         }
         if (null === this.d.titleErr && null === this.d.bodyErr) {
-            var x = this.$refs.createPostForm;
-            x.submit();
+            this.d.loader = true;
+            ev.target.submit();
         }
+        ev.target.submit();
     };
     CreatePost.prototype.handleFile = function (ev) {
         this.d.imagePrev = '';
@@ -16195,7 +16205,9 @@ function setSlotData(cls) {
     }
     var data = {};
     for (var x in cls.$data) {
-        data[x] = cls[x];
+        if (x !== 'd') {
+            data[x] = cls[x];
+        }
     }
     // set methods
     methods.forEach(function (x) {

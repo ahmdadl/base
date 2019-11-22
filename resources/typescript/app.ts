@@ -32,7 +32,7 @@ Vue.component('side-nav', SideNav)
  */
 Vue.directive('init', {
     bind: function (el, binding, vnode) {
-        vnode.context[binding.arg] = binding.value
+        vnode.context.$children[0][binding.arg] = binding.value
     }
 })
 
