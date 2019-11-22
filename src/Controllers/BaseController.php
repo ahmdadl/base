@@ -34,7 +34,7 @@ abstract class BaseController
         return (new RedirectResponse($target))->send();
     }
 
-    public function render(string $temp, array $param = []) : Response
+    public function render(string $temp, array $param = [])
     {
         return $this->view->render($temp, $param);
     }

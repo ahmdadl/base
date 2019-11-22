@@ -6,5 +6,5 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface FrontRenderInterface
 {
-    public function render(string $template, array $params = []) : Response;
+    public function render(string $template, array $params = []);
 }

@@ -41,13 +41,16 @@ class FrontRender implements FrontRenderInterface
         $this->configView();
     }
 
-    public function render(string $template, array $params = []): Response
+    public function render(string $template, array $params = [])
     {
-        return $this->response->setContent(
+        
+        $this->response->setContent(
             $this->spaceless(
                 $this->view->render($template, $params)
             )
         );
+
+        $this->session->se->getFlashBag()->clear();
     }
 
     /**
@@ -83,10 +86,20 @@ class FrontRender implements FrontRenderInterface
             'errors' => new class ($this->session->se)
             {
                 private $session;
+                public $danger;
+                private $old;
 
                 public function __construct($session)
                 {
                     $this->session = $session;
+
+                    // load all danger sessions in one variable
+                    $this->danger = $this->load('danger');
+                }
+
+                private function load(string $bag) 
+                {
+                    return $this->session->getFlashBag()->get($bag);
                 }
 
                 public function any() : bool
@@ -109,11 +122,6 @@ class FrontRender implements FrontRenderInterface
                 {
                     return $this->get($key, 'old') ?? '';
                 }
-
-                // public function __destruct()
-                // {
-                //     $this->session->getFlashBag()->clear();
-                // }
             }
         ]);
     }

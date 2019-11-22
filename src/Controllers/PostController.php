@@ -39,7 +39,7 @@ class PostController extends BaseController
         ]);
     }
 
-    public function create() : Response
+    public function create()
     {
         return $this->render('post/create');
     }
@@ -150,7 +150,8 @@ class PostController extends BaseController
             'danger',
             $error
         );
-        return $this->create();
+        // return $this->create();
+        return $this->redirect('/blog/posts/create');
         $this->session->se->set('name', 'ahmedAdel');
 
         echo $this->session->se->get('name');
