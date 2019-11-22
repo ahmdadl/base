@@ -14,7 +14,7 @@
                     <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>"><?=$this->__('nav.portfolio')?></a>
                 </li>
                 <li>
-                    <a class="nav-link <?= $this->uri('/blog') ? 'active' : '' ?>" href="/blog"><?=$this->__('nav.blog')?></a>
+                    <a class="nav-link <?= $this->uri('/blog/posts') ? 'active' : '' ?>" href="/blog/posts"><?=$this->__('nav.blog')?></a>
                 </li>
             </ul>
 
