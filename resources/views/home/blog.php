@@ -1,6 +1,6 @@
 <section id='blog' class="skills bg-light text-dark text-center mt-3">
     <h2>
-        Latest Blog Posts
+        <?=$this->__('home.title.blog')?>
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
     <div class="text-center mt-5">
@@ -10,11 +10,11 @@
                  img="/posts/img/<?=$p->img ?? '1.png'?>">
                     <template v-slot:info>
                         <div class='py-2 my-1 text-muted d-block'>
-                            <span class="mr-3">
+                            <span class="mr-3" title='<?=$this->__('home.sec.blog.date')?>'>
                                 <i class="fas fa-clock"></i>
                                 <?= $p->created_at ?>
                             </span>
-                            <span class=''>
+                            <span class='' title='<?=$this->__('home.sec.blog.c_count')?>'>
                                 <i class="fas fa-comment-alt"></i>
                                 <?= rand(0, 40) ?>
                             </span>

@@ -19,6 +19,8 @@ return [
             'about' => 'About',
             'skill' => 'Skills',
             'project' => 'Project',
+            'blog' => 'Latest Blog Posts',
+            'contact' => 'Contact Me'
         ],
         'sec' => [
             'feat' => [
@@ -57,7 +59,11 @@ return [
                 'hire' => 'Hire Me'
             ],
             'proj' => [
-                'client' => 'Client',
+                'client' => 'Client'
+            ],
+            'blog' => [
+                'date' => 'Updated At',
+                'c_count' => 'Comments Count'
             ]
         ]
     ],
