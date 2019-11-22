@@ -5,7 +5,7 @@ return [
      * appplicate name 
      * i do not know why its important but use it any way
      */
-    'name' => 'APP_NAME',
+    'name' => 'ninjaCoder',
 
     // default directories
     'dir' => [
