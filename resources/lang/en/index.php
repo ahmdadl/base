@@ -16,7 +16,9 @@ return [
         'and' => 'and I`m',
         'start' => 'Get Started',
         'title' => [
-            'about' => 'About'
+            'about' => 'About',
+            'skill' => 'Skills',
+            'project' => 'Project',
         ],
         'sec' => [
             'feat' => [
@@ -47,6 +49,12 @@ return [
                     'icon' => 'language',
                     'txt' => 'TestIt in this website itself.'
                 ],
+            ],
+            'skill' => [
+                'info' => "I'm a full-stack developer specialised in frontend and backend development for complex scalable web apps. I write about web development on my blog.
+                Want to know how I may help your project? Check out",
+                'my' => 'My',
+                'hire' => 'Hire Me'
             ]
         ]
     ],

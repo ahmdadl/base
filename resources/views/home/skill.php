@@ -1,16 +1,16 @@
 <section id='skills' class="skills bg-light text-dark text-center mt-3">
     <h2>
-        Skills
+        <?= $this->__('home.title.skill') ?>
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
     </h2>
     <div class="row text-center">
         <div class="col-12 col-md-6 mt-3 mb-5">
             <img src="<?= $this->asset('/assets/img/user.png') ?>" class="img w-75 p-1 border border-secondary rounded" />
             <p class="text-secondary mt-2 text-capitalize">
-                I'm a full-stack developer specialised in frontend and backend development for complex scalable web apps. I write about web development on my blog.
-                Want to know how I may help your project? Check out <a href='#projects' v-scroll-to="'#projects'" class='btn btn-outline-primary btn-sm'>my projects section</a>.
+                <?= $this->__('home.sec.skill.info') ?>
+                <a href='#projects' v-scroll-to="'#projects'" class='btn btn-outline-primary btn-sm'><?= $this->__('home.sec.skill.my') ?> <?= $this->__('home.title.project') ?></a>.
             </p>
-            <a href='#contact' v-scroll-to="{el:'#contact', duration:2500}" class="btn btn-primary">Hire Me</a>
+            <a href='#contact' v-scroll-to="{el:'#contact', duration:2500}" class="btn btn-primary"><?=$this->__('home.sec.skill.hire')?></a>
         </div>
         <div class="col-12 col-md-6 mt-3">
             <div class=>
