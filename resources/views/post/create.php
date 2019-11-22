@@ -10,7 +10,6 @@
 </header>
 
 <div class='createPost mt-5'>
-    <?=json_encode($session->getFlashBag()->peekAll())?>
     <form ref='createPostForm' class="form needs-validation <?= $errors->any() ? 'was-validated' : '' ?>" :class="{'was-validated': h.d.titleErr || h.d.bodyErr}" action='/blog/posts' method="post" @submit.stop.prevent="h.d.beforeSubmit" enctype="multipart/form-data" novalidate>
         <?= $this->csrf() ?>
         <div class="form-group row">
@@ -26,7 +25,7 @@
             <label for="img" class="col-sm-2 col-form-label">Image</label>
             <div class="col-sm-10">
                 <div class="custom-file">
-                    <input type="file" name='img' @change="h.d.handleFile" class="custom-file-input <?= ($errors->has('file') or $errors->has('files')) ? 'is-invalid' : '' ?>" id="customFile" accept="image/*" required />
+                    <input type="file" name='img' @change="h.d.handleFile" class="custom-file-input <?= ($errors->has('file') or $errors->has('files')) ? 'is-invalid' : '' ?>" :class="{'is-invalid': h.d.imgErr}" id="customFile" accept="image/*" required />
                     <label class="custom-file-label" for="customFile">Choose file</label>
                     <div class="invalid-feedback">
                         <?php
@@ -36,7 +35,7 @@
                                 break;
                             }
                         } else {
-                            echo "The Image field is required.";
+                            echo "The Image must be less than 750 kilobytes.";
                         }
                         ?>
                     </div>
