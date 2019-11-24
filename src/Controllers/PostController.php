@@ -34,7 +34,8 @@ class PostController extends BaseController
     public function index()
     {
         return $this->view->render('post/index', [
-            // 'posts' => $this->model->readAll()
+            'posts' => $this->model->readAll(),
+            'model' => $this->model
         ]);
     }
 

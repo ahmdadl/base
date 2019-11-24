@@ -25,6 +25,16 @@ class Post
         $this->con = $db->getConnection();
     }
 
+    public function __set($name, $value)
+    {
+        $this->{$name} = Filter::filterStr($value);
+    }
+
+    /**
+     * create new post
+     *
+     * @return boolean
+     */
     public function create () : bool
     {
         $stmt = 'INSERT INTO '. $this->tbName . ' (type, title, slug, body, img) VALUES (:t, :title, :s, :body, :i)';
@@ -42,8 +52,25 @@ class Post
         return $sql->execute($params);
     }
 
-    public function __set($name, $value)
+    public function readAll() : array
     {
-        $this->{$name} = Filter::filterStr($value);
+        $stmt = 'SELECT id, type, title, slug, body, img, created_at, updated_at FROM ' . $this->tbName .' ORDER BY id DESC';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute();
+
+        return $sql->fetchAll();
+    }
+
+    public function categories(int $postId) : array
+    {
+        $stmt = 'SELECT id, title FROM categories WHERE id IN (SELECT catId FROM post_categoires WHERE postId = :pid)';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':pid' => $postId]);
+
+        return $sql->fetchAll();
     }
 }
