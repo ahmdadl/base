@@ -19,6 +19,10 @@ import Component from "vue-class-component";
         title: {
             type: String,
             required: true
+        },
+        href: {
+            type: String,
+            required: false
         }
     },
     template: require("./card.html")

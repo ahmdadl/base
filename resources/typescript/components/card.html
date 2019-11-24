@@ -11,7 +11,9 @@
                 </div>
             </div>
             <div class="card-footer text-dark">
-                <h5 class="card-title" v-text="title"></h5>
+                <h5 class="card-title">
+                    <a :href='href' v-text="title"></a>
+                </h5>
                 <div class="tags d-block text-capitalize">
                     <slot name="tags"></slot>
                 </div>
@@ -22,7 +24,9 @@
                 <img :src="img" class="card-img-top transition" :alt="title" />
             </div>
             <div class="card-body text-dark">
-                <h5 class="card-title" v-text="title"></h5>
+                <h5 class="card-title">
+                    <a :href="'/blog/posts/' + href" v-text="title"></a>
+                </h5>
                 <slot name="info"></slot>
             </div>
             <slot name="footer"></slot>
