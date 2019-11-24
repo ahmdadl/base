@@ -1,6 +1,7 @@
 import Vue, { VNode } from "vue";
 import VueScrollTo from 'vue-scrollto'
 import Axios from "axios";
+import * as BTN from './bootstrap-native-v4.min.js'
 
 // controllers
 import LandingPage from './Landing'
@@ -44,3 +45,8 @@ if (path === '/') {
 } else {
     Blog()
 }
+
+const dataToggleSelector = document.querySelectorAll('[data-toggle="tooltip"]')
+dataToggleSelector.forEach(el => {
+    BTN.Tooltip(el)
+})
