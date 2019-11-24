@@ -6,7 +6,7 @@
     <div class="text-center mt-5">
         <div class="row">
             <?php foreach ($posts as $p) : ?>
-                <card cls='post text-left' title='<?= $p->title ?>'
+                <card cls='post text-left col-lg-4' title='<?= $p->title ?>'
                  img="/posts/img/<?=$p->img ?? '1.png'?>">
                     <template v-slot:info>
                         <div class='py-2 my-1 text-muted d-block'>
