@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\{
 };
 use App\Util\{
     AppSession,
-    Password
+    Password,
+    Trans
 };
 use League\Plates\Engine;
 use League\Plates\Extension\{
@@ -18,6 +19,8 @@ use League\Plates\Extension\{
     URI
 };
 use App\View\FrontRenderTrait;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
 class FrontRender implements FrontRenderInterface
 {
@@ -27,17 +30,24 @@ class FrontRender implements FrontRenderInterface
     private $response;
     private $view;
     private $session;
+    private $trans;
 
     public function __construct(
         Request $request,
         Response $response,
         Engine $view,
-        AppSession $session
+        AppSession $session,
+        Trans $trans
     ) {
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;
         $this->session = $session;
+        $this->trans = $trans;
+
+        // set translation locale
+        $this->trans->setLocal($this->request->getLocale());
+
         $this->configView();
     }
 
@@ -119,5 +129,12 @@ class FrontRender implements FrontRenderInterface
                 }
             }
         ]);
+
+        /**
+         * retrun translation
+         */
+        $this->view->registerFunction('__', function ($str) {
+            return $this->trans->trans->trans($str);
+        });
     }
 }

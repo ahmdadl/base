@@ -16572,19 +16572,19 @@ readers do not read off random characters that represent icons */
           animation: fa-spin 2s infinite linear;
 }
 
-.project.card .card-img-overlay {
+.project .card .card-img-overlay {
   background-color: rgba(139, 38, 0, 0.38);
   opacity: 0;
   height: 0;
   transition: all ease-in 0.5s;
 }
 
-.project.card:hover .card-img-overlay {
+.project .card:hover .card-img-overlay {
   opacity: 1;
   height: 100%;
 }
 
-.post.card .card-img-container:hover .card-img-top {
+.post .card .card-img-container:hover .card-img-top {
   transform: scale(1.3);
 }
 

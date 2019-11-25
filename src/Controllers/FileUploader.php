@@ -39,7 +39,7 @@ trait FileUploader
     private function upload(string $targetDir = '')
     {
         $originalFilename = pathinfo($this->file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = Password::randStr(strlen($originalFilename));
+        $safeFilename = Password::randStr(7);
         $fileName = $safeFilename . uniqid() . '.' . $this->file->guessExtension();
 
         // target file will be relative to root folder
@@ -70,6 +70,7 @@ trait FileUploader
             $error->size = $error->type = false;
             
             foreach ($types as $type) {
+               
                 if ('image/' . $type === $this->file->getClientMimeType()) {
                     $error->type = true;
                     break;

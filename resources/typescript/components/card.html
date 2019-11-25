@@ -1,8 +1,5 @@
-<div class="col-12 col-md-6 col-lg-4 mb-3 px-sm-5 px-md-2">
-    <div
-        class="card bg-light text-white shadow border border-dark"
-        :class="cls"
-    >
+<div class="col-12 mb-3 px-sm-5 px-md-2" :class="cls">
+    <div class="card bg-light text-white shadow border border-dark">
         <slot name="header"></slot>
         <div v-if="hasOverlay">
             <div class="card-body position-relative p-0">
@@ -12,21 +9,35 @@
                 </div>
             </div>
             <div class="card-footer text-dark">
-                <h5 class="card-title" v-text="title"></h5>
+                <h5 class="card-title">
+                    <a :href="href" v-text="title"></a>
+                </h5>
                 <div class="tags d-block text-capitalize">
                     <slot name="tags"></slot>
                 </div>
             </div>
         </div>
-        <div v-else>
-            <div class="postion-relative overflow-hidden card-img-container transition">
-                <img :src="img" class="card-img-top transition" :alt="title" />
+        <div v-else :class="rowClass !== 'col-12' ? 'overflow-hidden' : ''">
+            <div :class="rowClass !== 'col-12' ? 'row' : ''">
+                <div :class="rowClass" class="p-0">
+                    <div
+                    class="overflow-hidden card-img-container transition"
+                >
+                    <img
+                        :src="img"
+                        class="card-img-top transition"
+                        :alt="title"
+                    />
+                </div>
+                </div>
+                <div class="card-body text-dark p-3" :class="rowClass">
+                    <h5 class="card-title">
+                        <a :href="'/blog/posts/' + href" v-text="title"></a>
+                    </h5>
+                    <slot name="info"></slot>
+                </div>
+                <slot name="footer"></slot>
             </div>
-            <div class="card-body text-dark">
-                <h5 class="card-title" v-text="title"></h5>
-                <slot name="info"></slot>
-            </div>
-            <slot name="footer"></slot>
         </div>
     </div>
 </div>

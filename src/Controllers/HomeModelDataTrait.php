@@ -11,33 +11,27 @@ trait HomeModelDataTrait
         $pros = [
             $this->createPros(
                 'Responsive', 
-                'tablet-alt',
-                'My layouts will work on any device, big or small.'
+                'tablet-alt'
             ),
             $this->createPros(
                 'Dynamic', 
-                'rocket',
-                'I love making pages come to life.'
+                'rocket'
             ),
             $this->createPros(
                 'Tested',
-                'cog',
-                'All website features is well tested before deployment'
+                'cog'
             ),
             $this->createPros(
-                'Well Organized, Documented', 
-                'code',
-                'To help other`s  to continue after me'
+                'Organized', 
+                'code'
             ),
             $this->createPros(
-                'Up to Date', 
-                'laptop-code',
-                'using always the latest versions of my tools'
+                'Up_To_Date', 
+                'laptop-code'
             ),
             $this->createPros(
-                'Multi Language', 
-                'language',
-                'as well as RTL or LTR support'
+                'Multi_Language', 
+                'language'
             ),
         ];
 
@@ -112,13 +106,11 @@ trait HomeModelDataTrait
 
     private function createPros(
         string $title,
-        string $icon,
-        string $txt
+        string $icon
     ): object {
         return (object) [
             'title' => $title,
-            'icon' => $icon,
-            'txt' => $txt
+            'icon' => $icon
         ];
     }
 

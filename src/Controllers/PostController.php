@@ -34,7 +34,9 @@ class PostController extends BaseController
     public function index()
     {
         return $this->view->render('post/index', [
-            // 'posts' => $this->model->readAll()
+            'posts' => $this->model->readAll(),
+            'model' => $this->model,
+            'pinned' => $this->model->pinnedPosts()
         ]);
     }
 
@@ -89,7 +91,7 @@ class PostController extends BaseController
             $error->files = $this->validate(750, ['png', 'jpeg', 'jpg']);
 
             // file has error
-            if (!$error->files->size && !$error->files->type) {
+            if ($error->files->size && $error->files->type) {
                 // all data was validated
 
                 // first upload image
@@ -128,5 +130,19 @@ class PostController extends BaseController
         );
         
         return $this->redirect('/blog/posts/create');
+    }
+
+    public function find()
+    {
+        $q = Filter::filterStr($this->request->get('q'));
+
+        if (!$q) {
+            return $this->redirect('/blog/posts/');
+        }
+
+        return $this->render('post/index', [
+            'posts' => $this->model->findPosts($q),
+            'model' => $this->model
+        ]);
     }
 }
