@@ -90,7 +90,7 @@ class PostController extends BaseController
             $error->files = $this->validate(750, ['png', 'jpeg', 'jpg']);
 
             // file has error
-            if (!$error->files->size && !$error->files->type) {
+            if ($error->files->size && $error->files->type) {
                 // all data was validated
 
                 // first upload image
