@@ -16622,3 +16622,7 @@ readers do not read off random characters that represent icons */
   opacity: 0;
 }
 
+.breadcrump-head .breadcrumb {
+  background-color: rgba(0, 0, 0, 0.68) !important;
+}
+

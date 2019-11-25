@@ -106,4 +106,15 @@ class Post
 
         return ($sql->fetch())->c;
     }
+
+    public function readOne(string $slug) : object
+    {
+        $stmt = 'SELECT * FROM ' . $this->tbName. ' WHERE slug = :sp';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':sp' => $slug]);
+
+        return $sql->fetch();
+    }
 }

@@ -152,4 +152,19 @@ class PostController extends BaseController
             'model' => $this->model
         ]);
     }
+
+    public function show(array $param)
+    {
+        if (!isset($param['slug']) || !Filter::filterStr($param['slug'])) {
+            return $this->redirect('/404');
+        }
+
+        $slug = Filter::filterStr($param['slug']);
+
+        $post = $this->model->readOne($slug);
+
+        return $this->render('post/show', [
+            'post' => $post
+        ]);
+    }
 }
