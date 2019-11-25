@@ -9,27 +9,24 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use App\Models\Home;
+use Hashids\Hashids;
 
-class HomeController
+class HomeController extends BaseController
 {
     use HomeModelDataTrait;
 
-    private $request;
-    private $view;
-    private $session;
-    private $model;
+    protected $model;
 
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
+        Hashids $hashids,
         Home $model,
         AppSession $session
     ) {
-        $this->request = $request;
-        $this->view = $view;
+        parent::__construct($request, $view, $hashids, $session);
         $this->model = $model;
-        $this->session = $session;
-        $this->session->sessStart();
+        
     }
 
     public function show($params = [])
@@ -81,5 +78,10 @@ class HomeController
 
         header("Content-Type: application/json");
         echo json_encode($output);
+    }
+
+    public function toPosts()
+    {
+        return $this->redirect('/blog/posts');
     }
 }
