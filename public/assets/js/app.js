@@ -16497,6 +16497,11 @@ var Card = /** @class */ (function (_super) {
                 href: {
                     type: String,
                     required: false
+                },
+                rowClass: {
+                    type: String,
+                    required: false,
+                    default: 'col-12'
                 }
             },
             template: __webpack_require__(/*! ./card.html */ "./resources/typescript/components/card.html")
@@ -16858,7 +16863,7 @@ var animatedDots = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12 col-md-6 mb-3 px-sm-5 px-md-2\" :class=\"cls\">\r\n    <div\r\n        class=\"card bg-light text-white shadow border border-dark\"\r\n    >\r\n        <slot name=\"header\"></slot>\r\n        <div v-if=\"hasOverlay\">\r\n            <div class=\"card-body position-relative p-0\">\r\n                <img :src=\"img\" class=\"card-img\" :alt=\"title\" />\r\n                <div class=\"card-img-overlay\">\r\n                    <slot name=\"overlay\"></slot>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-footer text-dark\">\r\n                <h5 class=\"card-title\">\r\n                    <a :href='href' v-text=\"title\"></a>\r\n                </h5>\r\n                <div class=\"tags d-block text-capitalize\">\r\n                    <slot name=\"tags\"></slot>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div v-else>\r\n            <div class=\"postion-relative overflow-hidden card-img-container transition\">\r\n                <img :src=\"img\" class=\"card-img-top transition\" :alt=\"title\" />\r\n            </div>\r\n            <div class=\"card-body text-dark\">\r\n                <h5 class=\"card-title\">\r\n                    <a :href=\"'/blog/posts/' + href\" v-text=\"title\"></a>\r\n                </h5>\r\n                <slot name=\"info\"></slot>\r\n            </div>\r\n            <slot name=\"footer\"></slot>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class=\"col-12 mb-3 px-sm-5 px-md-2\" :class=\"cls\">\r\n    <div class=\"card bg-light text-white shadow border border-dark\">\r\n        <slot name=\"header\"></slot>\r\n        <div v-if=\"hasOverlay\">\r\n            <div class=\"card-body position-relative p-0\">\r\n                <img :src=\"img\" class=\"card-img\" :alt=\"title\" />\r\n                <div class=\"card-img-overlay\">\r\n                    <slot name=\"overlay\"></slot>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-footer text-dark\">\r\n                <h5 class=\"card-title\">\r\n                    <a :href=\"href\" v-text=\"title\"></a>\r\n                </h5>\r\n                <div class=\"tags d-block text-capitalize\">\r\n                    <slot name=\"tags\"></slot>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div v-else :class=\"rowClass !== 'col-12' ? 'overflow-hidden' : ''\">\r\n            <div :class=\"rowClass !== 'col-12' ? 'row' : ''\">\r\n                <div :class=\"rowClass\" class=\"p-0\">\r\n                    <div\r\n                    class=\"overflow-hidden card-img-container transition\"\r\n                >\r\n                    <img\r\n                        :src=\"img\"\r\n                        class=\"card-img-top transition\"\r\n                        :alt=\"title\"\r\n                    />\r\n                </div>\r\n                </div>\r\n                <div class=\"card-body text-dark p-3\" :class=\"rowClass\">\r\n                    <h5 class=\"card-title\">\r\n                        <a :href=\"'/blog/posts/' + href\" v-text=\"title\"></a>\r\n                    </h5>\r\n                    <slot name=\"info\"></slot>\r\n                </div>\r\n                <slot name=\"footer\"></slot>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 
@@ -16947,11 +16952,31 @@ var AllPosts = /** @class */ (function (_super) {
     function AllPosts() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.d = _this;
+        _this.cardClass = 'col-md-6';
+        _this.rowClass = 'col-12';
+        _this.cardLayout = 'grid';
         return _this;
     }
+    AllPosts.prototype.layoutChanger = function (type) {
+        if (type === 'classic') {
+            this.d.cardClass = 'col-md-12';
+            this.d.rowClass = 'col-12';
+            this.d.cardLayout = type;
+        }
+        else if (type === 'list') {
+            this.d.cardClass = 'col-md-12';
+            this.d.rowClass = 'col-lg-6';
+            this.d.cardLayout = type;
+        }
+        else {
+            this.d.cardClass = 'col-md-6';
+            this.d.rowClass = 'col-12';
+            this.d.cardLayout = type;
+        }
+    };
     AllPosts.prototype.mounted = function () {
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this);
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, 'layoutChanger');
     };
     AllPosts = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({

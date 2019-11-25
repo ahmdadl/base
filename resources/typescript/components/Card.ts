@@ -23,6 +23,11 @@ import Component from "vue-class-component";
         href: {
             type: String,
             required: false
+        },
+        rowClass: {
+            type: String,
+            required: false,
+            default: 'col-12'
         }
     },
     template: require("./card.html")

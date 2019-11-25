@@ -7,7 +7,7 @@
     <div class='col-12 col-sm-8'>
         <div class="row">
             <?php foreach ($posts as $p) : ?>
-                <card cls='post text-left' title='<?= $p->title ?>' img="/posts/img/<?= $p->img ?? '1.png' ?>" href="<?= $p->slug ?>">
+                <card title='<?= $p->title ?>' img="/posts/img/<?= $p->img ?? '1.png' ?>" href="<?= $p->slug ?>" :cls='"post text-left transition " + h.d.cardClass' :row-class="h.d.rowClass">
                     <template v-slot:info>
                         <div class='py-2 my-1 text-muted d-block'>
                             <span class="mr-3" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
@@ -27,7 +27,7 @@
                         </span>
                     </template>
                     <template v-slot:footer>
-                        <div class='card-footer text-center'>
+                        <div class='card-footer text-center mx-auto'>
                             <?php foreach ($model->categories($p->id) as $cat) : ?>
                                 <span class='badge badge-primary p-1 mx-1'>
                                     <?= $cat->title ?>
@@ -52,17 +52,17 @@
             </div>
         </div>
 
-        <div class="card mb-4">
+        <div class="card mb-4 d-none d-sm-block">
             <h5 class="card-header bg-primary text-light">change layout</h5>
             <div class="card-body">
                 <div class="d-inline">
-                    <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="Grid View">
+                    <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'grid'}" data-toggle="tooltip" data-placement="top" title="Grid View" @click="h.d.layoutChanger('grid')">
                         <i class='fas fa-grip-vertical'></i>
                     </button>
-                    <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="List View">
+                    <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'list'}" data-toggle="tooltip" data-placement="top" title="List View" @click="h.d.layoutChanger('list')">
                         <i class='fas fa-bars'></i>
                     </button>
-                    <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="Classical View">
+                    <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'classic'}" data-toggle="tooltip" data-placement="top" title="Classical View" @click="h.d.layoutChanger('classic')">
                         <i class='fas fa-square'></i>
                     </button>
                 </div>
