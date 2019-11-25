@@ -133,6 +133,15 @@ class PostController extends BaseController
 
     public function find()
     {
-        echo $this->request->getQueryString();
+        $q = Filter::filterStr($this->request->get('q'));
+
+        if (!$q) {
+            return $this->redirect('/blog/posts/');
+        }
+
+        return $this->render('post/index', [
+            'posts' => $this->model->findPosts($q),
+            'model' => $this->model
+        ]);
     }
 }

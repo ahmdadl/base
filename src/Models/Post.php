@@ -73,4 +73,15 @@ class Post
 
         return $sql->fetchAll();
     }
+
+    public function findPosts(string $slug) : array
+    {
+        $stmt = 'SELECT * FROM '.$this->tbName.' WHERE slug LIKE :slug ORDER BY id DESC LIMIT 7';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':slug' => '%'.$slug.'%']);
+
+        return $sql->fetchAll();
+    }
 }
