@@ -130,4 +130,9 @@ class PostController extends BaseController
         
         return $this->redirect('/blog/posts/create');
     }
+
+    public function find()
+    {
+        echo $this->request->getQueryString();
+    }
 }

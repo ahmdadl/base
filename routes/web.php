@@ -16,6 +16,7 @@ return function (RouteCollector $r) {
             $r->get('', ['PostController@index']);
             $r->post('', ['PostController@save']);
             $r->get('/create', ['PostController@create']);
+            $r->get('/s', ['PostController@find']);
         });
     });
 
