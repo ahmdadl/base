@@ -17,7 +17,7 @@
                         <div class='py-2 my-1 text-muted d-block'>
                             <span class="mr-3" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
                                 <i class="fas fa-clock"></i>
-                                <?= $p->created_at ?>
+                                <?= date_format(date_create($p->updated_at), 'd M Y') ?>
                             </span>
                             <a href='/blog/posts/<?= $p->slug ?>/#comments' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
                                 <span class=''>
@@ -88,7 +88,7 @@
                             <div class="media-body">
                                 <span class="mt-0">
                                     <span class="">
-                                        12-oct-2019
+                                        <?= date_format(date_create($p->updated_at), 'd M Y') ?>
                                     </span>
                                     |<a href='/blog/posts/<?= $p->slug ?>/#comments' class='ml-2' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
                                         <span class=''>
