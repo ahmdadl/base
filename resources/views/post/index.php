@@ -6,6 +6,11 @@
 <div class='mt-3 row'>
     <div class='col-12 col-sm-8'>
         <div class="row">
+            <?php if (sizeof($posts) < 1) : ?>
+                <div class='alert alert-danger mt-5 mx-auto text-capitalize'>
+                    <strong>Sorry, </strong> We Can not find what you are seraching for
+                </div>
+            <?php endif ?>
             <?php foreach ($posts as $p) : ?>
                 <card title='<?= $p->title ?>' img="/posts/img/<?= $p->img ?? '1.png' ?>" href="<?= $p->slug ?>" :cls='"post text-left transition " + h.d.cardClass' :row-class="h.d.rowClass">
                     <template v-slot:info>
