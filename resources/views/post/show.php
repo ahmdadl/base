@@ -14,16 +14,16 @@
                     <li class="breadcrumb-item">
                         <a href="/blog">Home</a>
                     </li>
-                    <li class="breadcrumb-item active text-light text-break"><?= $post->title ?></li>
+                    <li class="breadcrumb-item active text-light text-break"><?= $posts->title ?></li>
                 </ol>
             </div>
-            <img src='/posts/img/<?= $post->img ?>' class='img img-responsive w-100'>
+            <img src='/posts/img/<?= $posts->img ?>' class='img img-responsive w-100'>
         </div>
 
-        <h2 class='mt-3'><?= $post->title ?></h2>
+        <h2 class='mt-3'><?= $posts->title ?></h2>
 
         <p class='lead'>
-            <?= $post->body ?>
+            <?= $posts->body ?>
         </p>
     </div>
     <div class="col-12 col-sm-4">

@@ -41,4 +41,16 @@ class Category
 
         return ($sql->fetch())->c;
     }
+
+    public function loadPosts(int $id) : array
+    {
+        $stmt = 'SELECT * FROM posts AS p 
+        JOIN post_categoires AS pc ON pc.catId = 2 AND pc.postId = p.id';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute();
+
+        return $sql->fetchAll();
+    }
 }

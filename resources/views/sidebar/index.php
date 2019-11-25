@@ -89,7 +89,7 @@
             <ul class="list-unstyled mb-0">
                 <li>
                     <?php foreach ($cats as $c) : ?>
-                        <a href="#" class='btn btn-primary m-2'>
+                        <a href="/blog/cat/<?=$c->id*256?>/<?=$c->title?>" class='btn btn-primary m-2'>
                             <?=$c->title?>
                             <span class='badge badge-light'>
                                 <?=$catModel->countPosts($c->id)?>

@@ -15,6 +15,7 @@ use Hashids\Hashids;
 class PostController extends BaseController
 {
     use FileUploader;
+    use ViewData;
 
     private $categoryModel;
 
@@ -38,13 +39,11 @@ class PostController extends BaseController
 
     public function index()
     {
-        return $this->view->render('post/index', [
-            'posts' => $this->model->readAll(),
-            'model' => $this->model,
-            'pinned' => $this->model->pinnedPosts(),
-            'cats' => $this->categoryModel->readAll(),
-            'catModel' => $this->categoryModel
-        ]);
+        return $this->view->render('post/index', $this->vd(
+            $this->model->readAll(),
+            $this->model,
+            $this->categoryModel
+        ));
     }
 
     public function create()
@@ -147,13 +146,14 @@ class PostController extends BaseController
             return $this->redirect('/blog/posts/');
         }
 
-        return $this->render('post/index', [
-            'posts' => $this->model->findPosts($q),
-            'model' => $this->model,
-            'pinned' => $this->model->pinnedPosts(),
-            'cats' => $this->categoryModel->readAll(),
-            'catModel' => $this->categoryModel
-        ]);
+        return $this->render(
+            'post/index',
+            $this->vd(
+                $this->model->findPosts($q),
+                $this->model,
+                $this->categoryModel
+            )
+        );
     }
 
     public function show(array $param)
@@ -166,12 +166,10 @@ class PostController extends BaseController
 
         $post = $this->model->readOne($slug);
 
-        return $this->render('post/show', [
-            'post' => $post,
-            'model' => $this->model,
-            'pinned' => $this->model->pinnedPosts(),
-            'cats' => $this->categoryModel->readAll(),
-            'catModel' => $this->categoryModel
-        ]);
+        return $this->render('post/show', $this->vd(
+            $post,
+            $this->model,
+            $this->categoryModel
+        ));
     }
 }

@@ -21,6 +21,10 @@ return function (RouteCollector $r) {
             $r->get('/s', ['PostController@find']);
             $r->get('/{slug}', ['PostController@show']);
         });
+
+        $r->addGroup('/cat', function (RouteCollector $r) {
+            $r->get('/{id}/{title}', ['CategoryController@index']);
+        });
     });
 
     // api routes
