@@ -70,14 +70,21 @@
         </div>
 
         <div class="card my-4">
-            <h5 class="card-header">Popular Posts</h5>
+            <h5 class="card-header bg-primary text-light">Popular Posts</h5>
             <div class="card-body">
 
             </div>
         </div>
 
         <div class="card my-4">
-            <h5 class="card-header">Categories</h5>
+            <h5 class="card-header bg-primary text-light">Share this Post</h5>
+            <div class="card-body">
+
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <h5 class="card-header bg-primary text-light">Categories</h5>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6">
