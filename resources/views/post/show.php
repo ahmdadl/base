@@ -14,16 +14,25 @@
                     <li class="breadcrumb-item">
                         <a href="/blog">Home</a>
                     </li>
-                    <li class="breadcrumb-item active text-light text-break"><?=$post->slug?></li>
+                    <li class="breadcrumb-item active text-light text-break"><?= $post->title ?></li>
                 </ol>
             </div>
             <img src='/posts/img/<?= $post->img ?>' class='img img-responsive w-100'>
         </div>
 
-        <h4><?= $post->title ?></h4>
+        <h2 class='mt-3'><?= $post->title ?></h2>
 
-        <p>
+        <p class='lead'>
             <?= $post->body ?>
         </p>
+    </div>
+    <div class="col-12 col-sm-4">
+        <?php $this->insert('sidebar/index', [
+            'layoutClass' => true,
+            'model' => $model,
+            'pinned' => $pinned,
+            'cats' => $cats,
+            'catModel' => $catModel
+        ]) ?>
     </div>
 </div>

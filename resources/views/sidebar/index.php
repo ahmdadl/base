@@ -14,6 +14,7 @@
     </div>
 </div>
 
+<?php if (!isset($layoutClass)) : ?>
 <div class="card mb-4 d-none d-sm-block">
     <h5 class="card-header bg-primary text-light">change layout</h5>
     <div class="card-body">
@@ -30,6 +31,7 @@
         </div>
     </div>
 </div>
+<?php endif?>
 
 <div class="card my-4">
     <h5 class="card-header bg-primary text-light">Popular Posts</h5>

@@ -135,7 +135,7 @@ class PostController extends BaseController
             'danger',
             $error
         );
-        
+
         return $this->redirect('/blog/posts/create');
     }
 
@@ -164,7 +164,11 @@ class PostController extends BaseController
         $post = $this->model->readOne($slug);
 
         return $this->render('post/show', [
-            'post' => $post
+            'post' => $post,
+            'model' => $this->model,
+            'pinned' => $this->model->pinnedPosts(),
+            'cats' => $this->categoryModel->readAll(),
+            'catModel' => $this->categoryModel
         ]);
     }
 }
