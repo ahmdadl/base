@@ -95,4 +95,15 @@ class Post
 
         return $sql->fetchAll();
     }
+
+    public function getCommentCount(int $pid)
+    {
+        $stmt = 'SELECT COUNT(*) as c FROM comments WHERE postId = :pid';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':pid' => $pid]);
+
+        return ($sql->fetch())->c;
+    }
 }
