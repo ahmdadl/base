@@ -56,14 +56,14 @@
             <h5 class="card-header bg-primary text-light">change layout</h5>
             <div class="card-body">
                 <div class="d-inline">
-                    <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="List View">
-                        <i class='fas fa-bars'></i>
-                    </button>
                     <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="Grid View">
                         <i class='fas fa-grip-vertical'></i>
                     </button>
+                    <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="List View">
+                        <i class='fas fa-bars'></i>
+                    </button>
                     <button type='button' class='btn btn-outline-primary mx-1' data-toggle="tooltip" data-placement="top" title="Classical View">
-                        <i class='fas fa-grip-horizontal'></i>
+                        <i class='fas fa-square'></i>
                     </button>
                 </div>
             </div>
