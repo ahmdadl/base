@@ -149,7 +149,10 @@ class PostController extends BaseController
 
         return $this->render('post/index', [
             'posts' => $this->model->findPosts($q),
-            'model' => $this->model
+            'model' => $this->model,
+            'pinned' => $this->model->pinnedPosts(),
+            'cats' => $this->categoryModel->readAll(),
+            'catModel' => $this->categoryModel
         ]);
     }
 
