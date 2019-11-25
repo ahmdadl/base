@@ -47,7 +47,9 @@
     <div class="col-12 col-sm-4">
         <?php $this->insert('sidebar/index', [
             'model' => $model,
-            'pinned' => $pinned
+            'pinned' => $pinned,
+            'cats' => $cats,
+            'catModel' => $catModel
         ])?>
     </div>
 </div>

@@ -73,16 +73,18 @@
     <h5 class="card-header bg-primary text-light">Categories</h5>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#">Web Design</a>
-                    </li>
-                    <li>
-                        <a href="#">HTML</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <?php foreach ($cats as $c) : ?>
+                        <a href="#" class='btn btn-primary m-2'>
+                            <?=$c->title?>
+                            <span class='badge badge-light'>
+                                <?=$catModel->countPosts($c->id)?>
+                            </span>
+                        </a>
+                    <?php endforeach ?>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

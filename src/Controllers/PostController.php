@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
@@ -15,6 +16,8 @@ class PostController extends BaseController
 {
     use FileUploader;
 
+    private $categoryModel;
+
     /**
      * upload dir based on root directory
      */
@@ -25,10 +28,12 @@ class PostController extends BaseController
         FrontRenderInterface $view,
         Post $model,
         Hashids $hashids,
-        AppSession $session
+        AppSession $session,
+        Category $categoryModel
     ) {
         parent::__construct($request, $view, $hashids, $session);
         $this->model = $model;
+        $this->categoryModel = $categoryModel;
     }
 
     public function index()
@@ -36,7 +41,9 @@ class PostController extends BaseController
         return $this->view->render('post/index', [
             'posts' => $this->model->readAll(),
             'model' => $this->model,
-            'pinned' => $this->model->pinnedPosts()
+            'pinned' => $this->model->pinnedPosts(),
+            'cats' => $this->categoryModel->readAll(),
+            'catModel' => $this->categoryModel
         ]);
     }
 

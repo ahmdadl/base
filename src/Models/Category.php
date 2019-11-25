@@ -19,4 +19,26 @@ class Category
     {
         $this->con = $db->getConnection();
     }
+
+    public function readAll() : array
+    {
+        $stmt = 'SELECT id, title FROM '. $this->tbName;
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute();
+
+        return $sql->fetchAll();
+    }
+
+    public function countPosts(int $cid) : int
+    {
+        $stmt = 'SELECT COUNT(*) AS c FROM post_categoires WHERE catId = :cid';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute(['cid' => $cid]);
+
+        return ($sql->fetch())->c;
+    }
 }
