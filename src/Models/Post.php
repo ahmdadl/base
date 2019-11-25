@@ -84,4 +84,15 @@ class Post
 
         return $sql->fetchAll();
     }
+
+    public function pinnedPosts () : array
+    {
+        $stmt = 'SELECT * FROM ' . $this->tbName . ' WHERE pin = 0 ORDER BY id DESC LIMIT 4';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute();
+
+        return $sql->fetchAll();
+    }
 }

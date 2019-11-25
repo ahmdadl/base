@@ -81,7 +81,31 @@
         <div class="card my-4">
             <h5 class="card-header bg-primary text-light">Popular Posts</h5>
             <div class="card-body">
-
+                <ul class='list-unstyled'>
+                    <?php foreach ($pinned as $p) : ?>
+                        <li class="media mt-3 text-break">
+                            <img src="/posts/img/<?= $p->img ?>" width="90" height='80' class="mr-3 rounded" alt="<?= $p->title ?>">
+                            <div class="media-body">
+                                <span class="mt-0">
+                                    <span class="">
+                                        12-oct-2019
+                                    </span>
+                                    |<a href='/blog/posts/<?= $p->slug ?>/#comments' class='ml-2' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
+                                        <span class=''>
+                                            <i class="fas fa-comment-alt"></i>
+                                            <?= rand(0, 40) ?>
+                                        </span>
+                                    </a>
+                                </span>
+                                <h5 class="mt-1 mb-1">
+                                    <a href="/blog/posts/<?= $p->slug ?>">
+                                        <?= $p->title ?>
+                                    </a>
+                                </h5>
+                            </div>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
             </div>
         </div>
 

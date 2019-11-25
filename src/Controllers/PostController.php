@@ -35,7 +35,8 @@ class PostController extends BaseController
     {
         return $this->view->render('post/index', [
             'posts' => $this->model->readAll(),
-            'model' => $this->model
+            'model' => $this->model,
+            'pinned' => $this->model->pinnedPosts()
         ]);
     }
 
