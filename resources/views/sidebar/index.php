@@ -67,7 +67,18 @@
 <div class="card my-4">
     <h5 class="card-header bg-primary text-light">Share this Post</h5>
     <div class="card-body">
-
+        <button class="btn btn-outline-primary m-2">
+            <i class="fab fa-facebook-f"></i>
+            FaceBook
+        </button>
+        <button class="btn btn-outline-info m-2">
+            <i class="fab fa-twitter"></i>
+            Twitter
+        </button>
+        <button class="btn btn-outline-danger m-2">
+            <i class="fab fa-github"></i>
+            Github
+        </button>
     </div>
 </div>
 
