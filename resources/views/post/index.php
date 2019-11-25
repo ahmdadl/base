@@ -43,12 +43,16 @@
         <div class="card mb-4">
             <h5 class="card-header bg-primary text-light">Search</h5>
             <div class="card-body">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">Go!</button>
-                    </span>
-                </div>
+                <form action="/blog/posts/s" method="get" class="form">
+                    <div class="input-group">
+                        <input type="text" name='q' class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" type="submit">
+                                <i class='fas fa-search'></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
 
