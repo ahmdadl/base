@@ -37,7 +37,7 @@ return function (RouteCollector $r) {
         'CommentController@store',
         'middlewares' => ['CsrfVerify']
     ]);
-    $r->post('/api/comments', [
+    $r->post('/api/allComments', [
         'CommentController@index',
         'middlewares' => ['CsrfVerify']
     ]);

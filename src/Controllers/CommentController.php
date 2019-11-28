@@ -28,6 +28,16 @@ class CommentController extends BaseController
         $this->model = $model;
     }
 
+    public function index ()
+    {
+        $postId = Filter::filterStr($this->post('postId'));
+        if (null !== $postId) {
+            $this->model->postId = (int) $postId;
+            header('Content-Type: application/json');
+            echo json_encode($this->model->readAll());
+        }
+    }
+
     public function store()
     {
         $postId = $this->post('postId');
