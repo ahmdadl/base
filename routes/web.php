@@ -32,4 +32,8 @@ return function (RouteCollector $r) {
         'HomeController@saveMail',
         'middlewares' => ['CsrfVerify']
     ]);
+    $r->post('/api/sendComment', [
+        'CommentController@store',
+        'middlewares' => ['CsrfVerify']
+    ]);
 };
