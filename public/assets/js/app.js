@@ -17104,6 +17104,7 @@ var ShowPost = /** @class */ (function (_super) {
         _this.messErr = null;
         _this.commErr = null;
         _this.commenting = null;
+        _this.csrfToken = '';
         return _this;
     }
     ShowPost.prototype.validateEmail = function (email) {
@@ -17139,17 +17140,28 @@ var ShowPost = /** @class */ (function (_super) {
     };
     ShowPost.prototype.commentSend = function () {
         // first rest all errors
-        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = null;
+        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
         this.validateName();
         this.validateEmailInput();
         this.validateMessage();
-        if (false === this.nameErr &&
-            false === this.emailErr &&
-            false === this.messErr) {
+        console.log(this.csrfToken, this.d.nameErr, this.d.emailErr, this.d.messErr);
+        if (false === this.d.nameErr &&
+            false === this.d.emailErr &&
+            false === this.d.messErr) {
             // send comment
+            this.d.commenting = true;
+            var form = new FormData();
+            form.append("name", this.name);
+            form.append("email", this.email);
+            form.append("message", this.message);
+            form.append("csrfToken", this.csrfToken);
+            console.log(form);
         }
     };
     ShowPost.prototype.mounted = function () {
+        // @ts-ignore
+        // attach csrf_token to variable
+        this.csrfToken = this.$root.$refs.csrf_token.value;
         // set all to allow parent to use it
         this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput");
     };

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import setSlotData from "../partials/setSlotData";
+import Axios from "axios";
 
 @Component({
     template: require("./template.html")
@@ -14,7 +15,8 @@ export default class ShowPost extends Vue {
     public emailErr: null | boolean = null;
     public messErr: null | boolean = null;
     public commErr: null | boolean = null;
-    public commenting = null;
+    public commenting: null | boolean = null;
+    public csrfToken = ''
 
     public validateEmail(email: string): boolean {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{1,}))$/;
@@ -50,23 +52,36 @@ export default class ShowPost extends Vue {
 
     public commentSend() {
         // first rest all errors
-        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = null;
+        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
 
         this.validateName();
         this.validateEmailInput();
         this.validateMessage();
 
+        console.log(this.csrfToken, this.d.nameErr, this.d.emailErr, this.d.messErr)
+
         if (
-            false === this.nameErr &&
-            false === this.emailErr &&
-            false === this.messErr
+            false === this.d.nameErr &&
+            false === this.d.emailErr &&
+            false === this.d.messErr
         ) {
             // send comment
+            this.d.commenting = true;
 
+            let form = new FormData();
+            form.append("name", this.name);
+            form.append("email", this.email);
+            form.append("message", this.message);
+            form.append("csrfToken", this.csrfToken);
+            console.log(form)
         }
     }
 
     mounted() {
+        // @ts-ignore
+        // attach csrf_token to variable
+        this.csrfToken = this.$root.$refs.csrf_token.value;
+
         // set all to allow parent to use it
         this.d = setSlotData(
             this,
