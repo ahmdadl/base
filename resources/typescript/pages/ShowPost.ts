@@ -8,6 +8,7 @@ import Axios from "axios";
 })
 export default class ShowPost extends Vue {
     public d: this = this;
+    public postID: null | number = null
     public name = "";
     public email = "";
     public message = "";
@@ -84,7 +85,7 @@ export default class ShowPost extends Vue {
             form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
             // @ts-ignore
-            form.append('postId', this.$root.$refs.postID.value);
+            form.append('postId', this.postID)
             
             Axios.post('/api/sendComment', form)
                 .then(res => {
@@ -112,6 +113,8 @@ export default class ShowPost extends Vue {
         // @ts-ignore
         // attach csrf_token to variable
         this.csrfToken = this.$root.$refs.csrf_token.value;
+        // @ts-ignore
+        this.postID = this.$root.$refs.postID.value
 
         // set all to allow parent to use it
         this.d = setSlotData(
@@ -120,5 +123,12 @@ export default class ShowPost extends Vue {
             "validateName",
             "validateEmailInput"
         ) as this;
+
+        // load comments from database
+        Axios.post('/api/comments/', {
+            csrfToken: this.csrfToken,
+            postId: this.postID
+        }).then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 }

@@ -17099,6 +17099,7 @@ var ShowPost = /** @class */ (function (_super) {
     function ShowPost() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.d = _this;
+        _this.postID = null;
         _this.name = "";
         _this.email = "";
         _this.message = "";
@@ -17166,7 +17167,7 @@ var ShowPost = /** @class */ (function (_super) {
             form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
             // @ts-ignore
-            form.append('postId', this.$root.$refs.postID.value);
+            form.append('postId', this.postID);
             axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/sendComment', form)
                 .then(function (res) {
                 if (res.data) {
@@ -17195,8 +17196,16 @@ var ShowPost = /** @class */ (function (_super) {
         // @ts-ignore
         // attach csrf_token to variable
         this.csrfToken = this.$root.$refs.csrf_token.value;
+        // @ts-ignore
+        this.postID = this.$root.$refs.postID.value;
         // set all to allow parent to use it
         this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput");
+        // load comments from database
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/comments/', {
+            csrfToken: this.csrfToken,
+            postId: this.postID
+        }).then(function (res) { return console.log(res); })
+            .catch(function (err) { return console.log(err); });
     };
     ShowPost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
