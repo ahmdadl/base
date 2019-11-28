@@ -8,7 +8,7 @@
     </header>
 
     <div class='col-12 col-md-8'>
-        <div class=''>
+        <div class='pb-5'>
             <div class='breadcrump-head position-absolute'>
                 <ol class="breadcrumb rounded-0 bg-dark text-light">
                     <li class="breadcrumb-item">
