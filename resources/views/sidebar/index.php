@@ -1,9 +1,9 @@
 <div class="card mb-4">
-    <h5 class="card-header bg-primary text-light">Search</h5>
+    <h5 class="card-header bg-primary text-light"><?=$this->__('sb.s')?></h5>
     <div class="card-body">
         <form action="/blog/posts/s" method="get" class="form">
             <div class="input-group">
-                <input type="text" name='q' class="form-control" placeholder="Search for...">
+                <input type="text" name='q' class="form-control" placeholder="<?=$this->__('sb.s')?> <?=$this->__('sb.for')?>...">
                 <span class="input-group-btn">
                     <button class="btn btn-outline-primary" type="submit">
                         <i class='fas fa-search'></i>
@@ -16,16 +16,16 @@
 
 <?php if (!isset($layoutClass)) : ?>
 <div class="card mb-4 d-none d-sm-block">
-    <h5 class="card-header bg-primary text-light">change layout</h5>
+    <h5 class="card-header bg-primary text-light"><?=$this->__('sb.cl')?></h5>
     <div class="card-body">
         <div class="d-inline">
-            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'grid'}" data-toggle="tooltip" data-placement="top" title="Grid View" @click="h.d.layoutChanger('grid')">
+            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'grid'}" data-toggle="tooltip" data-placement="top" title="<?=$this->__('sb.gv')?>" @click="h.d.layoutChanger('grid')">
                 <i class='fas fa-grip-vertical'></i>
             </button>
-            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'list'}" data-toggle="tooltip" data-placement="top" title="List View" @click="h.d.layoutChanger('list')">
+            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'list'}" data-toggle="tooltip" data-placement="top" title="<?=$this->__('sb.lv')?>" @click="h.d.layoutChanger('list')">
                 <i class='fas fa-bars'></i>
             </button>
-            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'classic'}" data-toggle="tooltip" data-placement="top" title="Classical View" @click="h.d.layoutChanger('classic')">
+            <button type='button' class='btn btn-outline-primary mx-1' :class="{'active': h.d.cardLayout === 'classic'}" data-toggle="tooltip" data-placement="top" title="<?=$this->__('sb.classic')?>" @click="h.d.layoutChanger('classic')">
                 <i class='fas fa-square'></i>
             </button>
         </div>
@@ -34,7 +34,7 @@
 <?php endif?>
 
 <div class="card my-4">
-    <h5 class="card-header bg-primary text-light">Popular Posts</h5>
+    <h5 class="card-header bg-primary text-light"><?=$this->__('sb.pop')?></h5>
     <div class="card-body">
         <ul class='list-unstyled'>
             <?php foreach ($pinned as $p) : ?>
@@ -65,25 +65,25 @@
 </div>
 
 <div class="card my-4">
-    <h5 class="card-header bg-primary text-light">Share this Post</h5>
+    <h5 class="card-header bg-primary text-light"><?=$this->__('sb.share.t')?></h5>
     <div class="card-body">
         <button class="btn btn-outline-primary m-2">
             <i class="fab fa-facebook-f"></i>
-            FaceBook
+            <?=$this->__('sb.share.fb')?>
         </button>
         <button class="btn btn-outline-info m-2">
             <i class="fab fa-twitter"></i>
-            Twitter
+            <?=$this->__('sb.share.tw')?>
         </button>
         <button class="btn btn-outline-danger m-2">
-            <i class="fab fa-github"></i>
-            Github
+            <i class="fab fa-pinterest-p"></i>
+            <?=$this->__('sb.share.pin')?>
         </button>
     </div>
 </div>
 
 <div class="card my-4">
-    <h5 class="card-header bg-primary text-light">Categories</h5>
+    <h5 class="card-header bg-primary text-light"><?=$this->__('sb.cat')?></h5>
     <div class="card-body">
         <div class="row">
             <ul class="list-unstyled mb-0">

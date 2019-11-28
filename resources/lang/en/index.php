@@ -110,5 +110,21 @@ return [
             'success' => 'your comment saved view it below',
             'btn' => 'Add Comment'
         ]
+    ],
+    'sb' => [
+        's' => 'Search',
+        'for' => 'for',
+        'cl' => 'Change Layout',
+        'gv' => 'Grid View',
+        'lv' => 'List View',
+        'classic' => 'Classical View',
+        'pop' => 'Popular Posts',
+        'share' => [
+            't' => 'Share this',
+            'fb' => 'Facebook',
+            'tw' => 'Twitter',
+            'pin' => 'Pinterest'
+        ],
+        'cat' => 'Categories'
     ]
 ];
