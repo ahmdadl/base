@@ -123,7 +123,9 @@ return [
             't' => 'Share this',
             'fb' => 'Facebook',
             'tw' => 'Twitter',
-            'pin' => 'Pinterest'
+            'ln' => 'LinkedIn',
+            'ma' => 'Mail',
+            'text' => 'visit our blog'
         ],
         'cat' => 'Categories'
     ]

@@ -66,19 +66,29 @@
 
 <div class="card my-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.share.t')?></h5>
+    <?php
+        $siteUri = 'http://ninjacoder.com';
+        $url = isset($post) ? $siteUri . '/blog/posts/'.$post->slug : $siteUri;
+        $text = $post->title ?? $this->__('sb.share.text');
+        $hasta = 'programming,php,vueJs,web_development,laravel'
+    ?>
     <div class="card-body">
-        <button class="btn btn-outline-primary m-2">
+        <a href="http://www.facebook.com/sharer.php?u=<?=$url?>" target="_blank" class="btn btn-outline-primary m-2">
             <i class="fab fa-facebook-f"></i>
             <?=$this->__('sb.share.fb')?>
-        </button>
-        <button class="btn btn-outline-info m-2">
+        </a>
+        <a href='https://twitter.com/share?url=<?=$url?>&amp;text=<?=$text?>&amp;hashtags=<?=$hasta?>' class="btn btn-outline-info m-2" target="_blank">
             <i class="fab fa-twitter"></i>
             <?=$this->__('sb.share.tw')?>
-        </button>
-        <button class="btn btn-outline-danger m-2">
-            <i class="fab fa-pinterest-p"></i>
-            <?=$this->__('sb.share.pin')?>
-        </button>
+        </a>
+        <a href='http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$url?>' class="btn btn-outline-danger m-2" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+            <?=$this->__('sb.share.ln')?>
+        </a>
+        <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-danger m-2">
+            <i class="fas fa-mail-bulk"></i>
+            <?=$this->__('sb.share.mail')?>
+        </a>
     </div>
 </div>
 

@@ -36,7 +36,8 @@
             'model' => $model,
             'pinned' => $pinned,
             'cats' => $cats,
-            'catModel' => $catModel
+            'catModel' => $catModel,
+            'post' => $posts
         ]) ?>
     </div>
 </div>
