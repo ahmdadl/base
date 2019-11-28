@@ -37,4 +37,9 @@ abstract class BaseController
     {
         return $this->view->render($temp, $param);
     }
+
+    public function post(string $key)
+    {
+        return $this->request->request->get($key);
+    }
 }
