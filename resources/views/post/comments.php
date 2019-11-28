@@ -57,7 +57,10 @@
             <div class="media-body">
                 <p class="mt-0 mb-1">
                     <h5 class="mb-0">{{c.name}}</h5>
-                    <span class="text-muted">{{c.created_at}}</span>
+                    <span class="text-muted">
+                        <i class="fas fa-clock"></i>
+                        {{c.created_at}}
+                    </span>
                 </p>
                 {{c.body}}
             </div>
