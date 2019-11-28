@@ -43,5 +43,17 @@ class CommentController extends BaseController
         if (!$name || !Filter::len($name, 5, 255)) {
             $errors->name = true;
         }
+
+        if (!$email || !Filter::len($email, 5)) {
+            $errors->email = true;
+        }
+
+        if (!$message || !Filter::len($message, 5)) {
+            $errors->message = true;
+        }
+
+        if ($name && $email && $message) {
+            
+        }
     }
 }
