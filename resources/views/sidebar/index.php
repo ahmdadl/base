@@ -74,19 +74,19 @@
     ?>
     <div class="card-body">
         <a href="http://www.facebook.com/sharer.php?u=<?=$url?>" target="_blank" class="btn btn-outline-primary m-2">
-            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-facebook-f pr-3"></i>
             <?=$this->__('sb.share.fb')?>
         </a>
         <a href='https://twitter.com/share?url=<?=$url?>&amp;text=<?=$text?>&amp;hashtags=<?=$hasta?>' class="btn btn-outline-info m-2" target="_blank">
-            <i class="fab fa-twitter"></i>
+            <i class="fab fa-twitter pr-3"></i>
             <?=$this->__('sb.share.tw')?>
         </a>
-        <a href='http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$url?>' class="btn btn-outline-danger m-2" target="_blank">
-            <i class="fab fa-linkedin-in"></i>
+        <a href='http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$url?>' class="btn btn-outline-primary m-2" target="_blank">
+            <i class="fab fa-linkedin-in pr-3"></i>
             <?=$this->__('sb.share.ln')?>
         </a>
-        <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-danger m-2">
-            <i class="fas fa-mail-bulk"></i>
+        <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-secondary m-2">
+            <i class="fas fa-mail-bulk pr-3"></i>
             <?=$this->__('sb.share.mail')?>
         </a>
     </div>
