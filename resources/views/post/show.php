@@ -1,5 +1,5 @@
 <?php $this->layout('layouts/blog', [
-    'title' => $this->__('cpost.title'),
+    'title' => $posts->title ?? '',
     'component' => 'show-post'
 ]) ?>
 
@@ -12,7 +12,7 @@
             <div class='breadcrump-head position-absolute'>
                 <ol class="breadcrumb rounded-0 bg-dark text-light">
                     <li class="breadcrumb-item">
-                        <a href="/blog">Home</a>
+                        <a href="/blog"><?=$this->__('shpost.home')?></a>
                     </li>
                     <li class="breadcrumb-item active text-light text-break"><?= $posts->title ?></li>
                 </ol>

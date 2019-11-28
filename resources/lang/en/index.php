@@ -102,5 +102,13 @@ return [
             'imgSize' => 'The Image must be less than 750 kilobytes.',
             'bodyReq' => 'The Body must be greater than 150 characters.'
         ]
+    ],
+    'shpost' => [
+        'home' => 'Home',
+        'c' => [
+            'title' => 'Leave a Comment',
+            'success' => 'your comment saved view it below',
+            'btn' => 'Add Comment'
+        ]
     ]
 ];
