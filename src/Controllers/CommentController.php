@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\Post;
+use App\Models\Comment;
 use Symfony\Component\HttpFoundation\Request;
 use App\View\FrontRenderInterface;
 use App\Util\AppSession;
@@ -17,7 +17,7 @@ class CommentController extends BaseController
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
-        Post $model,
+        Comment $model,
         Hashids $hashids,
         AppSession $session
     ) {
@@ -27,6 +27,6 @@ class CommentController extends BaseController
 
     public function store()
     {
-        echo $this->request->get('name');
+        echo json_encode($this->request->request->all());
     }
 }
