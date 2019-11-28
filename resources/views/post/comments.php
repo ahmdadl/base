@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="cmessage"><?= $this->__('home.sec.con.inp.mess') ?></label>
-                    <textarea class="form-control col-sm-10" id="cmessage" rows="6" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess') ?>" v-model.trim='h.d.message' :class="{'is-invalid': h.d.messErr, 'is-valid': h.d.messErr === false}" minlength="10" required></textarea>
+                    <textarea class="form-control col-sm-10" id="cmessage" rows="7" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess') ?>" v-model.trim='h.d.message' :class="{'is-invalid': h.d.messErr, 'is-valid': h.d.messErr === false}" minlength="10" required></textarea>
                     <div class="col-sm-10 offset-sm-2 invalid-feedback">
                         <?= $this->__('home.sec.con.vaild.mess') ?>
                     </div>
