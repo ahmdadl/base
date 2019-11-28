@@ -72,6 +72,17 @@ export default class ShowPost extends Vue {
         this.resetErr();
     }
 
+    public addToComments(): void {
+        // @ts-ignore
+        this.d.allComments.push({
+            id: 5050,
+            name: this.d.name,
+            email: this.d.email,
+            body: this.d.message,
+            created_at: 'now'
+        });
+    }
+
     public commentSend() {
         // first rest all errors
         this.resetErr();
@@ -105,6 +116,7 @@ export default class ShowPost extends Vue {
                         else if (r.message) this.d.messErr = true;
                         else if (r.done) {
                             this.d.commErr = false;
+                            this.addToComments();
                             this.resetForm();
                         }
                     }

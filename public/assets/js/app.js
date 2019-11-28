@@ -17151,6 +17151,16 @@ var ShowPost = /** @class */ (function (_super) {
         this.d.name = this.d.email = this.d.message = "";
         this.resetErr();
     };
+    ShowPost.prototype.addToComments = function () {
+        // @ts-ignore
+        this.d.allComments.push({
+            id: 5050,
+            name: this.d.name,
+            email: this.d.email,
+            body: this.d.message,
+            created_at: 'now'
+        });
+    };
     ShowPost.prototype.commentSend = function () {
         var _this = this;
         // first rest all errors
@@ -17182,6 +17192,7 @@ var ShowPost = /** @class */ (function (_super) {
                         _this.d.messErr = true;
                     else if (r.done) {
                         _this.d.commErr = false;
+                        _this.addToComments();
                         _this.resetForm();
                     }
                 }
