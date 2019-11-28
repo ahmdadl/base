@@ -87,7 +87,7 @@
         </a>
         <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-secondary m-2">
             <i class="fas fa-mail-bulk pr-3"></i>
-            <?=$this->__('sb.share.mail')?>
+            <?=$this->__('sb.share.ma')?>
         </a>
     </div>
 </div>
