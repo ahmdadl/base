@@ -22,10 +22,10 @@ class Comment
         $this->con = $db->getConnection();
     }
 
-    // public function __set($name, $value)
-    // {
-    //     $this->{$name} = Filter::filterStr($value);
-    // }
+    public function __set($name, $value)
+    {
+        $this->{$name} = Filter::filterStr($value);
+    }
 
     public function save ()
     {
