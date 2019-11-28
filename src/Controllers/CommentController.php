@@ -10,6 +10,9 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use Hashids\Hashids;
+use PHPUnit\Util\Json;
+use stdClass;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CommentController extends BaseController
 {
@@ -27,6 +30,18 @@ class CommentController extends BaseController
 
     public function store()
     {
-        echo json_encode($this->request->request->all());
+        $name = Filter::filterStr($this->post('name'));
+        $email = Filter::filterStr($this->post('email'));
+        $message = Filter::filterStr($this->post('message'));
+
+        $errors = new class {
+            public $name = false;
+            public $email = false;
+            public $message = false;
+        };
+
+        if (!$name || !Filter::len($name, 5, 255)) {
+            $errors->name = true;
+        }
     }
 }
