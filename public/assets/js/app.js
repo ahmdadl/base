@@ -17108,7 +17108,9 @@ var ShowPost = /** @class */ (function (_super) {
         _this.messErr = null;
         _this.commErr = null;
         _this.commenting = null;
-        _this.csrfToken = '';
+        _this.csrfToken = "";
+        _this.allComments = null;
+        _this.loading = false;
         return _this;
     }
     ShowPost.prototype.validateEmail = function (email) {
@@ -17146,7 +17148,7 @@ var ShowPost = /** @class */ (function (_super) {
         this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
     };
     ShowPost.prototype.resetForm = function () {
-        this.d.name = this.d.email = this.d.message = '';
+        this.d.name = this.d.email = this.d.message = "";
         this.resetErr();
     };
     ShowPost.prototype.commentSend = function () {
@@ -17167,8 +17169,8 @@ var ShowPost = /** @class */ (function (_super) {
             form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
             // @ts-ignore
-            form.append('postId', this.postID);
-            axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/sendComment', form)
+            form.append("postId", this.postID);
+            axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/sendComment", form)
                 .then(function (res) {
                 if (res.data) {
                     var r = res.data;
@@ -17193,6 +17195,7 @@ var ShowPost = /** @class */ (function (_super) {
         }
     };
     ShowPost.prototype.mounted = function () {
+        var _this = this;
         // @ts-ignore
         // attach csrf_token to variable
         this.csrfToken = this.$root.$refs.csrf_token.value;
@@ -17201,11 +17204,19 @@ var ShowPost = /** @class */ (function (_super) {
         // set all to allow parent to use it
         this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput");
         // load comments from database
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/comments/', {
-            csrfToken: this.csrfToken,
-            postId: this.postID
-        }).then(function (res) { return console.log(res); })
-            .catch(function (err) { return console.log(err); });
+        // show loader
+        this.d.loading = true;
+        var form = new FormData();
+        form.append("csrfToken", this.csrfToken);
+        // @ts-ignore
+        form.append("postId", this.postID);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/allComments", form)
+            .then(function (res) {
+            console.log(res);
+            _this.d.allComments = res.data;
+        })
+            .catch(function (err) { return console.log(err); })
+            .finally(function () { return (_this.d.loading = false); });
     };
     ShowPost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({

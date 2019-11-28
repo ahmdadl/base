@@ -2,13 +2,22 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import setSlotData from "../partials/setSlotData";
 import Axios from "axios";
+import { create } from "domain";
+
+interface Comment {
+    id: number;
+    name: string;
+    email: string;
+    body: string;
+    created_at: string;
+}
 
 @Component({
     template: require("./template.html")
 })
 export default class ShowPost extends Vue {
     public d: this = this;
-    public postID: null | number = null
+    public postID: null | number = null;
     public name = "";
     public email = "";
     public message = "";
@@ -17,7 +26,9 @@ export default class ShowPost extends Vue {
     public messErr: null | boolean = null;
     public commErr: null | boolean = null;
     public commenting: null | boolean = null;
-    public csrfToken = ''
+    public csrfToken = "";
+    public allComments: null | Array<Comment> = null;
+    public loading = false;
 
     public validateEmail(email: string): boolean {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{1,}))$/;
@@ -51,21 +62,19 @@ export default class ShowPost extends Vue {
         }
     }
 
-    public resetErr () : void
-    {
+    public resetErr(): void {
         this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
     }
 
-    public resetForm () : void
-    {
-        this.d.name = this.d.email = this.d.message = ''
+    public resetForm(): void {
+        this.d.name = this.d.email = this.d.message = "";
 
-        this.resetErr()
+        this.resetErr();
     }
 
     public commentSend() {
         // first rest all errors
-        this.resetErr()
+        this.resetErr();
 
         this.validateName();
         this.validateEmailInput();
@@ -85,27 +94,27 @@ export default class ShowPost extends Vue {
             form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
             // @ts-ignore
-            form.append('postId', this.postID)
-            
-            Axios.post('/api/sendComment', form)
+            form.append("postId", this.postID);
+
+            Axios.post("/api/sendComment", form)
                 .then(res => {
                     if (res.data) {
-                        let r = res.data
+                        let r = res.data;
                         if (r.name) this.d.nameErr = true;
                         else if (r.email) this.d.emailErr = true;
                         else if (r.message) this.d.messErr = true;
                         else if (r.done) {
-                            this.d.commErr = false
-                            this.resetForm()
+                            this.d.commErr = false;
+                            this.resetForm();
                         }
                     }
                 })
                 .catch(err => {
-                    this.d.commErr = true
+                    this.d.commErr = true;
                 })
                 .finally(() => {
-                    this.d.commenting = false
-                })
+                    this.d.commenting = false;
+                });
         }
     }
 
@@ -114,7 +123,7 @@ export default class ShowPost extends Vue {
         // attach csrf_token to variable
         this.csrfToken = this.$root.$refs.csrf_token.value;
         // @ts-ignore
-        this.postID = this.$root.$refs.postID.value
+        this.postID = this.$root.$refs.postID.value;
 
         // set all to allow parent to use it
         this.d = setSlotData(
@@ -125,10 +134,19 @@ export default class ShowPost extends Vue {
         ) as this;
 
         // load comments from database
-        Axios.post('/api/comments/', {
-            csrfToken: this.csrfToken,
-            postId: this.postID
-        }).then(res => console.log(res))
-        .catch(err => console.log(err))
+        // show loader
+        this.d.loading = true;
+
+        let form = new FormData();
+        form.append("csrfToken", this.csrfToken);
+        // @ts-ignore
+        form.append("postId", this.postID);
+        Axios.post("/api/allComments", form)
+            .then(res => {
+                console.log(res);
+                this.d.allComments = res.data;
+            })
+            .catch(err => console.log(err))
+            .finally(() => (this.d.loading = false));
     }
 }
