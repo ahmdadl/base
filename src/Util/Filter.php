@@ -18,9 +18,9 @@ final class Filter
 
         $str = trim($str);
         $str = filter_var($str, FILTER_SANITIZE_STRING);
-        $str = htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
         $str = strip_tags($str);
         $str = stripslashes($str);
+        $str = htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 
         return $str;
     }
