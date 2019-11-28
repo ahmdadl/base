@@ -5,12 +5,74 @@ import setSlotData from "../partials/setSlotData";
 @Component({
     template: require("./template.html")
 })
-export default class AllPosts extends Vue
-{
+export default class ShowPost extends Vue {
     public d: this = this;
+    public name = "";
+    public email = "";
+    public message = "";
+    public nameErr: null | boolean = null;
+    public emailErr: null | boolean = null;
+    public messErr: null | boolean = null;
+    public commErr: null | boolean = null;
+    public commenting = null;
+
+    public validateEmail(email: string): boolean {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{1,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    public validateName(): void {
+        // validate name
+        if (this.d.name.length < 5 || this.d.name.length >= 255) {
+            this.d.nameErr = true;
+        } else {
+            this.d.nameErr = false;
+        }
+    }
+
+    public validateEmailInput(): void {
+        // validate email
+        if (this.d.email.length < 5 || !this.validateEmail(this.d.email)) {
+            this.d.emailErr = true;
+        } else {
+            this.d.emailErr = false;
+        }
+    }
+
+    public validateMessage(): void {
+        // validate message
+        if (this.d.message.length < 10) {
+            this.d.messErr = true;
+        } else {
+            this.d.messErr = false;
+        }
+    }
+
+    public commentSend() {
+        // first rest all errors
+        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = null;
+
+        this.validateName();
+        this.validateEmailInput();
+        this.validateMessage();
+
+        if (
+            false === this.nameErr &&
+            false === this.emailErr &&
+            false === this.messErr
+        ) {
+            // send comment
+
+        }
+    }
 
     mounted() {
         // set all to allow parent to use it
-        this.d = setSlotData(this) as this;
+        this.d = setSlotData(
+            this,
+            "commentSend",
+            "validateName",
+            "validateEmailInput"
+        ) as this;
     }
 }

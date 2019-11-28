@@ -17091,25 +17091,76 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AllPosts = /** @class */ (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AllPosts, _super);
-    function AllPosts() {
+var ShowPost = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ShowPost, _super);
+    function ShowPost() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.d = _this;
+        _this.name = "";
+        _this.email = "";
+        _this.message = "";
+        _this.nameErr = null;
+        _this.emailErr = null;
+        _this.messErr = null;
+        _this.commErr = null;
+        _this.commenting = null;
         return _this;
     }
-    AllPosts.prototype.mounted = function () {
-        // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this);
+    ShowPost.prototype.validateEmail = function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{1,}))$/;
+        return re.test(String(email).toLowerCase());
     };
-    AllPosts = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    ShowPost.prototype.validateName = function () {
+        // validate name
+        if (this.d.name.length < 5 || this.d.name.length >= 255) {
+            this.d.nameErr = true;
+        }
+        else {
+            this.d.nameErr = false;
+        }
+    };
+    ShowPost.prototype.validateEmailInput = function () {
+        // validate email
+        if (this.d.email.length < 5 || !this.validateEmail(this.d.email)) {
+            this.d.emailErr = true;
+        }
+        else {
+            this.d.emailErr = false;
+        }
+    };
+    ShowPost.prototype.validateMessage = function () {
+        // validate message
+        if (this.d.message.length < 10) {
+            this.d.messErr = true;
+        }
+        else {
+            this.d.messErr = false;
+        }
+    };
+    ShowPost.prototype.commentSend = function () {
+        // first rest all errors
+        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = null;
+        this.validateName();
+        this.validateEmailInput();
+        this.validateMessage();
+        if (false === this.nameErr &&
+            false === this.emailErr &&
+            false === this.messErr) {
+            // send comment
+        }
+    };
+    ShowPost.prototype.mounted = function () {
+        // set all to allow parent to use it
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput");
+    };
+    ShowPost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
             template: __webpack_require__(/*! ./template.html */ "./resources/typescript/pages/template.html")
         })
-    ], AllPosts);
-    return AllPosts;
+    ], ShowPost);
+    return ShowPost;
 }(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
-/* harmony default export */ __webpack_exports__["default"] = (AllPosts);
+/* harmony default export */ __webpack_exports__["default"] = (ShowPost);
 
 
 /***/ }),
