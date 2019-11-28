@@ -58,14 +58,13 @@ class CommentController extends BaseController
         $email = Filter::filterStr($this->post('email'));
         $message = Filter::filterStr($this->post('message'));
 
-        $errors = new class
-        {
-            public $pid = false;
-            public $name = false;
-            public $email = false;
-            public $message = false;
-            public $done = false;
-        };
+        $errors = (object) [
+            'pid' => false,
+            'name' => false,
+            'email' => false,
+            'message' => false,
+            'done' => false,
+        ];
 
         if (null === $postId) {
             $errors->pid = true;
@@ -91,6 +90,7 @@ class CommentController extends BaseController
             $this->model->body = $message;
 
             if ($this->model->save()) {
+                $errors->email = $this->get_gravatar($email);
                 $errors->done = true;
             }
         }

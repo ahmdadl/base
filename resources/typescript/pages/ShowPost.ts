@@ -72,12 +72,12 @@ export default class ShowPost extends Vue {
         this.resetErr();
     }
 
-    public addToComments(): void {
+    public addToComments(img: string): void {
         // @ts-ignore
         this.d.allComments.push({
             id: 5050,
             name: this.d.name,
-            email: this.d.email,
+            email: img,
             body: this.d.message,
             created_at: 'now'
         });
@@ -110,15 +110,16 @@ export default class ShowPost extends Vue {
             Axios.post("/api/sendComment", form)
                 .then(res => {
                     if (res.data) {
+                        console.log(res)
                         let r = res.data;
-                        if (r.name) this.d.nameErr = true;
-                        else if (r.email) this.d.emailErr = true;
-                        else if (r.message) this.d.messErr = true;
-                        else if (r.done) {
+                        if (r.done) {
                             this.d.commErr = false;
-                            this.addToComments();
+                            this.addToComments(r.email);
                             this.resetForm();
                         }
+                        else if (r.name) this.d.nameErr = true;
+                        else if (r.email) this.d.emailErr = true;
+                        else if (r.message) this.d.messErr = true;
                     }
                 })
                 .catch(err => {

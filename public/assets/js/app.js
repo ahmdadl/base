@@ -17151,12 +17151,12 @@ var ShowPost = /** @class */ (function (_super) {
         this.d.name = this.d.email = this.d.message = "";
         this.resetErr();
     };
-    ShowPost.prototype.addToComments = function () {
+    ShowPost.prototype.addToComments = function (img) {
         // @ts-ignore
         this.d.allComments.push({
             id: 5050,
             name: this.d.name,
-            email: this.d.email,
+            email: img,
             body: this.d.message,
             created_at: 'now'
         });
@@ -17183,18 +17183,19 @@ var ShowPost = /** @class */ (function (_super) {
             axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/sendComment", form)
                 .then(function (res) {
                 if (res.data) {
+                    console.log(res);
                     var r = res.data;
-                    if (r.name)
+                    if (r.done) {
+                        _this.d.commErr = false;
+                        _this.addToComments(r.email);
+                        _this.resetForm();
+                    }
+                    else if (r.name)
                         _this.d.nameErr = true;
                     else if (r.email)
                         _this.d.emailErr = true;
                     else if (r.message)
                         _this.d.messErr = true;
-                    else if (r.done) {
-                        _this.d.commErr = false;
-                        _this.addToComments();
-                        _this.resetForm();
-                    }
                 }
             })
                 .catch(function (err) {
