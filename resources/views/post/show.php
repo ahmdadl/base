@@ -26,7 +26,9 @@
             <?= $posts->body ?>
         </p>
 
-        <?php $this->insert('post/comments')?>
+        <?php $this->insert('post/comments', [
+            'pid' => $posts->id
+        ])?>
     </div>
     <div class="col-12 col-md-4">
         <?php $this->insert('sidebar/index', [

@@ -17087,6 +17087,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
 /* harmony import */ var _partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../partials/setSlotData */ "./resources/typescript/partials/setSlotData.ts");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -17138,24 +17141,54 @@ var ShowPost = /** @class */ (function (_super) {
             this.d.messErr = false;
         }
     };
-    ShowPost.prototype.commentSend = function () {
-        // first rest all errors
+    ShowPost.prototype.resetErr = function () {
         this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
+    };
+    ShowPost.prototype.resetForm = function () {
+        this.d.name = this.d.email = this.d.message = '';
+        this.resetErr();
+    };
+    ShowPost.prototype.commentSend = function () {
+        var _this = this;
+        // first rest all errors
+        this.resetErr();
         this.validateName();
         this.validateEmailInput();
         this.validateMessage();
-        console.log(this.csrfToken, this.d.nameErr, this.d.emailErr, this.d.messErr);
         if (false === this.d.nameErr &&
             false === this.d.emailErr &&
             false === this.d.messErr) {
             // send comment
             this.d.commenting = true;
             var form = new FormData();
-            form.append("name", this.name);
-            form.append("email", this.email);
-            form.append("message", this.message);
+            form.append("name", this.d.name);
+            form.append("email", this.d.email);
+            form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
-            console.log(form);
+            // @ts-ignore
+            form.append('postId', this.$root.$refs.postID.value);
+            axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/sendComment', form)
+                .then(function (res) {
+                if (res.data) {
+                    var r = res.data;
+                    if (r.name)
+                        _this.d.nameErr = true;
+                    else if (r.email)
+                        _this.d.emailErr = true;
+                    else if (r.message)
+                        _this.d.messErr = true;
+                    else if (r.done) {
+                        _this.d.commErr = false;
+                        _this.resetForm();
+                    }
+                }
+            })
+                .catch(function (err) {
+                _this.d.commErr = true;
+            })
+                .finally(function () {
+                _this.d.commenting = false;
+            });
         }
     };
     ShowPost.prototype.mounted = function () {

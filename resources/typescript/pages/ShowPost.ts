@@ -50,15 +50,25 @@ export default class ShowPost extends Vue {
         }
     }
 
+    public resetErr () : void
+    {
+        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
+    }
+
+    public resetForm () : void
+    {
+        this.d.name = this.d.email = this.d.message = ''
+
+        this.resetErr()
+    }
+
     public commentSend() {
         // first rest all errors
-        this.d.nameErr = this.d.emailErr = this.d.messErr = this.d.commErr = this.d.commenting = null;
+        this.resetErr()
 
         this.validateName();
         this.validateEmailInput();
         this.validateMessage();
-
-        console.log(this.csrfToken, this.d.nameErr, this.d.emailErr, this.d.messErr)
 
         if (
             false === this.d.nameErr &&
@@ -69,11 +79,32 @@ export default class ShowPost extends Vue {
             this.d.commenting = true;
 
             let form = new FormData();
-            form.append("name", this.name);
-            form.append("email", this.email);
-            form.append("message", this.message);
+            form.append("name", this.d.name);
+            form.append("email", this.d.email);
+            form.append("message", this.d.message);
             form.append("csrfToken", this.csrfToken);
-            console.log(form)
+            // @ts-ignore
+            form.append('postId', this.$root.$refs.postID.value);
+            
+            Axios.post('/api/sendComment', form)
+                .then(res => {
+                    if (res.data) {
+                        let r = res.data
+                        if (r.name) this.d.nameErr = true;
+                        else if (r.email) this.d.emailErr = true;
+                        else if (r.message) this.d.messErr = true;
+                        else if (r.done) {
+                            this.d.commErr = false
+                            this.resetForm()
+                        }
+                    }
+                })
+                .catch(err => {
+                    this.d.commErr = true
+                })
+                .finally(() => {
+                    this.d.commenting = false
+                })
         }
     }
 
