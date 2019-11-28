@@ -8,9 +8,9 @@
             <strong><?= $this->__('home.sec.con.success') ?></strong>
         </alert>
         <form method="post" class="form needs-validation" novalidate @submit.prevent.stop="h.d.commentSend">
-            <?=$this->csrf()?>
-            <?=$this->_method('post')?>
-            <input type='hidden' ref='postID' value="<?=$pid?>" />
+            <?= $this->csrf() ?>
+            <?= $this->_method('post') ?>
+            <input type='hidden' ref='postID' value="<?= $pid ?>" />
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="name">Name</label>
                 <input type="text" class="form-control col-sm-10" id="name" placeholder="Enter Your Name" v-model.trim='h.d.name' :class="{'is-invalid': h.d.nameErr, 'is-valid': h.d.nameErr === false}" @keypress="h.d.validateName" minlength="5" maxlength="255" required>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="email">Email</label>
-                <input type="email" class="form-control col-sm-10" id="email" placeholder="Enter Your Email" v-model.trim='h.d.email' :class="{'is-invalid': h.d.emailErr, 'is-valid': h.d.emailErr === false}"  @keypress='h.d.validateEmailInput' id="userEmail" minlength="5" required>
+                <input type="email" class="form-control col-sm-10" id="email" placeholder="Enter Your Email" v-model.trim='h.d.email' :class="{'is-invalid': h.d.emailErr, 'is-valid': h.d.emailErr === false}" @keypress='h.d.validateEmailInput' id="userEmail" minlength="5" required>
                 <div class="invalid-feedback">
                     Please provide a valid email.
                 </div>
@@ -33,8 +33,8 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-                Comment
                 <span v-if='h.d.commenting' class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Comment
             </button>
         </form>
     </fieldset>
