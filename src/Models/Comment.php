@@ -27,6 +27,17 @@ class Comment
         $this->{$name} = Filter::filterStr($value);
     }
 
+    public function readAll () : array
+    {
+        $stmt = 'SELECT id, name, email, body, created_at FROM '. $this->tbName . ' WHERE postId = :pid';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute(['pid' => $this->postId]);
+
+        return $sql->fetchAll();
+    }
+
     public function save ()
     {
         $stmt = 'INSERT INTO ' . $this->tbName . ' (postId, name, email, body) VALUES (:pid, :name, :email, :body)';
@@ -34,7 +45,7 @@ class Comment
         $sql = $this->con->prepare($stmt);
 
         $params = [
-            ':pid' => 1,
+            ':pid' => $this->postId,
             ':name' => $this->name,
             ':email' => $this->email,
             ':body' => $this->body
