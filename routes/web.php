@@ -27,6 +27,11 @@ return function (RouteCollector $r) {
         });
     });
 
+    // admin routes
+    $r->addGroup('/root', function (RouteCollector $r) {
+        $r->get('/login', ['AdminController@login']);
+    });
+
     // api routes
     $r->addGroup('/api', function (RouteCollector $r) {
         $r->post('/sendMail', [
