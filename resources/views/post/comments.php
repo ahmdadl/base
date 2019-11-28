@@ -39,3 +39,27 @@
         </form>
     </fieldset>
 </div>
+
+<div class="m-3">
+    <div class="text-center" v-if='h.d.loading'>
+        <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-unstyled">
+        <li class="media mt-4" v-for='c in h.d.allComments' :key="c.id">
+            <img :src="c.email" class="mr-3" :alt="c.name">
+            <div class="media-body">
+                <p class="mt-0 mb-1">
+                    <h5 class="mb-0">{{c.name}}</h5>
+                    <span class="text-muted">{{c.created_at}}</span>
+                </p>
+                {{c.body}}
+            </div>
+        </li>
+    </ul>
+
+</div>

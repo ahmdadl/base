@@ -143,7 +143,7 @@ export default class ShowPost extends Vue {
         form.append("postId", this.postID);
         Axios.post("/api/allComments", form)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 this.d.allComments = res.data;
             })
             .catch(err => console.log(err))

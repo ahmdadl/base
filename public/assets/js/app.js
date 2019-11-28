@@ -17212,7 +17212,7 @@ var ShowPost = /** @class */ (function (_super) {
         form.append("postId", this.postID);
         axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/allComments", form)
             .then(function (res) {
-            console.log(res);
+            // console.log(res);
             _this.d.allComments = res.data;
         })
             .catch(function (err) { return console.log(err); })
