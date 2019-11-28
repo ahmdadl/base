@@ -10,7 +10,7 @@ return function (RouteCollector $r) {
     $r->get('/fonts/{font}', ['AssetController@fonts']);
     $r->get('/posts/img/{img}', ['AssetController@postImg']);
 
-    
+
     // blog routes
     $r->addGroup('/blog', function (RouteCollector $r) {
         $r->get('', ['HomeController@toPosts']);
@@ -28,17 +28,19 @@ return function (RouteCollector $r) {
     });
 
     // api routes
-    $r->post('/api/sendMail', [
-        'HomeController@saveMail',
-        'middlewares' => ['CsrfVerify']
-    ]);
+    $r->addGroup('/api', function (RouteCollector $r) {
+        $r->post('/sendMail', [
+            'HomeController@saveMail',
+            'middlewares' => ['CsrfVerify']
+        ]);
 
-    $r->post('/api/sendComment', [
-        'CommentController@store',
-        'middlewares' => ['CsrfVerify']
-    ]);
-    $r->post('/api/allComments', [
-        'CommentController@index',
-        'middlewares' => ['CsrfVerify']
-    ]);
+        $r->post('/sendComment', [
+            'CommentController@store',
+            'middlewares' => ['CsrfVerify']
+        ]);
+        $r->post('/allComments', [
+            'CommentController@index',
+            'middlewares' => ['CsrfVerify']
+        ]);
+    });
 };
