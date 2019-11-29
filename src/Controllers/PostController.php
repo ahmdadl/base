@@ -173,7 +173,7 @@ class PostController extends BaseController
         ));
     }
 
-    public function edit (array $param)
+    public function edit(array $param)
     {
         $this->model->slug = $param['slug'];
 
@@ -184,13 +184,93 @@ class PostController extends BaseController
         ]);
     }
 
-    public function update (array $param)
+    public function update(array $param)
     {
-        echo $param['slug'];
+        $error = (object) [
+            'title' => false,
+            'body' => false,
+            'file' => false,
+            'files' => false,
+            'uploading' => false,
+            'saving' => false
+        ];
 
-        var_dump(
-            $this->request->request->all(),
-            $_FILES
+        $old = (object) [
+            'title' => '',
+            'body' => ''
+        ];
+
+        $slug = Filter::filterStr($param['slug']);
+        $title = Filter::filterStr($this->request->get('title'));
+        $body = Filter::filterStr($this->request->get('body'));
+        $oldImg = Filter::filterStr($this->post('oldImg'));
+
+        // validate title
+        if (!$title || !Filter::len($title, 15)) {
+            $error->title = true;
+        } else {
+            $old->title = $title;
+        }
+
+        // validate body
+        if (!$body || !Filter::len($body, 150)) {
+            $error->body = true;
+        } else {
+            $old->body = $body;
+        }
+
+        // check if image was enterd
+        if (empty($_FILES['img']['name'])) {
+            $error->file = true;
+        }
+
+        // if all data was entered corectly
+        if (!$error->title || !$error->body) {
+            if ($error->file) {
+                $img = $oldImg;
+            } else {
+                $this->setUploader($_FILES['img']);
+                // validate files
+                $error->files = $this->validate(750, ['png', 'jpeg', 'jpg']);
+
+                if ($error->files->size && $error->files->type) {
+                    // first upload image
+                    $img = $this->upload(self::UPLOAD_DIR);
+
+                    // check if file was not saved
+                    if (!$img) {
+                        $error->uplading = false;
+                    }
+                }
+            }
+            if ($img) {
+                // image uploaded succeffully
+
+                // save post
+                $this->model->title = $title;
+                $this->model->body = $body;
+                $this->model->img = $img;
+                $this->model->slug = $slug;
+
+                if (!$this->model->update()) {
+                    $error->saving = true;
+                } else {
+                    return $this->redirect('/blog/posts');
+                }
+            }
+        }
+
+        // add old variables
+        $this->session->addFlash(
+            'old',
+            $old
         );
+
+        $this->session->addFlash(
+            'danger',
+            $error
+        );
+
+        return $this->redirect('/blog/posts/' . $slug . '/edit');
     }
 }

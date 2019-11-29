@@ -128,4 +128,23 @@ class Post
 
         return $sql->fetch();
     }
+
+    public function update() : bool
+    {
+        $stmt = 'UPDATE ' . $this->tbName . ' SET 
+        title = :title, slug = :sg, body = :body, img = :img 
+        WHERE slug = :slug';
+
+        $sql = $this->con->prepare($stmt);
+
+        $param = [
+            ':title' => $this->title,
+            ':sg' => str_replace(' ', '-', $this->title),
+            ':body' => $this->body,
+            ':img' => $this->img,
+            ':slug' => $this->slug
+        ];
+
+        return ($sql->execute($param));
+    }
 }

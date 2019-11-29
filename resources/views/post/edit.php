@@ -46,6 +46,7 @@
             <div class='col-12 text-center'>
                 <div>
                     <img src="/posts/img/<?=$posts->img?>" class='imagePrev w-75 border border-primary p-1 rounded' />
+                    <input type="hidden" name='oldImg' value="<?=$posts->img?>" />
                 </div>
                 <transition name="slide-fade">
                     <img :src="h.d.imagePrev" v-if="h.d.showPrev" class='imagePrev w-75 border border-primary p-1 rounded' />
