@@ -22,6 +22,11 @@ class AdminController extends BaseController
 
     public function login()
     {
-        var_dump('asdsad');
+        return $this->render('admin/login');
+    }
+
+    public function letMeIn()
+    {
+        print_r($this->request->request->all());
     }
 }
