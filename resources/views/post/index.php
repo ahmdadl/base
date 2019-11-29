@@ -1,5 +1,5 @@
 <?php $this->layout('layouts/blog', [
-    'title' => $this->__('cpost.title'),
+    'title' => $this->__('posts.title'),
     'component' => 'all-posts'
 ]) ?>
 
@@ -8,7 +8,7 @@
         <div class="row">
             <?php if (sizeof($posts) < 1) : ?>
                 <div class='alert alert-danger mt-5 mx-auto text-capitalize'>
-                    <strong>Sorry, </strong> We Can not find what you are seraching for
+                    <?=$this->__('posts.empty')?>
                 </div>
             <?php endif ?>
             <?php foreach ($posts as $p) : ?>

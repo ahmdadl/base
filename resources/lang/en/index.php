@@ -103,6 +103,10 @@ return [
             'bodyReq' => 'The Body must be greater than 150 characters.'
         ]
     ],
+    'posts' => [
+        'title' => 'All Posts',
+        'empty' => '<strong>Sorry, </strong> We Can not find what you are seraching for'
+    ],
     'shpost' => [
         'home' => 'Home',
         'c' => [
