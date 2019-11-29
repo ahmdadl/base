@@ -4,10 +4,22 @@
 ]) ?>
 
 <div class="my-5 mx-auto">
-    <div class="card pt-5">
-        <div class="card-header text-center bg-primary text-light">
-            <h4>LogIn</h4>
-        </div>
+    <div class="pt-5 mt-3">
+        <?php if ($errors->any()) : ?>
+            <alert type='danger'>
+                <strong>
+                    <?= $errors->has('email') ? 'please enter a valid email<br />' : '' ?>
+                    <?= $errors->has('pass') ? 'please enter a valid password<br />' : '' ?>
+                    <?= $errors->has('exist') ? 'name or password is incorrect<br />' : '' ?>
+                    <?= $errors->has('err') ? 'an errror occured, please try again later' : '' ?>
+                </strong>
+            </alert>
+        <?php endif ?>
+    </div>
+    <div class="card">
+        <h5 class="card-header text-center bg-primary text-light">
+            LogIn
+        </h5>
         <div class="card-body">
             <form action="/root" method="post" class="form">
                 <?= $this->_method('post') ?>
@@ -19,7 +31,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="password" class="form-label col-sm-2">password</label>
-                    <input type="text" name="password" id="password" class="form-control col-sm-10" placeholder="your password" aria-describedby="passwordHelpId">
+                    <input type="password" name="password" id="password" class="form-control col-sm-10" placeholder="your password" aria-describedby="passwordHelpId">
                     <small id="passwordHelpId" class="text-muted offset-sm-2">please enter your password</small>
                 </div>
                 <div class="form-group row">
