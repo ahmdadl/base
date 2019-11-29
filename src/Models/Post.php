@@ -63,6 +63,17 @@ class Post
         return $sql->fetchAll();
     }
 
+    public function readBySlug()
+    {
+        $stmt = 'SELECT * FROM ' . $this->tbName . ' WHERE slug = :sg';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':sg' => $this->slug]);
+
+        return $sql->fetch();
+    }
+
     public function categories(int $postId) : array
     {
         $stmt = 'SELECT id, title FROM categories WHERE id IN (SELECT catId FROM post_categoires WHERE postId = :pid)';

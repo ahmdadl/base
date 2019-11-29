@@ -172,4 +172,25 @@ class PostController extends BaseController
             $this->categoryModel
         ));
     }
+
+    public function edit (array $param)
+    {
+        $this->model->slug = $param['slug'];
+
+        $post = $this->model->readBySlug();
+
+        return $this->render('post/edit', [
+            'posts' => $post
+        ]);
+    }
+
+    public function update (array $param)
+    {
+        echo $param['slug'];
+
+        var_dump(
+            $this->request->request->all(),
+            $_FILES
+        );
+    }
 }

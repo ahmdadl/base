@@ -20,6 +20,11 @@ return function (RouteCollector $r) {
             $r->get('/create', ['PostController@create']);
             $r->get('/s', ['PostController@find']);
             $r->get('/{slug}', ['PostController@show']);
+            $r->get('/{slug}/edit', ['PostController@edit']);
+            $r->post('/{slug}', [
+                'PostController@update',
+                'middlewares' => ['CsrfVerify']
+            ]);
         });
 
         $r->addGroup('/cat', function (RouteCollector $r) {
