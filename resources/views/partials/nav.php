@@ -21,16 +21,22 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-
+                <?php if (!$session->has('admin')) : ?>
+                <li class="nav-item">
+                    <span id="navbarDropdown" class="nav-link active">
+                        <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                        Ahmed Adel
+                    </span>
+                </li>
+                <?php else : ?>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        </span>
-                        <img class="img d-inline rounded-circle pr-1" src='http://ft.test/img/user.png' width="35" height="35">
-                        <?= $session->get('userName') ?> <span class="caret"></span>
+                        <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                        Ahmed Adel
+                        <span class="caret <?= $session->has('admin') ? '' : 'd-none' ?>"></span>
                     </a>
 
-                    <?php if ($session->has('admin')) : ?>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/logout" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <?= $this->__('user.logout') ?>
@@ -39,10 +45,9 @@
                             <form id="logout-form" action="/root/logout" method="POST" style="display: none;">
                                 <?= $this->csrf() ?>
                             </form>
-                        </div>
-                    <?php endif ?>
+                    </div>
                 </li>
-
+                <?php endif ?>
             </ul>
         </div>
     </div>
