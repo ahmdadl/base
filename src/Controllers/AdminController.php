@@ -90,4 +90,10 @@ class AdminController extends BaseController
 
         return $this->redirect('/root/login');
     }
+
+    public function logOut()
+    {
+        $this->session->se->invalidate();
+        return $this->redirect('/blog/posts');
+    }
 }

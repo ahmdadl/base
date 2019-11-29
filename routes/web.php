@@ -29,9 +29,13 @@ return function (RouteCollector $r) {
 
     // admin routes
     $r->addGroup('/root', function (RouteCollector $r) {
-        $r->get('/login', ['AdminController@login']);
         $r->post('', [
             'AdminController@letMeIn',
+            'middlewares' => ['CsrfVerify']
+        ]);
+        $r->get('/login', ['AdminController@login']);
+        $r->post('/logout',[
+            'AdminController@logOut',
             'middlewares' => ['CsrfVerify']
         ]);
     });
