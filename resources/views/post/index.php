@@ -39,6 +39,10 @@
                                 </span>
                             <?php endforeach ?>
                         </div>
+                        <div class="bg-dark text-center py-1">
+                            <a href='/blog/posts/<?=$p->slug?>/edit' class="btn btn-info mx-1">Edit</a>
+                            <button type="button" class="btn btn-danger mx-1">Delete</button>
+                        </div>
                     </template>
                 </card>
             <?php endforeach ?>
