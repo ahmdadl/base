@@ -22,7 +22,7 @@
 
         <h2 class='mt-3'><?= $posts->title ?></h2>
 
-        <p class='lead'>
+        <p class='lead' v-pre>
             <?= $this->re($posts->body) ?>
         </p>
 
