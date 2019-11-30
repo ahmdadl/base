@@ -59,4 +59,31 @@ class CategoryController extends BaseController
     {
         return $this->render('category/create');
     }
+
+    public function store()
+    {
+        $errors = (object) [
+            'done' => false,
+            'err' => false
+        ];
+
+        $title = Filter::filterStr($this->post('title'));
+
+        if (!$title) {
+            return $this->redirect('/blog/posts');
+        }
+
+        if ($this->model->create($title)) {
+            $errors->done = true;
+        } else {
+            $errors->err = true;
+        }
+
+        $this->session->addFlash(
+            'danger',
+            $errors
+        );
+        
+        return $this->redirect('/blog/cat/create');
+    }
 }

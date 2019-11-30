@@ -20,6 +20,16 @@ class Category
         $this->con = $db->getConnection();
     }
 
+    public function create(string $title) : bool
+    {
+        $stmt = 'INSERT INTO ' . $this->tbName . ' (title) 
+        VALUES (:t)';
+
+        $sql = $this->con->prepare($stmt);
+
+        return $sql->execute([':t' => $title]);
+    }
+
     public function readAll() : array
     {
         $stmt = 'SELECT id, title FROM '. $this->tbName;
