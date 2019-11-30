@@ -35,7 +35,7 @@ class Post
      *
      * @return boolean
      */
-    public function create () : bool
+    public function create () : string
     {
         $stmt = 'INSERT INTO '. $this->tbName . ' (type, title, slug, body, img) VALUES (:t, :title, :s, :body, :i)';
 
@@ -49,7 +49,9 @@ class Post
             ':i' => $this->img
         ];
 
-        return $sql->execute($params);
+        $sql->execute($params);
+
+        return $this->con->lastInsertId();
     }
 
     public function readAll() : array

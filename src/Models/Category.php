@@ -63,4 +63,25 @@ class Category
 
         return $sql->fetchAll();
     }
+
+    public function insertCategories($postId, array $cats)
+    {
+        $values = '';
+        $params = [];
+
+        foreach ($cats as $c) {
+            $values .= '(?, ?), ';
+            $params[] = $postId;
+            $params[] = $c;
+        }
+
+        $values = rtrim($values, ", ");
+
+        $stmt = 'INSERT INTO post_categoires (postId, catId) 
+        VALUES ' . $values . '';
+
+        $sql = $this->con->prepare($stmt);
+
+        return $sql->execute($params);
+    }
 }

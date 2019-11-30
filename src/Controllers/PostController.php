@@ -48,7 +48,9 @@ class PostController extends BaseController
 
     public function create()
     {
-        return $this->render('post/create');
+        return $this->render('post/create', [
+            'cats' => $this->categoryModel->readAll()
+        ]);
     }
 
     public function save()
@@ -56,6 +58,7 @@ class PostController extends BaseController
         $error = (object) [
             'title' => false,
             'body' => false,
+            'cat' => false,
             'file' => false,
             'files' => false,
             'uploading' => false,
@@ -69,6 +72,7 @@ class PostController extends BaseController
 
         $title = Filter::filterStr($this->request->get('title'));
         $body = Filter::filterStr($this->request->get('body'));
+        $cats = Filter::filterStr($this->post('category'));
 
         // validate title
         if (!$title || !Filter::len($title, 15)) {
@@ -84,13 +88,23 @@ class PostController extends BaseController
             $old->body = $body;
         }
 
+        // validate categories
+        if (!$cats) {
+            $error->cat = true;
+        } else {
+            $cats = explode(',', $cats);
+            if (!sizeof($cats)) {
+                $error->cat = true;
+            }
+        }
+
         // check if image was enterd
         if (empty($_FILES['img']['name'])) {
             $error->file = true;
         }
 
         // if all data was entered corectly
-        if (!$error->title || !$error->body || !$error->file) {
+        if (!$error->title && !$error->body && !$error->cat && !$error->file) {
             $this->setUploader($_FILES['img']);
 
             // validate files
@@ -115,11 +129,16 @@ class PostController extends BaseController
                     $this->model->img = $img;
                     $this->model->slug = str_replace(' ', '-', $title);
 
-                    if (!$this->model->create()) {
+                    $postId = $this->model->create();
+
+                    if ($postId) {
+                        if ($this->categoryModel->insertCategories($postId ,$cats)) {
+                            return $this->redirect('/blog/posts');
+                        }
+                        
                         $error->saving = true;
-                    } else {
-                        return $this->redirect('/blog/posts');
                     }
+                    $error->saving = true;
                 }
             }
         }
