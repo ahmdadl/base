@@ -255,7 +255,7 @@ class PostController extends BaseController
                 if (!$this->model->update()) {
                     $error->saving = true;
                 } else {
-                    return $this->redirect('/blog/posts');
+                    return $this->redirect('/blog/posts/' . $slug);
                 }
             }
         }
