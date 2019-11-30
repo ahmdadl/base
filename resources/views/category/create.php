@@ -12,7 +12,7 @@
     <div class="card mx-auto">
         <h5 class="card-header bg-primary text-light">Name Category</h5>
         <div class="card-body">
-            <form action="/cat" method="post">
+            <form action="/blog/cat" method="post">
                 <div class="form-group row">
                     <label for="cat" class="col-sm-2">Title</label>
                     <input type="text" name="title" id="cat" class="form-control col-sm-10" placeholder="category" aria-describedby="helpId">

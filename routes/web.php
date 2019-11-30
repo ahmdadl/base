@@ -29,6 +29,10 @@ return function (RouteCollector $r) {
         });
 
         $r->addGroup('/cat', function (RouteCollector $r) {
+            $r->post('', [
+                'CategoryController@store',
+                'middlewares' => ['CsrfVerify']
+            ]);
             $r->get('/{id}/{title}', ['CategoryController@index']);
             $r->get('/create', ['CategoryController@create']);
         });
@@ -41,7 +45,7 @@ return function (RouteCollector $r) {
             'middlewares' => ['CsrfVerify']
         ]);
         $r->get('/login', ['AdminController@login']);
-        $r->post('/logout',[
+        $r->post('/logout', [
             'AdminController@logOut',
             'middlewares' => ['CsrfVerify']
         ]);
