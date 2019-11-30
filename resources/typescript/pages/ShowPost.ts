@@ -3,6 +3,7 @@ import Component from "vue-class-component";
 import setSlotData from "../partials/setSlotData";
 import Axios from "axios";
 import { create } from "domain";
+import removePost from '../partials/removePost';
 
 interface Comment {
     id: number;
@@ -131,6 +132,11 @@ export default class ShowPost extends Vue {
         }
     }
 
+    public deletePost (pid, redirect = false)
+    {
+        removePost(this, pid, redirect)
+    }
+
     mounted() {
         // @ts-ignore
         // attach csrf_token to variable
@@ -143,7 +149,8 @@ export default class ShowPost extends Vue {
             this,
             "commentSend",
             "validateName",
-            "validateEmailInput"
+            "validateEmailInput",
+            'deletePost'
         ) as this;
 
         // load comments from database

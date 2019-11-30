@@ -16946,6 +16946,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
 /* harmony import */ var _partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../partials/setSlotData */ "./resources/typescript/partials/setSlotData.ts");
+/* harmony import */ var _partials_removePost__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../partials/removePost */ "./resources/typescript/partials/removePost.ts");
+
 
 
 
@@ -16958,6 +16960,7 @@ var AllPosts = /** @class */ (function (_super) {
         _this.cardClass = 'col-md-6';
         _this.rowClass = 'col-12';
         _this.cardLayout = 'grid';
+        _this.delLoad = false;
         return _this;
     }
     AllPosts.prototype.layoutChanger = function (type) {
@@ -16977,9 +16980,13 @@ var AllPosts = /** @class */ (function (_super) {
             this.d.cardLayout = type;
         }
     };
+    AllPosts.prototype.deletePost = function (pid, redirect) {
+        if (redirect === void 0) { redirect = false; }
+        Object(_partials_removePost__WEBPACK_IMPORTED_MODULE_4__["default"])(this, pid, redirect);
+    };
     AllPosts.prototype.mounted = function () {
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, 'layoutChanger');
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, 'layoutChanger', 'deletePost');
     };
     AllPosts = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
@@ -17089,6 +17096,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../partials/setSlotData */ "./resources/typescript/partials/setSlotData.ts");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _partials_removePost__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../partials/removePost */ "./resources/typescript/partials/removePost.ts");
+
 
 
 
@@ -17206,6 +17215,10 @@ var ShowPost = /** @class */ (function (_super) {
             });
         }
     };
+    ShowPost.prototype.deletePost = function (pid, redirect) {
+        if (redirect === void 0) { redirect = false; }
+        Object(_partials_removePost__WEBPACK_IMPORTED_MODULE_5__["default"])(this, pid, redirect);
+    };
     ShowPost.prototype.mounted = function () {
         var _this = this;
         // @ts-ignore
@@ -17214,7 +17227,7 @@ var ShowPost = /** @class */ (function (_super) {
         // @ts-ignore
         this.postID = this.$root.$refs.postID.value;
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput");
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput", 'deletePost');
         // load comments from database
         // show loader
         this.d.loading = true;
@@ -17250,6 +17263,42 @@ var ShowPost = /** @class */ (function (_super) {
 /***/ (function(module, exports) {
 
 module.exports = "<div><slot :d=\"d\"></slot></div>";
+
+/***/ }),
+
+/***/ "./resources/typescript/partials/removePost.ts":
+/*!*****************************************************!*\
+  !*** ./resources/typescript/partials/removePost.ts ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return removePost; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+function removePost(self, pid, redirect) {
+    self.$root.$refs['delLoad' + pid].classList.remove('d-none');
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete('/blog/posts/' + pid).then(function (res) {
+        console.log(res);
+        if (res.data && res.data.done) {
+            if (redirect) {
+                location.href = '/blog/posts';
+            }
+            else {
+                location.reload();
+            }
+        }
+    })
+        .catch(function (err) { return console.log(err); })
+        .finally(function () {
+        // @ts-ignore
+        self.$root.$refs['delLoad' + pid].classList.add('d-none');
+    });
+}
+
 
 /***/ }),
 

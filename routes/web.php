@@ -17,6 +17,7 @@ return function (RouteCollector $r) {
         $r->addGroup('/posts', function (RouteCollector $r) {
             $r->get('', ['PostController@index']);
             $r->post('', ['PostController@save']);
+            $r->delete('/{pid}', ['PostController@destroy']);
             $r->get('/create', ['PostController@create']);
             $r->get('/s', ['PostController@find']);
             $r->get('/{slug}', ['PostController@show']);

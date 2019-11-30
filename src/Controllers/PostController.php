@@ -177,7 +177,7 @@ class PostController extends BaseController
     {
         $this->model->slug = $param['slug'];
 
-        $post = $this->model->readBySlug();
+        $post = $this->model->readOne();
 
         return $this->render('post/edit', [
             'posts' => $post
@@ -272,5 +272,18 @@ class PostController extends BaseController
         );
 
         return $this->redirect('/blog/posts/' . $slug . '/edit');
+    }
+
+    public function destroy(array $param)
+    {
+        if (!isset($param['pid'])) {
+            return $this->redirect('/blog/posts');
+        }
+
+        $pid = (int) $param['pid'];
+
+        $this->model->id = $pid;
+
+        echo json_encode(['done' => $this->model->delete()]);
     }
 }

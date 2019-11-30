@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import setSlotData from "../partials/setSlotData";
+import Axios from 'axios';
+import removePost from '../partials/removePost';
 
 @Component({
     template: require("./template.html")
@@ -11,6 +13,7 @@ export default class AllPosts extends Vue
     public cardClass = 'col-md-6'
     public rowClass = 'col-12'
     public cardLayout = 'grid'
+    public delLoad = false
 
     public layoutChanger (type: string) : void
     {
@@ -29,8 +32,13 @@ export default class AllPosts extends Vue
         }
     }
 
+    public deletePost (pid, redirect = false)
+    {
+        removePost(this, pid, redirect)
+    }
+
     mounted() {
         // set all to allow parent to use it
-        this.d = setSlotData(this, 'layoutChanger') as this;
+        this.d = setSlotData(this, 'layoutChanger', 'deletePost') as this;
     }
 }

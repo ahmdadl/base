@@ -63,17 +63,6 @@ class Post
         return $sql->fetchAll();
     }
 
-    public function readBySlug()
-    {
-        $stmt = 'SELECT * FROM ' . $this->tbName . ' WHERE slug = :sg';
-
-        $sql = $this->con->prepare($stmt);
-
-        $sql->execute([':sg' => $this->slug]);
-
-        return $sql->fetch();
-    }
-
     public function categories(int $postId) : array
     {
         $stmt = 'SELECT id, title FROM categories WHERE id IN (SELECT catId FROM post_categoires WHERE postId = :pid)';
@@ -129,6 +118,17 @@ class Post
         return $sql->fetch();
     }
 
+    public function readById($pid) : object
+    {
+        $stmt = 'SELECT * FROM ' . $this->tbName. ' WHERE id = :pid';
+
+        $sql = $this->con->prepare($stmt);
+
+        $sql->execute([':pid' => $pid]);
+
+        return $sql->fetch();
+    }
+
     public function update() : bool
     {
         $stmt = 'UPDATE ' . $this->tbName . ' SET 
@@ -146,5 +146,14 @@ class Post
         ];
 
         return ($sql->execute($param));
+    }
+
+    public function delete()
+    {
+        $stmt = 'DELETE FROM '. $this->tbName . ' WHERE id = :pid';
+
+        $sql = $this->con->prepare($stmt);
+
+        return $sql->execute([':pid' => $this->id]);
     }
 }

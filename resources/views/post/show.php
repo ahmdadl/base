@@ -26,6 +26,8 @@
             <?= $posts->body ?>
         </p>
 
+        <?=$this->insert('post/opr', ['p' => $posts, 'red' => true])?>
+
         <?php $this->insert('post/comments', [
             'pid' => $posts->id
         ])?>
