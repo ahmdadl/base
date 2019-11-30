@@ -17042,7 +17042,7 @@ var CreatePost = /** @class */ (function (_super) {
         return _this;
     }
     CreatePost.prototype.setCategory = function () {
-        this.d.realCat = this.d.catModel.sort().join(',');
+        this.d.realCat = (this.d.catModel.sort()).join(',');
     };
     CreatePost.prototype.beforeSubmit = function (ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = this.d.loader = null;

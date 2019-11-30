@@ -20,7 +20,7 @@ export default class CreatePost extends Vue {
     public loader: null | boolean = null;
 
     public setCategory() {
-        this.d.realCat = this.d.catModel.sort().join(',')
+        this.d.realCat = (this.d.catModel.sort()).join(',')
     }
 
     public beforeSubmit(ev) {
