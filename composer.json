@@ -22,7 +22,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "respect/validation": "^1.1",
         "symfony/translation": "v4.4.0",
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.7.1"
     },
     "require-dev": {
         "phpunit/phpunit": "8",
