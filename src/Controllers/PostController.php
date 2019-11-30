@@ -133,7 +133,7 @@ class PostController extends BaseController
 
                     if ($postId) {
                         if ($this->categoryModel->insertCategories($postId ,$cats)) {
-                            return $this->redirect('/blog/posts');
+                            return $this->redirect('/blog/posts/'.$this->model->slug);
                         }
                         
                         $error->saving = true;
