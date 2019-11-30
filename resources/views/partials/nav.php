@@ -22,21 +22,23 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 <?php if (!$session->has('admin')) : ?>
-                <li class="nav-item">
-                    <span id="navbarDropdown" class="nav-link active">
-                        <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
-                        Ahmed Adel
-                    </span>
-                </li>
+                    <li class="nav-item">
+                        <span id="navbarDropdown" class="nav-link active">
+                            <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                            Ahmed Adel
+                        </span>
+                    </li>
                 <?php else : ?>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
-                        Ahmed Adel
-                        <span class="caret <?= $session->has('admin') ? '' : 'd-none' ?>"></span>
-                    </a>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                            Ahmed Adel
+                            <span class="caret <?= $session->has('admin') ? '' : 'd-none' ?>"></span>
+                        </a>
 
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/blog/posts/create">Create Post</a>
+                            <a class="dropdown-item" href="/blog/cat/create">Create Category</a>
                             <a class="dropdown-item" href="/logout" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <?= $this->__('user.logout') ?>
@@ -45,8 +47,8 @@
                             <form id="logout-form" action="/root/logout" method="POST" style="display: none;">
                                 <?= $this->csrf() ?>
                             </form>
-                    </div>
-                </li>
+                        </div>
+                    </li>
                 <?php endif ?>
             </ul>
         </div>
