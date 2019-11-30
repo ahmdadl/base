@@ -200,7 +200,7 @@ class PostController extends BaseController
 
         $slug = Filter::filterStr($param['slug']);
         $title = Filter::filterStr($this->request->get('title'));
-        $body = Filter::filterStr($this->request->get('body'));
+        $body = $this->request->get('body');
         $oldImg = Filter::filterStr($this->post('oldImg'));
 
         // validate title
