@@ -175,9 +175,7 @@ class PostController extends BaseController
 
     public function edit(array $param)
     {
-        $this->model->slug = $param['slug'];
-
-        $post = $this->model->readOne();
+        $post = $this->model->readOne(Filter::filterStr($param['slug']));
 
         return $this->render('post/edit', [
             'posts' => $post
@@ -255,7 +253,7 @@ class PostController extends BaseController
                 if (!$this->model->update()) {
                     $error->saving = true;
                 } else {
-                    return $this->redirect('/blog/posts/' . $slug);
+                    return $this->redirect('/blog/posts/' . str_replace(' ', '-', $title));
                 }
             }
         }
