@@ -50,3 +50,11 @@ const dataToggleSelector = document.querySelectorAll('[data-toggle="tooltip"]')
 dataToggleSelector.forEach(el => {
     BTN.Tooltip(el)
 })
+
+// // @ts-ignore
+// Prism.plugins.toolbar.registerButton('hello-world', {
+// 	text: 'Hello World!', // required
+// 	onClick: function (env) { // optional
+// 		alert('This code snippet is written in ' + env.language + '.');
+// 	}
+// });

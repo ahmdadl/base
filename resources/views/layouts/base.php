@@ -10,7 +10,7 @@
     <link rel="icon" href="">
 </head>
 
-<body>
+<body class='line-numbers'>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
     <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
         <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?>">
@@ -50,7 +50,12 @@
             </div>
         </footer>
     </main>
-    <script src='<?= $this->asset('/assets/js/bootstrap-native-v4.min.js') ?>'></script>
+    <script src='<?= $this->asset('/assets/js/prism.js') ?>'></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script> -->
+    
+
     <script src="<?= $this->asset('/assets/js/app.js') ?>"></script>
 </body>
 

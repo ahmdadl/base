@@ -15597,6 +15597,13 @@ var dataToggleSelector = document.querySelectorAll('[data-toggle="tooltip"]');
 dataToggleSelector.forEach(function (el) {
     _bootstrap_native_v4_min_js__WEBPACK_IMPORTED_MODULE_2__["Tooltip"](el);
 });
+// // @ts-ignore
+// Prism.plugins.toolbar.registerButton('hello-world', {
+// 	text: 'Hello World!', // required
+// 	onClick: function (env) { // optional
+// 		alert('This code snippet is written in ' + env.language + '.');
+// 	}
+// });
 
 
 /***/ }),
