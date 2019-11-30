@@ -19,6 +19,7 @@ use League\Plates\Extension\{
     URI
 };
 use App\View\FrontRenderTrait;
+use ParsedownExtra;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 
@@ -135,6 +136,15 @@ class FrontRender implements FrontRenderInterface
          */
         $this->view->registerFunction('__', function ($str) {
             return $this->trans->trans->trans($str);
+        });
+
+        /**
+         * render markdown
+         */
+        $this->view->registerFunction('re', function ($md) {
+            $parse = new ParsedownExtra();
+
+            return $parse->text($md);
         });
     }
 }

@@ -23,7 +23,7 @@
         <h2 class='mt-3'><?= $posts->title ?></h2>
 
         <p class='lead'>
-            <?= $posts->body ?>
+            <?= $this->re($posts->body) ?>
         </p>
 
         <?=$this->insert('post/opr', ['p' => $posts, 'red' => true])?>
