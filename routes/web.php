@@ -30,6 +30,7 @@ return function (RouteCollector $r) {
 
         $r->addGroup('/cat', function (RouteCollector $r) {
             $r->get('/{id}/{title}', ['CategoryController@index']);
+            $r->get('/create', ['CategoryController@create']);
         });
     });
 

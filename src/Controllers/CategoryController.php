@@ -54,4 +54,9 @@ class CategoryController extends BaseController
             $this->model
         ));
     }
+
+    public function create()
+    {
+        return $this->render('category/create');
+    }
 }
