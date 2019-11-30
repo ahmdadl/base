@@ -6,6 +6,13 @@ $fa-font-path: "/fonts";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 @import "./prism.scss";
 
+/**
+* prism tweaks
+*/
+.token.variable {
+    color: #ff2a3e;
+}
+
 .navbar {
     transition: all ease-in 0.5s;
 }

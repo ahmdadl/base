@@ -16742,6 +16742,14 @@ div.code-toolbar > .toolbar span:focus {
   text-decoration: none;
 }
 
+/**
+* prism tweaks
+*/
+
+.token.variable {
+  color: #ff2a3e;
+}
+
 .navbar {
   transition: all ease-in 0.5s;
 }
