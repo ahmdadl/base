@@ -9,6 +9,8 @@ export default class CreatePost extends Vue {
     public d = this;
     public file: File;
     public title = "";
+    public catModel = []
+    public realCat = ''
     public imagePrev: string = "";
     public showPrev: boolean = false;
     public body = "";
@@ -16,6 +18,10 @@ export default class CreatePost extends Vue {
     public imgErr: null | boolean = null;
     public bodyErr: null | boolean = null;
     public loader: null | boolean = null;
+
+    public setCategory() {
+        this.d.realCat = this.d.catModel.sort().join(',')
+    }
 
     public beforeSubmit(ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = this.d.loader = null
@@ -65,6 +71,6 @@ export default class CreatePost extends Vue {
 
     mounted() {
         // set all to allow parent to use it
-        this.d = setSlotData(this, "beforeSubmit", "handleFile") as this;
+        this.d = setSlotData(this, "beforeSubmit", "handleFile", 'setCategory') as this;
     }
 }

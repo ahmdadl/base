@@ -17030,6 +17030,8 @@ var CreatePost = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.d = _this;
         _this.title = "";
+        _this.catModel = [];
+        _this.realCat = '';
         _this.imagePrev = "";
         _this.showPrev = false;
         _this.body = "";
@@ -17039,6 +17041,9 @@ var CreatePost = /** @class */ (function (_super) {
         _this.loader = null;
         return _this;
     }
+    CreatePost.prototype.setCategory = function () {
+        this.d.realCat = this.d.catModel.sort().join(',');
+    };
     CreatePost.prototype.beforeSubmit = function (ev) {
         this.d.titleErr = this.d.imgErr = this.d.bodyErr = this.d.loader = null;
         if (this.d.title.length < 15) {
@@ -17074,7 +17079,7 @@ var CreatePost = /** @class */ (function (_super) {
     };
     CreatePost.prototype.mounted = function () {
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "beforeSubmit", "handleFile");
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "beforeSubmit", "handleFile", 'setCategory');
     };
     CreatePost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
