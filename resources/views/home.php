@@ -29,7 +29,7 @@
         $this->insert('home/about', ['pros' => $pros]);
         $this->insert('home/skill');
         $this->insert('home/project', ['projects' => $projects]);
-        $this->insert('home/blog', ['posts' => $posts]);
+        $this->insert('home/blog', ['posts' => $posts, 'model' => $model]);
         $this->insert('home/contact');
 
         /**

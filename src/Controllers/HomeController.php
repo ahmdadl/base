@@ -9,6 +9,7 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use App\Models\Home;
+use App\Models\Post;
 use Hashids\Hashids;
 
 class HomeController extends BaseController
@@ -16,16 +17,19 @@ class HomeController extends BaseController
     use HomeModelDataTrait;
 
     protected $model;
+    protected $postModel;
 
     public function __construct(
         Request $request,
         FrontRenderInterface $view,
         Hashids $hashids,
         Home $model,
+        Post $postModel,
         AppSession $session
     ) {
         parent::__construct($request, $view, $hashids, $session);
         $this->model = $model;
+        $this->postModel = $postModel;
     }
 
     public function show($params = [])
@@ -37,7 +41,8 @@ class HomeController extends BaseController
         return $this->view->render('home', [
             'pros' => $pros,
             'projects' => $projects,
-            'posts' => $posts
+            'posts' => $posts,
+            'model' => $this->postModel
         ]);
     }
 
