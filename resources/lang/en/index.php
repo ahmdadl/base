@@ -4,6 +4,7 @@ return [
     'nav' => [
         'portfolio' => 'Portfolio',
         'blog' => 'Blog',
+        'lang' => 'Language'
     ],
     'user' => [
         'login' => 'Login',
