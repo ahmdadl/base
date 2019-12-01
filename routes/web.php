@@ -11,7 +11,9 @@ return function (RouteCollector $r) {
     $r->get('/posts/img/{img}', ['AssetController@postImg']);
 
     // error
-    $r->get('/errors/{num}', ['AssetController@handelErrors']);
+    $r->get('/errors/{num}', ['HomeController@handelErrors']);
+    // lang changer
+    $r->get('/lang/{code}', ['HomeController@changeLang']);
 
 
     // blog routes

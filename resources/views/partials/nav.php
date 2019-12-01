@@ -11,10 +11,29 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>"><?= $this->__('nav.portfolio') ?></a>
+                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>">
+                        <i class="fas fa-user d-sm-none"></i>
+                        <?= $this->__('nav.portfolio') ?>
+                    </a>
                 </li>
                 <li>
-                    <a class="nav-link <?= $this->uri('/blog/posts') ? 'active' : '' ?>" href="/blog/posts"><?= $this->__('nav.blog') ?></a>
+                    <a class="nav-link <?= $this->uri('/blog/posts') ? 'active' : '' ?>" href="/blog/posts">
+                        <i class="fas fa-blog d-sm-none"></i>
+                        <?= $this->__('nav.blog') ?>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class='fas fa-language'></i>
+                            language
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item <?=$session->get('lang') === 'ar' ? 'active' : ''?>" href="<?=$session->get('lang') === 'en' ? '/lang/ar?was='.$this->uri() : '#'?>">العربية</a>
+                            <a class="dropdown-item <?=$session->get('lang') === 'en' ? 'active' : ''?>" href="<?=$session->get('lang') === 'ar' ? '/lang/en?was='.$this->uri() : '#'?>">English</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
 

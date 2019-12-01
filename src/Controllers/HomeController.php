@@ -26,12 +26,11 @@ class HomeController extends BaseController
     ) {
         parent::__construct($request, $view, $hashids, $session);
         $this->model = $model;
-        
     }
 
     public function show($params = [])
     {
-        [$pros, $projects, ] = $this->getData();
+        [$pros, $projects,] = $this->getData();
 
         $posts = $this->model->getPosts();
 
@@ -83,5 +82,22 @@ class HomeController extends BaseController
     public function toPosts()
     {
         return $this->redirect('/blog/posts');
+    }
+
+    public function handelErrors(array $param)
+    {
+        $page = isset($param['num']) ? $param['num'] : 404;
+
+        return $this->view->render('error/p' . $page);
+    }
+
+    public function changeLang(array $param)
+    {
+        $code = isset($param['code']) ? $param['code'] : 'en';
+        $redirectTo = $this->request->query->get('was', '/');
+
+        $this->session->se->set('lang', $code);
+        
+        return $this->redirect($redirectTo);
     }
 }
