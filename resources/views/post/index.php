@@ -14,12 +14,12 @@
             <?php foreach ($posts as $p) : ?>
                 <card title='<?= $p->title ?>' img="/posts/img/<?= $p->img ?? '1.png' ?>" href="<?= $p->slug ?>" :cls='"post text-left transition " + h.d.cardClass' :row-class="h.d.rowClass">
                     <template v-slot:info>
-                        <div class='py-2 my-1 text-muted d-block'>
+                        <div class='py-2 my-1 text-muted d-block' dir='ltr'>
                             <span class="mr-3" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
                                 <i class="fas fa-clock"></i>
                                 <?= date_format(date_create($p->updated_at), 'd M Y') ?>
                             </span>
-                            <a href='/blog/posts/<?= $p->slug ?>/#comments' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
+                            <a href='/blog/posts/<?= $p->slug ?>/#comments' class='mx-3' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
                                 <span class=''>
                                     <i class="fas fa-comment-alt"></i>
                                     <?= $model->getCommentCount($p->id) ?>
