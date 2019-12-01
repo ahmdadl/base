@@ -32,7 +32,7 @@ return [
                 ],
                 'Dynamic' => [
                     'title' => 'Dynamic',
-                    'txt' => 'I love making pages come to life.'
+                    'txt' => 'I love making web pages come to life.'
                 ],
                 'Tested' => [
                     'title' => 'Tested',
@@ -41,7 +41,7 @@ return [
                 'Organized' => [
                     'title' => 'Organized, Documented',
                     'icon' => 'code',
-                    'txt' => 'To help other`s  to continue after me.'
+                    'txt' => 'To help other developers to work after me.'
                 ],
                 'Up_To_Date' => [
                     'title' => 'Up to Date',
@@ -51,7 +51,7 @@ return [
                 'Multi_Language' => [
                     'title' => 'Multi Language',
                     'icon' => 'language',
-                    'txt' => 'TestIt in this website itself.'
+                    'txt' => 'try this in this website.'
                 ],
             ],
             'skill' => [
@@ -64,13 +64,13 @@ return [
                 'client' => 'Client'
             ],
             'blog' => [
-                'date' => 'Updated At',
-                'c_count' => 'Comments Count'
+                'date' => 'last update',
+                'c_count' => 'comments'
             ],
             'con' => [
                 'res' => 'I Will Respond Withen 24 Hours',
                 'err' => 'an Error occured, Please try again later',
-                'success' => 'Email Sent Succefully',
+                'success' => 'Email Sent successfully',
                 'btn' => 'Send',
                 'inp' => [
                     'name' => 'Name',
