@@ -56,10 +56,12 @@
             <img :src="c.email" class="mr-3" :alt="c.name">
             <div class="media-body">
                 <p class="mt-0 mb-1">
-                    <button class="btn btn-danger btn-sm py-1 float-right" @click.stop.prevent="h.d.deleteComment(c.id, inx)">
-                        <span :ref="'commentDanger' + c.id" class="spinner-border spinner-border-sm mr-2 d-none" role="status" aria-hidden="true"></span>
-                        X
-                    </button>
+                    <?php if ($session->has('admin')) : ?>
+                        <button class="btn btn-danger btn-sm py-1 float-right" @click.stop.prevent="h.d.deleteComment(c.id, inx)">
+                            <span :ref="'commentDanger' + c.id" class="spinner-border spinner-border-sm mr-2 d-none" role="status" aria-hidden="true"></span>
+                            X
+                        </button>
+                    <?php endif ?>
                     <h5 class="mb-0">{{c.name}}</h5>
                     <span class="text-muted">
                         <i class="fas fa-clock"></i>
