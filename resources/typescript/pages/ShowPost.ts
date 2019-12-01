@@ -190,7 +190,7 @@ export default class ShowPost extends Vue {
                 // console.log(res);
                 this.d.allComments = res.data;
             })
-            .catch(err => console.log(err))
+            .catch(err => {/* console.log(err) */})
             .finally(() => (this.d.loading = false));
     }
 }
