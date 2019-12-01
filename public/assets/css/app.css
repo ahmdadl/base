@@ -6274,3 +6274,8 @@ div.code-toolbar > .toolbar span:focus {
   }
 }
 
+input[type=email]:focus,
+input[type=password]:focus {
+  direction: ltr;
+}
+

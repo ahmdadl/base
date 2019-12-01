@@ -133,3 +133,8 @@ $spacer: 1rem !default;
         border: none;
     }
 }
+input[type='email']:focus,
+input[type='password']:focus {
+    // text-align: left;
+    direction: ltr;
+}
