@@ -4,7 +4,7 @@
 ]) ?>
 
 <div class='mt-3 row'>
-    <div class='col-12 col-sm-8'>
+    <div class='col-12 col-md-8'>
         <div class="row">
             <?php if (sizeof($posts) < 1) : ?>
                 <div class='alert alert-danger mt-5 mx-auto text-capitalize'>
@@ -45,7 +45,7 @@
             <?php endforeach ?>
         </div>
     </div>
-    <div class="col-12 col-sm-4">
+    <div class="col-12 col-md-4">
         <?php $this->insert('sidebar/index', [
             'model' => $model,
             'pinned' => $pinned,
