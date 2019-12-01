@@ -63,7 +63,7 @@
                         </button>
                     <?php endif ?>
                     <h5 class="mb-0">{{c.name}}</h5>
-                    <span class="text-muted">
+                    <span class="text-muted" dir='ltr'>
                         <i class="fas fa-clock"></i>
                         {{c.created_at}}
                     </span>
