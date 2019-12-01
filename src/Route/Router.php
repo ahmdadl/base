@@ -182,7 +182,7 @@ class Router
             // check if middleware not passed
             if ($err) {
                 // redirect to 403
-                return (new RedirectResponse('/error/403'))->send();
+                return (new RedirectResponse('/errors/403'))->send();
             };
         }
         return false;
