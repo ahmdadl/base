@@ -10,6 +10,9 @@ return function (RouteCollector $r) {
     $r->get('/fonts/{font}', ['AssetController@fonts']);
     $r->get('/posts/img/{img}', ['AssetController@postImg']);
 
+    // error
+    $r->get('/errors/{num}', ['AssetController@handelErrors']);
+
 
     // blog routes
     $r->addGroup('/blog', function (RouteCollector $r) {

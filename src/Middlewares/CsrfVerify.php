@@ -28,10 +28,10 @@ class CsrfVerify extends Base implements MiddlewareInterface
         }
 
         // send message to view via flash sessions
-        $this->session->se->getFlashBag()->add(
-            'danger',
-            'an error occured. please try again later'
-        );
+        // $this->session->se->getFlashBag()->add(
+        //     'danger',
+        //     'an error occured. please try again later'
+        // );
         // stop any other middleware
         return true;
     }
