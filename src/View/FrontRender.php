@@ -48,8 +48,10 @@ class FrontRender implements FrontRenderInterface
 
         // set translation locale
         $local = $this->request->getLocale() === 'ar' ? 'ar' : 'en';
-        $this->trans->setLocal($local);
-        $this->session->se->set('lang', $this->request->getLocale());
+        if ($this->session->se->has('lang')) {
+            $this->session->se->set('lang', $local);
+        }
+        $this->trans->setLocal($this->session->se->get('lang') ?? 'en');
 
         $this->configView();
     }
