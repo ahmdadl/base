@@ -51,7 +51,7 @@ return function (RouteCollector $r) {
     $r->addGroup('/root', function (RouteCollector $r) {
         $r->post('', [
             'AdminController@letMeIn',
-            'middlewares' => ['AdminAuth', 'CsrfVerify']
+            'middlewares' => ['CsrfVerify']
         ]);
         $r->get('/login', ['AdminController@login']);
         $r->post('/logout', [
@@ -64,16 +64,16 @@ return function (RouteCollector $r) {
     $r->addGroup('/api', function (RouteCollector $r) {
         $r->post('/sendMail', [
             'HomeController@saveMail',
-            'middlewares' => ['AdminAuth', 'CsrfVerify']
+            'middlewares' => ['CsrfVerify']
         ]);
 
         $r->post('/sendComment', [
             'CommentController@store',
-            'middlewares' => ['AdminAuth', 'CsrfVerify']
+            'middlewares' => ['CsrfVerify']
         ]);
         $r->post('/allComments', [
             'CommentController@index',
-            'middlewares' => ['AdminAuth', 'CsrfVerify']
+            'middlewares' => ['CsrfVerify']
         ]);
         $r->delete('/comments/{cid}', [
             'CommentController@destroy',
