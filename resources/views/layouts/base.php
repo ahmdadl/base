@@ -15,7 +15,7 @@
     <link rel="icon" href="">
 </head>
 
-<body class='line-numbers body-rtl'>
+<body class='line-numbers'>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
     <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
         <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?>">
