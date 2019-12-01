@@ -1,10 +1,14 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm text-light fixed-top <?= $navClass ?>">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm text-light fixed-top <?= $navClass ?>">
     <div class="container">
         <a class="navbar-brand" href="/">
             NinjaCoder
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler border-0 text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <span id="navbarDropdown" class="nav-link ">
+                <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                Ahmed Adel
+            </span>
         </button>
 
         <div class="collapse navbar-collapse navbar-sm-" id="navbarSupportedContent">
@@ -30,8 +34,8 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item <?=$session->get('lang') === 'ar' ? 'active' : ''?>" href="<?=$session->get('lang') === 'en' ? '/lang/ar?was='.$this->uri() : '#'?>">العربية</a>
-                            <a class="dropdown-item <?=$session->get('lang') === 'en' ? 'active' : ''?>" href="<?=$session->get('lang') === 'ar' ? '/lang/en?was='.$this->uri() : '#'?>">English</a>
+                            <a class="dropdown-item <?= $session->get('lang') === 'ar' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'en' ? '/lang/ar?was=' . $this->uri() : '#' ?>">العربية</a>
+                            <a class="dropdown-item <?= $session->get('lang') === 'en' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'ar' ? '/lang/en?was=' . $this->uri() : '#' ?>">English</a>
                         </div>
                     </div>
                 </li>
@@ -42,7 +46,7 @@
                 <!-- Authentication Links -->
                 <?php if (!$session->has('admin')) : ?>
                     <li class="nav-item">
-                        <span id="navbarDropdown" class="nav-link active">
+                        <span id="navbarDropdown" class="nav-link active d-none d-md-block">
                             <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
                             Ahmed Adel
                         </span>
