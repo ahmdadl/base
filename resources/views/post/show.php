@@ -9,7 +9,7 @@
 
     <div class='col-12 col-md-8'>
         <div class='pb-5'>
-            <div class='breadcrump-head position-absolute'>
+            <div class='breadcrump-head position-absolute' style='top: 0;'>
                 <ol class="breadcrumb rounded-0 bg-dark text-light">
                     <li class="breadcrumb-item">
                         <a href="/blog"><?=$this->__('shpost.home')?></a>
