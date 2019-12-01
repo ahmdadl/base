@@ -1,6 +1,7 @@
 $fa-font-path: "/fonts";
+$spacer: 1rem !default;
 
-@import "../../../bl/node_modules/bootstrap/scss/bootstrap.scss";
+// @import "../../../bl/node_modules/bootstrap/scss/_variables";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
@@ -20,6 +21,8 @@ $fa-font-path: "/fonts";
 #canvas {
     position: absolute;
     z-index: -1;
+    top: 0;
+    left: 0;
     // min-height: 100%;
 }
 .masthead {
@@ -48,26 +51,6 @@ $fa-font-path: "/fonts";
         opacity: 1;
     }
 }
-// .hexagon {
-//     overflow: hidden;
-//     -webkit-transform: rotate(45deg);
-//     -moz-transform: rotate(45deg);
-//     -ms-transform: rotate(45deg);
-//     -o-transform: rotate(45deg);
-//     transform: rotate(45deg);
-//     cursor: pointer;
-//     margin: 0 0 0 -80px;
-//     i {
-//         -webkit-transform: rotate(-45deg);
-//         -moz-transform: rotate(-45deg);
-//         -ms-transform: rotate(-45deg);
-//         -o-transform: rotate(-45deg);
-//         transform: rotate(-45deg);
-//     }
-//     &:hover i {
-//         animation: fa-spin 2s infinite linear;
-//     }
-// }
 .transition {
     transition: all ease-in 0.5s;
 }
@@ -112,7 +95,7 @@ $fa-font-path: "/fonts";
         cursor: pointer;
         &:hover {
             padding-left: $spacer / 3;
-            color: $white;
+            color: #fff;
         }
     }
 }
