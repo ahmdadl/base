@@ -52,7 +52,7 @@
     </div>
 
     <ul class="list-unstyled">
-        <li class="media mt-4 transition" v-for='c in h.d.allComments' :key="c.id" :class="{'animated': c.id === 5050}">
+        <li class="media mt-4 transition" v-for='c in h.d.allComments' :key="c.id" :id="'d' + c.id" :class="{'animated': undefined !== c.fresh}">
             <img :src="c.email" class="mr-3" :alt="c.name">
             <div class="media-body">
                 <p class="mt-0 mb-1">

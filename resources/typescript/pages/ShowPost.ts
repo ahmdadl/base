@@ -11,6 +11,7 @@ interface Comment {
     email: string;
     body: string;
     created_at: string;
+    fresh?: boolean;
 }
 
 @Component({
@@ -73,14 +74,15 @@ export default class ShowPost extends Vue {
         this.resetErr();
     }
 
-    public addToComments(img: string): void {
+    public addToComments(img: string, commentId: number): void {
         // @ts-ignore
         this.d.allComments.push({
-            id: 5050,
+            id: commentId,
             name: this.d.name,
             email: img,
             body: this.d.message,
-            created_at: 'now'
+            created_at: 'now',
+            fresh: true
         });
     }
 
@@ -111,11 +113,11 @@ export default class ShowPost extends Vue {
             Axios.post("/api/sendComment", form)
                 .then(res => {
                     if (res.data) {
-                        console.log(res)
+                        // console.log(res)
                         let r = res.data;
                         if (r.done) {
                             this.d.commErr = false;
-                            this.addToComments(r.email);
+                            this.addToComments(r.email, r.cid);
                             this.resetForm();
                         }
                         else if (r.name) this.d.nameErr = true;

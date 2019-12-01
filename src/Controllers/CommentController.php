@@ -60,6 +60,7 @@ class CommentController extends BaseController
 
         $errors = (object) [
             'pid' => false,
+            'cid' => false,
             'name' => false,
             'email' => false,
             'message' => false,
@@ -89,7 +90,7 @@ class CommentController extends BaseController
             $this->model->email = $email;
             $this->model->body = $message;
 
-            if ($this->model->save()) {
+            if ($errors->cid = $this->model->save()) {
                 $errors->email = $this->get_gravatar($email);
                 $errors->done = true;
             }

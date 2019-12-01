@@ -51,6 +51,8 @@ class Comment
             ':body' => $this->body
         ];
 
-        return ($sql->execute($params));
+        $sql->execute($params);
+
+        return $this->con->lastInsertId();
     }
 }
