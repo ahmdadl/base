@@ -3,7 +3,7 @@ import Component from "vue-class-component";
 import setSlotData from "../partials/setSlotData";
 import Axios from "axios";
 import { create } from "domain";
-import removePost from '../partials/removePost';
+import removePost from "../partials/removePost";
 
 interface Comment {
     id: number;
@@ -81,7 +81,7 @@ export default class ShowPost extends Vue {
             name: this.d.name,
             email: img,
             body: this.d.message,
-            created_at: 'now',
+            created_at: "now",
             fresh: true
         });
     }
@@ -119,8 +119,7 @@ export default class ShowPost extends Vue {
                             this.d.commErr = false;
                             this.addToComments(r.email, r.cid);
                             this.resetForm();
-                        }
-                        else if (r.name) this.d.nameErr = true;
+                        } else if (r.name) this.d.nameErr = true;
                         else if (r.email) this.d.emailErr = true;
                         else if (r.message) this.d.messErr = true;
                     }
@@ -134,9 +133,31 @@ export default class ShowPost extends Vue {
         }
     }
 
-    public deletePost (pid, redirect = false)
-    {
-        removePost(this, pid, redirect)
+    public deletePost(pid, redirect = false) {
+        removePost(this, pid, redirect);
+    }
+
+    public deleteComment(cid: number, inx: number) {
+        console.log(cid, inx);
+        let span = this.$root.$refs["commentDanger" + cid][0] as HTMLElement;
+
+        span.classList.remove("d-none");
+
+        Axios.delete("/api/comments/" + cid)
+            .then(res => {
+                // console.log(res);
+                if (res && res.data) {
+                    if (res.data.done) {
+                        // @ts-ignore
+                        this.d.allComments.splice(inx, 1);
+                    } else {
+                        console.log('an error occured')
+                        console.log(res)
+                    }
+                }
+            })
+            .catch(err => console.log(err))
+            .finally(() => span.classList.add("d-none"));
     }
 
     mounted() {
@@ -152,7 +173,8 @@ export default class ShowPost extends Vue {
             "commentSend",
             "validateName",
             "validateEmailInput",
-            'deletePost'
+            "deletePost",
+            "deleteComment"
         ) as this;
 
         // load comments from database

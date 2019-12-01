@@ -125,4 +125,20 @@ class CommentController extends BaseController
         }
         return $url;
     }
+
+    public function destroy (array $param)
+    {
+        if (!isset($param['cid'])) {
+            return $this->redirect('/blog/posts');
+        }
+
+        $cid = (int) $param['cid'];
+        $output = (object) ['done' => false];
+
+        if ($this->model->remove($cid)) {
+            $output->done = true;
+        }
+
+        echo json_encode($output);
+    }
 }

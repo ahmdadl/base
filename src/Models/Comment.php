@@ -55,4 +55,14 @@ class Comment
 
         return $this->con->lastInsertId();
     }
+
+    public function remove($cid)
+    {
+        $stmt = 'DELETE FROM ' . $this->tbName . ' 
+        WHERE id = :cid';
+
+        $sql = $this->con->prepare($stmt);
+
+        return ($sql->execute([':cid' => $cid]));
+    }
 }

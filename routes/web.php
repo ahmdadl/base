@@ -66,5 +66,9 @@ return function (RouteCollector $r) {
             'CommentController@index',
             'middlewares' => ['CsrfVerify']
         ]);
+        $r->delete('/comments/{cid}', [
+            'CommentController@destroy',
+            'middlewares' => ['CsrfVerify']
+        ]);
     });
 };

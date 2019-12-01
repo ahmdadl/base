@@ -35,7 +35,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">
                     <span v-if='h.d.commenting' class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <?=$this->__('shpost.c.btn')?>
+                    <?= $this->__('shpost.c.btn') ?>
                 </button>
             </form>
         </div>
@@ -52,10 +52,14 @@
     </div>
 
     <ul class="list-unstyled">
-        <li class="media mt-4 transition" v-for='c in h.d.allComments' :key="c.id" :id="'d' + c.id" :class="{'animated': undefined !== c.fresh}">
+        <li class="media mt-4 transition" v-for='(c, inx) in h.d.allComments' :key="c.id" :id="'d' + c.id" :class="{'animated': undefined !== c.fresh}">
             <img :src="c.email" class="mr-3" :alt="c.name">
             <div class="media-body">
                 <p class="mt-0 mb-1">
+                    <button class="btn btn-danger btn-sm py-1 float-right" @click.stop.prevent="h.d.deleteComment(c.id, inx)">
+                        <span :ref="'commentDanger' + c.id" class="spinner-border spinner-border-sm mr-2 d-none" role="status" aria-hidden="true"></span>
+                        X
+                    </button>
                     <h5 class="mb-0">{{c.name}}</h5>
                     <span class="text-muted">
                         <i class="fas fa-clock"></i>

@@ -17179,7 +17179,7 @@ var ShowPost = /** @class */ (function (_super) {
             name: this.d.name,
             email: img,
             body: this.d.message,
-            created_at: 'now',
+            created_at: "now",
             fresh: true
         });
     };
@@ -17232,6 +17232,28 @@ var ShowPost = /** @class */ (function (_super) {
         if (redirect === void 0) { redirect = false; }
         Object(_partials_removePost__WEBPACK_IMPORTED_MODULE_5__["default"])(this, pid, redirect);
     };
+    ShowPost.prototype.deleteComment = function (cid, inx) {
+        var _this = this;
+        console.log(cid, inx);
+        var span = this.$root.$refs["commentDanger" + cid][0];
+        span.classList.remove("d-none");
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.delete("/api/comments/" + cid)
+            .then(function (res) {
+            // console.log(res);
+            if (res && res.data) {
+                if (res.data.done) {
+                    // @ts-ignore
+                    _this.d.allComments.splice(inx, 1);
+                }
+                else {
+                    console.log('an error occured');
+                    console.log(res);
+                }
+            }
+        })
+            .catch(function (err) { return console.log(err); })
+            .finally(function () { return span.classList.add("d-none"); });
+    };
     ShowPost.prototype.mounted = function () {
         var _this = this;
         // @ts-ignore
@@ -17240,7 +17262,7 @@ var ShowPost = /** @class */ (function (_super) {
         // @ts-ignore
         this.postID = this.$root.$refs.postID.value;
         // set all to allow parent to use it
-        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput", 'deletePost');
+        this.d = Object(_partials_setSlotData__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "commentSend", "validateName", "validateEmailInput", "deletePost", "deleteComment");
         // load comments from database
         // show loader
         this.d.loading = true;
