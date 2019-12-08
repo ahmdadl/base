@@ -8,7 +8,7 @@
     </header>
 
     <div class='col-12 col-md-8'>
-        <div class='pb-5'>
+        <div class='pb-1'>
             <div class='breadcrump-head position-absolute' style='top: 0;'>
                 <ol class="breadcrumb rounded-0 bg-dark text-light">
                     <li class="breadcrumb-item">
@@ -20,19 +20,31 @@
             <img src='/posts/img/<?= $posts->img ?>' class='img img-responsive w-100'>
         </div>
 
-        <div class="text-left px-5">
-            <span class="mr-3" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
-                <i class="fas fa-clock"></i>
-                <?= date_format(date_create($p->updated_at), 'd M Y') ?>
-            </span>
-            <div class="drop-down d-inline mx-2">
-                <span class='btn btn-outline-primary'>
-                    Language
-                </span>
-            </div>
-        </div>
+        <ul class="list-group list-group-horizontal border-bottom text-muted w-75 mx-auto">
+            <li class="list-group-item border-0">
+                <div class="py-2">
+                    <div class="" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
+                        <i class="fas fa-clock"></i>
+                        <?= date_format(date_create($posts->updated_at), 'd M Y') ?>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item border-0">
+                <div class="dropdown">
+                    <a class="btn btn-outline-primary  dropdown-toggle" href="#" role="button" id="dropdownMenuLinkLangSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class='fas fa-language'></i>
+                        <?= $this->__('nav.lang') ?>
+                    </a>
 
-        <h2 class='mt-3'><?= $posts->title ?></h2>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkLangSelect">
+                        <a class="dropdown-item <?= $session->get('lang') === 'ar' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'en' ? '/lang/ar?was=' . $this->uri() : '#' ?>">العربية</a>
+                        <a class="dropdown-item <?= $session->get('lang') === 'en' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'ar' ? '/lang/en?was=' . $this->uri() : '#' ?>">English</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <h2 class='mt-4'><?= $posts->title ?></h2>
 
         <p class='lead' v-pre>
             <?= $this->re($posts->body) ?>
