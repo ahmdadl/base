@@ -12,7 +12,7 @@ class AppSession
     const CHECK_IP_ADDRESS = false; // check if user changed ip
     const CHECK_BROWSER = true; // check if user changed browser
     // const SAME_SITE = 'Strict'; // or lax for more than one domain
-    const SESSION_MAXLIFE = 1800; // 1800 sec ==> 30 min
+    const SESSION_MAXLIFE = 3600; // 1800 sec ==> 30 min
     // const Strict_MODE = 1; // or 0
 
     /**
