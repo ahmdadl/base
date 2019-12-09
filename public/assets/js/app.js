@@ -17250,7 +17250,7 @@ var ShowPost = /** @class */ (function (_super) {
                     _this.d.allComments.splice(inx, 1);
                 }
                 else {
-                    console.log('an error occured');
+                    console.log("an error occured");
                     console.log(res);
                 }
             }
@@ -17279,7 +17279,9 @@ var ShowPost = /** @class */ (function (_super) {
             // console.log(res);
             _this.d.allComments = res.data;
         })
-            .catch(function (err) { })
+            .catch(function (err) {
+            /* console.log(err) */
+        })
             .finally(function () { return (_this.d.loading = false); });
     };
     ShowPost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

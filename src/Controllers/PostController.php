@@ -11,6 +11,7 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use Hashids\Hashids;
+use ParsedownExtra;
 
 class PostController extends BaseController
 {
@@ -177,11 +178,11 @@ class PostController extends BaseController
 
     public function show(array $param)
     {
-        if (!isset($param['slug']) || !Filter::filterStr($param['slug'])) {
+        $slug = Filter::filterStr($param['slug']);
+
+        if (!$slug) {
             return $this->redirect('/404');
         }
-
-        $slug = Filter::filterStr($param['slug']);
 
         $post = $this->model->readOne($slug);
 
@@ -303,4 +304,22 @@ class PostController extends BaseController
 
         echo json_encode(['done' => $this->model->delete()]);
     }
+
+    // public function getBody(array $param)
+    // {
+    //     $slug = Filter::filterStr($param['slug']);
+    //     $lang = Filter::filterStr($param['lang']);
+
+    //     if (!$slug || !$lang) {
+    //         return false;
+    //     }
+
+    //     $this->model->slug = $slug;
+    //     $body = $this->model->readBodyByLang($lang);
+    //     $parsedText = (new ParsedownExtra())->text($body->body);
+
+    //     header('Content-Type: application/json');
+
+    //     echo json_encode($parsedText);
+    // }
 }

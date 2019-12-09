@@ -37,8 +37,8 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkLangSelect">
-                        <a class="dropdown-item <?= $session->get('lang') === 'ar' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'en' ? '/lang/ar?was=' . $this->uri() : '#' ?>">العربية</a>
-                        <a class="dropdown-item <?= $session->get('lang') === 'en' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'ar' ? '/lang/en?was=' . $this->uri() : '#' ?>">English</a>
+                        <a class="dropdown-item <?=$this->uri('/blog/posts/' . $posts->slug . '/ar') ? 'active' : ''?>" href="<?=$this->uri('/blog/posts/' . $posts->slug . '/ar') ? '#' : '/blog/posts/'.$posts->slug .'/ar'?>">العربية</a>
+                        <a class="dropdown-item <?=$this->uri('/blog/posts/' . $posts->slug .'/ar' ) ?: 'active'?>" href="<?=$this->uri('/blog/posts/' . $posts->slug) ? '#' : '/blog/posts/'.$posts->slug?>">English</a>
                     </div>
                 </div>
             </li>
@@ -46,8 +46,11 @@
 
         <h2 class='mt-4'><?= $posts->title ?></h2>
 
-        <p class='lead' v-pre>
-            <?= $this->re($posts->body) ?>
+        <p class='lead'>
+            <div id='post-body' v-pre>
+                <?= $this->re($this->uri('/blog/posts/' . $posts->slug . '/ar') ?
+                    $posts->body_ar : $posts->body) ?>
+            </div>
         </p>
 
         <?= $this->insert('post/opr', ['p' => $posts, 'red' => true]) ?>
