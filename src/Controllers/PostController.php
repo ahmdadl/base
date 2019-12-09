@@ -73,6 +73,7 @@ class PostController extends BaseController
 
         $title = Filter::filterStr($this->request->get('title'));
         $body = Filter::filterStr($this->request->get('body'));
+        $body_ar = Filter::filterStr($this->request->get('body_ar'));
         $cats = Filter::filterStr($this->post('category'));
 
         // validate title
@@ -83,7 +84,7 @@ class PostController extends BaseController
         }
 
         // validate body
-        if (!$body || !Filter::len($body, 150)) {
+        if (!$body || !$body_ar || !Filter::len($body, 150)) {
             $error->body = true;
         } else {
             $old->body = $body;
@@ -127,6 +128,7 @@ class PostController extends BaseController
                     // save post
                     $this->model->title = $title;
                     $this->model->body = $body;
+                    $this->model->body_ar = $body_ar;
                     $this->model->img = $img;
                     $this->model->slug = str_replace(' ', '-', $title);
 

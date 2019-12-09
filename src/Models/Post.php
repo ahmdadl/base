@@ -16,6 +16,7 @@ class Post
     public $title;
     public $slug;
     public $body;
+    public $body_ar;
     public $img;
     public $created_at;
     public $updated_at;
@@ -37,7 +38,7 @@ class Post
      */
     public function create () : string
     {
-        $stmt = 'INSERT INTO '. $this->tbName . ' (type, title, slug, body, img) VALUES (:t, :title, :s, :body, :i)';
+        $stmt = 'INSERT INTO '. $this->tbName . ' (type, title, slug, body, body_ar, img) VALUES (:t, :title, :s, :body, :bar, :i)';
 
         $sql = $this->con->prepare($stmt);
 
@@ -46,6 +47,7 @@ class Post
             ':title' => $this->title,
             ':s' => $this->slug,
             ':body' => $this->body,
+            ':bar' => $this->body_ar,
             ':i' => $this->img
         ];
 
