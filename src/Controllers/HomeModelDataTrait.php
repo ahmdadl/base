@@ -99,9 +99,11 @@ trait HomeModelDataTrait
 
     private function randImage () : string
     {
-        $arr = range(1, 8);
+        // $arr = range(1, 8);
 
-        return $arr[rand(0, sizeof($arr)-1)] . '.png';
+        // return $arr[rand(0, sizeof($arr)-1)] . '.png';
+
+        return 'proj.jpg';
     }
 
     private function createPros(
