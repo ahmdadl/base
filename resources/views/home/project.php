@@ -6,7 +6,7 @@
     <div class="text-center mt-5">
         <div class="row">
             <?php foreach ($projects as $p) : ?>
-                <card :has-overlay='true' cls='project col-lg-4' img="<?= $this->asset('assets/img/' . $p->img) ?>" title="<?= $p->title ?>">
+                <card :has-overlay='true' cls='project col-lg-4' img="" title="<?= $p->title ?>">
                     <template v-slot:overlay>
                         <h5 class="card-title"><?=$this->__('home.sec.proj.client')?>: <?= $p->client ?></h5>
                         <p class="card-text"><?= $p->info ?></p>
