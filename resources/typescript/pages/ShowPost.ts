@@ -151,8 +151,8 @@ export default class ShowPost extends Vue {
                         // @ts-ignore
                         this.d.allComments.splice(inx, 1);
                     } else {
-                        console.log('an error occured')
-                        console.log(res)
+                        console.log("an error occured");
+                        console.log(res);
                     }
                 }
             })
@@ -190,7 +190,9 @@ export default class ShowPost extends Vue {
                 // console.log(res);
                 this.d.allComments = res.data;
             })
-            .catch(err => {/* console.log(err) */})
+            .catch(err => {
+                /* console.log(err) */
+            })
             .finally(() => (this.d.loading = false));
     }
 }

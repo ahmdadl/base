@@ -23,7 +23,7 @@ return [
      * setting to dev will display all errors on screen
      * and setting to prod will log errors only to error log directory
      */
-    'env' => 'prod', // or 'prod'
+    'env' => 'dev', // or 'prod'
 
     /**
      * is debug enabled for this enviroment
@@ -33,7 +33,7 @@ return [
      * * affecting the router with changes 
      * * and website will work on cached routes
      */
-    'isDebug' => false,
+    'isDebug' => true,
 
     // hashids options
     'hashids' => [

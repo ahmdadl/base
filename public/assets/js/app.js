@@ -15597,6 +15597,10 @@ var dataToggleSelector = document.querySelectorAll('[data-toggle="tooltip"]');
 dataToggleSelector.forEach(function (el) {
     _bootstrap_native_v4_min_js__WEBPACK_IMPORTED_MODULE_2__["Tooltip"](el);
 });
+var DropDownSelector = document.querySelectorAll('[data-toggle="dropdown"]');
+DropDownSelector.forEach(function (el) {
+    _bootstrap_native_v4_min_js__WEBPACK_IMPORTED_MODULE_2__["Dropdown"](el);
+});
 // // @ts-ignore
 // Prism.plugins.toolbar.registerButton('hello-world', {
 // 	text: 'Hello World!', // required
@@ -17246,7 +17250,7 @@ var ShowPost = /** @class */ (function (_super) {
                     _this.d.allComments.splice(inx, 1);
                 }
                 else {
-                    console.log('an error occured');
+                    console.log("an error occured");
                     console.log(res);
                 }
             }
@@ -17275,7 +17279,9 @@ var ShowPost = /** @class */ (function (_super) {
             // console.log(res);
             _this.d.allComments = res.data;
         })
-            .catch(function (err) { })
+            .catch(function (err) {
+            /* console.log(err) */
+        })
             .finally(function () { return (_this.d.loading = false); });
     };
     ShowPost = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

@@ -51,6 +51,11 @@ dataToggleSelector.forEach(el => {
     BTN.Tooltip(el)
 })
 
+const DropDownSelector = document.querySelectorAll('[data-toggle="dropdown"]')
+DropDownSelector.forEach(el => {
+    BTN.Dropdown(el)
+})
+
 // // @ts-ignore
 // Prism.plugins.toolbar.registerButton('hello-world', {
 // 	text: 'Hello World!', // required

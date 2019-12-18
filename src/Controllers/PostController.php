@@ -11,6 +11,7 @@ use App\View\FrontRenderInterface;
 use App\Util\AppSession;
 use App\Util\Filter;
 use Hashids\Hashids;
+use ParsedownExtra;
 
 class PostController extends BaseController
 {
@@ -72,6 +73,7 @@ class PostController extends BaseController
 
         $title = Filter::filterStr($this->request->get('title'));
         $body = Filter::filterStr($this->request->get('body'));
+        $body_ar = Filter::filterStr($this->request->get('body_ar'));
         $cats = Filter::filterStr($this->post('category'));
 
         // validate title
@@ -82,7 +84,7 @@ class PostController extends BaseController
         }
 
         // validate body
-        if (!$body || !Filter::len($body, 150)) {
+        if (!$body || !$body_ar || !Filter::len($body, 150)) {
             $error->body = true;
         } else {
             $old->body = $body;
@@ -126,6 +128,7 @@ class PostController extends BaseController
                     // save post
                     $this->model->title = $title;
                     $this->model->body = $body;
+                    $this->model->body_ar = $body_ar;
                     $this->model->img = $img;
                     $this->model->slug = str_replace(' ', '-', $title);
 
@@ -177,11 +180,11 @@ class PostController extends BaseController
 
     public function show(array $param)
     {
-        if (!isset($param['slug']) || !Filter::filterStr($param['slug'])) {
+        $slug = Filter::filterStr($param['slug']);
+
+        if (!$slug) {
             return $this->redirect('/404');
         }
-
-        $slug = Filter::filterStr($param['slug']);
 
         $post = $this->model->readOne($slug);
 
@@ -303,4 +306,22 @@ class PostController extends BaseController
 
         echo json_encode(['done' => $this->model->delete()]);
     }
+
+    // public function getBody(array $param)
+    // {
+    //     $slug = Filter::filterStr($param['slug']);
+    //     $lang = Filter::filterStr($param['lang']);
+
+    //     if (!$slug || !$lang) {
+    //         return false;
+    //     }
+
+    //     $this->model->slug = $slug;
+    //     $body = $this->model->readBodyByLang($lang);
+    //     $parsedText = (new ParsedownExtra())->text($body->body);
+
+    //     header('Content-Type: application/json');
+
+    //     echo json_encode($parsedText);
+    // }
 }

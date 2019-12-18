@@ -73,6 +73,15 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="body" class="col-sm-2 col-form-label"><?= $this->__('cpost.inp.body') ?></label>
+            <div class="col-sm-10">
+                <textarea class="form-control <?= $errors->has('body') ? 'is-invalid' : '' ?>" id="body" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('cpost.inp.body') ?> In Arabic" name='body_ar' rows="15" required></textarea>
+                <div class="invalid-feedback">
+                    <?= $this->__('cpost.vaild.bodyReq') ?>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
             <div class="col-10 offset-sm-2">
                 <button type="submit" class='btn btn-primary btn-block text-capitalize'>
                     <span v-if='h.d.loader' class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
