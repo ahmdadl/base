@@ -67,7 +67,7 @@
 <div class="card my-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.share.t')?></h5>
     <?php
-        $siteUri = 'http://ninjacoder.com';
+        $siteUri = 'http://ninjacoder.qa';
         $url = isset($post) ? $siteUri . '/blog/posts/'.$post->slug : $siteUri;
         $text = $post->title ?? $this->__('sb.share.text');
         $hasta = 'programming,php,vueJs,web_development,laravel'
@@ -81,7 +81,7 @@
             <i class="fab fa-twitter pr-3"></i>
             <?=$this->__('sb.share.tw')?>
         </a>
-        <a href='http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$url?>' class="btn btn-outline-primary m-2" target="_blank">
+        <a href='https://www.linkedin.com/shareArticle?mini=true&url=<?=urlencode($url)?>&title=<?=urlencode($text)?>' class="btn btn-outline-primary m-2" target="_blank">
             <i class="fab fa-linkedin-in pr-3"></i>
             <?=$this->__('sb.share.ln')?>
         </a>
