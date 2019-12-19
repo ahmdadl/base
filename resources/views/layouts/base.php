@@ -50,8 +50,22 @@
                     </div>
                 </div>
                 <div class='row'>
-                    <div class="mx-auto w-75 text-center">
+                    <div class="col-12 col-sm-6 mb-2 text-center">
                         Copyright © ninjaCoder 2019
+                    </div>
+                    <div class="col-12 col-sm-6 text-center">
+                        <button class="btn btn-primary btn-sm rounded mx-2 pt-0">
+                            &nbsp;
+                        </button>
+                        <button class="btn btn-danger btn-sm rounded mx-2 pt-0">
+                            &nbsp;
+                        </button>
+                        <button class="active btn btn-dark btn-sm rounded mx-2 pt-0">
+                            &nbsp;
+                        </button>
+                        <button class="btn btn-light btn-sm rounded mx-2 pt-0">
+                            &nbsp;
+                        </button>
                     </div>
                 </div>
             </div>
