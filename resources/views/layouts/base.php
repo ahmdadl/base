@@ -51,7 +51,7 @@
                 </div>
                 <div class='row'>
                     <div class="col-12 col-sm-6 mb-2 text-center">
-                        Copyright © ninjaCoder 2019
+                        made with &hearts; by ninjaCoder 2019
                     </div>
                     <div class="col-12 col-sm-6 text-center">
                         <span class="text-muted"><?=$this->__('home.theme')?>: </span>
