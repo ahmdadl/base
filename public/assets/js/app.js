@@ -16548,7 +16548,6 @@ var ColorChanger = /** @class */ (function (_super) {
         var theme = localStorage.getItem('theme');
         if (theme) {
             var ctheme = JSON.parse(theme);
-            console.log(ctheme);
             if (ctheme.bg === 'dark') {
                 this.updateColor(0, 'dark', 'light', false);
             }
@@ -16634,7 +16633,6 @@ var ColorChanger = /** @class */ (function (_super) {
         // save object to local storage
         if (fromButton) {
             localStorage.setItem('theme', JSON.stringify(db));
-            console.log(db);
         }
     };
     ColorChanger = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

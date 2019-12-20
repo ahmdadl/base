@@ -28,7 +28,6 @@ export default class ColorChanger extends Vue {
         let theme = localStorage.getItem('theme')
         if (theme) {
             let ctheme: {color: string, bg: string} = JSON.parse(theme)
-            console.log(ctheme)
 
             if (ctheme.bg === 'dark') {
                 this.updateColor(0, 'dark', 'light', false)
@@ -124,7 +123,6 @@ export default class ColorChanger extends Vue {
         // save object to local storage
         if (fromButton) {
             localStorage.setItem('theme', JSON.stringify(db))
-            console.log(db)
         }
     }
 }
