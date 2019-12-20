@@ -100,7 +100,7 @@ export default function LandingPage () {
         },
         mounted() {
             // attach csrf_token to variable
-            this.csrfToken = this.$refs.csrf_token.value + '55';
+            this.csrfToken = this.$refs.csrf_token.value;
     
             // change navbar background on scroll
             document.addEventListener("scroll", ev => {
