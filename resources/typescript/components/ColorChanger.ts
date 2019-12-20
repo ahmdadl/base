@@ -24,11 +24,43 @@ import Component from "vue-class-component";
     `
 })
 export default class ColorChanger extends Vue {
-    public updateColor() {
-        let type = this.$props.type,
-            target = this.$props.target;
+    mounted() {
+        let theme = localStorage.getItem('theme')
+        if (theme) {
+            let ctheme: {color: string, bg: string} = JSON.parse(theme)
+            console.log(ctheme)
+
+            if (ctheme.bg === 'dark') {
+                this.updateColor(0, 'dark', 'light', false)
+            } else if (ctheme.bg === 'light') {
+                this.updateColor(0, 'light', 'dark', false)
+            } 
+            if (ctheme.color === 'primary') {
+                this.updateColor(0, 'primary', 'danger', false)
+            } else if (ctheme.color === 'danger') {
+                this.updateColor(0, 'danger', 'primary', false)
+            }
+        }
+    }
+
+    public updateColor(
+        x = 0,
+        type: string = this.$props.type,
+        target: string = this.$props.target,
+        fromButton: boolean = true
+    ) {
+        let db = JSON.parse(localStorage.getItem('theme') as string)
+        
+        if (!db) {
+            db = {
+                color: 'primary',
+                bg: 'light'
+            }
+        }
 
         if (type === "dark" || type === "light") {
+            db.bg = type
+
             // @ts-ignore
             document
                 .querySelectorAll(
@@ -69,6 +101,8 @@ export default class ColorChanger extends Vue {
                     }
                 });
         } else {
+            db.color = type
+
             // @ts-ignore
             for (const pr of document.querySelectorAll(
                 `.actual-page .btn,.actual-page .bg-${target}, .actual-page .text-${target}, .actual-page .badge-${target}, .navbar.bg-${target}, .border-${target}`
@@ -85,6 +119,12 @@ export default class ColorChanger extends Vue {
                     pr.classList.replace(`border-${target}`, `border-${type}`);
                 }
             }
+        }
+
+        // save object to local storage
+        if (fromButton) {
+            localStorage.setItem('theme', JSON.stringify(db))
+            console.log(db)
         }
     }
 }

@@ -16544,10 +16544,40 @@ var ColorChanger = /** @class */ (function (_super) {
     function ColorChanger() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    ColorChanger.prototype.updateColor = function () {
+    ColorChanger.prototype.mounted = function () {
+        var theme = localStorage.getItem('theme');
+        if (theme) {
+            var ctheme = JSON.parse(theme);
+            console.log(ctheme);
+            if (ctheme.bg === 'dark') {
+                this.updateColor(0, 'dark', 'light', false);
+            }
+            else if (ctheme.bg === 'light') {
+                this.updateColor(0, 'light', 'dark', false);
+            }
+            if (ctheme.color === 'primary') {
+                this.updateColor(0, 'primary', 'danger', false);
+            }
+            else if (ctheme.color === 'danger') {
+                this.updateColor(0, 'danger', 'primary', false);
+            }
+        }
+    };
+    ColorChanger.prototype.updateColor = function (x, type, target, fromButton) {
         var e_1, _a;
-        var type = this.$props.type, target = this.$props.target;
+        if (x === void 0) { x = 0; }
+        if (type === void 0) { type = this.$props.type; }
+        if (target === void 0) { target = this.$props.target; }
+        if (fromButton === void 0) { fromButton = true; }
+        var db = JSON.parse(localStorage.getItem('theme'));
+        if (!db) {
+            db = {
+                color: 'primary',
+                bg: 'light'
+            };
+        }
         if (type === "dark" || type === "light") {
+            db.bg = type;
             // @ts-ignore
             document
                 .querySelectorAll(".actual-page.bg-" + target + ", .actual-page .bg-" + target + ", .actual-page .bg-" + type + ", .sidenav.bg-dark, .sidenav.bg-secondary")
@@ -16578,6 +16608,7 @@ var ColorChanger = /** @class */ (function (_super) {
             });
         }
         else {
+            db.color = type;
             try {
                 // @ts-ignore
                 for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(document.querySelectorAll(".actual-page .btn,.actual-page .bg-" + target + ", .actual-page .text-" + target + ", .actual-page .badge-" + target + ", .navbar.bg-" + target + ", .border-" + target)), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -16599,6 +16630,11 @@ var ColorChanger = /** @class */ (function (_super) {
                 }
                 finally { if (e_1) throw e_1.error; }
             }
+        }
+        // save object to local storage
+        if (fromButton) {
+            localStorage.setItem('theme', JSON.stringify(db));
+            console.log(db);
         }
     };
     ColorChanger = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
