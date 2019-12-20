@@ -6106,6 +6106,14 @@ div.code-toolbar > .toolbar span:focus {
   color: #ff2a3e;
 }
 
+/**
+* theme tweaks
+*/
+
+.bg-dark .shadow {
+  box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.15) !important;
+}
+
 .navbar {
   transition: all ease-in 0.5s;
 }
@@ -6121,6 +6129,7 @@ div.code-toolbar > .toolbar span:focus {
   position: relative;
   width: 100%;
   height: auto;
+  z-index: 2;
 }
 
 @media (min-width: 768px) {

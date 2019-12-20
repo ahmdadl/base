@@ -1,9 +1,9 @@
-<div class="card mb-4">
+<div class="card bg-light text-dark mb-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.s')?></h5>
     <div class="card-body">
         <form action="/blog/posts/s" method="get" class="form">
             <div class="input-group">
-                <input type="text" name='q' class="form-control" placeholder="<?=$this->__('sb.s')?> <?=$this->__('sb.for')?>...">
+                <input type="text" name='q' class="form-control bg-light text-dark" placeholder="<?=$this->__('sb.s')?> <?=$this->__('sb.for')?>...">
                 <span class="input-group-btn">
                     <button class="btn btn-outline-primary" type="submit">
                         <i class='fas fa-search'></i>
@@ -15,7 +15,7 @@
 </div>
 
 <?php if (!isset($layoutClass)) : ?>
-<div class="card mb-4 d-none d-sm-block">
+<div class="card bg-light text-dark mb-4 d-none d-sm-block">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.cl')?></h5>
     <div class="card-body">
         <div class="d-inline">
@@ -33,7 +33,7 @@
 </div>
 <?php endif?>
 
-<div class="card my-4">
+<div class="card bg-light text-dark my-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.pop')?></h5>
     <div class="card-body">
         <ul class='list-unstyled'>
@@ -45,7 +45,7 @@
                             <span class="">
                                 <?= date_format(date_create($p->updated_at), 'd M Y') ?>
                             </span>
-                            |<a href='/blog/posts/<?= $p->slug ?>/#comments' class='mx-2' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
+                            |<a href='/blog/posts/<?= $p->slug ?>/#comments' class='mx-2 text-primary' data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.c_count') ?>'>
                                 <span class=''>
                                     <i class="fas fa-comment-alt"></i>
                                     <?= $model->getCommentCount($p->id) ?>
@@ -53,7 +53,7 @@
                             </a>
                         </span>
                         <h5 class="mt-1 mb-1">
-                            <a href="/blog/posts/<?= $p->slug ?>">
+                            <a href="/blog/posts/<?= $p->slug ?>" class="text-primary">
                                 <?= $p->title ?>
                             </a>
                         </h5>
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div class="card my-4">
+<div class="card bg-light text-dark my-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.share.t')?></h5>
     <?php
         $siteUri = 'http://ninjacoder.qa';
@@ -73,26 +73,26 @@
         $hasta = 'programming,php,vueJs,web_development,laravel'
     ?>
     <div class="card-body">
-        <a href="http://www.facebook.com/sharer.php?u=<?=$url?>" target="_blank" class="btn btn-outline-primary m-2">
+        <a href="http://www.facebook.com/sharer.php?u=<?=$url?>" target="_blank" class="btn btn-outline-primary m-2 noColor">
             <i class="fab fa-facebook-f pr-3"></i>
             <?=$this->__('sb.share.fb')?>
         </a>
-        <a href='https://twitter.com/share?url=<?=$url?>&amp;text=<?=$text?>&amp;hashtags=<?=$hasta?>' class="btn btn-outline-info m-2" target="_blank">
+        <a href='https://twitter.com/share?url=<?=$url?>&amp;text=<?=$text?>&amp;hashtags=<?=$hasta?>' class="btn btn-outline-info m-2 noColor" target="_blank">
             <i class="fab fa-twitter pr-3"></i>
             <?=$this->__('sb.share.tw')?>
         </a>
-        <a href='https://www.linkedin.com/shareArticle?mini=true&url=<?=urlencode($url)?>&title=<?=urlencode($text)?>' class="btn btn-outline-primary m-2" target="_blank">
+        <a href='https://www.linkedin.com/shareArticle?mini=true&url=<?=urlencode($url)?>&title=<?=urlencode($text)?>' class="btn btn-outline-primary m-2 noColor" target="_blank">
             <i class="fab fa-linkedin-in pr-3"></i>
             <?=$this->__('sb.share.ln')?>
         </a>
-        <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-secondary m-2">
+        <a href='mailto:?Subject=<?=urlencode('post at' . $url)?>&amp;Body=<?=urlencode($text ?? '')?>' class="btn btn-outline-secondary m-2 noColor">
             <i class="fas fa-mail-bulk pr-3"></i>
             <?=$this->__('sb.share.ma')?>
         </a>
     </div>
 </div>
 
-<div class="card my-4">
+<div class="card bg-light text-dark my-4">
     <h5 class="card-header bg-primary text-light"><?=$this->__('sb.cat')?></h5>
     <div class="card-body">
         <div class="row">

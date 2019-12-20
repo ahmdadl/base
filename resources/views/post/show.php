@@ -20,8 +20,8 @@
             <img src='/posts/img/<?= $posts->img ?>' class='img img-responsive w-100'>
         </div>
 
-        <ul class="list-group list-group-horizontal border-bottom text-muted w-75 mx-auto">
-            <li class="list-group-item border-0">
+        <ul class="list-group list-group-horizontal border-bottom w-75 mx-auto">
+            <li class="list-group-item border-0 bg-dark text-light">
                 <div class="py-2">
                     <div class="" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
                         <i class="fas fa-clock"></i>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </li>
-            <li class="list-group-item border-0">
+            <li class="list-group-item border border-primary">
                 <div class="dropdown">
                     <a class="btn btn-outline-primary  dropdown-toggle" href="#" role="button" id="dropdownMenuLinkLangSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class='fas fa-language'></i>

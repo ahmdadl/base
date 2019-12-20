@@ -17,17 +17,17 @@
     <link rel="icon" href="">
 </head>
 
-<body class='line-numbers'>
+<body class='line-numbers bg-light text-dark'>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
     <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
-        <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?>">
+        <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?> actual-page bg-light text-dark pb-5">
             <?= $this->section('content') ?>
         </div>
 
         <input type="hidden" ref='csrf_token' id='csrf_token' class="d-none" name='csrf_token' value="<?= $session->get('X_CSRF_TOKEN') ?>">
 
 
-        <footer class="bg-dark text-light p-5">
+        <footer class="bg-dark text-light p-5 border-top border-secondary">
             <div class="container">
                 <div class="row text-center py-4">
                     <div class="mx-auto w-75">
@@ -54,18 +54,10 @@
                         Copyright © ninjaCoder 2019
                     </div>
                     <div class="col-12 col-sm-6 text-center">
-                        <button class="btn btn-primary btn-sm rounded mx-2 pt-0">
-                            &nbsp;
-                        </button>
-                        <button class="btn btn-danger btn-sm rounded mx-2 pt-0">
-                            &nbsp;
-                        </button>
-                        <button class="active btn btn-dark btn-sm rounded mx-2 pt-0">
-                            &nbsp;
-                        </button>
-                        <button class="btn btn-light btn-sm rounded mx-2 pt-0">
-                            &nbsp;
-                        </button>
+                        <color-changer type='primary' target='danger'></color-changer>
+                        <color-changer type='danger' target='primary'></color-changer>
+                        <color-changer type='light' target='dark'></color-changer>
+                        <color-changer type='dark' target='light'></color-changer>
                     </div>
                 </div>
             </div>

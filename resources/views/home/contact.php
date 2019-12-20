@@ -1,4 +1,4 @@
-<section id='contact' class="skills bg-light text-dark text-center mt-3">
+<section id='contact' class="skills bg-light text-dark text-dark text-center mt-3">
     <h2>
         <?=$this->__('home.title.contact')?>
         <hr class='mx-auto bg-dark pt-1 rounded w-25 px-5' />
@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label for="userName" class="d-none d-sm-inline col-sm-2 col-form-label"><?=$this->__('home.sec.con.inp.name')?></label>
                 <div class="col-sm-10">
-                    <input type="text" v-model='name' class="form-control" :class="{'is-invalid': nameErr, 'is-valid': nameErr === false}" id="userName" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.name')?>" minlength="3" maxlength="120" required />
+                    <input type="text" v-model='name' class="form-control bg-light text-black-50" :class="{'is-invalid': nameErr, 'is-valid': nameErr === false}" id="userName" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.name')?>" minlength="3" maxlength="120" required />
                     <div class="invalid-feedback">
                         <?=$this->__('home.sec.con.vaild.name')?>
                     </div>
@@ -24,7 +24,7 @@
             <div class="form-group row">
                 <label for="userEmail" class="d-none d-sm-inline col-sm-2 col-form-label"><?=$this->__('home.sec.con.inp.email')?></label>
                 <div class="col-sm-10">
-                    <input type="email" v-model='email' class="form-control" :class="{'is-invalid': emailErr, 'is-valid': emailErr === false}" id="userEmail" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.email')?>" minlength="5" required />
+                    <input type="email" v-model='email' class="form-control bg-light text-dark" :class="{'is-invalid': emailErr, 'is-valid': emailErr === false}" id="userEmail" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.email')?>" minlength="5" required />
                     <div class="invalid-feedback">
                     <?=$this->__('home.sec.con.vaild.email')?>
                     </div>
@@ -33,7 +33,7 @@
             <div class="form-group row">
                 <label for="userMessage" class="d-none d-sm-inline col-sm-2 col-form-label"><?=$this->__('home.sec.con.inp.mess')?></label>
                 <div class="col-sm-10">
-                    <textarea v-model='message' class="form-control" :class="{'is-invalid': messErr, 'is-valid': messErr === false}" id="userMessage" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess')?>" rows="6" minlength="5" required></textarea>
+                    <textarea v-model='message' class="form-control bg-light text-dark" :class="{'is-invalid': messErr, 'is-valid': messErr === false}" id="userMessage" placeholder="<?=$this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess')?>" rows="6" minlength="5" required></textarea>
                     <div class="invalid-feedback">
                     <?=$this->__('home.sec.con.vaild.mess')?>
                     </div>

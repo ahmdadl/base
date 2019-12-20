@@ -15555,10 +15555,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Card */ "./resources/typescript/components/Card.ts");
 /* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Alert */ "./resources/typescript/components/Alert.ts");
 /* harmony import */ var _components_SideNav__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/SideNav */ "./resources/typescript/components/SideNav.ts");
+/* harmony import */ var _components_ColorChanger__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/ColorChanger */ "./resources/typescript/components/ColorChanger.ts");
 
 
 
 // controllers
+
 
 
 
@@ -15577,17 +15579,18 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-job-title", _com
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("animated-dots", _components_animatedDots__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("dync-progress", _components_Progress__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("card", _components_Card__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('side-nav', _components_SideNav__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("side-nav", _components_SideNav__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('color-changer', _components_ColorChanger__WEBPACK_IMPORTED_MODULE_11__["default"]);
 /**
  * create directive to init model value
  */
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].directive('init', {
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].directive("init", {
     bind: function (el, binding, vnode) {
         vnode.context.$children[0][binding.arg] = binding.value;
     }
 });
-var currentPage = '', path = location.pathname;
-if (path === '/') {
+var currentPage = "", path = location.pathname;
+if (path === "/") {
     Object(_Landing__WEBPACK_IMPORTED_MODULE_3__["default"])();
 }
 else {
@@ -15601,13 +15604,6 @@ var DropDownSelector = document.querySelectorAll('[data-toggle="dropdown"]');
 DropDownSelector.forEach(function (el) {
     _bootstrap_native_v4_min_js__WEBPACK_IMPORTED_MODULE_2__["Dropdown"](el);
 });
-// // @ts-ignore
-// Prism.plugins.toolbar.registerButton('hello-world', {
-// 	text: 'Hello World!', // required
-// 	onClick: function (env) { // optional
-// 		alert('This code snippet is written in ' + env.language + '.');
-// 	}
-// });
 
 
 /***/ }),
@@ -16528,6 +16524,103 @@ var Card = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./resources/typescript/components/ColorChanger.ts":
+/*!*********************************************************!*\
+  !*** ./resources/typescript/components/ColorChanger.ts ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+
+
+
+var ColorChanger = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColorChanger, _super);
+    function ColorChanger() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ColorChanger.prototype.updateColor = function () {
+        var e_1, _a;
+        var type = this.$props.type, target = this.$props.target;
+        if (type === "dark" || type === "light") {
+            // @ts-ignore
+            document
+                .querySelectorAll(".actual-page.bg-" + target + ", .actual-page .bg-" + target + ", .actual-page .bg-" + type + ", .sidenav.bg-dark, .sidenav.bg-secondary")
+                .forEach(function (bg) {
+                document.body.classList.replace("bg-" + target, "bg-" + type);
+                document.body.classList.replace("text-" + type, "text-" + target);
+                var eleClass = bg.classList;
+                if (eleClass.contains("sidenav")) {
+                    if (eleClass.contains("bg-dark") && type === "dark") {
+                        eleClass.replace("bg-dark", "bg-secondary");
+                        eleClass.replace("text-white-50", "text-black-50");
+                    }
+                    else {
+                        eleClass.replace("bg-secondary", "bg-dark");
+                        eleClass.replace("text-black-50", "text-white-50");
+                    }
+                }
+                else {
+                    eleClass.replace("bg-" + target, "bg-" + type);
+                    eleClass.replace("text-" + type, "text-" + target);
+                }
+                if (bg.nodeName === "HR" || bg.classList.contains('align-middle')) {
+                    eleClass.replace("bg-" + type, "bg-" + target);
+                    eleClass.replace("text-" + target, "text-" + type);
+                }
+            });
+        }
+        else {
+            try {
+                // @ts-ignore
+                for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(document.querySelectorAll(".actual-page .btn,.actual-page .bg-" + target + ", .actual-page .text-" + target + ", .actual-page .badge-" + target + ", .navbar.bg-" + target + ", .border-" + target)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var pr = _c.value;
+                    if (!pr.classList.contains("noColor")) {
+                        pr.classList.replace("btn-" + target, "btn-" + type);
+                        pr.classList.replace("btn-outline-" + target, "btn-outline-" + type);
+                        pr.classList.replace("bg-" + target, "bg-" + type);
+                        pr.classList.replace("text-" + target, "text-" + type);
+                        pr.classList.replace("badge-" + target, "badge-" + type);
+                        pr.classList.replace("border-" + target, "border-" + type);
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+        }
+    };
+    ColorChanger = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_2__["default"])({
+            props: {
+                type: {
+                    type: String,
+                    required: true
+                },
+                target: {
+                    type: String,
+                    required: true
+                }
+            },
+            template: "\n        <button\n            class=\"btn btn-sm rounded mx-2 pt-0 changeTheme\"\n            :class=\"['btn-' + type, {active: type === 'dark'}]\"\n            :type=\"target\"\n            @click=\"updateColor\"\n        >\n            &nbsp;\n        </button>\n    "
+        })
+    ], ColorChanger);
+    return ColorChanger;
+}(vue__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (ColorChanger);
+
+
+/***/ }),
+
 /***/ "./resources/typescript/components/Progress.ts":
 /*!*****************************************************!*\
   !*** ./resources/typescript/components/Progress.ts ***!
@@ -16877,7 +16970,7 @@ var animatedDots = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12 mb-3 px-sm-5 px-md-2\" :class=\"cls\">\n    <div class=\"card bg-light text-white shadow border border-dark\">\n        <slot name=\"header\"></slot>\n        <div v-if=\"hasOverlay\">\n            <div class=\"card-body position-relative p-0\">\n                <img :src=\"img\" class=\"card-img\" :alt=\"title\" />\n                <div class=\"card-img-overlay\">\n                    <slot name=\"overlay\"></slot>\n                </div>\n            </div>\n            <div class=\"card-footer text-dark\">\n                <h5 class=\"card-title\">\n                    <a :href=\"href\" v-text=\"title\"></a>\n                </h5>\n                <div class=\"tags d-block text-capitalize\">\n                    <slot name=\"tags\"></slot>\n                </div>\n            </div>\n        </div>\n        <div v-else :class=\"rowClass !== 'col-12' ? 'overflow-hidden' : ''\">\n            <div :class=\"rowClass !== 'col-12' ? 'row' : ''\">\n                <div :class=\"rowClass\" class=\"p-0\">\n                    <div\n                    class=\"overflow-hidden card-img-container transition\"\n                >\n                    <img\n                        :src=\"img\"\n                        class=\"card-img-top transition\"\n                        :alt=\"title\"\n                    />\n                </div>\n                </div>\n                <div class=\"card-body text-dark p-3\" :class=\"rowClass\">\n                    <h5 class=\"card-title\">\n                        <a :href=\"'/blog/posts/' + href\" v-text=\"title\"></a>\n                    </h5>\n                    <slot name=\"info\"></slot>\n                </div>\n                <slot name=\"footer\"></slot>\n            </div>\n        </div>\n    </div>\n</div>\n";
+module.exports = "<div class=\"col-12 mb-3 px-sm-5 px-md-2\" :class=\"cls\">\n    <div class=\"card bg-light text-dark shadow border border-dark\">\n        <slot name=\"header\"></slot>\n        <div v-if=\"hasOverlay\">\n            <div class=\"card-body position-relative p-0\">\n                <img :src=\"img\" class=\"card-img\" :alt=\"title\" />\n                <div class=\"card-img-overlay\">\n                    <slot name=\"overlay\"></slot>\n                </div>\n            </div>\n            <div class=\"card-footer text-dark\">\n                <h5 class=\"card-title\">\n                    <a :href=\"href\" class=\"text-primary\" v-text=\"title\"></a>\n                </h5>\n                <div class=\"tags d-block text-capitalize\">\n                    <slot name=\"tags\"></slot>\n                </div>\n            </div>\n        </div>\n        <div v-else :class=\"rowClass !== 'col-12' ? 'overflow-hidden' : ''\">\n            <div :class=\"rowClass !== 'col-12' ? 'row' : ''\">\n                <div :class=\"rowClass\" class=\"p-0\">\n                    <div\n                    class=\"overflow-hidden card-img-container transition\"\n                >\n                    <img\n                        :src=\"img\"\n                        class=\"card-img-top transition\"\n                        :alt=\"title\"\n                    />\n                </div>\n                </div>\n                <div class=\"card-body p-3\" :class=\"rowClass\">\n                    <h5 class=\"card-title\">\n                        <a :href=\"'/blog/posts/' + href\" class=\"text-primary\" v-text=\"title\"></a>\n                    </h5>\n                    <slot name=\"info\"></slot>\n                </div>\n                <slot name=\"footer\"></slot>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
 

@@ -1,5 +1,5 @@
 <div class='m-4'>
-    <fieldset class="card my-4">
+    <fieldset class="card bg-light text-dark my-4">
         <h5 class="card-header bg-primary text-light"><?= $this->__('shpost.c.title') ?>:</h5>
         <div class="card-body">
             <alert type='danger' v-if='h.d.commErr'>
@@ -14,21 +14,21 @@
                 <input type='hidden' ref='postID' value="<?= $pid ?>" />
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="name"><?= $this->__('home.sec.con.inp.name') ?></label>
-                    <input type="text" class="form-control col-sm-10" id="name" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.name') ?>" v-model.trim='h.d.name' :class="{'is-invalid': h.d.nameErr, 'is-valid': h.d.nameErr === false}" @keypress="h.d.validateName" minlength="5" maxlength="255" required>
+                    <input type="text" class="form-control bg-light text-dark col-sm-10" id="name" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.name') ?>" v-model.trim='h.d.name' :class="{'is-invalid': h.d.nameErr, 'is-valid': h.d.nameErr === false}" @keypress="h.d.validateName" minlength="5" maxlength="255" required>
                     <div class="col-sm-10 offset-sm-2 invalid-feedback">
                         <?= $this->__('home.sec.con.vaild.name') ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="email"><?= $this->__('home.sec.con.inp.email') ?></label>
-                    <input type="email" class="form-control col-sm-10" id="email" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.email') ?>" v-model.trim='h.d.email' :class="{'is-invalid': h.d.emailErr, 'is-valid': h.d.emailErr === false}" @keypress='h.d.validateEmailInput' id="userEmail" minlength="5" required>
+                    <input type="email" class="form-control bg-light text-dark col-sm-10" id="email" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.email') ?>" v-model.trim='h.d.email' :class="{'is-invalid': h.d.emailErr, 'is-valid': h.d.emailErr === false}" @keypress='h.d.validateEmailInput' id="userEmail" minlength="5" required>
                     <div class="col-sm-10 offset-sm-2 invalid-feedback">
                         <?= $this->__('home.sec.con.vaild.email') ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="cmessage"><?= $this->__('home.sec.con.inp.mess') ?></label>
-                    <textarea class="form-control col-sm-10" id="cmessage" rows="7" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess') ?>" v-model.trim='h.d.message' :class="{'is-invalid': h.d.messErr, 'is-valid': h.d.messErr === false}" minlength="10" required></textarea>
+                    <textarea class="form-control bg-light text-dark col-sm-10" id="cmessage" rows="7" placeholder="<?= $this->__('cpost.ph.enter') . $this->__('home.sec.con.inp.mess') ?>" v-model.trim='h.d.message' :class="{'is-invalid': h.d.messErr, 'is-valid': h.d.messErr === false}" minlength="10" required></textarea>
                     <div class="col-sm-10 offset-sm-2 invalid-feedback">
                         <?= $this->__('home.sec.con.vaild.mess') ?>
                     </div>
