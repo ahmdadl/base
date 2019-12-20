@@ -20,7 +20,7 @@
             <img src='/posts/img/<?= $posts->img ?>' class='img img-responsive w-100'>
         </div>
 
-        <ul class="list-group list-group-horizontal py-3">
+        <ul class="list-group list-group-horizontal flex-row py-3">
             <li class="list-group-item border-0 bg-dark text-light">
                 <div class="py-2">
                     <div class="" data-toggle="tooltip" data-placement="top" title='<?= $this->__('home.sec.blog.date') ?>'>
