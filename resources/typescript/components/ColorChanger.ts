@@ -55,12 +55,16 @@ export default class ColorChanger extends Vue {
                             eleClass.replace("text-black-50", "text-white-50");
                         }
                     } else {
-                        eleClass.replace(`bg-${target}`, `bg-${type}`)
+                        eleClass.replace(`bg-${target}`, `bg-${type}`);
                         eleClass.replace(`text-${type}`, `text-${target}`);
                     }
 
-                    if (bg.nodeName === "HR" || bg.classList.contains('align-middle')) {
-                        eleClass.replace(`bg-${type}`, `bg-${target}`)
+                    if (
+                        bg.nodeName === "HR" ||
+                        bg.classList.contains("align-middle") ||
+                        eleClass.contains("list-group-item")
+                    ) {
+                        eleClass.replace(`bg-${type}`, `bg-${target}`);
                         eleClass.replace(`text-${target}`, `text-${type}`);
                     }
                 });

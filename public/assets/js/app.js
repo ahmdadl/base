@@ -16569,7 +16569,9 @@ var ColorChanger = /** @class */ (function (_super) {
                     eleClass.replace("bg-" + target, "bg-" + type);
                     eleClass.replace("text-" + type, "text-" + target);
                 }
-                if (bg.nodeName === "HR" || bg.classList.contains('align-middle')) {
+                if (bg.nodeName === "HR" ||
+                    bg.classList.contains("align-middle") ||
+                    eleClass.contains("list-group-item")) {
                     eleClass.replace("bg-" + type, "bg-" + target);
                     eleClass.replace("text-" + target, "text-" + type);
                 }
