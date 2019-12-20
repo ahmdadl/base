@@ -16,6 +16,7 @@ return [
         'myName' => 'Ahmed Adel',
         'and' => 'and I`m',
         'start' => 'Get Started',
+        'theme' => 'Theme',
         'title' => [
             'top' => 'Top',
             'about' => 'About',

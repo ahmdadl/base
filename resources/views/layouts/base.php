@@ -54,7 +54,7 @@
                         Copyright © ninjaCoder 2019
                     </div>
                     <div class="col-12 col-sm-6 text-center">
-                        <span class="text-muted">Theme: </span>
+                        <span class="text-muted"><?=$this->__('home.theme')?>: </span>
                         <color-changer type='primary' target='danger'></color-changer>
                         <color-changer type='danger' target='primary'></color-changer>
                         <color-changer type='light' target='dark'></color-changer>
