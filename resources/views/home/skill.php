@@ -5,7 +5,7 @@
     </h2>
     <div class="row text-center">
         <div class="col-12 col-md-6 mt-3 mb-5">
-            <img src="<?= $this->asset('/assets/img/me.jpeg') ?>" class="img w-75 p-1 border border-secondary rounded" />
+            <img src="<?= $this->asset('/assets/img/meLarge.jpg') ?>" class="img w-75 p-1 border border-secondary rounded" />
             <p class="text-secondary mt-2 text-capitalize">
                 <?= $this->__('home.sec.skill.info') ?>
                 <a href='#projects' v-scroll-to="'#projects'" class='btn btn-outline-primary btn-sm'><?= $this->__('home.sec.skill.my') ?> <?= $this->__('home.title.project') ?></a>.
