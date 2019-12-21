@@ -17,7 +17,7 @@
     <link rel="icon" href="">
 </head>
 
-<body class='line-numbers bg-light text-dark'>
+<body class='line-numbers bg-light text-dark' id='top-ele'>
     <?= $this->insert('partials/nav', ['navClass' => $navClass ?? '']) ?>
     <main class="<?= $mainClass ?? 'blog' ?>" id="<?= $id ?? 'body' ?>">
         <div class="<?=isset($mainClass) && $mainClass === 'landing-page' ?: 'container-fluid'?> actual-page bg-light text-dark pb-5">
@@ -25,6 +25,10 @@
         </div>
 
         <input type="hidden" ref='csrf_token' id='csrf_token' class="d-none" name='csrf_token' value="<?= $session->get('X_CSRF_TOKEN') ?>">
+
+        <button class="btn btn-outline-danger position-fixed toTop" v-scroll-to="'#top-ele'">
+            <i class="fas fa-chevron-up"></i>
+        </button>
 
 
         <footer class="bg-dark text-light p-5 border-top border-secondary">

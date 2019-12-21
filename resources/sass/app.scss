@@ -151,3 +151,9 @@ html,
 body {
     font-family: 'Tajawal', 'Roboto', Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+.toTop {
+    bottom: 15vh;
+    right: 5vw;
+    z-index: 9;
+}
