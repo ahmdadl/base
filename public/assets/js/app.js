@@ -15404,6 +15404,10 @@ function Blog() {
             CreatePost: _pages_CreatePost__WEBPACK_IMPORTED_MODULE_1__["default"],
             AllPosts: _pages_AllPosts__WEBPACK_IMPORTED_MODULE_2__["default"],
             ShowPost: _pages_ShowPost__WEBPACK_IMPORTED_MODULE_3__["default"]
+        },
+        mounted: function () {
+            // hide splash screen
+            this.$refs.splashScreen.style.display = 'none';
         }
     });
 }
@@ -15512,6 +15516,8 @@ function LandingPage() {
             }
         },
         mounted: function () {
+            // hide splash screen
+            this.$refs.splashScreen.style.display = 'none';
             // attach csrf_token to variable
             this.csrfToken = this.$refs.csrf_token.value;
             // change navbar background on scroll

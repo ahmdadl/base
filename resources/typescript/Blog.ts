@@ -10,6 +10,10 @@ export default function Blog () {
             CreatePost,
             AllPosts,
             ShowPost
+        },
+        mounted () {
+            // hide splash screen
+            this.$refs.splashScreen.style.display = 'none'
         }
     })
 }

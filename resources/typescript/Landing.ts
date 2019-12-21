@@ -99,6 +99,9 @@ export default function LandingPage () {
             }
         },
         mounted() {
+            // hide splash screen
+            this.$refs.splashScreen.style.display = 'none'
+
             // attach csrf_token to variable
             this.csrfToken = this.$refs.csrf_token.value;
     
