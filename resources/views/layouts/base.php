@@ -27,11 +27,6 @@
 
         <input type="hidden" ref='csrf_token' id='csrf_token' class="d-none" name='csrf_token' value="<?= $session->get('X_CSRF_TOKEN') ?>">
 
-        <button class="btn btn-outline-danger position-fixed toTop" v-scroll-to="'#top-ele'">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-
-
         <footer class="bg-dark text-light p-5 border-top border-secondary">
             <div class="container">
                 <div class="row text-center py-4">
@@ -68,6 +63,11 @@
                 </div>
             </div>
         </footer>
+
+        <button class="btn btn-outline-danger position-fixed toTop d-none d-sm-block" v-scroll-to="'#top-ele'">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
     </main>
     <script src='<?= $this->asset('/assets/js/prism.js') ?>'></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
