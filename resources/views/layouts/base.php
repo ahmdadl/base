@@ -18,7 +18,7 @@
     <?php endif ?>
     <link href="<?= $this->asset('/assets/css/app.css') ?>" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="icon" href="">
+    <link rel="icon" href="<?=$this->asset('/assets/img/me.jpeg')?>">
 </head>
 
 <body class='line-numbers bg-light text-dark' id='top-ele'>
