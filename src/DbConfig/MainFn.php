@@ -14,9 +14,9 @@ abstract class MainFn
     protected $user = 'root';
     protected $pass = '123';
 
-    public function __construct(string $db_name = 'test')
+    public function __construct()
     {
-        $this->db_name = $db_name;
+        $this->db_name = 'ninjaCoder';
     }
 
     public function isLive() : bool

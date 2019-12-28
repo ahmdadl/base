@@ -48,14 +48,15 @@ trait FrontRenderTrait
     {
         $search = [
             '/>\s+</',
-            '/(\s)+/s',
+            // '/(\s)+/s',
             '/<!--(.|\s)*?-->/'
         ];
         $replace = [
             '><',
-            '\\1',
+            // '\\1',
             ''
         ];
         return trim(preg_replace($search, $replace, $html));
+        // return $html;
     }
 }

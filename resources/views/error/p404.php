@@ -1,1 +1,4 @@
-<h3>404 Error at(<?=date('D M Y H:I:a')?>) Page not found</h3>
+<?php $this->layout('layouts/errors', [
+    'errCode' => 404,
+    'errMessage' => 'Not Found'
+])?>

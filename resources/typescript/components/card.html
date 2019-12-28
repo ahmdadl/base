@@ -1,0 +1,43 @@
+<div class="col-12 mb-3 px-sm-5 px-md-2" :class="cls">
+    <div class="card bg-light text-dark shadow border border-dark">
+        <slot name="header"></slot>
+        <div v-if="hasOverlay">
+            <div class="card-body position-relative p-0">
+                <img :src="img" class="card-img" :alt="title" />
+                <div class="card-img-overlay">
+                    <slot name="overlay"></slot>
+                </div>
+            </div>
+            <div class="card-footer text-dark">
+                <h5 class="card-title">
+                    <a :href="href" class="text-primary" v-text="title"></a>
+                </h5>
+                <div class="tags d-block text-capitalize">
+                    <slot name="tags"></slot>
+                </div>
+            </div>
+        </div>
+        <div v-else :class="rowClass !== 'col-12' ? 'overflow-hidden' : ''">
+            <div :class="rowClass !== 'col-12' ? 'row' : ''">
+                <div :class="rowClass" class="p-0">
+                    <div
+                    class="overflow-hidden card-img-container transition"
+                >
+                    <img
+                        :src="img"
+                        class="card-img-top transition"
+                        :alt="title"
+                    />
+                </div>
+                </div>
+                <div class="card-body p-3" :class="rowClass">
+                    <h5 class="card-title">
+                        <a :href="'/blog/posts/' + href" class="text-primary" v-text="title"></a>
+                    </h5>
+                    <slot name="info"></slot>
+                </div>
+                <slot name="footer"></slot>
+            </div>
+        </div>
+    </div>
+</div>

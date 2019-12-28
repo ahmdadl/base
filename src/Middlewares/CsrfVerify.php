@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Middlewares;
 
@@ -11,23 +13,25 @@ class CsrfVerify extends Base implements MiddlewareInterface
      *
      * @return bool
      */
-    public function process() : bool
+    public function process(): bool
     {
         // get saved in session csrf token
         $known = $this->session->se->get('X_CSRF_TOKEN');
         // get the token submited with user input
         $token = $this->request->request->get('csrfToken');
-        // check if the two tokens not equal
-        if (hash_equals($known, $token)) {
-            // if no error
-            return false;
+        if (null !== $known && null !== $token) {
+            // check if the two tokens not equal
+            if (hash_equals($known, $token)) {
+                // if no error
+                return false;
+            }
         }
 
         // send message to view via flash sessions
-        $this->session->se->getFlashBag()->add(
-            'danger',
-            'an error occured. please try again later'
-        );
+        // $this->session->se->getFlashBag()->add(
+        //     'danger',
+        //     'an error occured. please try again later'
+        // );
         // stop any other middleware
         return true;
     }

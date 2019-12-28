@@ -5,7 +5,7 @@ return [
      * appplicate name 
      * i do not know why its important but use it any way
      */
-    'name' => 'APP_NAME',
+    'name' => 'ninjaCoder',
 
     // default directories
     'dir' => [
@@ -44,7 +44,7 @@ return [
     // sessions options
     'session' => [
         'name' => null, // use default webSiteNameSESSION
-        'samesite' => 'Strict', // or `lax' for multi domain websites
+        'samesite' => 'lax', // or `lax' for multi domain websites
 
         /**
          * destroy the after a period 

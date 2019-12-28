@@ -8,5 +8,7 @@
 !/storage/log/.gitkeep
 /storage/tmp/*
 !/storage/tmp/.gitkeep
+/storage/posts/*
+!/storage/posts/.gitkeep
 .env
 .phpunit.result.cache

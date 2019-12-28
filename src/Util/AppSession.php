@@ -12,7 +12,7 @@ class AppSession
     const CHECK_IP_ADDRESS = false; // check if user changed ip
     const CHECK_BROWSER = true; // check if user changed browser
     // const SAME_SITE = 'Strict'; // or lax for more than one domain
-    const SESSION_MAXLIFE = 1800; // 1800 sec ==> 30 min
+    const SESSION_MAXLIFE = 3600; // 1800 sec ==> 30 min
     // const Strict_MODE = 1; // or 0
 
     /**
@@ -78,6 +78,18 @@ class AppSession
 
         // check session active time
         $this->checkActivity($maxlife);
+    }
+
+    /**
+     * add new flash session in stack
+     *
+     * @param string $bag
+     * @param mixed $value
+     * @return void
+     */
+    public function addFlash(string $bag, $value) : void
+    {
+        $this->se->getFlashBag()->add($bag, $value);
     }
 
     /**

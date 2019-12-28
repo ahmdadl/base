@@ -203,7 +203,7 @@ class Bootstrap
         /** @todo add mail function to email admin with errors */
 
         // redirect to unknownError route
-        (new RedirectResponse('error'))->send();
+        (new RedirectResponse('/errors/'))->send();
     }
 }
 

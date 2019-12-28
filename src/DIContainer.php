@@ -136,7 +136,7 @@ class DIContainer
             $this->config['session']['maxlife']
         );
         $this->container->setParameter('session_options', [
-            'name' => $this->config['session']['name'] ?? strtoupper($_SERVER['HTTP_HOST']) . 'SESSION',
+            'name' => $this->config['session']['name'] ?? $this->config['name'] . 'SessID',
             'use_strict_mode' => true,
             // disable and handle regenrate session ID manauly
             'gc_probability' => 0,

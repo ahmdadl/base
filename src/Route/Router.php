@@ -174,11 +174,16 @@ class Router
         $class->$method($args);
     }
 
-    private function handleMiddlewares(array $middlewares) : bool
+    private function handleMiddlewares(array $middlewares)
     {
         foreach ($middlewares as $cls) {
             $err = ($this->container->get('App\Middlewares\\' . $cls))->process();
-            if ($err) return true;
+
+            // check if middleware not passed
+            if ($err) {
+                // redirect to 403
+                return (new RedirectResponse('/errors/403'))->send();
+            };
         }
         return false;
     }

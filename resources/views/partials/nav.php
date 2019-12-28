@@ -1,75 +1,77 @@
-<nav
-    class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm text-light">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm text-light fixed-top <?= $navClass ?>">
     <div class="container">
         <a class="navbar-brand" href="/">
-            MyBlog
+            NinjaCoder
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler border-0 text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <span id="navbarDropdown" class="nav-link ">
+                <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                Ahmed Adel
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse navbar-sm-"
-            id="navbarSupportedContent">
+        <div class="collapse navbar-collapse navbar-sm-" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link {{request()->is('posts') ? 'active' : ''}}"
-                        href="/posts">Posts</a>
+                    <a class="nav-link <?= $this->uri('/') ? 'active' : '' ?>" href="<?= $this->uri('/') ? '#body' : '/' ?>">
+                        <i class="fas fa-user d-sm-none"></i>
+                        <?= $this->__('nav.portfolio') ?>
+                    </a>
                 </li>
                 <li>
-                    <a class="nav-link {{request()->is('posts/create') ? 'active' : ''}}"
-                        href="/posts/create">Create</a>
+                    <a class="nav-link <?= $this->uri('/blog/posts') ? 'active' : '' ?>" href="/blog/posts">
+                        <i class="fas fa-blog d-sm-none"></i>
+                        <?= $this->__('nav.blog') ?>
+                    </a>
                 </li>
                 <li>
-                    <a class="nav-link {{request()->is('category/create') ? 'active' : ''}}"
-                        href="/category/create">Ccategory</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class='fas fa-language'></i>
+                            <?= $this->__('nav.lang') ?>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item <?= $session->get('lang') === 'ar' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'en' ? '/lang/ar?was=' . $this->uri() : '#' ?>">العربية</a>
+                            <a class="dropdown-item <?= $session->get('lang') === 'en' ? 'active' : '' ?>" href="<?= $session->get('lang') === 'ar' ? '/lang/en?was=' . $this->uri() : '#' ?>">English</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                <?php if($session->has('userName')) : ?>
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="/login">Login</a>
-                </li>
-                <?php if (true) : ?>
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="/register">Register</a>
-                </li>
-                <?php endif ?>
-                <?php else : ?>
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle"
-                        href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" v-pre>
-                            <?=$session->get('userName')?>
+                <?php if (!$session->has('admin')) : ?>
+                    <li class="nav-item">
+                        <span id="navbarDropdown" class="nav-link active d-none d-md-block">
+                            <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                            Ahmed Adel
                         </span>
-                        <img class="img d-inline rounded-circle pr-1"
-                            src='http://ft.test/img/user.png' width="35"
-                            height="35">
-                            <?=$session->get('userName')?> <span class="caret"></span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/logout"
-                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            Logout
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img class="img d-inline rounded-circle pr-1" src='/assets/img/me.jpeg' width="35" height="35">
+                            Ahmed Adel
+                            <span class="caret <?= $session->has('admin') ? '' : 'd-none' ?>"></span>
                         </a>
 
-                        <form id="logout-form" action="/logout"
-                            method="POST" style="display: none;">
-                            <?=$this->csrf()?>
-                        </form>
-                    </div>
-                </li>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/blog/posts/create">Create Post</a>
+                            <a class="dropdown-item" href="/blog/cat/create">Create Category</a>
+                            <a class="dropdown-item" href="/logout" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                <?= $this->__('user.logout') ?>
+                            </a>
+
+                            <form id="logout-form" action="/root/logout" method="POST" style="display: none;">
+                                <?= $this->csrf() ?>
+                            </form>
+                        </div>
+                    </li>
                 <?php endif ?>
             </ul>
         </div>
